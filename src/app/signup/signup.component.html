@@ -1,0 +1,68 @@
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+      <div class="col-md-6 left-section d-flex flex-column justify-content-center align-items-center text-center p-5">
+        <div class="d-flex ">
+            <img src="../../assets/logo.png" alt="Logo" class="me-3" />
+        </div>
+        <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
+        <h2 class="mt-4 mb-4">Check automobile insurance <br> status in 2 seconds</h2>
+        <p class="text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor
+            incididunt.
+        </p>
+      </div>
+      <div class="col-md-6 justify-content-between right-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a routerLink="/landing-page">
+                <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
+            </a>
+          <p>Already have an account? <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a></p>
+        </div>
+        <div class="w-100 justify-content-center">
+          <h1 style="font-size: 48px; margin-top: 60px; " class="mt-3">Account Creation</h1>
+          <div class="d-flex justify-content-end align-items-center mb-3 mt-3" style="height: 25px; padding-right: 20px;">
+            <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
+                1
+            </div>
+        </div>
+        <form class="mt-5" [formGroup]="SignupForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="errorMessage" class=" alert-danger">{{ errorMessage }}</div>
+            <p class="mb-3" style="font-size: 17px;">Fill the form below to create your account</p>
+            <div class="mb-4">
+              <input type="email" formControlName="email" class="form-control field" placeholder="Your Email Address" required />
+            </div>
+            <div class="mb-2 input-group">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control field" placeholder="Your Password" required />
+              <!-- <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" (click)="toggleShowPassword()">
+                  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+              </div> -->
+            </div>
+            <div class="mb-4 input-group">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmpassword" class="form-control field" placeholder="Confirm your Password" required />
+              <!-- <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" (click)="toggleShowConfirmPassword()">
+                  <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+              </div> -->
+            </div>
+            <button type="submit" class="btn btn-warning text-white w-100 mb-3" style="height: 52px;">
+              <strong>Next</strong>
+            </button>
+          </form>
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <hr class="w-100" />
+            <span class="px-2">or</span>
+            <hr class="w-100" />
+          </div>
+          <a href="" >
+            <button type="button" class="btn btn-outline-dark w-100" style="height: 52px;">
+              <img src="../../assets/image 1.png" alt="Google Logo" class="me-2"/> Sign up with
+              Google
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

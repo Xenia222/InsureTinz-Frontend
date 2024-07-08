@@ -1,0 +1,223 @@
+<style>
+    .table-no-border th,
+    .table-no-border td,
+    .table-no-border {
+        border: none !important;
+    }
+
+    body {
+        font-family: 'Nunito Sans', sans-serif;
+    }
+
+    .case-user {
+        background-color: #000000;
+        text-align: center;
+        padding: 30px;
+        border-radius: 50px;
+    }
+</style>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-white navbar-dark h-100">
+                <a href="#" class="navbar-brand mx-4 mb-2">
+                    <h3 class="text-main">Main Admin</h3>
+                </a>
+
+                <div class="navbar-bas w-100">
+                    <a routerLink="/dashboard" class="nav-item nav-link active ">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-17.4-6.9-33.1-18.1-44.6L366 161.7c5.3-12.1-.2-26.3-12.3-31.6s-26.3 .2-31.6 12.3L257.9 288c-.6 0-1.3 0-1.9 0c-35.3 0-64 28.7-64 64s28.7 64 64 64zM176 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM96 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm352-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+                        </svg>
+                        <div class="element">Dashboard</div>
+                    </a>
+
+                    <a routerLink="/credits" class="nav-item nav-link mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M96 96V320c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H160c-35.3 0-64 28.7-64 64zm64 160c35.3 0 64 28.7 64 64H160V256zM224 96c0 35.3-28.7 64-64 64V96h64zM576 256v64H512c0-35.3 28.7-64 64-64zM512 96h64v64c-35.3 0-64-28.7-64-64zM288 208a80 80 0 1 1 160 0 80 80 0 1 1 -160 0zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120V360c0 66.3 53.7 120 120 120H520c13.3 0 24-10.7 24-24s-10.7-24-24-24H120c-39.8 0-72-32.2-72-72V120z" />
+                        </svg>
+                        <div class="element">Credits</div>
+                    </a>
+                    <a routerLink="/quick-check" class="nav-item nav-link mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                        </svg>
+                        <div class="element">Insurance status</div>
+                    </a>
+                    <a routerLink="/verification-history" class="nav-item nav-link mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H64V96h88zm56 0h88v64H208V96zm240 0v64H360V96h88zM64 224h88v64H64V224zm232 0v64H208V224h88zm64 0h88v64H360V224zM152 352v64H64V352h88zm56 0h88v64H208V352zm240 0v64H360V352h88z" />
+                        </svg>
+                        <div class="element">Status history and logs history</div>
+                    </a>
+                    <a routerLink="/list-users" class="nav-item nav-link mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
+                        </svg>
+                        <div class="element">Create user accounts</div>
+                    </a>
+                    <a routerLink="/profile" class="nav-item nav-link mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                        </svg>
+                        <div class="element">Profile</div>
+                    </a>
+
+                    <div class="mt-auto">
+                        <hr>
+                        <a href="#" class="open-modal nav-item nav-link mt-2 " data-bs-toggle="dropdown"
+                            style="cursor: pointer;" id="logoutBtn"><i class="fa fa-chart-bar me-2"></i>
+                            <div class="element">Logout</div>
+                        </a>
+                        <!-- Fenêtre modale de confirmation -->
+                        <div id="myModal" class="modale">
+                            <div class="modal-contenu shadow-lg">
+                                <div class="" style="text-align: center;">
+                                    Are you sure you want to logout?
+                                </div>
+                                <div class="" style="margin-top: 10px;">
+                                    <button type="button" class="btn " style="color: #07AA2B;">Yes</button>
+                                    <button type="button" class="btn "
+                                        style="margin-left: 80px; color: #E65440;">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-white navbar-white sticky-top px-4 py-0">
+
+                <a href="#" class="sidebar-toggler flex-shrink-0 navbar-brand d-flex d-lg-none me-4">
+                    <h3 class="text-dark mb-0"><i class="fa fa-bars"></i></h3>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown" style="position:absolute">
+                        <a href="#" class="nav-link ">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                    d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z" />
+                            </svg>
+                            <span class="notification-badge d-none d-lg-inline-flex">0</span>
+                        </a>
+
+                    </div>
+
+                    <div class="nav-item dropdown"
+                        style="font-size: 15px; color: rgba(64, 64, 64, 1);     text-align: end;">
+
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="../../assets/francais.png" width="40" height="27" alt="English"
+                                style="  border-radius: 5px;margin-right: 10px;  width: 20%;  height: 11%;">
+                            <span class="d-none d-lg-inline-flex">English</span>
+                        </a>
+                        <div class="menu-langue dropdown-menu"
+                            style="border: unset; padding: 6px; border-radius: 10px;  box-shadow: 0px 0px 7px 1px #ebebeb;">
+                            <li><a class="dropdown-item" href="#">Select language</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <a href="#" class="dropdown-item" href="#">
+                                <img src="../../assets/anglais.png" width="40" height="27" alt="English"
+                                    style=" margin-right: 10px;">
+                                <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">English</span>
+                            </a>
+                            <a class="dropdown-item mt-2" href="#">
+                                <img src="../../assets/anglais.png" width="40" height="27" alt="English"
+                                    style=" margin-right: 10px;">
+                                <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">Français</span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link " style="display: flex;">
+                            <img class="rounded-circle me-lg-2" src="../../assets/user.jpg" alt=""
+                                style="width: 40px; height: 40px;">
+                            <div>
+                                <span class="" style="font-size: medium;">John Doe</span><br>
+                                <span class=" " style="font-size: small; ">Admin</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+
+        </div>
+        <!-- Content End -->
+
+
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Ouvrir la fenêtre modale
+            $('.modale-info').hide();
+            $('.image-info').click(function () {
+                $('.modale-info').css('display', 'block');
+            });
+            $('.open-modal').click(function () {
+                $('#myModal').css('display', 'block');
+            });
+
+            // Fermer la fenêtre modale en cliquant sur la croix ou en dehors de la fenêtre
+            $('.close, .modale').click(function () {
+                $('#myModal').css('display', 'none');
+            });
+
+            // Empêcher la fermeture de la fenêtre modale lors du clic à l'intérieur de la modal-content
+            $('.modal-content').click(function (event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>

@@ -1,0 +1,225 @@
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+
+        <div class="col-md-6 left-section d-flex flex-column justify-content-center align-items-center text-center p-5">
+            <div class="d-flex ">
+                <img src="../../assets/logo.png" alt="Logo" class="me-3" />
+            </div>
+            <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
+            <h2 class="mt-4 mb-4">Check automobile insurance <br> status in 2 seconds</h2>
+            <p class="text-center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor
+                incididunt.
+            </p>
+          </div>
+            
+      <div class="col-md-6 right-section">
+
+
+        <form [formGroup]="SignupForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="activeSection === 1" class="w-100">
+
+                <div class="w-100 d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <a href="#">
+                        <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
+                      </a>
+                    <div>
+                      <span>Already have an account? </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a>
+                    </div>
+                </div>
+
+              <h1 style="font-size: 39px; margin-top: 30px;">Structure's informations</h1>
+              <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
+                <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
+                  3
+                </div>
+              </div>
+              <p style="font-size: 17px; margin-top: 50px; margin-bottom: 30px;">Complete informations about your structure</p>
+              <div formGroupName="structureInfo" class="w-100">
+                <div class="mb-4">
+                  <input type="text" formControlName="agencyName" class="field form-control" placeholder="Agency Name *" required />
+                </div>
+                <div class="mb-4">
+                  <input type="text" formControlName="agencyType" class="field form-control" placeholder="Agency Type *" required />
+                </div>
+                <div class="mb-4 d-flex justify-content-between">
+                  <select formControlName="country" class="form-select field me-4" required>
+                    <option selected disabled>Country *</option>
+                    <option value="1">Country 1</option>
+                    <option value="2">Country 2</option>
+                  </select>
+                  <select formControlName="state" class="form-select field" required>
+                    <option selected disabled>State *</option>
+                    <option value="1">State 1</option>
+                    <option value="2">State 2</option>
+                  </select>
+                </div>
+                <div class="mb-4 d-flex justify-content-between">
+                  <select formControlName="city" class="form-select field me-4" required>
+                    <option selected disabled>City *</option>
+                    <option value="1">City 1</option>
+                    <option value="2">City 2</option>
+                  </select>
+                  <select formControlName="locgov" class="form-select field" required>
+                    <option selected disabled>Local governement *</option>
+                    <option value="1">Local governement</option>
+                    <option value="2">Local governement</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" (click)="nextSection()" class="btn btn-warning w-100 text-white" style="height: 52px;"><strong>Next</strong></button>
+            </div>
+          
+            <div *ngIf="activeSection === 2" class="w-100" style="margin-bottom:50px;">
+
+                <div class="w-100 d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <a type="button" (click)="previousSection()">
+                        <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
+                      </a>
+                    <div>
+                      <span>Already have an account? </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a>
+                    </div>
+                </div>
+
+              <h1 style="font-size: 39px; margin-top: 30px; margin-bottom: 25px;">Structure's informations</h1>
+              <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
+                <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
+                  3
+                </div>
+              </div>
+              <p style="font-size: 17px; margin-top: 30px; margin-bottom: 25px;">Contact information</p>
+              <div formGroupName="contactInfo">
+                <div class="mb-4">
+                  <input type="text" formControlName="primaryContactName" class="field form-control" placeholder="Primary contact Name *" required />
+                </div>
+                <div class="mb-4">
+                  <input type="text" formControlName="secondaryContactName" class="field form-control" placeholder="Secondary contact Name" />
+                </div>
+                <div class="mb-4">
+                  <input type="text" formControlName="primaryContactTitle" class="field form-control" placeholder="Primary contact Title *" required />
+                </div>
+                <div class="mb-4">
+                  <input type="email" formControlName="primaryContactEmail" class="field form-control" placeholder="Primary contact Business Email *" required />
+                </div>
+                <div class="mb-4">
+                  <input type="email" formControlName="secondaryContactEmail" class="field form-control" placeholder="Secondary contact Business Email" />
+                </div>
+                <div class="mb-4 d-flex">
+                  <div class="input-group me-4">
+                    <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label>
+                    <select class="form-select field w-25" id="number1" aria-label="Default select example">
+                      <option selected>+229</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                    <input type="text" formControlName="primaryPhoneNumber" class="w-75 field form-control" required />
+                  </div>
+                  <div class="input-group">
+                    <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label>
+                    <select class="form-select field w-25" id="number2" aria-label="Default select example">
+                      <option selected>+229</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </select>
+                    <input type="text" formControlName="secondaryPhoneNumber" class="field form-control w-75" />
+                  </div>
+                </div>
+              </div>
+              <!-- <button type="button" (click)="previousSection()" class="btn btn-warning w-100 text-white" style="height: 52px; margin-bottom: 20px;"><strong>Previous</strong></button> -->
+              <button type="button" (click)="nextSection()" class="btn btn-warning w-100 text-white" style="height: 52px;"><strong>Next</strong></button>
+            </div>
+          
+            <div *ngIf="activeSection === 3" class="w-100">
+
+                <div class="w-100 d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <a type="button" (click)="previousSection()">
+                        <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
+                      </a>
+                    <div>
+                      <span>Already have an account? </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a>
+                    </div>
+                </div>
+
+              <h1 style="font-size: 39px; margin-top: 20px; margin-bottom: 0px;">Upload documents</h1>
+              <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
+                <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
+                  3
+                </div>
+              </div>
+              <div *ngIf="errorMessage" class=" alert-danger">{{ errorMessage }}</div>
+              <p style="font-size: 17px; margin-top: 20px;">Additional informations</p>
+              <div class="mb-4">
+                <div class="drop-zone d-flex" style="color: darkgray;" id="drop-zone" (click)="onDropZoneClick()" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)">
+                  <div class="d-flex input-label" style="height: 150px; width: 40%;">
+                    <p class="me-3 ms-4">Drop file here</p>
+                    <img src="../../assets/1904676-arrow-backup-cloud-hosting-storage-up-upload_122526.png" class="me-3" alt="" style="width: 10%; height: 13%; margin-top: -21px;">
+                  </div>
+                  <span class="file-name" id="file-name">{{ fileName }}</span>
+                  <input type="file" id="file-input" formControlName="document" accept="image/*" (change)="onFileChange($event)" style="display: none;" required>
+                </div>
+              </div>
+          
+              <div class="mb-4" formArrayName="terms">
+                <div *ngFor="let term of termsArray.controls; let i = index" class="form-check mb-4">
+                  <input class="form-check-input me-3" style="width: 20px; height: 20px;" type="checkbox" [formControlName]="i" />
+                  <a class="form-check-label text-decoration-none" style="margin-top: 5px;"> Terms and Conditions Agreement {{ i + 1 }}</a>
+                </div>
+              </div>
+          
+              <!-- <button type="button" (click)="previousSection()" class="btn btn-warning w-100 text-white" style="height: 52px; margin-bottom: 20px;"><strong>Previous</strong></button> -->
+              <button type="submit" class="btn btn-warning w-100 text-white" style="height: 52px;"><strong>Complete registration</strong></button>
+            </div>
+          </form>
+          
+          
+          
+          
+          
+          
+          
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+//   $('#file-select-button').click(function(){
+//     $('.upload input').click();
+// });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  Array.prototype.forEach.call(
+    document.querySelectorAll(".file-upload__button"),
+    function(button) {
+      const hiddenInput = button.parentElement.querySelector(".file-upload__input");
+      const label = button.parentElement.querySelector(".file-upload__label");
+      const defaultLabelText = "No file(s) selected";
+
+      // Set default text for label
+      label.textContent = defaultLabelText;
+      label.title = defaultLabelText;
+
+      button.addEventListener("click", function() {
+        hiddenInput.click();
+      });
+
+      hiddenInput.addEventListener("change", function() {
+        const filenameList = Array.prototype.map.call(hiddenInput.files, function(file) {
+          return file.name;
+        });
+
+        label.textContent = filenameList.join(", ") || defaultLabelText;
+        label.title = label.textContent;
+      });
+    }
+  );
+});
+
+</script>
