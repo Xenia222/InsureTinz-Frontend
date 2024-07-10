@@ -24,7 +24,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: '/credits', pathMatch: 'full' },
+  { path: '', redirectTo: '/create-user-accounts', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login-otp', component: LoginOtpComponent },

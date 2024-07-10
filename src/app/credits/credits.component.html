@@ -1,106 +1,220 @@
 <div class="" style="padding: 0 0px !important;
 overflow-x: hidden;
 overflow-y: scroll;">
-    <div class="row">
-        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
+  <div class="row">
+    <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
 
-        <!-- Main content -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-            <div class="content">
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+      <div class="content">
 
-                <!-- Sale & Revenue Start -->
-                <div class="container-fluid subc">
+        <!-- Sale & Revenue Start -->
+        <div *ngIf="activeSection === 1" class="container-fluid subc">
 
-                    <div class="" style="padding: 28px;">
-                        <div class="col-sm-12 col-xl-12">
-                          <div class="bg-white  case" >
-                                  <section class=" py-1 mt-3">
-                                    <div class=" mt-4 ">
-                                      <h3>Purchase Credits</h3>
-                                  </div>
-                                  <div class=" " style="padding: 14px 0;">
-                                      
-                                      <div class="  fs-5">
-                                          <p>Use the interactive slider to customize your credit purchase by selecting the desired quantity and viewing its associated price in real-time. </p>
-                                      </div>
-                                      <br>
-                                        
-                                        <div id="demo_4"></div>
-        
-                                        <br><br><br><br>
-                                        <div class="prix-bouton">
-                              
-                                              <div class=" btn-custom shadow-lg py-4 px-5 "><span class="spn pl-3">Price</span> : <strong class=""> 60 000 Fcfa</strong> </div>
-                              
-                                              <div class="cont3">
-                                                <div>
-                                                    
-                                                    <button routerlink="/payments" class="btn btn-warning px-3 mt-4 shadow-lg text-dark bbt "> <strong>Proceed to payment</strong>
-                                                        <svg width="39" height="20" viewBox="0 0 49 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <g filter="url(#filter0_d_197_2117)">
-                                                            <path d="M44.292 9.65512L29.3529 0.849011L29.2326 18.1691L44.292 9.65512ZM4.28353 10.7656L30.7823 11.0236L30.8031 8.0237L4.30436 7.76566L4.28353 10.7656Z" fill="black"/>
-                                                            </g>
-                                                            <defs>
-                                                            <filter id="filter0_d_197_2117" x="0.283569" y="0.849121" width="48.0084" height="25.3198" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                                                            <feOffset dy="4"/>
-                                                            <feGaussianBlur stdDeviation="2"/>
-                                                            <feComposite in2="hardAlpha" operator="out"/>
-                                                            <feColorMatrix type="matrix" values="0 0 0 0 0.741667 0 0 0 0 0.735486 0 0 0 0 0.735486 0 0 0 0.25 0"/>
-                                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_197_2117"/>
-                                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_197_2117" result="shape"/>
-                                                            </filter>
-                                                            </defs>
-                                                        </svg>
-                                                        </button>
-                                                </div>
-                                              </div>
-                              
-                                        </div>
-                                        
-                                        <br><br>
-                                      </div>
-                              
-                                  </section>
-                          </div>
-                        </div>  
-            
-                </div>
+          <div class="" style="padding: 28px;">
+            <div class="col-sm-12 col-xl-12">
+              <div class="bg-white  case">
+                <section class=" py-1 mt-3">
+                  <div class=" mt-4 ">
+                    <h3>Purchase Credits</h3>
+                  </div>
+                  <div class=" " style="padding: 14px 0;">
 
+                    <div class="  fs-5" style="font-size: 17px !important;">
+                      <p>Use the interactive slider to customize your credit purchase by selecting the desired quantity
+                        and viewing its associated price in real-time. </p>
+                    </div>
+                    <br>
+                    <!-- <div id="demo_3"></div> -->
+                    <div class="slider-container">
+                      <input class="slider" type="range" min="0" max="1000" [value]="value" (input)="updateSlider($event)">
+                      <p id="rangeValue">{{ value }} credits</p>
+                    </div>
 
+                    <br><br><br>
+                    <div class="prix-bouton">
 
-                </div>
+                      <div class=" btn-custom shadow-lg py-4 px-5 "><span class="spn pl-3">Price</span> : <strong
+                          class="" style="font-size: 28px; font-weight: 800;"> 60 000 Fcfa</strong> </div>
 
+                      <div class="cont3">
+                        <div>
 
+                          <button type="button" (click)="nextSection()"
+                            class="btn btn-warning px-3 mt-4 shadow-lg text-dark bbt "> <strong>Proceed to
+                              payment</strong>
+                            <svg width="39" height="20" viewBox="0 0 49 27" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g filter="url(#filter0_d_197_2117)">
+                                <path
+                                  d="M44.292 9.65512L29.3529 0.849011L29.2326 18.1691L44.292 9.65512ZM4.28353 10.7656L30.7823 11.0236L30.8031 8.0237L4.30436 7.76566L4.28353 10.7656Z"
+                                  fill="black" />
+                              </g>
+                              <defs>
+                                <filter id="filter0_d_197_2117" x="0.283569" y="0.849121" width="48.0084"
+                                  height="25.3198" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                  <feColorMatrix in="SourceAlpha" type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                  <feOffset dy="4" />
+                                  <feGaussianBlur stdDeviation="2" />
+                                  <feComposite in2="hardAlpha" operator="out" />
+                                  <feColorMatrix type="matrix"
+                                    values="0 0 0 0 0.741667 0 0 0 0 0.735486 0 0 0 0 0.735486 0 0 0 0.25 0" />
+                                  <feBlend mode="normal" in2="BackgroundImageFix"
+                                    result="effect1_dropShadow_197_2117" />
+                                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_197_2117"
+                                    result="shape" />
+                                </filter>
+                              </defs>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
 
+                    </div>
+
+                    <br><br>
+                  </div>
+
+                </section>
+              </div>
             </div>
 
+          </div>
 
-        </main>
-    </div>
+
+
+        </div>
+
+
+        <div *ngIf="activeSection === 2" class="container-fluid pt-4 px-4">
+
+          <div class="">
+            <h3 class="marg">Purchase Credits</h3>
+          </div>
+          <div class="row g-4">
+            <div class="col-sm-12 col-xl-12 mb-4">
+              <div class="bg-white casex">
+                <div class="boxx1">
+                  <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;">
+                  <h4 class="marg text-center">Paiement methods</h4>
+                  <div class="btn-checkbox-group mt-2">
+                    <div class="checkbox-group">
+                      <div class="checkbox-group-btn">
+                        <button type="button" class="bouton-image btn btn-light"
+                          onclick="toggleCheckbox('checkbox1')"><img src="../../assets/téléchargement (2) 1.png"
+                            class="img " alt=""></button>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="checkbox1"
+                          value="option1">
+                      </div>
+                    </div>
+                    <div class="checkbox-group">
+                      <div class="checkbox-group-btn">
+                        <button type="button" class="bouton-image btn btn-light"
+                          onclick="toggleCheckbox('checkbox2')"><img src="../../assets/1200x600wa 1.png" class="img"
+                            alt=""></button>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="checkbox2"
+                          value="option2">
+                      </div>
+                    </div>
+                    <div class="checkbox-group">
+                      <div class="checkbox-group-btn">
+                        <button type="button" class="bouton-image btn btn-light"
+                          onclick="toggleCheckbox('checkbox3')"><img src="../../assets/téléchargement (1) 1.png"
+                            class="img" alt=""></button>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="checkbox3"
+                          value="option3">
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="mt-5 row justify-content-center">
+                    <div class="credit-div col-auto px-4">
+                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits: <strong>200</strong><span class="px-4">Price :
+                          <strong>60 000 Fcfa</strong></span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-5 row justify-content-center">
+                    <div class="col-auto">
+                      <button (click)="nextSection()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Pay</button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <img src="../../assets/unsplash_A82PSKGx9cI.png" class="img1 ml-auto" alt="">
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="activeSection === 3" class="container-fluid pt-4 px-4">
+          <div class="row g-4">
+            <div class="col-sm-12 col-xl-12 mb-4">
+              <div class="bg-white casex">
+                <section class="container bg-white" style="border-radius: 10px;">
+                  <div class="container mt-4 ">
+                  <img src="../../assets/Arrow 2.png" type="button" class="bac" routerLink="/credits" alt="" style="height: 20px; margin-top: 10px;">
+                      <div class="flex">
+                          <div class="w-100">
+                            <div class="d-flex">
+                              <img src="img/Arrow 2.png" alt="" style="height: 20px; margin-top: 10px;">
+                              <h3 class="text-warning text-center pb-4 w-100" style="font-size: 55px;"> Success </h3>
+                            </div>  
+                            </div>
+                          <div><img src="../../assets/Group 75859.png" alt=""></div>
+                      </div>
+                      
+                      <p class="fs-4 mx-5 pt-4 text-center">Your payment has been successfully processed. Thank you for your transaction.</p>
+                      <br>
+                      <div class="d-flex justify-content-around">
+                          <div><p><strong>Total credit purchased: 200</strong></p></div>
+                          <div><p class="colors">Date: 24/06/2024</p></div>
+                      </div>
+                      <br>
+                  </div>
+              </section>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+
+
+    </main>
+  </div>
 </div>
 
-<script>
-    // $("#demo_1").ionRangeSlider({
-    //     type: "double",
-    //     grid: true,
-    //     min: 0,
-    //     max: 1000,
-    //     from: 200,
-    //     to: 800,
-    //     prefix: "$"
-    // });
-    
-    $("#demo_4").ionRangeSlider({
-    type: "double",
-    min: 0,
-    max: 600,
-    from:0,
-    to: 200,
-    drag_interval: true,
-    min_interval: null,
-    max_interval: null
-    });
-    
-    </script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+<!-- <script>
+  function updateSlider(slider) {
+    const value = slider.value;
+    const max = slider.max;
+    const min = slider.min;
+    const percentage = ((value - min) / (max - min)) * 100;
+    slider.style.background = `linear-gradient(to right, #ffcc00 ${percentage}%, #b8a9a9 ${percentage}%)`;
+    document.getElementById('rangeValue').innerText = `${value} credits`;
+  }
+</script> -->
