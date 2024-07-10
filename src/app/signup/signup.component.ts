@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../_services/storage.service';
+import { TokenService } from '../_services/token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,11 +13,11 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   SignupForm: FormGroup;
   errorMessage: string | null = null;
-  email:string | undefined;
+  email:any;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private storageService: StorageService,private tokenService: TokenService) {
     this.SignupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -34,9 +36,11 @@ export class SignupComponent {
     } else {
       this.errorMessage = null;
       console.log(this.SignupForm.value);
-      // Redirection après une soumission réussie
-      this.router.navigate(['/signup-otp']);
+      this.storageService.saveCredentials(this.SignupForm.value("email"), this.SignupForm.value("password"))
+      
     }
+    console.log(this.email,this.showConfirmPassword)
+    
   }
 
   toggleShowPassword() {

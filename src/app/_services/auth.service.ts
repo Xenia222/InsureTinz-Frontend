@@ -17,7 +17,7 @@ export class AuthService {
     formData.append('email', email);
     formData.append('password', password);
 
-    return this.http.post(`${this.apiUrl}/login`, formData);
+    return this.http.post(`${this.apiUrl}/client_login`, formData);
   }
 
   otp_send(email: string): Observable<any> {

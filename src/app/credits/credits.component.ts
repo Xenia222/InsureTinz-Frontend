@@ -1,6 +1,4 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import $ from 'jquery'; // Importez jQuery
-
 
 @Component({
   selector: 'app-credits',
