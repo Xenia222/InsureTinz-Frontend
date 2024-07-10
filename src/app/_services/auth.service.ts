@@ -1,0 +1,40 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ICredential } from '../_interfaces/credential';
+import { IToken } from '../_interfaces/token';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  apiUrl = 'http://127.0.0.1:8000/api'
+  constructor(private http: HttpClient) { }
+
+  login(email: string, password: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    return this.http.post(`${this.apiUrl}/login`, formData);
+  }
+
+  otp_send(email: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+
+    return this.http.post(`${this.apiUrl}/send-otp`, formData);
+
+  }
+
+  verify_otp(email: string, otp: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('otp', otp);
+
+    return this.http.post(`${this.apiUrl}/verify-otp`, formData);
+
+  }
+
+}
