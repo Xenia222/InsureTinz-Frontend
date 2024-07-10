@@ -27,6 +27,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     TestComponent,
     ListUsersComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    PaymentCompletionComponent
   ],
   imports: [
     BrowserModule,
