@@ -1,1 +1,158 @@
-<p>create-user-accounts works!</p>
+<div class="" style="padding: 0 0px !important;
+overflow-x: hidden;
+overflow-y: scroll;">
+    <div class="row">
+        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+            <div class="content">
+
+
+                <section>
+                    <div>
+                        <h3 class="text-dark p-4">Add a new user</h3>
+                    </div>
+
+                    <div class="col-sm-11 col-xl-11" style="margin: 0 auto;">
+
+                        <div class="bg-white  justify-content-between  conteneur">
+                            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                                <!-- Section I: Personal Information -->
+                                <h3>Perso Informations</h3>
+
+
+                                <div class="form-group">
+                                    <label for="photo">Upload Photo</label>
+                                    <input type="file" id="photo" class="form-control" (change)="onFileChange($event)">
+                                </div>
+
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" class="form-control champ"
+                                            formControlName="firstName">
+                                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" class="form-control champ"
+                                            formControlName="lastName">
+                                        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control champ" formControlName="email">
+                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                            <div *ngIf="f['email'].errors['email']">Email must be a valid email address
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 ">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" class="form-control champ" formControlName="phone">
+                                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6 ">
+                                        <label for="position">Position/Title</label>
+                                        <select id="position" class="form-control champ-select" formControlName="position">
+                                            <option *ngFor="let pos of positions" [value]="pos">{{pos}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && f['position'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['position'].errors['required']">Position is required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="department">Department</label>
+                                        <select id="department" class="form-control champ-select" formControlName="department">
+                                            <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['department'].errors['required']">Department is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Section II: Account Information -->
+                                <h3>Acc Informations</h3>
+
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="loginID">LoginID</label>
+                                        <input type="text" id="loginID" class="form-control" formControlName="loginID"
+                                            readonly>
+                                    </div>
+    
+                                    <div class="form-group col-md-6">
+                                        <label for="role">Role</label>
+                                        <select id="role" class="form-control champ-select" formControlName="role" multiple>
+                                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['role'].errors['required']">Role is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6">
+                                        <label for="rights">Rights</label>
+                                        <select id="rights" class="form-control champ-select" formControlName="rights" multiple>
+                                            <option *ngFor="let right of rights" [value]="right">{{right}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && f['rights'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['rights'].errors['required']">Rights are required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label champ">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail4">
+                                      </div>
+                                </div>
+                                
+
+                                <div *ngIf="errorMessage" class="alert alert-danger">
+                                    {{ errorMessage }}
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form>
+
+
+
+                        </div>
+                        <!--End account management-->
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+        </main>
+    </div>
+</div>

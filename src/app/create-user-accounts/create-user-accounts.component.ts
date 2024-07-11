@@ -1,10 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-user-accounts',
   templateUrl: './create-user-accounts.component.html',
   styleUrl: './create-user-accounts.component.css'
 })
-export class CreateUserAccountsComponent {
+export class CreateUserAccountsComponent implements OnInit{
 
+  userForm!: FormGroup;
+  submitted = false;
+  errorMessage: string | null = null;
+
+  positions = ['Manager', 'Developer', 'Designer', 'Analyst'];
+  departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
+  roles = ['Admin', 'User', 'Guest'];
+  rights = ['Read', 'Write', 'Execute'];
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.userForm = this.formBuilder.group({
+      photo: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      position: ['', Validators.required],
+      department: ['', Validators.required],
+      loginID: [{value: '', disabled: true}],
+      role: ['', Validators.required],
+      rights: ['', Validators.required]
+    });
+
+    this.userForm.valueChanges.subscribe(values => {
+      this.generateLoginID(values);
+    });
+  }
+
+  get f() {
+    return this.userForm.controls;
+  }
+
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      const file = target.files[0];
+      this.userForm.patchValue({
+        photo: file
+      });
+    }
+  }
+
+  generateLoginID(values: { firstName: any; lastName: any; email: any; phone: any; }) {
+    const { firstName, lastName, email, phone } = values;
+    if (firstName && lastName && email && phone) {
+      const loginID = `${firstName.charAt(0)}${lastName.charAt(0)}${email.split('@')[0]}${phone.slice(-4)}`.slice(0, 8);
+      this.userForm.patchValue({ loginID }, { emitEvent: false });
+    }
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.userForm.invalid) {
+      this.errorMessage = 'Please fill out the form correctly.';
+      return;
+    }
+    this.errorMessage = null;
+    // Handle form submission
+    console.log(this.userForm.value);
+  }
 }
