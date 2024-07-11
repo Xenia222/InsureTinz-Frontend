@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenService } from '../_services/token.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -10,37 +12,37 @@ import { TokenService } from '../_services/token.service';
 
 export class LoginComponent implements OnInit{
 
-  form = {
-    email : '',
-  password : '',
-  msg: ''
+  loginForm: FormGroup;
+  errorMessage: string | null = null;
+  
+  
+  constructor(private fb: FormBuilder,private authService: AuthService,private tokenService: TokenService,private storageService: StorageService){
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: [false]
+    });
   }
-  
-  
-  constructor(private authService: AuthService,private tokenService: TokenService){}
   
   ngOnInit(): void { }
 
   onSubmit(){
-    console.log(this.form.email,this.form.password)
-    this.authService.login(this.form.email, this.form.password).subscribe(
-      data => {
-        console.log(data.token)
-        console.log(data.detail)
-        this.tokenService.saveToken(data.token, this.form.email)
-        this.authService.otp_send(this.form.email).subscribe(
-          otpResponse => {
-            console.log('OTP envoyé:', otpResponse);
-          },
-          otpError => {
-            console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+    if (this.loginForm.invalid) {
+      this.errorMessage = 'Please enter valid credentials.';
+    } else {
+      this.errorMessage = null;
+      console.log(this.loginForm.value);
+      this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+        data => {
+          console.log(data.token)
+          if (data.token){
+            this.tokenService.saveToken(data.token)
+            this.storageService.saveCredentials(this.loginForm.value.email,this.loginForm.value.password)
+          }else{
+            this.errorMessage = data.status_message
           }
-        );
-      },
-      err => {
-        console.log(err.error),
-        this.form.msg = err.error.detail
-      })
+        })
+    }
     
   }
 

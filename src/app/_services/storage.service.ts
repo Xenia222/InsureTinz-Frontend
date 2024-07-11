@@ -8,10 +8,9 @@ export class StorageService {
 
   constructor(private router: Router) { }
 
-  saveCredentials(password: string, email: string){
+  saveCredentials(email: string,password: string){
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
-    this.router.navigate(['/signup-otp']);
   }
 
   clearCredentials(){

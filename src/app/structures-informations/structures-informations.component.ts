@@ -49,6 +49,7 @@ export class StructuresInformationsComponent {
   onSubmit() {
     if (this.SignupForm.invalid) {
       this.errorMessage = 'Please enter valid informations.';
+      
     } else {
       this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
       console.log(this.SignupForm.value);

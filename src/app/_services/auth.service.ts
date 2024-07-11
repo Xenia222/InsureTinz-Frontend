@@ -12,6 +12,14 @@ export class AuthService {
   apiUrl = 'http://127.0.0.1:8000/api'
   constructor(private http: HttpClient) { }
 
+  signup(email: any, password: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    return this.http.post(`${this.apiUrl}/client_register`, formData);
+  }
+
   login(email: string, password: string): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);
@@ -20,7 +28,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/client_login`, formData);
   }
 
-  otp_send(email: string): Observable<any> {
+  otp_send(email: any): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);
 
@@ -28,7 +36,7 @@ export class AuthService {
 
   }
 
-  verify_otp(email: string, otp: string): Observable<any> {
+  verify_otp(email: any, otp: any): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('otp', otp);

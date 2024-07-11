@@ -8,9 +8,9 @@ export class TokenService {
 
   constructor(private router: Router) { }
 
-  saveToken(token: string, email: string){
+  saveToken(token: string){
     localStorage.setItem('token', token)
-    this.router.navigate(['login-otp', email])
+    this.router.navigate(['login-otp'])
   }
 
   clearToken(){

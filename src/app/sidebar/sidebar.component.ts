@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TokenService } from '../_services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  constructor(private tokenService: TokenService){}
+  ngOnInit(): void {}
+  logout(){
+    this.tokenService.clearToken()
+  }
 }
