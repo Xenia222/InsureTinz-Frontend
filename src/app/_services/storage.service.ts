@@ -8,13 +8,14 @@ export class StorageService {
 
   constructor(private router: Router) { }
 
-  saveCredentials(password: string, email: string){
+  saveCredentials(id:string, email: string,password: string){
+    localStorage.setItem('id', id)
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
-    this.router.navigate(['/signup-otp']);
   }
 
   clearCredentials(){
+    localStorage.removeItem('id')
     localStorage.removeItem('email')
     localStorage.removeItem('password')
     this.router.navigate([''])
@@ -26,5 +27,9 @@ export class StorageService {
 
   getPassword(){
     return localStorage.getItem('password')
+  }
+
+  getId(){
+    return localStorage.getItem('id')
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-login-otp',
@@ -17,13 +18,18 @@ export class LoginOtpComponent implements OnInit {
   timer: number = 60;
   interval: any;
 
-  constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService) { }
+  constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService,private storageService: StorageService) { }
 
   ngOnInit() {
+    this.authService.otp_send(this.storageService.getEmail()).subscribe(
+      otpResponse => {
+        console.log('OTP envoyé:', otpResponse);
+      },
+      otpError => {
+        console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+      }
+    );
     this.startTimer();
-    this.route.paramMap.subscribe(params => {
-    this.email = params.get('value');
-  });
 } 
 
   startTimer() {
@@ -37,7 +43,7 @@ export class LoginOtpComponent implements OnInit {
   }
 
   resendOtp() {
-    this.authService.otp_send(this.email).subscribe(
+    this.authService.otp_send(this.storageService.getEmail()).subscribe(
       otpResponse => {
         console.log('OTP envoyé:', otpResponse);
       },
@@ -53,10 +59,11 @@ export class LoginOtpComponent implements OnInit {
 
   onSubmit(){
     console.log(this.otp)
-    this.authService.verify_otp(this.email, this.otp).subscribe(
+    this.authService.verify_otp(this.storageService.getEmail(), this.otp).subscribe(
       data => {
         console.log(data.detail)
-        this.router.navigate(['dashboard-locked'])
+        this.storageService.clearCredentials()
+        this.router.navigate(['dashboard'])
       },
       err => {
         console.log(err.error),

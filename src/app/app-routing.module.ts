@@ -22,13 +22,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { TestComponent } from './test/test.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { authGuard } from './_helper/auth.guard';
+import { ErrorComponent } from './_utils/error/error.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'login-otp/:value', component: LoginOtpComponent },
+  { path: 'login-otp', component: LoginOtpComponent , canActivate: [authGuard]},
   { path: 'signup', component: SignupComponent },
   { path: 'signup-otp', component: SignupOtpComponent },
   { path: 'signup-sucess', component: SignupSuccessComponent },
@@ -44,7 +46,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent , canActivate: [authGuard]},
   { path: 'test', component: TestComponent , canActivate: [authGuard]},
   { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
-  { path: 'structures-informations', component: StructuresInformationsComponent , canActivate: [authGuard]},
+  { path: 'structures-informations', component: StructuresInformationsComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path:'**', component: ErrorComponent  }
 
 
 ];
