@@ -31,6 +31,14 @@ main {
   }
 }
 
+.dep h6{
+  margin-bottom: 5px;
+  text-align: start;
+}
+.results-left{
+  text-align: start;
+}
+
 /* old css */
 *** Button ***/ .btn {
   transition: 0.5s;
@@ -151,7 +159,7 @@ main {
 
 @media (max-width: 991.98px) {
   .zone3 {
-    width: 88vw;
+    /* width: 88vw; */
     height: 25vh;
   }
 }
@@ -318,8 +326,8 @@ main {
 }
 .modale-info {
   position: absolute;
-  width: 414px;
-  height: 263px;
+  /* width: 414px;
+  height: 263px; */
   background-color: #ffffff;
   box-shadow: 0px 13px 61px 0px rgba(169, 169, 169, 0.37);
   border-radius: 10px;
@@ -330,9 +338,8 @@ main {
 }
 
 .divider {
-  border-left: 2px solid black;
-  height: 150px;
-  margin: 0 20px;
+  border-left: 1px solid #7d7d7d;
+  margin: 0 13px;
 }
 
 /* Fin du Css du tableau en bas du home page */
@@ -366,7 +373,13 @@ main {
     /* margin-left: 40px; */
   }
 }
-
+@media (max-width: 1200px) {
+  .px-md-4 {
+      padding-right: 1.5rem !important;
+      padding-left: 1.5rem !important;
+      width: 100%;
+  }
+}
 /*** Navbar ***/
 
 .sidebar .navbar .navbar-bas {
@@ -629,4 +642,22 @@ main {
 }
 td {
   padding-top: 17px !important;
+}
+
+@media (max-width: 767.98px) {
+  .results-left{
+    font-weight: 200;
+    min-width: 105px;
+    font-size: smaller;
+    text-align: start;
+  }
+  .dep h6{
+    font-size: 11px;
+    text-align: start;
+  }
+}
+@media (max-width: 991.98px) {
+  .col-xl-6 {
+    width: 100%;
+  }
 }

@@ -26,6 +26,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -54,6 +55,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ListUsersComponent,
     SidebarComponent,
     NavbarComponent,
+    CreditPurchaseHistoryComponent,
   ],
   imports: [
     BrowserModule,

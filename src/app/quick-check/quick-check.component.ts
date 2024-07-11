@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class QuickCheckComponent {
 
+
+    inputs: { value: string }[] = [{ value: '' }];
+  
+    addInput() {
+      this.inputs.push({ value: '' });
+    }
+  
+    removeInput() {
+      if (this.inputs.length > 1) {
+        this.inputs.pop();
+      }
+    }
+  
+    calculateWidth(index: number): number {
+      return 100 / Math.ceil((index + 1) / 2);
+    }
+
 }

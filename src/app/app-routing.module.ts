@@ -21,6 +21,8 @@ import { CreateUserAccountsComponent } from './create-user-accounts/create-user-
 import { ProfileComponent } from './profile/profile.component';
 import { TestComponent } from './test/test.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+
 
 const routes: Routes = [
 
@@ -44,6 +46,8 @@ const routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'list-users', component: ListUsersComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
+  { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
+
 
 
 ];

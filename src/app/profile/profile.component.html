@@ -1,1 +1,79 @@
-<p>profile works!</p>
+<div class="" style="padding: 0 0px !important;
+overflow-x: hidden;">
+    <div class="row">
+        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+            <div class="content">
+
+                <!-- Sale & Revenue Start -->
+                <div class="container-fluid pt-4 px-4 subc">
+
+                    <section class="container">
+                        <h2 class="py-1">Your profile</h2>
+
+                        <div class="contient">
+                            <div class="d-flex custom-gradient p-2 text-end">
+                                <div class="box" style=""></div>
+                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">Your Name <br> <span class="h-100 fs-6 text-warning ">Edit your photo</span></p></div>
+                              </div>
+                              
+                              <div class="bg-white mt-5 wadi">
+                                <div class="">
+                                  <form class="row g-3">
+                                    <div class="col-md-6">
+                                      <label for="firstName" class="form-label">First Name</label>
+                                      <input type="text" class="form-control champ" id="firstName" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="lastName" class="form-label">Last Name</label>
+                                      <input type="text" class="form-control champ" id="lastName" placeholder="Last Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="email" class="form-label">Your Email</label>
+                                      <input type="email" class="form-control champ" id="email" placeholder="name.example.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="phoneNumber" class="form-label">Phone Number</label>
+                                      <input type="tel" class="form-control champ" id="phoneNumber" placeholder="123-456-7890">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="password" class="form-label">Password</label>
+                                      <input type="password" class="form-control champ" id="password" placeholder="Password">
+                                    </div>
+                                    <div class="d-flex col-6 my-5">
+                                      <button type="button" class="d-flex btn ">
+                                        <i class="bi bi-arrow-clockwise text-primary"></i>
+                                         <p style="    color: #9b9a9a;"> <u>Reset Password</u></p>
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                          
+                                <div class="w-100 d-flex justify-content-center mt-2 ">
+                                  <button type="button" class="w-50 btn btn-warning pading"> Update </button>
+                                </div>
+                              </div>
+                        </div>
+
+                        
+                    </section>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
