@@ -3,6 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { TokenService } from '../_services/token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../_services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit{
   errorMessage: string | null = null;
   
   
-  constructor(private fb: FormBuilder,private authService: AuthService,private tokenService: TokenService,private storageService: StorageService){
+  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,private tokenService: TokenService,private storageService: StorageService){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -36,8 +37,9 @@ export class LoginComponent implements OnInit{
         data => {
           console.log(data.token)
           if (data.token){
+            this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
             this.tokenService.saveToken(data.token)
-            this.storageService.saveCredentials(this.loginForm.value.email,this.loginForm.value.password)
+            this.router.navigate(['login-otp'])
           }else{
             this.errorMessage = data.status_message
           }

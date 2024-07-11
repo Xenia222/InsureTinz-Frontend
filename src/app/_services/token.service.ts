@@ -10,7 +10,6 @@ export class TokenService {
 
   saveToken(token: string){
     localStorage.setItem('token', token)
-    this.router.navigate(['login-otp'])
   }
 
   clearToken(){

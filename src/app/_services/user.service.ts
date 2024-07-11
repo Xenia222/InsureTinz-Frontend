@@ -9,7 +9,7 @@ import { Iapi } from '../_interfaces/iapi';
 })
 export class UserService {
 
-  url = 'http://flp-api.francecentral.cloudapp.azure.com/users'
+  url = 'http://127.0.0.1:8000/api'
   constructor(private http: HttpClient) { }
 
   getAllUser(){
@@ -21,6 +21,10 @@ export class UserService {
   }
   trashUser(cid: number): Observable<Iapi>{
     return this.http.delete<Iapi>(this.url+'/trash/'+cid)
+  }
+
+  putUser(uid: string | null, user: {}): Observable<any>{
+    return this.http.put<any>(this.url+'/client_profile_update/'+uid, user)
   }
 
   untrashUser(cid: number): Observable<Iapi>{

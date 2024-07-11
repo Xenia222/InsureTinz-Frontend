@@ -62,7 +62,8 @@ export class LoginOtpComponent implements OnInit {
     this.authService.verify_otp(this.storageService.getEmail(), this.otp).subscribe(
       data => {
         console.log(data.detail)
-        this.router.navigate(['dashboard-locked'])
+        this.storageService.clearCredentials()
+        this.router.navigate(['dashboard'])
       },
       err => {
         console.log(err.error),

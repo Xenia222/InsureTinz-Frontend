@@ -41,7 +41,7 @@ export class SignupComponent {
         data => {
           console.log(data.detail);
           if (data.user){
-            this.storageService.saveCredentials(this.SignupForm.value.email, this.SignupForm.value.password)
+            this.storageService.saveCredentials(data.user.id,this.SignupForm.value.email, this.SignupForm.value.password)
             this.router.navigate(['/signup-otp']);
           }else{
             this.errorMessage = data.errorsList.email

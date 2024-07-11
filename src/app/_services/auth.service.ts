@@ -20,7 +20,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/client_register`, formData);
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: any, password: any): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
