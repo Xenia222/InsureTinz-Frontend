@@ -51,4 +51,8 @@ previousSection() {
   }
 }
 
+reloadPage() {
+  window.location.reload();
+}
+
 }

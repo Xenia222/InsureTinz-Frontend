@@ -1,6 +1,5 @@
 <div class="" style="padding: 0 0px !important;
-overflow-x: hidden;
-overflow-y: scroll;">
+overflow-x: hidden;">
     <div class="row">
         <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
 
@@ -137,7 +136,7 @@ overflow-y: scroll;">
 
                                             <!-- Menu déroulant pour sélectionner le mois -->
                                             <div class="mb-3 ml-auto">
-                                                <select id="monthSelect">
+                                                <select id="monthSelect" class="select form-select ">
                                                     <option value="all">All</option>
                                                     <option *ngFor="let month of months; index as i" [value]="i">{{
                                                         month }}</option>
@@ -168,39 +167,37 @@ overflow-y: scroll;">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="titre-tableau mb-0">Recent Verification</h6>
                                 <div class="conteneur-select ml-auto">
-                                    <select name="" class="select-table form-select text-dark mr-4"
-                                        style="background-color: #F5F6FA; color: #202224;">
-                                        <section>
-                                            <option value="">Insured</option>
-                                            <option value="">No insured</option>
-                                            <option value="">Atlantique</option>
-                                        </section>
+                                    <select class="form-select" aria-label="Default select example"
+                                        style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
+                                        <option selected>All status</option>
+                                        <option value="1">Insured</option>
+                                        <option value="2">Not insured</option>
                                     </select>
-                                    <select name="" class="select-table form-select "
-                                        style="background-color: #F5F6FA; color: #202224; ">
-                                        <section>
-                                            <option value="">Janvier</option>
-                                            <option value="">Fevrier</option>
-                                            <option value="">Atlantique</option>
-                                            <option value="">Borgou</option>
-                                            <option value="">Colline</option>
-                                            <option value="">Couffo</option>
-                                            <option value="">Donga</option>
-                                            <option value="">Litoral</option>
-                                            <option value="">Mono</option>
-                                            <option value="">Oueme</option>
-                                            <option value="">Plateau</option>
-                                            <option value="">Zou</option>
-                                        </section>
+                                    <select class="form-select" aria-label="Default select example"
+                                        style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
+                                        <option selected>Month</option>
+                                        <option value="">Janvier</option>
+                                        <option value="">Fevrier</option>
+                                        <option value="">Atlantique</option>
+                                        <option value="">Borgou</option>
+                                        <option value="">Colline</option>
+                                        <option value="">Couffo</option>
+                                        <option value="">Donga</option>
+                                        <option value="">Litoral</option>
+                                        <option value="">Mono</option>
+                                        <option value="">Oueme</option>
+                                        <option value="">Plateau</option>
+                                        <option value="">Zou</option>
                                     </select>
+
                                 </div>
 
                             </div>
 
                             <div class=" mt-4">
                                 <div class="row">
-                                    <div class="col card" style="padding: 1px;">
-                                        <table class="table table-responsive">
+                                    <div class="col card table-responsive" style="padding: 1px;">
+                                        <table class="table " style="margin-bottom: 220px;">
                                             <thead>
                                                 <tr class="">
                                                     <th style="background-color: aliceblue;">Date</th>
@@ -220,14 +217,14 @@ overflow-y: scroll;">
                                                             (click)="toggleInfo($event)"
                                                             style="width: 20px; margin-top: -2px;">
 
-                                                        <div class="modale-info" *ngIf="isInfoVisible"
-                                                            [ngStyle]="{ 'left.px': position.x, 'top.px': position.y }">
+                                                        <div class="modale-info" *ngIf="isInfoVisible">
                                                             <div
                                                                 style="color: rgba(145, 142, 244, 1); text-align: center;">
                                                                 More information
                                                             </div>
                                                             <div class="d-flex mt-2 dep">
-                                                                <div class="pl-4" style="font-weight: 200;">
+                                                                <div class="pl-4 results-left"
+                                                                    style="font-weight: 200;">
                                                                     <span>Automobile Make: </span> <br>
                                                                     <span class="mt-1">Model </span> <br>
                                                                     <span class="mt-1">Owner’s name </span><br>
@@ -261,8 +258,35 @@ overflow-y: scroll;">
                                                     <td>04 Sep 2019</td>
                                                     <td>23h 00 min 20 sec</td>
                                                     <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
-                                                            class="" (click)="toggleInfo($event)"
-                                                            style="width: 20px; margin-top: -2px;"></td>
+                                                            class="" (click)="toggleInfo2($event)"
+                                                            style="width: 20px; margin-top: -2px;">
+                                                        <div class="modale-info" *ngIf="isInfoVisible2">
+                                                            <div
+                                                                style="color: rgba(145, 142, 244, 1); text-align: center;">
+                                                                More information
+                                                            </div>
+                                                            <div class="d-flex mt-2 dep">
+                                                                <div class="pl-4 results-left"
+                                                                    style="font-weight: 200;">
+                                                                    <span>Automobile Make: </span> <br>
+                                                                    <span class="mt-1">Model </span> <br>
+                                                                    <span class="mt-1">Owner’s name </span><br>
+                                                                    <span class="mt-1">Policy number </span><br>
+                                                                    <span class="mt-2">VIN number </span><br>
+                                                                    <span class="pt-5">Expiration date </span>
+                                                                </div>
+                                                                <div class="divider"></div>
+                                                                <div>
+                                                                    <h6 class="text-dark">lorem... </h6>
+                                                                    <h6 class="text-dark">34465 </h6>
+                                                                    <h6 class="text-dark">Bill Gate </h6>
+                                                                    <h6 class="text-dark">67899GH467690 </h6>
+                                                                    <h6 class="text-dark">90087777 </h6>
+                                                                    <h6 class="text-dark">12/08/2023 </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     <td>Calavi</td>
                                                     <td style="padding-top: 3px !important;">
                                                         <div class="container">

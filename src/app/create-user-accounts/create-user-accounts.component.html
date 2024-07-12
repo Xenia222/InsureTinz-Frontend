@@ -1,6 +1,5 @@
 <div class="" style="padding: 0 0px !important;
-overflow-x: hidden;
-overflow-y: scroll;">
+overflow-x: hidden;">
     <div class="row">
         <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
 
@@ -11,7 +10,7 @@ overflow-y: scroll;">
 
                 <section>
                     <div>
-                        <h3 class="text-dark p-4">Add a new user</h3>
+                        <h3 class="text-dark th p-4">Add a new user</h3>
                     </div>
 
                     <div class="col-sm-11 col-xl-11" style="margin: 0 auto;">
@@ -21,11 +20,11 @@ overflow-y: scroll;">
                                 <!-- Section I: Personal Information -->
                                 <h3>Perso Informations</h3>
 
-
-                                <div class="form-group">
+                                
+                                <!-- <div class="form-group">
                                     <label for="photo">Upload Photo</label>
                                     <input type="file" id="photo" class="form-control" (change)="onFileChange($event)">
-                                </div>
+                                </div> -->
 
                                 <div class="row g-4">
                                     <div class="form-group col-md-6">
@@ -96,12 +95,12 @@ overflow-y: scroll;">
 
 
                                 <!-- Section II: Account Information -->
-                                <h3>Acc Informations</h3>
+                                <h3 class="mt-3">Account Informations</h3>
 
-                                <div class="row g-4">
+                                <div class="row g-4 ">
                                     <div class="form-group col-md-6">
                                         <label for="loginID">LoginID</label>
-                                        <input type="text" id="loginID" class="form-control" formControlName="loginID"
+                                        <input type="text" id="loginID" class="form-control champ" formControlName="loginID"
                                             readonly>
                                     </div>
     
@@ -127,9 +126,9 @@ overflow-y: scroll;">
                                             <div *ngIf="f['rights'].errors['required']">Rights are required</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="inputEmail4" class="form-label champ">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4" class="form-label ">Set a password</label>
+                                        <input type="text" class="form-control champ" id="">
                                       </div>
                                 </div>
                                 
@@ -138,7 +137,7 @@ overflow-y: scroll;">
                                     {{ errorMessage }}
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="boutoon btn-warning btn  px-5 py-2 mt-4">Add</button>
                             </form>
 
 

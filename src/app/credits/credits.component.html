@@ -1,5 +1,4 @@
 <div class="" style="padding: 0 0px !important;
-overflow-x: hidden;
 overflow-y: scroll;">
   <div class="row">
     <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
@@ -97,7 +96,10 @@ overflow-y: scroll;">
             <div class="col-sm-12 col-xl-12 mb-4">
               <div class="bg-white casex">
                 <div class="boxx1">
-                  <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;">
+                  <button (click)="previousSection()" class="bac" style="height: 20px; border: none; background: unset;">
+                    <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
+                  </button>
+                  <!-- <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;"> -->
                   <h4 class="marg text-center">Paiement methods</h4>
                   <div class="btn-checkbox-group mt-2">
                     <div class="checkbox-group">
@@ -169,7 +171,9 @@ overflow-y: scroll;">
               <div class="bg-white casex">
                 <section class="container bg-white" style="border-radius: 10px;">
                   <div class="container mt-4 ">
-                  <img src="../../assets/Arrow 2.png" type="button" class="bac" routerLink="/credits" alt="" style="height: 20px; margin-top: 10px;">
+                    <button (click)="reloadPage()" class="bac" style="height: 20px; border: none; background: unset;">
+                      <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
+                    </button>
                       <div class="flex">
                           <div class="w-100">
                             <div class="d-flex">
