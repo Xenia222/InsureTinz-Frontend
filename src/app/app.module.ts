@@ -27,6 +27,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
 import { tokenInterceptor } from './_helper/token.interceptor';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -57,6 +58,7 @@ import { tokenInterceptor } from './_helper/token.interceptor';
     ListUsersComponent,
     SidebarComponent,
     NavbarComponent,
+    PaymentCompletionComponent,
     CreditPurchaseHistoryComponent,
   ],
   imports: [
