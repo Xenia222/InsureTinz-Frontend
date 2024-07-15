@@ -125,7 +125,7 @@
 }
 @media (max-width: 991.98px) {
   .zone3 {
-    width: 88vw;
+    /* width: 88vw; */
     height: 25vh;
   }
 }
@@ -329,7 +329,7 @@
   }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 1200px) {
   .sidebar {
     margin-left: -250px;
   }
@@ -342,6 +342,9 @@
     width: 100%;
     margin-left: 0;
   }
+  .col-sm-6 {
+    width: 100%;
+}
 }
 
 /*** Navbar ***/

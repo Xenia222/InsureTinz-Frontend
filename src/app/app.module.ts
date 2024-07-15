@@ -28,6 +28,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
+import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+// import { NgxSliderModule } from '@angular-slider/ngx-slider';
+
 
 
 @NgModule({
@@ -54,7 +57,8 @@ import { PaymentCompletionComponent } from './payment-completion/payment-complet
     ListUsersComponent,
     SidebarComponent,
     NavbarComponent,
-    PaymentCompletionComponent
+    PaymentCompletionComponent,
+    CreditPurchaseHistoryComponent,
   ],
   imports: [
     BrowserModule,

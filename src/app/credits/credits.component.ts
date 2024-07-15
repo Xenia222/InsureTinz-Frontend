@@ -120,4 +120,8 @@ export class CreditsComponent {
     }
   }
 
+reloadPage() {
+  window.location.reload();
+}
+
 }

@@ -1,0 +1,139 @@
+<div class="" style="padding: 0 0px !important;
+overflow-x: hidden;">
+    <div class="row">
+        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+            <div class="content">
+
+                <!-- Sale & Revenue Start -->
+                <div class="container-fluid pt-4 px-4 subc">
+
+                    <div class="bann">
+                        <section class=" bg-white rounded">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="p-3 bigtext ">
+                                        <h3>Credit <br> Purchased</h3>
+                                        <p><strong class="color1 fs-2">32</strong> <br> <span class="color4">17/06/2023</span></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="p-3 bigtext">
+                                        <h3>Credit <br> Used</h3>
+                                        <p><strong class="color2 fs-2">47</strong> <br> <span class="color4 last bigtext2">
+                                                13/07/2023</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="p-3 bigtext">
+                                        <h3>Credit <br> Balance</h3>
+                                        <p><strong class="color3 fs-2">47</strong> <br> <span class="color4">17/06/2023</span></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                                    <div class="p-3  ">
+                                        <button (click)="navigateToCreditsPage()" type="button" class="btn btn-warning col align-item-center" routerLink="/credits"><strong>Purchase
+                                                Credit</strong></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                
+                        <div class=" mt-3 " style="padding: 0px;">
+                            <div class="btn-group grouppp" role="group" aria-label="Basic example">
+                
+                                <div class="sous-group">
+                                    <img src="../../assets/filter.png" alt="">
+                                </div>
+                                <div class="sous-group">
+                                    <span>filter by</span>
+                                </div>
+                                <div class="col-auto btn-light sous-group">
+                                    <select class="form-select bg-light">
+                                        <option selected>Date</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto sous-group">
+                                    <select class="form-select bg-light">
+                                        <option selected>Paiement By</option>
+                                        <option value="1">Deen</option>
+                                        <option value="2">Is</option>
+                                    </select>
+                                </div>
+                                <div class="sous-group">
+                                    <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
+                                </div>
+                
+                            </div>
+                
+                        </div>
+                        <div class="">
+                
+                            <section class="">
+                                <div class="container-fluid mt-3 rounded ">
+                                    <div class="row">
+                                        <div class="card col-12 table-responsive" style="padding-left: 0px; padding-right: 0px;">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Time</th>
+                                                        <th>Payement method</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>04 Sep 2019</td>
+                                                        <td>23h 00 min 20 sec</td>
+                                                        <td>Momo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>28 May 2019</td>
+                                                        <td>23h 00 min 20 sec</td>
+                                                        <td>Celtiis</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>23 Nov 2019</td>
+                                                        <td>23h 00 min 20 sec</td>
+                                                        <td>Momo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>05 Feb 2019</td>
+                                                        <td>23h 00 min 20 sec</td>
+                                                        <td>Paypal</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                
+                
+                
+                
+                
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
