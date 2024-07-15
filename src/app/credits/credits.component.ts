@@ -12,6 +12,7 @@ export class CreditsComponent {
   price: number = 0;
   paymentMethod: string = 'paypal'; // Default payment method
   currency: string = 'USD';
+  phoneNumber: string = '125463879';
   paymentStatus: string = '';
   isChecking: boolean = false;
 
@@ -51,11 +52,11 @@ export class CreditsComponent {
       return;
     }
     
-    this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency).subscribe(
+    this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
       
       response => {
         if (this.paymentMethod === 'paypal') {
-          window.location.href = response.paymentUrl;
+          window.location.href = response.redirectUrl;
         } else if (this.paymentMethod === 'mtnmomo') {
           // Handle MTN MoMo flow (e.g., show QR code or redirect)
           console.log('MTN MoMo payment initiated:', response);
@@ -66,10 +67,10 @@ export class CreditsComponent {
           
         }
 
-        if (response.status === 'pending' && response.referenceId) {
-          // Start checking status for MoMo payments
-          this.checkMoMoStatus(response.referenceId);
-        }
+        // if (response.status === 'pending' && response.referenceId) {
+        //   // Start checking status for MoMo payments
+        //   this.checkMoMoStatus(response.referenceId);
+        // }
       },
       error => {
         console.log(this.credits, this.paymentMethod, this.currency);
