@@ -21,14 +21,6 @@ export class SignupOtpComponent {
   constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit() {
-    this.authService.otp_send(this.storageService.getEmail()).subscribe(
-      otpResponse => {
-        console.log('OTP envoyé:', otpResponse);
-      },
-      otpError => {
-        console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
-      }
-    );
     this.startTimer();
 } 
 
@@ -62,12 +54,13 @@ export class SignupOtpComponent {
     
     this.authService.verify_otp(this.storageService.getEmail(), this.otp).subscribe(
       data => {
+
+        if (data.message == "Valid OTP"){
+          this.router.navigate(['structures-informations'])
+        }else{
+          this.errorMessage = data.message
+        }
         console.log(data.detail)
-        this.router.navigate(['structures-informations'])
-      },
-      err => {
-        console.log(err.error),
-        this.errorMessage = err.error.detail
       })
     
   }

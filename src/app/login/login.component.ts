@@ -4,6 +4,7 @@ import { TokenService } from '../_services/token.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../_services/storage.service';
 import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit{
   errorMessage: string | null = null;
   
   
-  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,private tokenService: TokenService,private storageService: StorageService){
+  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
+    private tokenService: TokenService,private storageService: StorageService, private userService: UserService){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -38,7 +40,16 @@ export class LoginComponent implements OnInit{
           console.log(data.token)
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
+            this.getUser()
             this.tokenService.saveToken(data.token)
+            this.authService.otp_send(this.storageService.getEmail()).subscribe(
+              otpResponse => {
+                console.log('OTP envoyé:', otpResponse);
+              },
+              otpError => {
+                console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+              }
+            );
             this.router.navigate(['login-otp'])
           }else{
             this.errorMessage = data.status_message
@@ -46,6 +57,18 @@ export class LoginComponent implements OnInit{
         })
     }
     
+  }
+  getUser() {
+    if (this.tokenService.getToken()) {
+      this.userService.getCurrentUser(this.tokenService.getToken()).subscribe(
+        user => {
+          console.log('User data:', user);
+        },
+        error => {
+          console.error('Failed to get user data:', error);
+        }
+      );
+    }
   }
 
 }

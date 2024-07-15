@@ -49,9 +49,9 @@ const routes: Routes = [
   { path: 'test', component: TestComponent , canActivate: [authGuard]},
   { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
   { path: 'structures-informations', component: StructuresInformationsComponent },
+  { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
   { path: 'logout', component: LogoutComponent },
   { path:'**', component: ErrorComponent  },
-  { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
 
 
 

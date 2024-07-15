@@ -25,7 +25,7 @@
                 1
             </div>
         </div>
-        <form class="mt-5" [formGroup]="SignupForm" (ngSubmit)="onSubmit()">
+        <form  [formGroup]="SignupForm" (ngSubmit)="onSubmit()" class="mt-5">
             <div *ngIf="errorMessage" class=" alert-danger">{{ errorMessage }}</div>
             <p class="mb-3" style="font-size: 17px;">Fill the form below to create your account</p>
             <div class="mb-4">

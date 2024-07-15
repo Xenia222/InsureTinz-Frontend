@@ -5,6 +5,7 @@ import { UserService } from '../_services/user.service';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
 import { TokenService } from '../_services/token.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-structures-informations',
@@ -38,12 +39,13 @@ export class StructuresInformationsComponent {
         primaryPhoneNumber: ['', Validators.required],
         secondaryPhoneNumber: [''],
       }),
-      // terms: this.fb.array([
-      //   this.fb.control(false, Validators.requiredTrue),
-      //   this.fb.control(false, Validators.requiredTrue),
-      //   this.fb.control(false, Validators.requiredTrue),
-      // ]),
-      // document: ['', Validators.required]
+      terms: this.fb.array([
+        this.fb.control(false, Validators.requiredTrue),
+        this.fb.control(false, Validators.requiredTrue),
+        this.fb.control(false, Validators.requiredTrue),
+      ]),
+      document: ['', Validators.required]
+
     });
   }
 
@@ -75,6 +77,7 @@ export class StructuresInformationsComponent {
           'primary_contact_business_email' :this.SignupForm.get('contactInfo.primaryContactEmail')?.value,
           'primary_business_phone_number' :this.SignupForm.get('contactInfo.primaryPhoneNumber')?.value,
           'secondary_business_phone_number' :this.SignupForm.get('contactInfo.secondaryPhoneNumber')?.value,
+          'document' :this.fileName,
         }).subscribe(
           data => {
             console.log(data.detail);
@@ -83,7 +86,6 @@ export class StructuresInformationsComponent {
                 data => {
                   console.log(data.token)
                   if (data.token){
-                    this.storageService.clearCredentials()
                     this.tokenService.saveToken(data.token)
                   }else{
                     this.errorMessage = data.status_message
@@ -140,8 +142,12 @@ export class StructuresInformationsComponent {
   }
 
   onFileChange(event: Event): void {
+    const file = this.SignupForm.get('document')?.value;
     const input = event.target as HTMLInputElement;
     const files = input.files;
+    if (file) {
+      saveAs(file, this.fileName);
+    }
     if (files?.length) {
       this.handleFiles(files);
     }

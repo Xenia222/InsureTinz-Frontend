@@ -14,7 +14,8 @@ import { UserService } from '../_services/user.service';
 export class SignupComponent {
   SignupForm: FormGroup;
   errorMessage: string | null = null;
-  email:any;
+  user_type: string = 'client master';
+  uid: string = '';
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
 
@@ -35,13 +36,22 @@ export class SignupComponent {
     if (this.SignupForm.invalid) {
       this.errorMessage = 'Please enter valid informations.';
     } else {
+      console.log(this.uid)
       this.errorMessage = null;
       console.log(this.SignupForm.value.email);
-      this.authService.signup(this.SignupForm.value.email, this.SignupForm.value.password).subscribe(
+      this.authService.signup(this.SignupForm.value.email, this.SignupForm.value.password, this.user_type, this.uid).subscribe(
         data => {
           console.log(data.detail);
           if (data.user){
             this.storageService.saveCredentials(data.user.id,this.SignupForm.value.email, this.SignupForm.value.password)
+            this.authService.otp_send(this.storageService.getEmail()).subscribe(
+              otpResponse => {
+                console.log('OTP envoyé:', otpResponse);
+              },
+              otpError => {
+                console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+              }
+            );
             this.router.navigate(['/signup-otp']);
           }else{
             this.errorMessage = data.errorsList.email
@@ -50,8 +60,6 @@ export class SignupComponent {
       );
       
     }
-    console.log(this.email,this.showConfirmPassword)
-    
   }
 
   toggleShowPassword() {

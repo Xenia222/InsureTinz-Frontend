@@ -1,43 +1,35 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { TokenService } from '../_services/token.service';
+import { inject } from '@angular/core';
 
-@Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
-  constructor(private tokenService: TokenService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  const token = inject(TokenService).getToken()
 
-    const token = this.tokenService.getToken()
-
+    // SI token à insérer dans le header
     if(token !== null){
-      let clone = request.clone({
-        headers: request.headers.set('Authorization', 'bearer '+ token)
-      })
-      return next.handle(clone).pipe(
-        catchError(error => {
-          if(error.status == 401){
-            this.tokenService.clearToken()
-          }
-          return throwError('Session Expired')
-        })
-      )
+      const authReq = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log(authReq)
+      // return next.handle(clone).pipe(
+      //   catchError(error => {
+      //     console.log(error)
+
+      //     if(error.status === 401){
+      //       this.tokenService.clearTokenExpired()
+      //     }
+
+      //     this.apiErrorService.sendError(error.error.message)
+      //     return throwError('Session Expired')
+      //   })
+      // )
+    return next(authReq);
+
     }
-    return next.handle(request);
-  }
-}
 
-
-export const TokenInterceptorProvider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: TokenInterceptor,
-  multi: true
-}
+    return next(req);
+  };

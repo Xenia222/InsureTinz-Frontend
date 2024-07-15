@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { tokenInterceptor } from './_helper/token.interceptor';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -68,7 +69,10 @@ import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor])
+    ),
   ],
   bootstrap: [AppComponent]
 })

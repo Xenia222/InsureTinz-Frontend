@@ -12,10 +12,12 @@ export class AuthService {
   apiUrl = 'http://127.0.0.1:8000/api'
   constructor(private http: HttpClient) { }
 
-  signup(email: any, password: any): Observable<any> {
+  signup(email: any, password: any, user_type: any, uid: any): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('user_type', user_type);
+    formData.append('uid', uid);
 
     return this.http.post(`${this.apiUrl}/client_register`, formData);
   }
