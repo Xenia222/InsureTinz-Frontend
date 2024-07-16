@@ -11,6 +11,7 @@ import { UserService } from '../_services/user.service';
 export class SidebarComponent {
 
   user: any
+  img: string = ''
   firstName: string =''
   lastName: string = ''
 
@@ -18,6 +19,7 @@ export class SidebarComponent {
 
   ngOnInit(): void {
     this.getUser()
+    this.loadProfilePhoto();
     console.log(this.user)
   }
   logout(){
@@ -37,5 +39,18 @@ export class SidebarComponent {
         }
       );
     }
+  }
+
+  loadProfilePhoto(): void {
+    this.userService.getProfilePhoto().subscribe(
+      response => {
+        console.log(response.photo_url)
+        this.img = response.photo_url;
+      },
+      error => {
+        console.error( error);
+        this.img = '';
+      }
+    );
   }
 }

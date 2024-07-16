@@ -13,6 +13,8 @@ import { StorageService } from '../_services/storage.service';
 })
 export class ProfileComponent implements OnInit{
   token: string = ''
+  msg: string = ''
+  
   form = {
     email: '',
     firstName: '',
@@ -33,8 +35,10 @@ export class ProfileComponent implements OnInit{
     }
   
   ngOnInit() {
+    this.form.password = ''
+    this.msg = ''
     this.loadProfilePhoto();
-    this.userService.getUser(this.storageService.getId()).subscribe(
+    this.userService.getUser().subscribe(
       data => {
         this.current_user = data.user
         this.form.email = data.user.email
@@ -51,7 +55,7 @@ export class ProfileComponent implements OnInit{
       this.userService.updateProfilePhoto(this.selectedFile).subscribe(
         response => {
           console.log('Photo de profil mise à jour avec succès', response);
-          // this.closeModal();
+          this.ngOnInit();
         },
         error => {
           console.error('Erreur lors de la mise à jour de la photo de profil', error);
@@ -65,7 +69,7 @@ export class ProfileComponent implements OnInit{
 
   onSubmit(){
     // console.log(this.form)
-    this.userService.putUser(this.current_user.id,
+    this.userService.putUser(
       {
         "email": this.form.email,
         "password":this.form.password,
@@ -75,11 +79,14 @@ export class ProfileComponent implements OnInit{
       }
     ).subscribe(
       data => {
-        // console.log(data.detail)
-        console.log(this.current_user)
-        this.router.navigate(['/profile']);
+        console.log(data)
+        this.ngOnInit();
         },
-      err => console.log(err)
+      data => {
+        console.log(data.error.status_message)
+        this.msg = data.error.status_message
+        this.ngOnInit()
+      }
     )
   }
 
@@ -90,15 +97,10 @@ export class ProfileComponent implements OnInit{
         this.photoUrl = response.photo_url;
       },
       error => {
-        console.error('Erreur lors de la récupération de la photo de profil', error);
+        console.error( error);
         this.photoUrl = null;
       }
     );
   }
 
-  // closeModal(): void {
-  //   const modal = document.getElementById('profilePhotoModal');
-  //   const modalInstance = bootstrap.Modal.getInstance(modal);
-  //   modalInstance.hide();
-  // }
 }

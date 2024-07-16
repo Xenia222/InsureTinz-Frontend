@@ -61,7 +61,6 @@ export class StructuresInformationsComponent {
       this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
       console.log(this.SignupForm.value);
       this.userService.putUser(
-        this.storageService.getId(),
          {
           "email": this.storageService.getEmail(),
           "password":this.storageService.getPassword(),
@@ -82,15 +81,7 @@ export class StructuresInformationsComponent {
           data => {
             console.log(data.detail);
             if (data.user){
-              this.authService.login(this.storageService.getEmail(),this.storageService.getPassword()).subscribe(
-                data => {
-                  console.log(data.token)
-                  if (data.token){
-                    this.tokenService.saveToken(data.token)
-                  }else{
-                    this.errorMessage = data.status_message
-                  }
-                })
+              this.storageService.clearCredentials()
               this.router.navigate(['/signup-sucess']);
             }else{
               this.errorMessage = data.errorsList

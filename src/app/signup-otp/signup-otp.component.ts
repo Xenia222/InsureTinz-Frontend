@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
+import { TokenService } from '../_services/token.service';
 
 @Component({
   selector: 'app-signup-otp',
@@ -18,7 +19,7 @@ export class SignupOtpComponent {
   timer: number = 60;
   interval: any;
 
-  constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService, private storageService: StorageService) { }
+  constructor(private router: Router,private tokenService: TokenService,private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit() {
     this.startTimer();
@@ -56,6 +57,15 @@ export class SignupOtpComponent {
       data => {
 
         if (data.message == "Valid OTP"){
+          this.authService.login(this.storageService.getEmail(),this.storageService.getPassword()).subscribe(
+            data => {
+              console.log(data.token)
+              if (data.token){
+                this.tokenService.saveToken(data.token)
+              }else{
+                this.errorMessage = data.status_message
+              }
+            })
           this.router.navigate(['structures-informations'])
         }else{
           this.errorMessage = data.message

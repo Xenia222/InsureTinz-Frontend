@@ -26,7 +26,7 @@ overflow-x: hidden;">
                                   <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="profilePhotoModalLabel">Mettre à jour la photo de profil</h5>
+                                      <h5 class="modal-title" id="profilePhotoModalLabel">Update profil picture</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
@@ -37,7 +37,7 @@ overflow-x: hidden;">
                                           <label for="photo" class="form-label">Choisir une photo :</label>
                                           <input type="file" id="photo" class="form-control" (change)="onFileSelected($event)">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
                                       </form>
                                     </div>
                                   </div>
@@ -57,15 +57,18 @@ overflow-x: hidden;">
                                     </div>
                                     <div class="col-md-6">
                                       <label for="email" class="form-label">Your Email</label>
-                                      <input type="email" [value]="form.email" name="email" class="form-control champ" [(ngModel)]="form.email" #email="ngModel" id="email" placeholder="name.example.com" required>
+                                      <input disabled="" type="email" [value]="form.email" name="email" class="form-control champ" [(ngModel)]="form.email" #email="ngModel" id="email" placeholder="name.example.com" required>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="phoneNumber" class="form-label">Phone Number</label>
                                       <input type="tel" [value]="form.phoneNumber" name="phoneNumber" class="form-control champ" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" id="phoneNumber" placeholder="123-456-7890" required>
                                     </div>
+                                    <div *ngIf="msg">
+                                      <p class="text-danger">{{ msg }}</p>
+                                    </div>
                                     <div class="col-md-6">
                                       <label for="password" class="form-label">Password</label>
-                                      <input type="password" name="password" class="form-control champ" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
+                                      <input type="password" [value]="form.password" name="password" class="form-control champ" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
                                     </div>
                                     <div class="d-flex col-6 my-5">
                                       <button class="d-flex btn ">

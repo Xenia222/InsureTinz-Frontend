@@ -19,9 +19,9 @@ export class ListUsersComponent implements OnInit{
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
-      data => {
-        console.log(data.data)
-        this.users = data
+      (data:any) => {
+        console.log(data.created_users)
+        this.users = data.created_users
       },
       error => {
 
