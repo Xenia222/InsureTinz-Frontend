@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
+import { data } from 'jquery';
+import { error } from 'console';
 
 @Component({
   selector: 'app-list-users',
@@ -9,9 +12,22 @@ import { Router } from '@angular/router';
 
 
 
-export class ListUsersComponent {
+export class ListUsersComponent implements OnInit{
+  
+  users:any
+  constructor(private router: Router, private userService: UserService) {}
 
-  constructor(private router: Router) {}
+  ngOnInit(): void {
+    this.userService.getAllUser().subscribe(
+      data => {
+        console.log(data.data)
+        this.users = data
+      },
+      error => {
+
+      }
+    )
+  }
 
   navigateToCreateUserAccounts() {
     this.router.navigate(['/create-user-accounts']);

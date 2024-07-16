@@ -21,11 +21,19 @@ export class ProfileComponent implements OnInit{
     phoneNumber:'',
   }
   current_user: any
+  selectedFile: File | null = null;
+  photoUrl: string | null = null;
 
   constructor(private userService: UserService
     ,private router: Router,private tokenService: TokenService,private storageService: StorageService
     ){}
+
+    onFileSelected(event: any): void {
+      this.selectedFile = event.target.files[0];
+    }
+  
   ngOnInit() {
+    this.loadProfilePhoto();
     this.userService.getUser(this.storageService.getId()).subscribe(
       data => {
         this.current_user = data.user
@@ -36,17 +44,24 @@ export class ProfileComponent implements OnInit{
         console.log(data.user)
       }
     )
-    // this.userService.getCurrentUser(this.tokenService.getToken()).subscribe(
-    //   user => {
-    //     this.current_user = user;
-    //     console.log('User data:', this.current_user);
-    //   },
-    //   error => {
-    //     console.error('Failed to get user data:', error);
-    //   }
-    // );
-    // console.log(this.current_user.id)
    }
+
+   onSubmitPhoto(): void {
+    if (this.selectedFile) {
+      this.userService.updateProfilePhoto(this.selectedFile).subscribe(
+        response => {
+          console.log('Photo de profil mise à jour avec succès', response);
+          // this.closeModal();
+        },
+        error => {
+          console.error('Erreur lors de la mise à jour de la photo de profil', error);
+        }
+      );
+    } else {
+      console.error('Aucun fichier sélectionné');
+    }
+  }
+
 
   onSubmit(){
     // console.log(this.form)
@@ -67,4 +82,23 @@ export class ProfileComponent implements OnInit{
       err => console.log(err)
     )
   }
+
+  loadProfilePhoto(): void {
+    this.userService.getProfilePhoto().subscribe(
+      response => {
+        console.log(response.photo_url)
+        this.photoUrl = response.photo_url;
+      },
+      error => {
+        console.error('Erreur lors de la récupération de la photo de profil', error);
+        this.photoUrl = null;
+      }
+    );
+  }
+
+  // closeModal(): void {
+  //   const modal = document.getElementById('profilePhotoModal');
+  //   const modalInstance = bootstrap.Modal.getInstance(modal);
+  //   modalInstance.hide();
+  // }
 }

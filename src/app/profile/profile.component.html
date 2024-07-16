@@ -15,10 +15,35 @@ overflow-x: hidden;">
 
                         <div class="contient">
                             <div class="d-flex custom-gradient p-2 text-end">
-                                <div class="box"></div>
-                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{form.firstName}} <br> <span class="h-100 fs-6 text-warning ">Edit your photo</span></p></div>
+                                <div *ngIf="photoUrl" class="box">
+                                  <img [src]="photoUrl" class="img-thumbnail box">
+                                </div>
+                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{form.firstName}} {{form.lastName}} <br> <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
                               </div>
-                              
+                              <!-- The Modal -->
+                              <div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="profilePhotoModalLabel">Mettre à jour la photo de profil</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                      <form (ngSubmit)="onSubmitPhoto()" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                          <label for="photo" class="form-label">Choisir une photo :</label>
+                                          <input type="file" id="photo" class="form-control" (change)="onFileSelected($event)">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
                               <div class="bg-white mt-5 wadi">
                                 <div class="">
                                   <form name="form" #LoginForm="ngForm" (ngSubmit)="onSubmit()" class="row g-3">

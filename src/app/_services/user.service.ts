@@ -14,13 +14,22 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
 
-  getCurrentUser($token: any){
-      const headers = new HttpHeaders().set('Authorization', $token);
-      return this.http.get(`${this.url}/user`, { headers });
+  getCurrentUser(){
+      return this.http.get(`${this.url}/user`);
     }
 
+  updateProfilePhoto(photo: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('photo', photo);
+    return this.http.post(`${this.url}/user/profile-photo`, formData);
+  }
+
+  getProfilePhoto(): Observable<any> {
+    return this.http.get(`${this.url}/user/profile-photo`);
+  }
+
   getAllUser(){
-    return this.http.get<IDataUser>(this.url)
+    return this.http.get<IDataUser>(this.url+'/client_users')
   }
 
   getUser(uid: any): Observable <any>{
