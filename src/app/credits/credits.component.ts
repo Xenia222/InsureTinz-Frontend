@@ -1,6 +1,8 @@
 import { error } from 'node:console';
 import { PaymentService } from '../_services/payment.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MtnMomoModalComponent } from '../mtn-momo-modal/mtn-momo-modal.component';
 
 @Component({
   selector: 'app-credits',
@@ -12,11 +14,11 @@ export class CreditsComponent {
   price: number = 0;
   paymentMethod: string = 'paypal'; // Default payment method
   currency: string = 'USD';
-  phoneNumber: string = '125463879';
+  phoneNumber: string = '';
   paymentStatus: string = '';
   isChecking: boolean = false;
 
-  constructor(private paymentService: PaymentService) {}
+  constructor(private paymentService: PaymentService,public dialog: MatDialog) {}
   
   checkMoMoStatus(referenceId: string, transactionId: string) {
     this.isChecking = true;
@@ -48,37 +50,49 @@ export class CreditsComponent {
   }
 
   proceedToPayment() {
-    if (!this.paymentMethod) {
-      alert('Please select a payment method');
-      return;
+    
+    if (this.paymentMethod === 'mtnmomo') {
+      const dialogRef = this.dialog.open(MtnMomoModalComponent, {
+        width: '400px',
+        // data: { response: response }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          console.log('Phone number received from modal:', result);
+          this.phoneNumber = result
+          this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
+            response => {
+            if (response.status === 'pending' && response.referenceId) {
+              // Start checking status for MoMo payments
+              this.checkMoMoStatus(response.referenceId, response.transactionId);
+            }
+            console.log('MTN MoMo payment initiated:', response);
+    
+          },
+          error => {
+            console.log(this.credits, this.paymentMethod, this.currency);
+            
+            console.error('Error initiating payment:', error)}
+        );
+        }
+      });
     }
     
+    else if (this.paymentMethod === 'paypal') {
     this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
       
       response => {
-        if (this.paymentMethod === 'paypal') {
+        
           // window.location.href = response.redirectUrl;
+          console.log(response)
           window.open(response.redirectUrl, '_blank');
-        } else if (this.paymentMethod === 'mtnmomo') {
-          // Handle MTN MoMo flow (e.g., show QR code or redirect)
-          console.log('MTN MoMo payment initiated:', response);
-        }
-
-        if (response.error) {
-          console.log(response.error);
-          
-        }
-
-        if (response.status === 'pending' && response.referenceId) {
-          // Start checking status for MoMo payments
-          this.checkMoMoStatus(response.referenceId, response.transactionId);
-        }
-      },
+        },
       error => {
         console.log(this.credits, this.paymentMethod, this.currency);
         
         console.error('Error initiating payment:', error)}
-    );
+      );
+    }
   }
   value: number = 0;
 

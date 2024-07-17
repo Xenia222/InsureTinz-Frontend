@@ -34,3 +34,6 @@ body {
   background: #f5f5f5;
   /* Couleur de fond de la piste */
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

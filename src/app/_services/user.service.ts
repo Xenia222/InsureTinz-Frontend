@@ -16,7 +16,11 @@ export class UserService {
 
   getCurrentUser(){
       return this.http.get(`${this.url}/user`);
-    }
+  }
+
+  resetPassword(user: {}){
+    return this.http.post<any>(this.url+'/change-password', user)
+  }
 
   updateProfilePhoto(photo: File): Observable<any> {
     const formData: FormData = new FormData();

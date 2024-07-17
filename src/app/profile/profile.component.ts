@@ -83,9 +83,11 @@ export class ProfileComponent implements OnInit{
         this.ngOnInit();
         },
       data => {
-        console.log(data.error.status_message)
+        console.log("profile")
+        console.log(data.error)
         this.msg = data.error.status_message
-        this.ngOnInit()
+        // this.msg = data.errorList.password
+        // this.ngOnInit()
       }
     )
   }
