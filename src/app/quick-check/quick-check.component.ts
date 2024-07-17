@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CheckService } from '../_services/check.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-quick-check',
@@ -7,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class QuickCheckComponent {
 
+  constructor(private checkService:CheckService){}
 
     inputs: { value: string }[] = [{ value: '' }];
   
@@ -22,6 +25,19 @@ export class QuickCheckComponent {
   
     calculateWidth(index: number): number {
       return 100 / Math.ceil((index + 1) / 2);
+    }
+
+    onSubmit(){
+      this.checkService.quickCheck({
+        'license_plate_numbers': this.inputs
+      }).subscribe(
+        data => {
+          console.log(data);
+        },
+        err =>{
+          console.log(err);
+        }
+      )
     }
 
 }

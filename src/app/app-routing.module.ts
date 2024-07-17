@@ -25,6 +25,7 @@ import { authGuard } from './_helper/auth.guard';
 import { ErrorComponent } from './_utils/error/error.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'logout', component: LogoutComponent },
   { path:'**', component: ErrorComponent  },
 

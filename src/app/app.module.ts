@@ -30,6 +30,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
 import { tokenInterceptor } from './_helper/token.interceptor';
+import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -60,6 +62,8 @@ import { tokenInterceptor } from './_helper/token.interceptor';
     NavbarComponent,
     PaymentCompletionComponent,
     CreditPurchaseHistoryComponent,
+    MtnMomoModalComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
