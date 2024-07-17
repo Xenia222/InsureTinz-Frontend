@@ -11,10 +11,11 @@ export class QuickCheckComponent {
 
   constructor(private checkService:CheckService){}
 
-    inputs: { value: string }[] = [{ value: '' }];
+  results: any[] = []
+  inputs: string[] = [''];
   
     addInput() {
-      this.inputs.push({ value: '' });
+      this.inputs.push('');
     }
   
     removeInput() {
@@ -32,12 +33,12 @@ export class QuickCheckComponent {
         'license_plate_numbers': this.inputs
       }).subscribe(
         data => {
-          console.log(data);
+          this.results = data.results
+          console.log(data.results);
         },
         err =>{
           console.log(err);
         }
       )
     }
-
 }
