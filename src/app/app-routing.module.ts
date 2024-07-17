@@ -15,6 +15,7 @@ import { CreditsComponent } from './credits/credits.component';
 import { PurchaseCreditsComponent } from './purchase-credits/purchase-credits.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { PaymentCreditsSuccessComponent } from './payment-credits-success/payment-credits-success.component';
+import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 import { QuickCheckComponent } from './quick-check/quick-check.component';
 import { VerificationHistoryComponent } from './verification-history/verification-history.component';
 import { CreateUserAccountsComponent } from './create-user-accounts/create-user-accounts.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'purchase-credits', component: PurchaseCreditsComponent , canActivate: [authGuard]},
   { path: 'payment-methods', component: PaymentMethodsComponent , canActivate: [authGuard]},
   { path: 'payment-credits-success', component: PaymentCreditsSuccessComponent , canActivate: [authGuard]},
+  { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard]},
   { path: 'quick-check', component: QuickCheckComponent , canActivate: [authGuard]},
   { path: 'verification-history', component: VerificationHistoryComponent , canActivate: [authGuard]},
   { path: 'create-user-accounts', component: CreateUserAccountsComponent , canActivate: [authGuard]},

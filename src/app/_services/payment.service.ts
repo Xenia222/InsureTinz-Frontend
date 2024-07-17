@@ -23,7 +23,7 @@ export class PaymentService {
   }
 
   completePayment(paymentData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/complete-payment`, paymentData);
+    return this.http.post(`${this.apiUrl}/complete/paypal/success`, paymentData);
   }
 
   checkMoMoStatus(referenceId: string, transactionId: string): Observable<any> {
