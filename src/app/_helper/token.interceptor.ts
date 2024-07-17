@@ -15,18 +15,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
         }
       });
       console.log(authReq)
-      // return next.handle(clone).pipe(
-      //   catchError(error => {
-      //     console.log(error)
 
-      //     if(error.status === 401){
-      //       this.tokenService.clearTokenExpired()
-      //     }
-
-      //     this.apiErrorService.sendError(error.error.message)
-      //     return throwError('Session Expired')
-      //   })
-      // )
     return next(authReq);
 
     }

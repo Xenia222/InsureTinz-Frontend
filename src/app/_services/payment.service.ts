@@ -16,7 +16,8 @@ export class PaymentService {
 
   
   initiatePayment(credits: number, paymentMethod: string, currency: string, phoneNumber: string): Observable<any> {
-
+    console.log({ "credits": credits, "method": paymentMethod, "currency": currency, 'phoneNumber':phoneNumber });
+    
     return this.http.post(`${this.apiUrl}/initiate-payment`, 
       { "credits": credits, "method": paymentMethod, "currency": currency, 'phoneNumber':phoneNumber });
   }
@@ -25,7 +26,7 @@ export class PaymentService {
     return this.http.post(`${this.apiUrl}/complete-payment`, paymentData);
   }
 
-  checkMoMoStatus(referenceId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/check-momo-status`, { referenceId });
+  checkMoMoStatus(referenceId: string, transactionId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/check-momo-status`, { referenceId, transactionId });
   }
 }

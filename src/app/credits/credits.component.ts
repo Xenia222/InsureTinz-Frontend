@@ -18,18 +18,19 @@ export class CreditsComponent {
 
   constructor(private paymentService: PaymentService) {}
   
-  checkMoMoStatus(referenceId: string) {
+  checkMoMoStatus(referenceId: string, transactionId: string) {
     this.isChecking = true;
-    this.paymentService.checkMoMoStatus(referenceId).subscribe(
+    this.paymentService.checkMoMoStatus(referenceId, transactionId).subscribe(
       response => {
         this.paymentStatus = response.status;
         if (response.status === 'success') {
           // Payment successful, update UI accordingly
-          console.log('Payment successful');
+
+          console.log(response);
         } else if (response.status === 'pending') {
           // Payment still processing, maybe check again after a delay
           console.log('Payment still processing');
-          setTimeout(() => this.checkMoMoStatus(referenceId), 5000); // Check again after 5 seconds
+          setTimeout(() => this.checkMoMoStatus(referenceId, transactionId), 5000); // Check again after 5 seconds
         }
       },
       error => {
@@ -56,7 +57,8 @@ export class CreditsComponent {
       
       response => {
         if (this.paymentMethod === 'paypal') {
-          window.location.href = response.redirectUrl;
+          // window.location.href = response.redirectUrl;
+          window.open(response.redirectUrl, '_blank');
         } else if (this.paymentMethod === 'mtnmomo') {
           // Handle MTN MoMo flow (e.g., show QR code or redirect)
           console.log('MTN MoMo payment initiated:', response);
@@ -67,10 +69,10 @@ export class CreditsComponent {
           
         }
 
-        // if (response.status === 'pending' && response.referenceId) {
-        //   // Start checking status for MoMo payments
-        //   this.checkMoMoStatus(response.referenceId);
-        // }
+        if (response.status === 'pending' && response.referenceId) {
+          // Start checking status for MoMo payments
+          this.checkMoMoStatus(response.referenceId, response.transactionId);
+        }
       },
       error => {
         console.log(this.credits, this.paymentMethod, this.currency);
