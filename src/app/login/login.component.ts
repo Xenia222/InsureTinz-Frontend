@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit{
           console.log(data.token)
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
-            this.getUser()
             this.tokenService.saveToken(data.token)
             this.authService.otp_send(this.storageService.getEmail()).subscribe(
               otpResponse => {
@@ -57,18 +56,6 @@ export class LoginComponent implements OnInit{
         })
     }
     
-  }
-  getUser() {
-    if (this.tokenService.getToken()) {
-      this.userService.getCurrentUser(this.tokenService.getToken()).subscribe(
-        user => {
-          console.log('User data:', user);
-        },
-        error => {
-          console.error('Failed to get user data:', error);
-        }
-      );
-    }
   }
 
 }

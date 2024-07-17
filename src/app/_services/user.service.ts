@@ -14,24 +14,41 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
 
-  getCurrentUser($token: any){
-      const headers = new HttpHeaders().set('Authorization', $token);
-      return this.http.get(`${this.url}/user`, { headers });
+  getCurrentUser(){
+      return this.http.get(`${this.url}/user`);
     }
 
-  getAllUser(){
-    return this.http.get<IDataUser>(this.url)
+  updateProfilePhoto(photo: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('photo', photo);
+    return this.http.post(`${this.url}/user/profile-photo`, formData);
   }
 
-  getUser(uid: any): Observable <any>{
-    return this.http.get(this.url+'/show_details_client_user/'+uid)
+  getProfilePhoto(): Observable<any> {
+    return this.http.get(`${this.url}/user/profile-photo`);
+  }
+
+  getRoleAndPermission(): Observable<any> {
+    return this.http.get(`${this.url}/create_client_user`)
+  }
+
+  addClientUser(user: {}): Observable<any>{
+    return this.http.post<any>(this.url+'/store_client_user', user)
+  }
+
+  getAllUser(){
+    return this.http.get<IDataUser>(this.url+'/client_users')
+  }
+
+  getUser(): Observable <any>{
+    return this.http.get(this.url+'/client_users')
   }
   trashUser(cid: number): Observable<Iapi>{
     return this.http.delete<Iapi>(this.url+'/trash/'+cid)
   }
 
-  putUser(uid: string | null, user: {}): Observable<any>{
-    return this.http.put<any>(this.url+'/client_profile_update/'+uid, user)
+  putUser(user: {}): Observable<any>{
+    return this.http.put<any>(this.url+'/client_profile_update', user)
   }
 
   untrashUser(cid: number): Observable<Iapi>{
