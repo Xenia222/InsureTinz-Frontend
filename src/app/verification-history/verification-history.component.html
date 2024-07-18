@@ -51,13 +51,15 @@
                                             <th class="text-center">DETAILS</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center py-4 ">00001356AGDBC2</td>
+                                    <tbody *ngIf="!noCheck">
+                                        <tr *ngFor="let check of checks">
+                                            <td class="text-center py-4 ">{{check.id}}</td>
                                             <td>
                                                 <div class="container mt-3">
                                                     <div class="active px-4 py-1">
-                                                        <p>Active</p>
+                                                        <div *ngIf="check.is_insured == 1" class="status-active ">Active</div>
+                                                        <div *ngIf="check.is_insured == 0" class="status-expired ">Expired</div>
+                                                        <div *ngIf="check.is_insured == null" class="status-expired ">Not found</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -76,31 +78,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center py-4">00001356AGDBC2</td>
-                                            <td>
-                                                <div class="container mt-3">
-                                                    <div class="active px-4 py-1">
-                                                        <p>Active</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="min-width: 300px !important;">
-                                                <div class="d-flex justify-content-around">
-                                                    <div>
-                                                        <span class="back1">Insurance company :<br> Policy number :<br>
-                                                            coverage details :<br>Expiration
-                                                            date :</span>
-                                                    </div>
-
-                                                    <div>
-                                                        <span>lorem... <br> 67899GH467690 <br> 90087777 <br>
-                                                            12/08/2023</span>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="noCheck">
+                                        <div class="text-center">
+                                            <strong>{{noCheck}}</strong>
+                                        </div>
                                     </tbody>
                                 </table>
                             </div>

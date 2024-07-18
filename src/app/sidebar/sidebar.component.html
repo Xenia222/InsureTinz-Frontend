@@ -83,7 +83,7 @@
 
                     <div class="mt-auto">
                         <hr>
-                        <a href="#" class="open-modal nav-item nav-link mt-2 " data-bs-toggle="dropdown"
+                        <a routerLink="/logout" class="open-modal nav-item nav-link mt-2 " data-bs-toggle="dropdown"
                             style="cursor: pointer;" id="logoutBtn"><i class="fa fa-chart-bar me-2"></i>
                             <div class="element">Logout</div>
                         </a>
@@ -163,10 +163,10 @@
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link " style="display: flex;">
-                            <img class="rounded-circle me-lg-2" src="../../assets/user.jpg" alt=""
+                            <img class="rounded-circle me-lg-2" [src]="img" alt=""
                                 style="width: 40px; height: 40px;">
                             <div>
-                                <span class="" style="font-size: medium;">John Doe</span><br>
+                                <span class="" style="font-size: medium;">{{ firstName }} {{ lastName }}</span><br>
                                 <span class=" " style="font-size: small; ">Admin</span>
                             </div>
                         </a>

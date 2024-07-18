@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +28,11 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { tokenInterceptor } from './_helper/token.interceptor';
+import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -55,19 +61,26 @@ import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit
     ListUsersComponent,
     SidebarComponent,
     NavbarComponent,
+    PaymentCompletionComponent,
     CreditPurchaseHistoryComponent,
+    MtnMomoModalComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
-    // NgxSliderModule,
+    NgxPaginationModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor])
+    ),
   ],
   bootstrap: [AppComponent]
 })

@@ -15,45 +15,73 @@ overflow-x: hidden;">
 
                         <div class="contient">
                             <div class="d-flex custom-gradient p-2 text-end">
-                                <div class="box" style=""></div>
-                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">Your Name <br> <span class="h-100 fs-6 text-warning ">Edit your photo</span></p></div>
+                                <div *ngIf="photoUrl" class="box">
+                                  <img [src]="photoUrl" class="img-thumbnail box">
+                                </div>
+                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{form.firstName}} {{form.lastName}} <br> <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
+                            </div>
+                              <!-- The Modal -->
+                              <div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="profilePhotoModalLabel">Update profil picture</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                      <form (ngSubmit)="onSubmitPhoto()" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                          <label for="photo" class="form-label">Choisir une photo :</label>
+                                          <input type="file" id="photo" class="form-control" (change)="onFileSelected($event)">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              
+
                               <div class="bg-white mt-5 wadi">
                                 <div class="">
-                                  <form class="row g-3">
+                                  <form name="form" #LoginForm="ngForm" (ngSubmit)="onSubmit()" class="row g-3">
                                     <div class="col-md-6">
                                       <label for="firstName" class="form-label">First Name</label>
-                                      <input type="text" class="form-control champ" id="firstName" placeholder="First Name">
+                                      <input type="text" [value]="form.firstName"  name="firstName" class="form-control champ" [(ngModel)]="form.firstName" #firstName="ngModel" id="firstName" placeholder="First Name" required>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="lastName" class="form-label">Last Name</label>
-                                      <input type="text" class="form-control champ" id="lastName" placeholder="Last Name">
+                                      <input type="text" [value]="form.lastName" name="lastName" class="form-control champ" [(ngModel)]="form.lastName" #lastName="ngModel" id="lastName" placeholder="Last Name" required>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="email" class="form-label">Your Email</label>
-                                      <input type="email" class="form-control champ" id="email" placeholder="name.example.com">
+                                      <input disabled="" type="email" [value]="form.email" name="email" class="form-control champ" [(ngModel)]="form.email" #email="ngModel" id="email" placeholder="name.example.com" required>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="phoneNumber" class="form-label">Phone Number</label>
-                                      <input type="tel" class="form-control champ" id="phoneNumber" placeholder="123-456-7890">
+                                      <input type="tel" [value]="form.phoneNumber" name="phoneNumber" class="form-control champ" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" id="phoneNumber" placeholder="123-456-7890" required>
+                                    </div>
+                                    <div *ngIf="msg">
+                                      <p class="text-danger">{{ msg }}</p>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="password" class="form-label">Password</label>
-                                      <input type="password" class="form-control champ" id="password" placeholder="Password">
+                                      <input type="password" [value]="form.password" name="password" class="form-control champ" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
                                     </div>
                                     <div class="d-flex col-6 my-5">
-                                      <button type="button" class="d-flex btn ">
+                                      <a href="/reset-password" class="d-flex btn">
                                         <i class="bi bi-arrow-clockwise text-primary"></i>
-                                         <p style="    color: #9b9a9a;"> <u>Reset Password</u></p>
-                                      </button>
+                                         <p style="color: #9b9a9a;"> <u>Reset Password</u></p>
+                                      </a>
+                                    </div>
+                                    <div class="w-100 d-flex justify-content-center mt-2 ">
+                                      <button type="submit" class="w-50 btn btn-warning pading"> Update </button>
                                     </div>
                                   </form>
                                 </div>
                           
-                                <div class="w-100 d-flex justify-content-center mt-2 ">
-                                  <button type="button" class="w-50 btn btn-warning pading"> Update </button>
-                                </div>
                               </div>
                         </div>
 

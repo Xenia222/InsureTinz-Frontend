@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
+import { StorageService } from '../_services/storage.service';
+import { AuthService } from '../_services/auth.service';
+import { TokenService } from '../_services/token.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-structures-informations',
@@ -14,7 +19,8 @@ export class StructuresInformationsComponent {
   activeSection: number = 1;
   fileName: string = 'No file(s) selected';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService,
+     private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
     this.SignupForm = this.fb.group({
       structureInfo: this.fb.group({
         agencyName: ['', Validators.required],
@@ -39,6 +45,7 @@ export class StructuresInformationsComponent {
         this.fb.control(false, Validators.requiredTrue),
       ]),
       document: ['', Validators.required]
+
     });
   }
 
@@ -49,11 +56,39 @@ export class StructuresInformationsComponent {
   onSubmit() {
     if (this.SignupForm.invalid) {
       this.errorMessage = 'Please enter valid informations.';
+
     } else {
       this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
       console.log(this.SignupForm.value);
+      this.userService.putUser(
+         {
+          "email": this.storageService.getEmail(),
+          "password":this.storageService.getPassword(),
+          "agency_name": this.SignupForm.get('structureInfo.agencyName')?.value,
+          "agency_type": this.SignupForm.get('structureInfo.agencyType')?.value,
+          "country": this.SignupForm.get('structureInfo.country')?.value,
+          "state": this.SignupForm.get('structureInfo.state')?.value,
+          "city": this.SignupForm.get('structureInfo.city')?.value,
+          'local_government' : this.SignupForm.get('structureInfo.locgov')?.value,
+          'primary_contact_name' :this.SignupForm.get('contactInfo.primaryContactName')?.value,
+          'secondary_contact_name' :this.SignupForm.get('contactInfo.secondaryContactName')?.value,
+          'primary_contact_title' :this.SignupForm.get('contactInfo.primaryContactTitle')?.value,
+          'primary_contact_business_email' :this.SignupForm.get('contactInfo.primaryContactEmail')?.value,
+          'primary_business_phone_number' :this.SignupForm.get('contactInfo.primaryPhoneNumber')?.value,
+          'secondary_business_phone_number' :this.SignupForm.get('contactInfo.secondaryPhoneNumber')?.value,
+          'document' :this.fileName,
+        }).subscribe(
+          data => {
+            console.log(data.detail);
+            if (data.user){
+              this.storageService.clearCredentials()
+              this.router.navigate(['/signup-sucess']);
+            }else{
+              this.errorMessage = data.errorsList
+            }
+          }
+        );
       // Redirection après une soumission réussie
-      this.router.navigate(['/signup-success']);
     }
   }
 
@@ -98,8 +133,12 @@ export class StructuresInformationsComponent {
   }
 
   onFileChange(event: Event): void {
+    const file = this.SignupForm.get('document')?.value;
     const input = event.target as HTMLInputElement;
     const files = input.files;
+    if (file) {
+      saveAs(file, this.fileName);
+    }
     if (files?.length) {
       this.handleFiles(files);
     }

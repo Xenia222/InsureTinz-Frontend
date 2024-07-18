@@ -30,7 +30,7 @@
             <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
             <a href="#" class="d-block mb-4 text-dark text-decoration-none" (click)="resendOtp()">Resend OTP</a>
             <button class="btn btn-warning text-white w-100" style="height: 52px;"
-                (click)="verifyOtp()"><strong>Next</strong></button>
+                (click)="onSubmit()"><strong>Next</strong></button>
         </div>
       </div>
     </div>
