@@ -52,6 +52,7 @@ overflow-x: hidden;">
                                     <td class="text-center three justify-content-center align-items-center d-flex">
                                         <div *ngIf="result.is_policy_valid == true" class="status-active ">Active</div>
                                         <div *ngIf="result.is_policy_valid == false" class="status-expired ">Expired</div>
+                                        <div *ngIf="result.is_policy_valid == null" class="status-expired ">Not found</div>
                                     </td>
                                     <td style="font-size: 15px;padding: 0 40px;">
             

@@ -57,7 +57,9 @@
                                             <td>
                                                 <div class="container mt-3">
                                                     <div class="active px-4 py-1">
-                                                        <p>{{check.is_insured}}</p>
+                                                        <div *ngIf="check.is_insured == 1" class="status-active ">Active</div>
+                                                        <div *ngIf="check.is_insured == 0" class="status-expired ">Expired</div>
+                                                        <div *ngIf="check.is_insured == null" class="status-expired ">Not found</div>
                                                     </div>
                                                 </div>
                                             </td>
