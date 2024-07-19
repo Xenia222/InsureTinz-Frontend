@@ -10,6 +10,10 @@ import { data } from 'jquery';
 export class VerificationHistoryComponent implements OnInit{
 
   checks: any = []
+  pagedItems: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 10;
   noCheck = null
 
   constructor(private checkService:CheckService){}
@@ -18,6 +22,8 @@ export class VerificationHistoryComponent implements OnInit{
     this.checkService.getCheckList().subscribe(
       data => {
         this.checks = data
+        this.totalPages = Math.ceil(this.checks.length / this.itemsPerPage);
+        this.updatePagedItems();
         if(data.error){
         this.noCheck = data.error
         }
@@ -54,6 +60,26 @@ export class VerificationHistoryComponent implements OnInit{
 
   hideInfo() {
     this.isInfoVisible = false;
+  }
+
+  updatePagedItems(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.pagedItems = this.checks.slice(start, end);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagedItems();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagedItems();
+    }
   }
 
 }

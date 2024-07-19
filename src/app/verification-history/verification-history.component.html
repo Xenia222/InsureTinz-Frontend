@@ -52,7 +52,7 @@
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="!noCheck">
-                                        <tr *ngFor="let check of checks">
+                                        <tr *ngFor="let check of pagedItems">
                                             <td class="text-center py-4 ">{{check.id}}</td>
                                             <td>
                                                 <div class="container mt-3">
@@ -78,6 +78,11 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <div>
+                                            <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+                                            <span>Page {{currentPage}} of {{totalPages}}</span>
+                                            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+                                          </div>
                                     </tbody>
                                     <tbody *ngIf="noCheck">
                                         <div class="text-center">

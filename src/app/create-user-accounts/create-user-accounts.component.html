@@ -108,10 +108,7 @@ overflow-x: hidden;">
                                         <label for="roles">Role</label>
                                         <select id="roles" [(ngModel)]="selectedRoleIds" (change)="onRolesChange()" multiple>
                                             <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
-                                          </select>
-                                        <!-- <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['role'].errors['required']">Role is required</div>
-                                        </div> -->
+                                        </select>
                                     </div>
                                 </div>
                                 

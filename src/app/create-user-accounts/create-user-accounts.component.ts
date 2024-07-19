@@ -20,11 +20,11 @@ export class CreateUserAccountsComponent implements OnInit{
   departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
   roles: any[] = [];
   selectedRoleIds: number[] = [];
-  selectedRoles: any[] = []; // Déclaration de selectedRoles
+  selectedRoles: any[] = [];
   rolePermissions: any[] = [];
   selectedPermissions: number[] = [];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private userService: UserService) {}
 
   ngOnInit() {
     this.userService.getRoleAndPermission().subscribe(
@@ -61,12 +61,11 @@ export class CreateUserAccountsComponent implements OnInit{
     return this.userForm.controls;
   }
 
-  onRolesChange() {
+  onRolesChange(): void {
     console.log('Selected Role IDs:', this.selectedRoleIds);
     this.selectedRoles = this.roles.filter(role => 
       { 
         this.selectedRoleIds.includes(role.id)
-
       });
     this.updateRolePermissions();
   }
