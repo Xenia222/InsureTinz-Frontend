@@ -18,4 +18,8 @@ export class CheckService {
   quickCheck(check: {}): Observable<any>{
     return this.http.post<any>(this.url+'/insurance-check', check)
   }
+
+  getTransaction(): Observable<any>{
+    return this.http.get(`${this.url}/transactions`);
+  }
 }

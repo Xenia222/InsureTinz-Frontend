@@ -16,13 +16,13 @@ overflow-x: hidden;">
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext ">
                                         <h3>Credit <br> Purchased</h3>
-                                        <p><strong class="color1 fs-2">32</strong> <br> <span class="color4">17/06/2023</span></p>
+                                        <p><strong class="color1 fs-2">{{user_credit}}</strong> <br> <span class="color4">17/06/2023</span></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h3>Credit <br> Used</h3>
-                                        <p><strong class="color2 fs-2">47</strong> <br> <span class="color4 last bigtext2">
+                                        <p><strong class="color2 fs-2">0</strong> <br> <span class="color4 last bigtext2">
                                                 13/07/2023</span>
                                         </p>
                                     </div>
@@ -30,7 +30,7 @@ overflow-x: hidden;">
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h3>Credit <br> Balance</h3>
-                                        <p><strong class="color3 fs-2">47</strong> <br> <span class="color4">17/06/2023</span></p>
+                                        <p><strong class="color3 fs-2">{{user_credit}}</strong> <br> <span class="color4">17/06/2023</span></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 d-flex justify-content-center align-items-center">
@@ -85,25 +85,10 @@ overflow-x: hidden;">
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>04 Sep 2019</td>
-                                                        <td>23h 00 min 20 sec</td>
-                                                        <td>Momo</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>28 May 2019</td>
-                                                        <td>23h 00 min 20 sec</td>
-                                                        <td>Celtiis</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>23 Nov 2019</td>
-                                                        <td>23h 00 min 20 sec</td>
-                                                        <td>Momo</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>05 Feb 2019</td>
-                                                        <td>23h 00 min 20 sec</td>
-                                                        <td>Paypal</td>
+                                                    <tr *ngFor="let transact of transaction">
+                                                        <td>{{transact.updated_at | date : "dd/MM/yyyy"}}</td>
+                                                        <td>{{transact.updated_at | date: "hh:mm:ss"}}</td>
+                                                        <td>{{transact.payment_method}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

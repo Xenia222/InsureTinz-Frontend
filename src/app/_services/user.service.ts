@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDataUser, ISingleUser, IUser } from '../_interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Iapi } from '../_interfaces/iapi';
 import { TokenService } from './token.service';
 
@@ -31,7 +31,7 @@ export class UserService {
   getProfilePhoto(): Observable<any> {
     return this.http.get(`${this.url}/user/profile-photo`);
   }
-
+  
   getRoleAndPermission(): Observable<any> {
     return this.http.get(`${this.url}/create_client_user`)
   }

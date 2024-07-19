@@ -106,9 +106,11 @@ overflow-x: hidden;">
     
                                     <div class="form-group col-md-6">
                                         <label for="roles">Role</label>
-                                        <select id="roles" class="form-control champ-select" formControlName="roles" (change)="onRolesChange($event)" multiple>
-                                            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
-                                        </select>
+                                        <select id="roles" class="form-control champ-select" formControlName="roles" (change)="onRolesChange()" multiple>
+                                            <option *ngFor="let role of roles" [value]="role.id">
+                                              {{ role.name }}
+                                            </option>
+                                          </select>
                                         <!-- <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
                                             <div *ngIf="f['role'].errors['required']">Role is required</div>
                                         </div> -->
@@ -120,10 +122,10 @@ overflow-x: hidden;">
                                     <div class="form-group col-md-6">
                                         <label for="permissions">Rights</label>
                                         <select id="permissions" class="form-control champ-select" formControlName="permissions" multiple>
-                                            <option *ngFor="let permission of filteredPermissions" [value]="permission.id">
-                                                {{ permission.name }}
-                                              </option>
-                                        </select>
+                                            <option *ngFor="let permission of permissions" [value]="permission.id">
+                                              {{ permission.name }}
+                                            </option>
+                                          </select>
                                         <!-- <div *ngIf="submitted && f['rights'].errors" class="invalid-feedback">
                                             <div *ngIf="f['rights'].errors['required']">Rights are required</div>
                                         </div> -->
