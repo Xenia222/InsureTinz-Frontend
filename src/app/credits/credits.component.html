@@ -185,8 +185,8 @@ overflow-y: scroll;">
                       <p class="fs-4 mx-5 pt-4 text-center">Your payment has been successfully processed. Thank you for your transaction.</p>
                       <br>
                       <div class="d-flex justify-content-around">
-                          <div><p><strong>Total credit purchased: 200</strong></p></div>
-                          <div><p class="colors">Date: 24/06/2024</p></div>
+                          <div><p><strong>Total credit purchased: {{ credits }}</strong></p></div>
+                          <div><p class="colors">Date: {{currentDate | date: "yyyy/dd/mm"}}</p></div>
                       </div>
                       <br>
                   </div>

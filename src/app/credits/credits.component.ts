@@ -12,6 +12,7 @@ import { MtnMomoModalComponent } from '../mtn-momo-modal/mtn-momo-modal.componen
 export class CreditsComponent {
   credits: number = 0;
   price: number = 0;
+  currentDate: Date = new Date();
   paymentMethod: string = 'paypal'; // Default payment method
   currency: string = 'USD';
   phoneNumber: string = '';
@@ -67,7 +68,7 @@ export class CreditsComponent {
               this.checkMoMoStatus(response.referenceId, response.transactionId);
             }
             console.log('MTN MoMo payment initiated:', response);
-    
+            this.nextSection()
           },
           error => {
             console.log(this.credits, this.paymentMethod, this.currency);

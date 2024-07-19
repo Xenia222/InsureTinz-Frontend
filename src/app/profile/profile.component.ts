@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit{
   current_user: any
   selectedFile: File | null = null;
   photoUrl: string | null = null;
+  success_msg: string ='';
 
   constructor(private userService: UserService
     ,private router: Router,private tokenService: TokenService,private storageService: StorageService
@@ -55,6 +56,7 @@ export class ProfileComponent implements OnInit{
       this.userService.updateProfilePhoto(this.selectedFile).subscribe(
         response => {
           console.log('Photo de profil mise à jour avec succès', response);
+          this.msg = response.status_message
           this.ngOnInit();
         },
         error => {
@@ -79,15 +81,19 @@ export class ProfileComponent implements OnInit{
       }
     ).subscribe(
       data => {
-        console.log(data)
-        this.ngOnInit();
+        console.log("Update profile",data)
+        if(data.message){
+        this.msg = data.message
+        }else{
+        this.success_msg = data.status_message
+        
+      }
         },
-      data => {
+      err => {
         console.log("profile")
-        console.log(data.error)
-        this.msg = data.error.status_message
-        // this.msg = data.errorList.password
-        // this.ngOnInit()
+        console.log(err.error)
+        this.msg = err.error.status_message
+        this.form.password = ''
       }
     )
   }

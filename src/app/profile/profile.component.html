@@ -76,6 +76,9 @@ overflow-x: hidden;">
                                          <p style="color: #9b9a9a;"> <u>Reset Password</u></p>
                                       </a>
                                     </div>
+                                    <div *ngIf="success_msg" class="text-success">
+                                      {{ success_msg }}
+                                    </div>
                                     <div class="w-100 d-flex justify-content-center mt-2 ">
                                       <button type="submit" class="w-50 btn btn-warning pading"> Update </button>
                                     </div>
