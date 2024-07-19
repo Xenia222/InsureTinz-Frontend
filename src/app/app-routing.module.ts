@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'logout', component: LogoutComponent },
+  { path: 'logout', component: LogoutComponent , canActivate: [authGuard]},
   { path:'**', component: ErrorComponent  },
 
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-otp',
@@ -16,23 +17,33 @@ export class LoginOtpComponent implements OnInit {
   generatedOtp: string = '';
   errorMessage: string | null = '';
   timer: number = 60;
+  timeLeftInSeconds: number = 10 * 60;
+  private countdownSubscription: Subscription | undefined;
   interval: any;
 
   constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService,private storageService: StorageService) { }
 
+  get minutes(): number {
+    return Math.floor(this.timeLeftInSeconds / 60);
+  }
+
+  get seconds(): number {
+    return this.timeLeftInSeconds % 60;
+  }
+
   ngOnInit() {
-    this.startTimer();
+    this.startCountdown();
 } 
 
-  startTimer() {
-    this.interval = setInterval(() => {
-      if (this.timer > 0) {
-        this.timer--;
-      } else {
-        clearInterval(this.interval);
-      }
-    }, 1000);
-  }
+startCountdown(): void {
+  this.countdownSubscription = interval(1000).subscribe(() => {
+    if (this.timeLeftInSeconds > 0) {
+      this.timeLeftInSeconds--;
+    } else {
+      this.countdownSubscription?.unsubscribe();
+    }
+  });
+}
 
   resendOtp() {
     this.authService.otp_send(this.storageService.getEmail()).subscribe(
@@ -45,7 +56,7 @@ export class LoginOtpComponent implements OnInit {
       }
     );
     this.timer = 60;
-    this.startTimer();
+    this.startCountdown();
   }
 
 

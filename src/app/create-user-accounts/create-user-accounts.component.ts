@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { error } from 'console';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-create-user-accounts',
@@ -19,45 +18,39 @@ export class CreateUserAccountsComponent implements OnInit{
 
   positions = ['Manager', 'Developer', 'Designer', 'Analyst'];
   departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
-  form: FormGroup;
   roles: any[] = [];
-  permissions: any[] = [];
-  filteredPermissions: any;
-  rolesPermissionsSectionVisible = false;
-  selectedRolePermissions: { [key: number]: any[] } = {};
+  selectedRoleIds: number[] = [];
+  selectedRoles: any[] = []; // Déclaration de selectedRoles
+  rolePermissions: any[] = [];
+  selectedPermissions: number[] = [];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
-    this.form = this.formBuilder.group({
-      roles: [[], []], 
-      permissions: [[], []]
-    });
-  }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.userService.getRoleAndPermission().subscribe(
       data => {
-        console.log("Roles permissions",data.roles)
+        console.log(data.roles)
+        console.log(data.permissions)
         this.roles = data.roles
-        this.permissions = data.roles.permissions
       },
       error => {
         console.log(error);
       }
       
     )
-    // this.userForm = this.formBuilder.group({
-    //   // photo: [''],
-    //   firstName: ['', Validators.required],
-    //   lastName: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', [Validators.required]],
-    //   phone: ['', Validators.required],
-    //   position: ['', Validators.required],
-    //   department: ['', Validators.required],
-    //   // loginID: [{value: '', disabled: true}],
-    //   // role: ['', Validators.required],
-    //   // permissions: ['', Validators.required]
-    // });
+    this.userForm = this.formBuilder.group({
+      // photo: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      phone: ['', Validators.required],
+      position: ['', Validators.required],
+      department: ['', Validators.required],
+      // loginID: [{value: '', disabled: true}],
+      // role: ['', Validators.required],
+      // permissions: ['', Validators.required]
+    });
 
     // this.userForm.valueChanges.subscribe(values => {
     //   this.generateLoginID(values);
@@ -68,13 +61,48 @@ export class CreateUserAccountsComponent implements OnInit{
     return this.userForm.controls;
   }
 
-  onFileChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-      const file = target.files[0];
-      this.userForm.patchValue({
-        photo: file
+  onRolesChange() {
+    console.log('Selected Role IDs:', this.selectedRoleIds);
+    this.selectedRoles = this.roles.filter(role => 
+      { 
+        this.selectedRoleIds.includes(role.id)
+
       });
+    this.updateRolePermissions();
+  }
+
+  updateRolePermissions(): void {
+    this.rolePermissions = [];
+    this.selectedPermissions = [];
+
+    this.selectedRoles.forEach(role => {
+      if (role.permissions) { 
+        this.rolePermissions = [
+          ...this.rolePermissions,
+          ...role.permissions
+        ];
+      }
+    });
+
+    // Éliminer les doublons
+    this.rolePermissions = Array.from(new Set(this.rolePermissions.map(permission => permission.id)))
+      .map(id => this.rolePermissions.find(permission => permission.id === id));
+
+    // Mettez à jour les permissions sélectionnées
+    this.selectedPermissions = this.rolePermissions.map(permission => permission.id);
+
+    // Pour débogage
+    console.log('Selected Roles:', this.selectedRoles);
+    console.log('Role Permissions:', this.rolePermissions);
+    console.log('Selected Permissions:', this.selectedPermissions);
+  }
+
+  onPermissionToggle(permissionId: number): void {
+    const index = this.selectedPermissions.indexOf(permissionId);
+    if (index > -1) {
+      this.selectedPermissions.splice(index, 1);
+    } else {
+      this.selectedPermissions.push(permissionId);
     }
   }
 
@@ -86,51 +114,26 @@ export class CreateUserAccountsComponent implements OnInit{
   //   }
   // }
 
-  onRolesChange() {
-    const selectedRoleIds = this.form.get('roles')?.value;
-    if (selectedRoleIds.length === 0) return;
-
-    // Fetch permissions based on selected roles
-    const permissionsByRole = selectedRoleIds.reduce((acc: { [x: string]: any[];[x: number]: any[]; }, roleId: number) => {
-      this.getPermissionsByRole(roleId).subscribe(permissions => {
-        acc[roleId] = permissions;
-        this.selectedRolePermissions = acc;
-        this.updatePermissionsFormArray();
-      });
-      return acc;
-    }, {} as { [key: number]: any[] });
-  }
-
-  private updatePermissionsFormArray() {
-    const control = this.form.get('permissions') as FormArray;
-    control.clear();
-    this.permissions.forEach(() => control.push(this.formBuilder.control(false)));
-  }
-
-  getPermissionsByRole(roleId: number): Observable<any[]> {
-    const permissionIds = this.permissions[roleId] || [];
-    const rolePermissions = this.permissions.filter(p => permissionIds.includes(p.id));
-    return of(rolePermissions);
+  onPermissionChange(options: HTMLOptionsCollection): void {
+    this.selectedPermissions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        this.selectedPermissions.push(Number(options[i].value));
+      }
+    }
   }
 
   onSubmit() {
 
-    const selectedRoleIds = this.form.get('roles')?.value;
-    const selectedPermissionIds = this.form.get('permissions')?.value
-      .map((checked: boolean, i: number) => checked ? this.permissions[i].id : null)
-      .filter((id: number | null) => id !== null) as number[];
-
-
     this.userService.addClientUser({
       'email': this.userForm.value.email,
-      'user_type': "client user",
       'primary_contact_name': this.userForm.value.firstName,
       'secondary_contact_name': this.userForm.value.lastName,
       'primary_business_phone_number': this.userForm.value.phone,
       'primary_contact_title' :this.userForm.value.position,
       "country": this.userForm.value.department,
-      "roles": selectedRoleIds,
-      "permissions":  selectedPermissionIds,
+      "roles": this.roles,
+      "permissions": this.selectedPermissions,
       'password': this.userForm.value.password,
     }).subscribe(
       data => {

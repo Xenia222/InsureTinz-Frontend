@@ -20,6 +20,9 @@ export class ResetPasswordComponent implements OnInit{
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
+    this.password.opassword = ''
+    this.password.npassword = ''
+    this.password.cpassword = ''
   }
   onSubmit(){
     this.userService.resetPassword({
@@ -33,6 +36,7 @@ export class ResetPasswordComponent implements OnInit{
         this.errorMessage = data.error
         this.ngOnInit()
         }else{
+          this.msg = data.message
           this.ngOnInit()
         }
       },
@@ -42,5 +46,6 @@ export class ResetPasswordComponent implements OnInit{
       }
 
     )
+    this.ngOnInit()
   }
 }

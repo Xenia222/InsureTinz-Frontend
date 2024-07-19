@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TokenService } from '../_services/token.service';
+import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 
 @Component({
   selector: 'app-logout',

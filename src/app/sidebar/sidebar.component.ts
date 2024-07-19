@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { TokenService } from '../_services/token.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +17,7 @@ export class SidebarComponent {
   firstName: string =''
   lastName: string = ''
 
-  constructor(private tokenService:TokenService, private userService: UserService){}
+  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.getUser()
@@ -39,6 +41,17 @@ export class SidebarComponent {
         }
       );
     }
+  }
+
+  modal(){
+    const dialogRef = this.dialog.open(LogoutModalComponent, {
+      width: '400px',
+      // data: { response: response }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
   }
 
   loadProfilePhoto(): void {

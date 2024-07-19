@@ -33,6 +33,7 @@ import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit
 import { tokenInterceptor } from './_helper/token.interceptor';
 import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LogoutModalComponent } from './logout-modal/logout-modal.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -65,6 +66,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     CreditPurchaseHistoryComponent,
     MtnMomoModalComponent,
     ResetPasswordComponent,
+    LogoutModalComponent,
   ],
   imports: [
     BrowserModule,
