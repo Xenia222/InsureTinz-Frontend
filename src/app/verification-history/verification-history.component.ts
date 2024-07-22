@@ -1,11 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CheckService } from '../_services/check.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-verification-history',
   templateUrl: './verification-history.component.html',
   styleUrl: './verification-history.component.css'
 })
-export class VerificationHistoryComponent {
+export class VerificationHistoryComponent implements OnInit{
+
+  checks: any = []
+  pagedItems: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 10;
+  noCheck = null
+
+  constructor(private checkService:CheckService){}
+
+  ngOnInit(): void {
+    this.checkService.getCheckList().subscribe(
+      data => {
+        this.checks = data
+        this.totalPages = Math.ceil(this.checks.length / this.itemsPerPage);
+        this.updatePagedItems();
+        if(data.error){
+        this.noCheck = data.error
+        }
+        console.log(data)
+      },
+      err => {
+        console.log(err)
+      }
+    )
+  }
 
   isShow = false;
 
@@ -32,6 +60,26 @@ export class VerificationHistoryComponent {
 
   hideInfo() {
     this.isInfoVisible = false;
+  }
+
+  updatePagedItems(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.pagedItems = this.checks.slice(start, end);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagedItems();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagedItems();
+    }
   }
 
 }

@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +28,12 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaymentCompletionComponent } from './payment-completion/payment-completion.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { tokenInterceptor } from './_helper/token.interceptor';
+import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LogoutModalComponent } from './logout-modal/logout-modal.component';
 import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -60,7 +67,11 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
     ListUsersComponent,
     SidebarComponent,
     NavbarComponent,
+    PaymentCompletionComponent,
     CreditPurchaseHistoryComponent,
+    MtnMomoModalComponent,
+    ResetPasswordComponent,
+    LogoutModalComponent,
     CreateUserSucessComponent,
     DetailsUserComponent,
     WhoWeAreComponent,
@@ -71,13 +82,17 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
     AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
-    // NgxSliderModule,
+    NgxPaginationModule
     CarouselModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor])
+    ),
   ],
   bootstrap: [AppComponent],
 })

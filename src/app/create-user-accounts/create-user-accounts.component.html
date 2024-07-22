@@ -64,9 +64,9 @@ overflow-x: hidden;">
                                     <div class="form-group col-md-6 ">
                                         <label for="phone">Phone Number</label>
                                         <input type="tel" id="phone" class="form-control champ" formControlName="phone">
-                                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                                        <!-- <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
                                             <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
 
@@ -78,9 +78,9 @@ overflow-x: hidden;">
                                         <select id="position" class="form-control champ-select" formControlName="position">
                                             <option *ngFor="let pos of positions" [value]="pos">{{pos}}</option>
                                         </select>
-                                        <div *ngIf="submitted && f['position'].errors" class="invalid-feedback">
+                                        <!-- <div *ngIf="submitted && f['position'].errors" class="invalid-feedback">
                                             <div *ngIf="f['position'].errors['required']">Position is required</div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -88,9 +88,9 @@ overflow-x: hidden;">
                                         <select id="department" class="form-control champ-select" formControlName="department">
                                             <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
                                         </select>
-                                        <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                                        <!-- <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
                                             <div *ngIf="f['department'].errors['required']">Department is required</div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -107,32 +107,25 @@ overflow-x: hidden;">
                                     </div>
     
                                     <div class="form-group col-md-6">
-                                        <label for="role">Role</label>
-                                        <select id="role" class="form-select champ-select" formControlName="role" >
-                                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                                        <label for="roles">Rôles:</label>
+                                        <select id="roles" class="form-control champ" multiple formControlName="roles">
+                                          <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
                                         </select>
-                                        <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['role'].errors['required']">Role is required</div>
-                                        </div>
-                                    </div>
+                                      </div>
                                 </div>
                                 
 
-                                <div class="row g-4">
-                                    <div class="form-group col-md-6">
-                                        <label for="role">Rights</label>
-                                        <select id="role" class="form-select champ-select" formControlName="role" >
-                                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                                <div class="row g-4 ">
+                                    <div class="form-group col-md-6" *ngIf="availablePermissions.length > 0">
+                                        <label for="permissions">Permissions:</label>
+                                        <select class="form-control champ" id="permissions" multiple formControlName="permissions">
+                                          <option *ngFor="let permission of availablePermissions" [value]="permission.id">
+                                            {{ permission.name }} ({{ permission.roleName }})
+                                          </option>
                                         </select>
-                                        <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['role'].errors['required']">Rights is required</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-label ">Set a password</label>
-                                        <input type="text" class="form-control champ" id="">
                                       </div>
                                 </div>
+                                
                                 
 
                                 <div *ngIf="errorMessage" class="alert alert-danger">

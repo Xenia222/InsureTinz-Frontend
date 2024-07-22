@@ -26,7 +26,7 @@ overflow-y: scroll;">
                     <br>
                     <!-- <div id="demo_3"></div> -->
                     <div class="slider-container">
-                      <input class="slider" type="range" min="0" max="1000" [value]="value" (input)="updateSlider($event)">
+                      <input class="slider" id="credits" type="range" [(ngModel)]="credits" (ngModelChange)="updatePrice()" min="0" max="1000" [value]="value" (input)="updateSlider($event)">
                       <p id="rangeValue">{{ value }} credits</p>
                     </div>
 
@@ -34,7 +34,7 @@ overflow-y: scroll;">
                     <div class="prix-bouton">
 
                       <div class=" btn-custom shadow-lg py-4 px-5 "><span class="spn pl-3">Price</span> : <strong
-                          class="" style="font-size: 28px; font-weight: 800;"> 60 000 Fcfa</strong> </div>
+                          class="" style="font-size: 28px; font-weight: 800;"> {{price}} Fcfa</strong> </div>
 
                       <div class="cont3">
                         <div>
@@ -101,6 +101,7 @@ overflow-y: scroll;">
                   </button>
                   <!-- <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;"> -->
                   <h4 class="marg text-center">Paiement methods</h4>
+                  
                   <div class="btn-checkbox-group mt-2">
                     <div class="checkbox-group">
                       <div class="checkbox-group-btn">
@@ -109,8 +110,7 @@ overflow-y: scroll;">
                             class="img " alt=""></button>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="checkbox1"
-                          value="option1">
+                        <input class="form-check-input" type="radio" id="mtnmomo" name="paymentMethod" value="mtnmomo" [(ngModel)]="paymentMethod">
                       </div>
                     </div>
                     <div class="checkbox-group">
@@ -132,24 +132,22 @@ overflow-y: scroll;">
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="checkbox3"
-                          value="option3">
+                        <input class="form-check-input" type="radio" id="paypal" name="paymentMethod" value="paypal" [(ngModel)]="paymentMethod">
                       </div>
                     </div>
-
 
                   </div>
 
                   <div class="mt-5 row justify-content-center">
                     <div class="credit-div col-auto px-4">
-                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits: <strong>200</strong><span class="px-4">Price :
-                          <strong>60 000 Fcfa</strong></span>
+                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits: <strong>{{credits}}</strong><span class="px-4">Price :
+                          <strong>{{price}} Fcfa</strong></span>
                       </p>
                     </div>
                   </div>
                   <div class="mt-5 row justify-content-center">
                     <div class="col-auto">
-                      <button (click)="nextSection()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Pay</button>
+                      <button (click)="proceedToPayment()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Pay</button>
                     </div>
                   </div>
                 </div>
@@ -187,8 +185,8 @@ overflow-y: scroll;">
                       <p class="fs-4 mx-5 pt-4 text-center">Your payment has been successfully processed. Thank you for your transaction.</p>
                       <br>
                       <div class="d-flex justify-content-around">
-                          <div><p><strong>Total credit purchased: 200</strong></p></div>
-                          <div><p class="colors">Date: 24/06/2024</p></div>
+                          <div><p><strong>Total credit purchased: {{ credits }}</strong></p></div>
+                          <div><p class="colors">Date: {{currentDate | date: "yyyy/dd/MM"}}</p></div>
                       </div>
                       <br>
                   </div>
