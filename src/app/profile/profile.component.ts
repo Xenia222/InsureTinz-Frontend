@@ -14,6 +14,8 @@ import { StorageService } from '../_services/storage.service';
 export class ProfileComponent implements OnInit{
   token: string = ''
   msg: string = ''
+  firstname: string = ''
+  lastname: string = ''
   
   form = {
     email: '',
@@ -45,6 +47,8 @@ export class ProfileComponent implements OnInit{
         this.form.email = data.user.email
         this.form.firstName = data.user.primary_contact_name
         this.form.lastName = data.user.secondary_contact_name
+        this.firstname = data.user.primary_contact_name
+        this.lastname =data.user.secondary_contact_name
         this.form.phoneNumber = data.user.primary_business_phone_number
         console.log(data.user)
       }

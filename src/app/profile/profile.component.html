@@ -18,7 +18,7 @@ overflow-x: hidden;">
                                 <div *ngIf="photoUrl" class="box">
                                   <img [src]="photoUrl" class="img-thumbnail box">
                                 </div>
-                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{form.firstName}} {{form.lastName}} <br> <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
+                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{firstname}} {{lastname}} <br> <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
                             </div>
                               <!-- The Modal -->
                               <div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
@@ -63,12 +63,13 @@ overflow-x: hidden;">
                                       <label for="phoneNumber" class="form-label">Phone Number</label>
                                       <input type="tel" [value]="form.phoneNumber" name="phoneNumber" class="form-control champ" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" id="phoneNumber" placeholder="123-456-7890" required>
                                     </div>
-                                    <div *ngIf="msg">
-                                      <p class="text-danger">{{ msg }}</p>
-                                    </div>
+                                    
                                     <div class="col-md-6">
                                       <label for="password" class="form-label">Password</label>
                                       <input type="password" [value]="form.password" name="password" class="form-control champ" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
+                                      <div *ngIf="msg">
+                                        <p class="text-danger">{{ msg }}</p>
+                                      </div>
                                     </div>
                                     <div class="d-flex col-6 my-5">
                                       <a href="/reset-password" class="d-flex btn">

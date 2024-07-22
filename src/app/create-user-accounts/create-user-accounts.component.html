@@ -105,7 +105,7 @@ overflow-x: hidden;">
                                     </div>
     
                                     <div class="form-group col-md-6">
-                                        <label for="roles">Rôles:</label>
+                                        <label for="roles">Roles:</label>
                                         <select id="roles" class="form-control champ" multiple formControlName="roles">
                                           <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
                                         </select>
@@ -114,13 +114,17 @@ overflow-x: hidden;">
                                 
 
                                 <div class="row g-4 ">
-                                    <div class="form-group col-md-6" *ngIf="availablePermissions.length > 0">
+                                    <div class="form-group col-md-6" >
                                         <label for="permissions">Permissions:</label>
-                                        <select class="form-control champ" id="permissions" multiple formControlName="permissions">
+                                        <select *ngIf="availablePermissions.length > 0" class="form-control champ" id="permissions" multiple formControlName="permissions">
                                           <option *ngFor="let permission of availablePermissions" [value]="permission.id">
                                             {{ permission.name }} ({{ permission.roleName }})
                                           </option>
                                         </select>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                        <label for="password">Set password:</label>
+                                        <input type="password" id="password" class="form-control champ" formControlName="password">
                                       </div>
                                 </div>
                                 

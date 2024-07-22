@@ -96,9 +96,10 @@ export class CreateUserAccountsComponent implements OnInit{
       'primary_contact_name': this.userForm.value.firstName,
       'secondary_contact_name': this.userForm.value.lastName,
       'primary_business_phone_number': this.userForm.value.phone,
-      'primary_contact_title' :this.userForm.value.position,
-      "country": this.userForm.value.department,
-      "roles": this.roles,
+      'primary_contact_title' :this.userForm.get('position')?.value,
+      "country": this.userForm.get('department')?.value,
+      "user_type":"client user",
+      "roles": this.userForm.get('roles')?.value,
       "permissions": this.userForm.get('permissions')?.value,
       'password': this.userForm.value.password,
     }).subscribe(
@@ -110,11 +111,11 @@ export class CreateUserAccountsComponent implements OnInit{
         console.log(error)
       }
     )
-    this.submitted = true;
-    if (this.userForm.invalid) {
-      this.errorMessage = 'Please fill out the form correctly.';
-      return;
-    }
+    // this.submitted = true;
+    // if (this.userForm.invalid) {
+    //   this.errorMessage = 'Please fill out the form correctly.';
+    //   return;
+    // }
     this.errorMessage = null;
     // Handle form submission
     console.log(this.userForm.value);
