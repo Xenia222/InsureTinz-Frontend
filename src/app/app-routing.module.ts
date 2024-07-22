@@ -27,6 +27,7 @@ import { ErrorComponent } from './_utils/error/error.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password-otp', component: ResetPasswordOtpComponent },
   { path: 'logout', component: LogoutComponent , canActivate: [authGuard]},
   { path:'**', component: ErrorComponent  },
 

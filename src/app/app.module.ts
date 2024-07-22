@@ -34,6 +34,8 @@ import { tokenInterceptor } from './_helper/token.interceptor';
 import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LogoutModalComponent } from './logout-modal/logout-modal.component';
+import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -67,6 +69,7 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
     MtnMomoModalComponent,
     ResetPasswordComponent,
     LogoutModalComponent,
+    ResetPasswordOtpComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     provideClientHydration(),

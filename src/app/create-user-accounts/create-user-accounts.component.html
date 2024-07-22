@@ -16,7 +16,7 @@ overflow-x: hidden;">
                     <div class="col-sm-11 col-xl-11" style="margin: 0 auto;">
 
                         <div class="bg-white  justify-content-between  conteneur">
-                            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                            <form  [formGroup]="userForm" #LoginForm="ngForm" (ngSubmit)="onSubmit()">
                                 <!-- Section I: Personal Information -->
                                 <h3>Perso Informations</h3>
 
@@ -62,9 +62,9 @@ overflow-x: hidden;">
                                     <div class="form-group col-md-6 ">
                                         <label for="phone">Phone Number</label>
                                         <input type="tel" id="phone" class="form-control champ" formControlName="phone">
-                                        <!-- <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
                                             <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                        </div> -->
+                                        </div>
                                     </div>
 
 

@@ -76,8 +76,11 @@ overflow-y: scroll;">
                                             <span class="">Details</span>
                                         </a>
                                         <hr>
-                                        <a class="dropdown-item " href="#">
+                                        <a *ngIf="user.status == 'active' " class="dropdown-item" (click)="deactivate(user.id)">
                                             <span class="" >Desactivate</span>
+                                        </a>
+                                        <a *ngIf="user.status == 'inactive' " class="dropdown-item " (click)="deactivate(user.id)">
+                                            <span class="" >Activate</span>
                                         </a>
                                     </div>
                                 </div>

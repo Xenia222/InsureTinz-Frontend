@@ -14,8 +14,16 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
 
+  getCurrentUserRole(): Observable<any>{
+    return this.http.get(`${this.url}/roles`);
+  }
+
   getCurrentUser(){
       return this.http.get(`${this.url}/user`);
+  }
+
+  deactivateUser(cid: any): Observable<any>{
+    return this.http.get(`${this.url}/deactivate_client_user/`+cid);
   }
 
   resetPassword(user: {}){

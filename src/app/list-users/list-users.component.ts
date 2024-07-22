@@ -29,6 +29,15 @@ export class ListUsersComponent implements OnInit{
     )
   }
 
+  deactivate(id: string){
+    this.userService.deactivateUser(id).subscribe(
+      data => {
+        console.log(data)
+        this.router.navigate(['/list-users']);
+        this.ngOnInit()
+      }
+    )
+  }
   navigateToCreateUserAccounts() {
     this.router.navigate(['/create-user-accounts']);
   }

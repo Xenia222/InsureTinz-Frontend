@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,13 +18,26 @@ export class SidebarComponent {
   img: string = ''
   firstName: string =''
   lastName: string = ''
+  roles: any[] = []
 
-  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog){}
+  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService){}
 
   ngOnInit(): void {
-    this.getUser()
-    this.loadProfilePhoto();
-    console.log(this.user)
+    this.userService.getCurrentUserRole().subscribe(
+      data => {
+        this.roles = data.roles
+        console.log(data.roles)
+        console.log(this.roles)
+        this.permissionsService.loadPermissions(this.roles);
+        this.getUser()
+        this.loadProfilePhoto();
+        console.log(this.user)
+      },
+      err => {
+        console.log(err)
+      }
+    )
+    
   }
   logout(){
     this.tokenService.clearToken()

@@ -46,7 +46,7 @@ overflow-x: hidden;">
 
                               <div class="bg-white mt-5 wadi">
                                 <div class="">
-                                  <form name="form" #LoginForm="ngForm" (ngSubmit)="onSubmit()" class="row g-3">
+                                  <form name="form" #LoginForm="ngForm" (ngSubmit)="LoginForm.valid && onSubmit()" class="row g-3">
                                     <div class="col-md-6">
                                       <label for="firstName" class="form-label">First Name</label>
                                       <input type="text" [value]="form.firstName"  name="firstName" class="form-control champ" [(ngModel)]="form.firstName" #firstName="ngModel" id="firstName" placeholder="First Name" required>
@@ -57,22 +57,47 @@ overflow-x: hidden;">
                                     </div>
                                     <div class="col-md-6">
                                       <label for="email" class="form-label">Your Email</label>
-                                      <input disabled="" type="email" [value]="form.email" name="email" class="form-control champ" [(ngModel)]="form.email" #email="ngModel" id="email" placeholder="name.example.com" required>
+                                      <div class="d-flex form-control champ justify-content-between">
+                                        <input disabled="" type="email" [value]="form.email" name="email" class="w-75 border-0 h-100" [(ngModel)]="form.email" #email="ngModel" id="email" placeholder="name.example.com" required>
+                                        <i class="fas fa-lock mt-2"></i>
+                                      </div>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="phoneNumber" class="form-label">Phone Number</label>
-                                      <input type="tel" [value]="form.phoneNumber" name="phoneNumber" class="form-control champ" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" id="phoneNumber" placeholder="123-456-7890" required>
+                                      <input
+                                        type="tel"
+                                        [value]="form.phoneNumber"
+                                        name="phoneNumber"
+                                        class="form-control champ"
+                                        [(ngModel)]="form.phoneNumber"
+                                        #phoneNumber="ngModel"
+                                        id="phoneNumber"
+                                        placeholder="00000000"
+                                        required
+                                        pattern="^\d{8}$"
+                                      />
+                                      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger fs-9">
+                                        <div *ngIf="phoneNumber.errors?.['required']">Phone number is required.</div>
+                                        <div *ngIf="phoneNumber.errors?.['pattern']">Invalid phone number format. Expected format: 00000000.</div>
+                                      </div>
                                     </div>
+                                    
                                     
                                     <div class="col-md-6">
                                       <label for="password" class="form-label">Password</label>
-                                      <input type="password" [value]="form.password" name="password" class="form-control champ" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
+                                      <div class="d-flex input-group ">
+                                        <input type="password" [value]="form.password" name="password" class="w-80 champ" style="width: 88%;" [(ngModel)]="form.password" #password="ngModel" id="password" placeholder="Password" required>
+                                          <span style="width: 12%;" class="input-group-text" id="togglePassword" (click)="togglePasswordVisibility()">
+                                            <i class="fa fa-eye" id="toggleIcon"></i>
+                                          </span>
+                                      </div>
                                       <div *ngIf="msg">
                                         <p class="text-danger">{{ msg }}</p>
                                       </div>
                                     </div>
+                                    
                                     <div class="d-flex col-6 my-5">
-                                      <a href="/reset-password" class="d-flex btn">
+                                      <a (click)="sendOtp()" class="d-flex btn">
                                         <i class="bi bi-arrow-clockwise text-primary"></i>
                                          <p style="color: #9b9a9a;"> <u>Reset Password</u></p>
                                       </a>
