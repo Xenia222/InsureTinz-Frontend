@@ -105,28 +105,25 @@ overflow-x: hidden;">
                                     </div>
     
                                     <div class="form-group col-md-6">
-                                        <label for="roles">Role</label>
-                                        <select id="roles" [(ngModel)]="selectedRoleIds" (change)="onRolesChange()" multiple>
-                                            <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+                                        <label for="roles">Rôles:</label>
+                                        <select id="roles" class="form-control champ" multiple formControlName="roles">
+                                          <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
                                         </select>
-                                    </div>
+                                      </div>
                                 </div>
                                 
 
-                                <div class="row g-4">
-                                    <div *ngIf="rolePermissions.length > 0">
-                                        <h3>Permissions for selected roles:</h3>
-                                        <div *ngFor="let permission of rolePermissions">
-                                          <input type="checkbox" [checked]="selectedPermissions.includes(permission.id)"
-                                                 (change)="onPermissionToggle(permission.id)">
-                                          {{ permission.name }}
-                                        </div>
-                                      </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4" class="form-label ">Set a password</label>
-                                        <input type="text" formControlName="password" class="form-control champ" id="">
+                                <div class="row g-4 ">
+                                    <div class="form-group col-md-6" *ngIf="availablePermissions.length > 0">
+                                        <label for="permissions">Permissions:</label>
+                                        <select class="form-control champ" id="permissions" multiple formControlName="permissions">
+                                          <option *ngFor="let permission of availablePermissions" [value]="permission.id">
+                                            {{ permission.name }} ({{ permission.roleName }})
+                                          </option>
+                                        </select>
                                       </div>
                                 </div>
+                                
                                 
 
                                 <div *ngIf="errorMessage" class="alert alert-danger">
