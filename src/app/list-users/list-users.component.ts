@@ -17,4 +17,7 @@ export class ListUsersComponent {
     this.router.navigate(['/create-user-accounts']);
   }
 
+  navigateToUserDetails() {
+    this.router.navigate(['/details-user']);
+  }
 }

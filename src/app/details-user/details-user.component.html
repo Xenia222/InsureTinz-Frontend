@@ -1,0 +1,130 @@
+<div class="" style="padding: 0 0px !important;
+overflow-x: hidden;
+overflow-y: scroll;">
+    <div class="row">
+        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+            <div class="content">
+
+                <section class="container-fluid pt-4 px-4">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div>
+                            <div class="">
+                                <h3 class="mb-0 mb-2 mb-lg-0 text-dark" style=" margin-left: 40px;">User's details</h3>
+
+                                <div class="det2">
+                                    <div class="d-flex det">
+                                        <div class="infopers">
+                                            <p>First name :</p>
+                                            <p>Last name :</p>
+                                            <p>Email :</p>
+                                            <p>Phone number :</p>
+                                            <p>Department :</p>
+                                        </div>
+    
+                                        <div class="infopers-result">
+                                            <p>Sako</p>
+                                            <p>Yaya</p>
+                                            <p>yayagmailnjni.com</p>
+                                            <p>+229 23456790</p>
+                                            <p>Atacora</p>
+                                        </div>
+    
+                                    </div>
+                                </div>
+
+
+                                <div class="det2 det22" style="margin-top: 45px; padding-bottom: 100px;">
+                                    <h3 class="mb-0 mb-2 mb-lg-0 text-dark">Logs history</h3>
+
+                                    <div class="col table-responsive">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr class="">
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>User</th>
+                                                    <th>Ville</th>
+                                                    <th class="px-5">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>04 Sep 2019</td>
+                                                    <td>23h 00 min 20 sec</td>
+                                                    <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
+                                                            class="" (click)="toggleInfo($event)"
+                                                            style="width: 20px; margin-top: -2px;">
+                                                        <div class="modale-info" *ngIf="isInfoVisible">
+                                                            <div style="color: rgba(145, 142, 244, 1); text-align: center;">
+                                                                More information</div>
+                                                            <div class="d-flex mt-2 dep">
+                                                                <div class="pl-4 results-right" 
+                                                                    style="font-weight: 200; border-right: 1px solid beige;">
+                                                                    <span>Automobile Make: </span> <br>
+                                                                    <span class="mt-1">Model </span> <br>
+                                                                    <span class="mt-1">Owner’s name </span><br>
+                                                                    <span class="mt-1">Policy number </span><br>
+                                                                    <span class="mt-2">VIN number </span><br>
+                                                                    <span class="pt-5">Expiration date </span>
+                                                                </div>
+                                                                <div class="divider"></div>
+                                                                <div>
+                                                                    <h6 class="text-dark">lorem... </h6>
+                                                                    <h6 class="text-dark">34465 </h6>
+                                                                    <h6 class="text-dark">Bill Gate </h6>
+                                                                    <h6 class="text-dark">67899GH467690 </h6>
+                                                                    <h6 class="text-dark">90087777 </h6>
+                                                                    <h6 class="text-dark">12/08/2023 </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>Calavi</td>
+                                                    <td>
+                                                        <div class="container ">
+                                                            <div class="active px-4 py-1">
+                                                                <p>Active</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>04 Sep 2019</td>
+                                                    <td>23h 00 min 20 sec</td>
+                                                    <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
+                                                            class="" (click)="toggleInfo($event)"
+                                                            style="width: 20px; margin-top: -2px;"></td>
+                                                    <td>Calavi</td>
+                                                    <td>
+                                                        <div class="container ">
+                                                            <div class="noactive px-4 py-1">
+                                                                <p>Not insured</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- La liste des users -->
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+    </div>
+</div>

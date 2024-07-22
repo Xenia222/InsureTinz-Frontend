@@ -27,7 +27,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 
 
 
@@ -56,6 +61,10 @@ import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit
     SidebarComponent,
     NavbarComponent,
     CreditPurchaseHistoryComponent,
+    CreateUserSucessComponent,
+    DetailsUserComponent,
+    WhoWeAreComponent,
+    HowItWorksComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,11 +73,12 @@ import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit
     ReactiveFormsModule,
     FormsModule,
     // NgxSliderModule,
+    CarouselModule
   ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

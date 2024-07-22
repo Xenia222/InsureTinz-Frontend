@@ -168,3 +168,22 @@
   border-radius: 12px;
   padding: 10px;
 }
+
+
+
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px; /* sidebar initialement cachée */
+  width: 260px;
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease; /* transition pour une animation fluide */
+  z-index: 1000; /* assure que la sidebar est au-dessus du contenu principal */
+}
+
+.sidebar.sidebar-visible {
+  left: 0; /* affiche la sidebar quand elle est visible */
+}

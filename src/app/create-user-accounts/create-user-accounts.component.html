@@ -25,8 +25,10 @@ overflow-x: hidden;">
                                     <label for="photo">Upload Photo</label>
                                     <input type="file" id="photo" class="form-control" (change)="onFileChange($event)">
                                 </div> -->
+                                <!-- <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*">
+        <label for="photo-upload" class="photo-upload-label">Upload Photo</label> -->
 
-                                <div class="row g-4">
+                                <div class="row g-4 mt-3">
                                     <div class="form-group col-md-6">
                                         <label for="firstName">First Name</label>
                                         <input type="text" id="firstName" class="form-control champ"
@@ -106,7 +108,7 @@ overflow-x: hidden;">
     
                                     <div class="form-group col-md-6">
                                         <label for="role">Role</label>
-                                        <select id="role" class="form-control champ-select" formControlName="role" multiple>
+                                        <select id="role" class="form-select champ-select" formControlName="role" >
                                             <option *ngFor="let role of roles" [value]="role">{{role}}</option>
                                         </select>
                                         <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
@@ -118,12 +120,12 @@ overflow-x: hidden;">
 
                                 <div class="row g-4">
                                     <div class="form-group col-md-6">
-                                        <label for="rights">Rights</label>
-                                        <select id="rights" class="form-control champ-select" formControlName="rights" multiple>
-                                            <option *ngFor="let right of rights" [value]="right">{{right}}</option>
+                                        <label for="role">Rights</label>
+                                        <select id="role" class="form-select champ-select" formControlName="role" >
+                                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
                                         </select>
-                                        <div *ngIf="submitted && f['rights'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['rights'].errors['required']">Rights are required</div>
+                                        <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['role'].errors['required']">Rights is required</div>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -139,9 +141,9 @@ overflow-x: hidden;">
 
                                 <button type="submit" class="boutoon btn-warning btn  px-5 py-2 mt-4">Add</button>
                             </form>
+                              
 
-
-
+                            
                         </div>
                         <!--End account management-->
 

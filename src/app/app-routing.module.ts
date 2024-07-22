@@ -22,6 +22,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { TestComponent } from './test/test.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
+import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
+
+
 
 
 const routes: Routes = [
@@ -47,6 +53,15 @@ const routes: Routes = [
   { path: 'list-users', component: ListUsersComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
+  { path: 'create-user-sucess', component: CreateUserSucessComponent },
+  { path: 'who-we-are', component: WhoWeAreComponent },
+  { path: 'how-it-works', component: HowItWorksComponent },
+  { path: 'details-user', component: DetailsUserComponent },
+  
+
+
+
+
 
 
 
