@@ -27,4 +27,18 @@ export class TestComponent {
       dropdown.classList.toggle('hidden');
     }
   }
+
+
+
+  slideConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    infinite: true,
+  };
+
+  slides = [
+    { img: "path-to-ambulance-image.jpg" },
+    // Ajoutez d'autres images si nécessaire
+  ];
 }

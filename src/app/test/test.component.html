@@ -1,47 +1,8 @@
-<app-navbar></app-navbar>
-<div class="d-flex">
-    <div class="sidebar bg-light border-end vh-100">
-        <h5 class="p-3">Main Admin</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard">
-              <i class="bi bi-house"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/credits">
-              <i class="bi bi-credit-card"></i> Credits
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/insurance-status">
-              <i class="bi bi-shield"></i> Insurance status
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/status-history">
-              <i class="bi bi-clock-history"></i> Status history and logs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/users">
-              <i class="bi bi-people"></i> Users accounts
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/profile">
-              <i class="bi bi-person"></i> Profile
-            </a>
-          </li>
-          <li class="nav-item mt-auto">
-            <a class="nav-link" routerLink="/logout">
-              <i class="bi bi-box-arrow-right"></i> Logout
-            </a>
-          </li>
-        </ul>
-      </div>
-      
-  <div class="content p-4">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<section class="carousel">
+  <ngx-slick-carousel class="carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+      <img [src]="slide.img" alt="slide image" />
+      <button class="carousel-button">Who can use</button>
+    </div>
+  </ngx-slick-carousel>
+</section>

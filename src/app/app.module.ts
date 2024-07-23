@@ -40,6 +40,9 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 // import { CarouselModule } from 'ngx-owl-carousel-o';
 import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 
 
@@ -76,6 +79,7 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
     DetailsUserComponent,
     WhoWeAreComponent,
     HowItWorksComponent,
+    WhoCanUseComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +88,8 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SlickCarouselModule
     // CarouselModule
   ],
   providers: [

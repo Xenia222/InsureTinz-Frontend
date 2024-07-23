@@ -334,9 +334,10 @@ hr {
   padding: 0 50px;
 }
 .body h2 {
-  margin-bottom: 10%;
-    margin-top:20px;  
-   padding-bottom: 20px;
+  margin-bottom: 1%;
+  margin-top: 30px;
+  padding-bottom: 30px;
+
 }
 .body .card {
   width: 398px;

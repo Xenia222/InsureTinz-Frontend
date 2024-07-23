@@ -30,6 +30,7 @@ import { CreateUserSucessComponent } from './create-user-sucess/create-user-suce
 import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
+import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
 
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -52,7 +53,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent , 
     // canActivate: [authGuard]
   },
-  { path: 'credits', component: CreditsComponent , canActivate: [authGuard]
+  { path: 'credits', component: CreditsComponent , 
+    // canActivate: [authGuard]
 
   },
   { path: 'purchase-credits', component: PurchaseCreditsComponent , 
@@ -91,6 +93,7 @@ const routes: Routes = [
   { path: 'create-user-sucess', component: CreateUserSucessComponent },
   { path: 'who-we-are', component: WhoWeAreComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
+  { path: 'who-can-use', component: WhoCanUseComponent },
   { path: 'details-user', component: DetailsUserComponent },
   
 

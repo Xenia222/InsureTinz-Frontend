@@ -714,7 +714,7 @@
     }
   
     .content {
-      /* width: calc(100% - 250px); */
+      margin-left: 20px;
     }
   
     .content.open {
