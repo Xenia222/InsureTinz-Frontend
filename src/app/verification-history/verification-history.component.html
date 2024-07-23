@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="" style="padding: 0 0px !important; overflow-x: hidden">
     <div class="row">
         <app-sidebar style="padding-right: 0 !important; ;"></app-sidebar>
@@ -27,8 +28,8 @@
                                         <option selected>Latest</option>
                                     </select>
                                 </div>
-                                <div class="sous-group">
-                                    <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
+                                <div  style="text-align: center;">
+                                    <span><a href="" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
                                 </div>
 
                             </div>
@@ -43,7 +44,7 @@
                     <div class="p-2 mt-4">
                         <div class="row">
                             <div class="col card table-responsive">
-                                <table class="table">
+                                <table class="table" style=" margin-bottom: 220px;">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No</th>
@@ -78,10 +79,18 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <div>
-                                            <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
-                                            <span>Page {{currentPage}} of {{totalPages}}</span>
-                                            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+                                        <div class="pagination">
+                                            <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-no">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                              </svg>
+                                            </button>
+                                            <span style="    padding-top: 10px;">Page {{currentPage}} of {{totalPages}}</span>
+                                            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-no">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                              </svg>
+                                            </button>
                                           </div>
                                     </tbody>
                                     <tbody *ngIf="noCheck">
@@ -94,8 +103,48 @@
                         </div>
                     </div>
 
-                    <div>
-                        <div class="container mt-4 sear33">
+                    <div class="">
+                        <div class="sear" style="width: 30%; margin-top: 30px;">
+                            <h3 >Verification log history</h3>
+                        </div>
+                        <div class="flex" style="">
+
+                            <div class="sear" style="width: 30%;">
+                                <input type="text" class="form-control recherche" id="formGroupExampleInput" placeholder="search">
+                              </div>
+    
+                            <div class=" mt-1 sear2" style="padding: 0px;">
+                                <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+    
+                                    <div class="sous-group24">
+                                        <img src="../../assets/filter.png" alt="">
+                                    </div>
+                                    <div class="sous-group24">
+                                        <span>filter by</span>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Department</option>
+                                        </select>
+                                    </div>
+                                    <div  style="text-align: center;">
+                                        <span><a href="" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                            <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
+                                    src="../../assets/ic-local-printshop-24px.png" alt=""></button>
+    
+                        </div>
+                        <!-- <div class="container mt-4 sear33">
                             <h3 class="sear">Verification log history</h3>
                         </div>
 
@@ -118,8 +167,8 @@
                                         <option selected>Department</option>
                                     </select>
                                 </div>
-                                <div class="sous-group">
-                                    <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
+                                <div class="">
+                                    <span><a href="" style="text-decoration: none !important;"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
                                 </div>
 
                             </div>
@@ -127,12 +176,12 @@
                             <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
                                     src="../../assets/ic-local-printshop-24px.png" alt=""></button>
 
-                        </div>
+                        </div> -->
 
                         <div class=" mt-4">
-                            <div class="row">
+                            <div class="row" style="padding-left: 13px;">
                                 <div class="col card table-responsive">
-                                    <table class="table ">
+                                    <table class="table " style="margin-bottom: 200px;">
                                         <thead>
                                             <tr class="">
                                                 <th>Date</th>
@@ -154,7 +203,7 @@
                                                             More information</div>
                                                         <div class="d-flex mt-2 dep">
                                                             <div class="pl-4 results-right" 
-                                                                style="font-weight: 200; border-right: 1px solid beige;">
+                                                                style="font-weight: 200;">
                                                                 <span>Automobile Make: </span> <br>
                                                                 <span class="mt-1">Model </span> <br>
                                                                 <span class="mt-1">Owner’s name </span><br>
@@ -163,7 +212,7 @@
                                                                 <span class="pt-5">Expiration date </span>
                                                             </div>
                                                             <div class="divider"></div>
-                                                            <div>
+                                                            <div class="resuh6">
                                                                 <h6 class="text-dark">lorem... </h6>
                                                                 <h6 class="text-dark">34465 </h6>
                                                                 <h6 class="text-dark">Bill Gate </h6>

@@ -321,8 +321,8 @@ font-weight: 400;
   }
   .modale-info {
     position: absolute;
-    width: 414px;
-    height: 263px;
+    /* width: 414px; */
+    /* height: 263px; */
     background-color: #ffffff;
     box-shadow: 0px 13px 61px 0px rgba(169, 169, 169, 0.37);
     border-radius: 10px;
@@ -334,8 +334,7 @@ font-weight: 400;
   
   .divider {
     border-left: 2px solid black;
-    height: 150px;
-    margin: 0 20px;
+    margin: 0 15px;
   }
   
   /* Fin du Css du tableau en bas du home page */
@@ -559,6 +558,8 @@ font-weight: 400;
 .table-no-border th, .table-no-border td, .table-no-border {
     border: none !important;
 }
+
+
 body {
 font-family: 'Nunito Sans', sans-serif;
 }
@@ -648,10 +649,18 @@ font-family: 'Nunito Sans', sans-serif;
     border-radius: 12px;
     background-color: white;
     box-shadow: 0px 0px 6px 4px #e0d9d9;
+
+  }
+  .de{
+    width: 65%;
+    margin: 0 auto;
   }
 
   .det22{
     padding: 35px 45px;
+  }
+  .details22 p{
+    margin-bottom: 5px !important;
   }
   .infopers{
     text-align: end;
@@ -661,9 +670,15 @@ font-family: 'Nunito Sans', sans-serif;
   }
 
   .infopers-result p{
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 10px;
 
+  }
+  .details22{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #b0b0ab;
+    margin-bottom: 14px;
   }
   .col{
     margin-top: 35px;
@@ -693,7 +708,7 @@ font-family: 'Nunito Sans', sans-serif;
   .active p {
     text-align: center;
     background-color: #50b89d61;
-    width: 70%;
+    /* width: 70%; */
     font-weight: 500;
     padding: 7px;
     color: #50b89d;
@@ -703,8 +718,49 @@ font-family: 'Nunito Sans', sans-serif;
     text-align: center;
     background-color: #f3aeae;
     color: #fd5454;
-    width: 70%;
+    /* width: 70%; */
     font-weight: 500;
     padding: 7px;
     border-radius: 5px;
   }
+
+
+   /* Fin du Css du tableau en bas du home page */
+@media (min-width: 1200px) {
+  .sidebar {
+    margin-left: 0;
+  }
+
+  .sidebar.open {
+    margin-left: -250px;
+  }
+
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+
+  .sidebar.open {
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0;
+    /* margin-left: 40px; */
+  }
+}
+@media (max-width: 640px) {
+  .details22{
+    flex-direction: column;
+  }
+  .det2 {
+    padding: 20px 20px;
+  }
+}

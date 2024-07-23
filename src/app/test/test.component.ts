@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+// import 'bootstrap';
+// import 'jquery';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-test',
@@ -8,9 +12,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class TestComponent {
 
-  sidebarVisible: boolean = false;
 
-  toggleSidebar() {
-    this.sidebarVisible = !this.sidebarVisible;
+  sidebarToggle: boolean = true;
+
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+  }
+
+  toggleDropdown(id: string) {
+    const dropdown = document.getElementById(id);
+
+    if (dropdown) {
+      dropdown.classList.toggle('hidden');
+    }
   }
 }

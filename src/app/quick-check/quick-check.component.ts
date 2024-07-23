@@ -14,15 +14,19 @@ export class QuickCheckComponent {
   results: any[] = []
   inputs: string[] = [''];
   
-    addInput() {
-      this.inputs.push('');
-    }
-  
-    removeInput() {
-      if (this.inputs.length > 1) {
-        this.inputs.pop();
-      }
-    }
+// Ajouter un nouvel input
+addInput() {
+  if (this.inputs.length < 5) {
+    this.inputs.push('');
+  }
+}
+
+// Retirer le dernier input
+removeInput() {
+  if (this.inputs.length > 1) {
+    this.inputs.pop();
+  }
+}
   
     calculateWidth(index: number): number {
       return 100 / Math.ceil((index + 1) / 2);

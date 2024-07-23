@@ -1,90 +1,47 @@
-<button class="sidebar-toggler flex-shrink-0 navbar-brand d-flex d-lg-none me-4" (click)="toggleSidebar()">
-    <h3 class="text-dark mb-0"><i class="fa fa-bars"></i></h3>
-  </button>
-
-<div class="sidebar pe-3 pb-3" [ngClass]="{ 'sidebar-visible': sidebarVisible }">
-    <nav class="navbar bg-white navbar-dark h-100">
-
-      <!-- Votre contenu de la sidebar ici -->
-      <div class="sidebar-content">
-        <!-- Liens de navigation -->
-        <!-- Vos liens de navigation ici -->
-
-        <div class="navbar-bas w-100">
-            <a routerLink="/dashboard" class="nav-item nav-link active ">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-17.4-6.9-33.1-18.1-44.6L366 161.7c5.3-12.1-.2-26.3-12.3-31.6s-26.3 .2-31.6 12.3L257.9 288c-.6 0-1.3 0-1.9 0c-35.3 0-64 28.7-64 64s28.7 64 64 64zM176 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM96 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm352-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
-                </svg>
-                <div class="element">Dashboard</div>
+<app-navbar></app-navbar>
+<div class="d-flex">
+    <div class="sidebar bg-light border-end vh-100">
+        <h5 class="p-3">Main Admin</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">
+              <i class="bi bi-house"></i> Dashboard
             </a>
-
-            <a routerLink="/credit-purchase-history" class="nav-item nav-link mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M96 96V320c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H160c-35.3 0-64 28.7-64 64zm64 160c35.3 0 64 28.7 64 64H160V256zM224 96c0 35.3-28.7 64-64 64V96h64zM576 256v64H512c0-35.3 28.7-64 64-64zM512 96h64v64c-35.3 0-64-28.7-64-64zM288 208a80 80 0 1 1 160 0 80 80 0 1 1 -160 0zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120V360c0 66.3 53.7 120 120 120H520c13.3 0 24-10.7 24-24s-10.7-24-24-24H120c-39.8 0-72-32.2-72-72V120z" />
-                </svg>
-                <div class="element">Credits</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/credits">
+              <i class="bi bi-credit-card"></i> Credits
             </a>
-            <a routerLink="/quick-check" class="nav-item nav-link mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                </svg>
-                <div class="element">Insurance status</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/insurance-status">
+              <i class="bi bi-shield"></i> Insurance status
             </a>
-            <a routerLink="/verification-history" class="nav-item nav-link mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H64V96h88zm56 0h88v64H208V96zm240 0v64H360V96h88zM64 224h88v64H64V224zm232 0v64H208V224h88zm64 0h88v64H360V224zM152 352v64H64V352h88zm56 0h88v64H208V352zm240 0v64H360V352h88z" />
-                </svg>
-                <div class="element">Status history and logs history</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/status-history">
+              <i class="bi bi-clock-history"></i> Status history and logs
             </a>
-            <a routerLink="/list-users" class="nav-item nav-link mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
-                </svg>
-                <div class="element">Users accounts</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/users">
+              <i class="bi bi-people"></i> Users accounts
             </a>
-            <a routerLink="/profile" class="nav-item nav-link mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path
-                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                </svg>
-                <div class="element">Profile</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profile">
+              <i class="bi bi-person"></i> Profile
             </a>
-
-            <div class="mt-auto">
-                <hr>
-                <a href="#" class="open-modal nav-item nav-link mt-2 " data-bs-toggle="dropdown"
-                    style="cursor: pointer;" id="logoutBtn"><i class="fa fa-chart-bar me-2"></i>
-                    <div class="element">Logout</div>
-                </a>
-                <!-- Fenêtre modale de confirmation -->
-                <div id="myModal" class="modale">
-                    <div class="modal-contenu shadow-lg">
-                        <div class="" style="text-align: center;">
-                            Are you sure you want to logout?
-                        </div>
-                        <div class="" style="margin-top: 10px;">
-                            <button type="button" class="btn " style="color: #07AA2B;">Yes</button>
-                            <button type="button" class="btn "
-                                style="margin-left: 80px; color: #E65440;">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+          </li>
+          <li class="nav-item mt-auto">
+            <a class="nav-link" routerLink="/logout">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
+      
+  <div class="content p-4">
+    <router-outlet></router-outlet>
   </div>
-  
+</div>

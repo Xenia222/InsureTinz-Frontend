@@ -14,8 +14,46 @@
     margin-left: 240px; /* Ajuste selon la largeur de ton sidebar */
   }
   
+  /* Fin du Css du tableau en bas du home page */
+@media (min-width: 1200px) {
+  .sidebar {
+    margin-left: 0;
+  }
+
+  .sidebar.open {
+    margin-left: -250px;
+  }
+
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+
+  .sidebar.open {
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0;
+    /* margin-left: 40px; */
+  }
+}
+@media (max-width: 1200px) {
+  .px-md-4 {
+      padding-right: 1.5rem !important;
+      padding-left: 1.5rem !important;
+      width: 100%;
+  }
+}
   /* Responsive adjustments */
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     #sidebar {
       position: relative;
       margin-left: -100%;
@@ -30,7 +68,7 @@
       margin-left: 0;
     }
   }
-  
+   */
   /* old css */
   Button .btn {
     transition: 0.5s;
@@ -154,6 +192,15 @@
       width: 88vw;
       height: 25vh;
     }
+  }
+  
+  @media (max-width: 500px) {
+    .lesinputs {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column; 
+      align-items: center;
+  }
   }
   
   .conteneur-select {
@@ -670,13 +717,17 @@
     margin-top: -31px; */
 }
 .btn{
-    background-color: #FFCB05;
-    box-shadow: 4px 4px 6px rgba(139, 136, 136, 0.25) !important;
-    border-radius: 10px !important;
-    color: #000000;
-    font-weight: 500;
-    font-size: 17px;
-    border: none !important;
+  background-color: #FFCB05;
+  box-shadow:0px 4px 6px rgba(139, 136, 136, 0.25) !important;
+  border-radius: 5px !important;
+  color: #000000;
+  font-weight: 500;
+  display: flex;
+  padding: 6px 35px;
+  /* font-size: 17px; */
+  border: none !important;
+  align-items: center;
+  justify-content: center;
 }
 .btn-warning:hover{
     box-shadow: unset !important;
@@ -911,4 +962,29 @@ input {
 .lien{
   background-color: unset;
   border: unset;
+}
+.lesinputs{
+  display: flex;
+  justify-content: flex-start;
+  /* padding-top: 20px; */
+}
+
+.lesinputs2{
+  width: 90%;
+  padding-top: 14px;
+}
+.ajout{
+  border: unset;
+  background: unset;
+  font-size: 12px;
+}
+.ajout2{
+  display: flex;
+  align-items: center;
+  width:50%;
+}
+.buttt{
+  /* display: flex;
+  flex-direction: column;
+  gap: 10px; */
 }

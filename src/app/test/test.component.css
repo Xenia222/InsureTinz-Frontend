@@ -1,189 +1,291 @@
-:root {
-  --primary: #ffcb05;
-  --secondary: #191c24;
-  --light: #6c7293;
-  --dark: #000000;
-}
+/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
 
-.sidebar .navbar .navbar-bas {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  height: 88%;
-}
 
-.sidebar .navbar .navbar-bas .nav-link {
-  padding: 5px 0px 5px 10px;
-  margin-left: 20px;
-  color: var(--dark);
-  font-weight: 500;
-  align-items: center;
-  /*border-left: 3px solid var(--secondary);*/
-  border-radius: 5px;
-  outline: none;
-  display: flex;
-  font-family: "Nunito Sans", sans-serif;
-  /* font-family: 'Nunito Sans' ; */
-}
-.sidebar .navbar .navbar-bas .nav-link i {
-  margin-top: 10px;
-  font-size: medium;
-}
+/* $color_1: #fff;
+$color_2: #F95B90;
+$background-color_1: #26394E;
+$background-color_2: #F95B90; */
 
-.sidebar .navbar .navbar-bas .nav-link .element {
-  font-size: 15px;
-  margin-left: 5px;
-}
-.navbar-bas svg {
-  margin-right: 10px;
-  width: 19px;
-  height: 30px;
-}
-
-/***le fond du menu actif ***/
-
-.sidebar .navbar .navbar-bas .nav-link:hover,
-.sidebar .navbar .navbar-bas .nav-link.active {
-  color: #fff;
-  background: #ffcb05;
-  border-color: #ffcb05;
-}
-.nav-link.active svg {
-  path {
-    fill: white;
+/* Styles pour les dropdowns */
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 10rem;
+	padding: 0.5rem 0;
+	margin: 0.125rem 0 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 0.25rem;
   }
-}
-.nav-link:hover svg {
-  path {
-    fill: white;
+
+  .main{
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	float: left;
+	min-width: 10rem;
+	padding: 0.5rem 0;
+	margin: 0.125rem 0 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 0.25rem;
   }
-}
-
-.sidebar .navbar .dropdown-item {
-  padding-left: 25px;
-  border-radius: 0 30px 30px 0;
-  color: var(--dark);
-}
-
-.sidebar .navbar .dropdown-item:hover,
-.sidebar .navbar .dropdown-item.active {
-  background: #ddd;
-}
-
-/* couleur des ecriture dans le navbar du header*/
-.content .navbar .navbar-nav .nav-link {
-  margin-left: 25px;
-  padding: 12px 0;
-  color: var(--dark);
-  outline: none;
-}
-
-.content .navbar .navbar-nav .nav-link:hover,
-.content .navbar .navbar-nav .nav-link.active {
-  color: var(--primary);
-}
-
-.content .navbar .sidebar-toggler,
-.content .navbar .navbar-nav .nav-link i {
-  width: 15px;
-  height: 15px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  border-radius: 40px;
-}
-
-.content .navbar .dropdown-item {
-  color: var(--dark);
-}
-
-.content .navbar .dropdown-item:hover,
-.content .navbar .dropdown-item.active {
-  background: #ffffff;
-}
-
-.content .navbar .dropdown-toggle::after {
-  margin-left: 6px;
-  vertical-align: middle;
-  border: none;
-  content: "\f107";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  transition: 0.5s;
-}
-
-/* .content .navbar .dropdown-toggle[aria-expanded="true"]::after {
-  transform: rotate(-180deg);
-} */
-
-.navbar-bas svg {
-  margin-right: 10px;
-  width: 17px;
-  height: 30px;
-  margin-left: 3px;
-}
-
+  .navb{
+	width: 19vw !important;
+	grid-gap: 5px;
+  }
+  
+  .dropdown-menu.show {
+	display: block;
+  }
+  
+  .dropdown-menu a:hover {
+	/* Ajoutez ici les styles que vous souhaitez appliquer aux liens du dropdown-menu survolés */
+	background-color: #F95B90; /* Changer la couleur de fond au survol */
+	color: #fff; /* Changer la couleur du texte au survol */
+	/* Ajoutez d'autres styles selon vos besoins */
+  }
+  
+  /* Styles pour les liens du dropdown-menu activés ou cliqués */
+  .dropdown-menu a:active {
+	/* Ajoutez ici les styles que vous souhaitez appliquer aux liens du dropdown-menu activés ou cliqués */
+	background-color: #F95B90; /* Changer la couleur de fond lors du clic */
+	color: #fff; /* Changer la couleur du texte lors du clic */
+	/* Ajoutez d'autres styles selon vos besoins */
+  }
+  
+  /* Styles pour les liens du dropdown-menu */
+.nav-item.dropdown a i {
+	margin-right: 10px; /* Ajoute un espace de 10px à droite des icônes */
+  }
+  
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 237px;
-  height: 100vh;
-  overflow-y: auto;
-  background: #fff;
-  transition: 0.5s;
-  z-index: 999;
+	background-color: #454a58;
+    color: #fff;
+    width: 37vw;
+    top: 16px;
+    left: 0;
+    bottom: 8px;
+    border-radius: 0;
+    font-family: "Alef", sans-serif;
+    border: none;
+    z-index: 0;
+    padding-top: 39px !important;
+    padding: 17px;
+    /* margin-bottom: 0px !important; */
+    margin-left: 20px;
+	box-shadow: 3px 4px 4px 2px rgba(30, 44, 68, 0.94);
+	overflow-y: scroll;
+    max-height: 100vh;
+	scrollbar-width: none; /* Pour Firefox */
 }
 
-.content {
-  margin-left: 250px;
-  /* min-height: 100vh; */
-  /* background: #e9e9e9; */
-  /* padding-bottom: 120px; */
-  transition: 0.5s;
+.sidebar::-webkit-scrollbar {
+  display: none; /* Pour Chrome, Safari et Opera */
 }
+.sidebar-body{
+	font-size: 14px;
+    font-weight: 200;
+}
+ 
+.sidebar-header {
 
-.text-main {
-  color: #f3d66d;
-  margin-left: 10px;
-}
-
-.case {
-  background: #ffffff;
-  box-shadow: 6px 6px 54px rgba(0, 0, 0, 0.05);
-  border-radius: 14px;
-}
-.element {
-  /* margin-top: 10px; */
-  display: flex;
+	h4 {
+		color: blue;
+		margin: 0;
+		font-family: 'Times New Roman', Times, serif;
+		text-align: center;
+		margin-top: 2vw;
+	}
 }
 .nav-link {
-  display: flex;
-  /* background-color: #ffcb05; */
-  align-items: center;
-  border-radius: 12px;
-  padding: 10px;
+	color: blue;
+	transition: background-color 0.3s ease;
+	&:hover {
+		background-color: blue;
+		color: blue;
+	}
+}
+
+.nav-link.active {
+	background-color: #F95B90;
+    color: #fff;
+    border-radius: 9px;
+}
+li{
+	a{
+		color: white;
+		text-decoration: none;
+		&:hover {
+			color: black;
+		}
+	}
+	
+}
+
+.portable{
+	display: none;
 }
 
 
 
 
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -260px; /* sidebar initialement cachée */
-  width: 260px;
-  height: 100%;
-  background-color: #fff;
-  transition: left 0.3s ease; /* transition pour une animation fluide */
-  z-index: 1000; /* assure que la sidebar est au-dessus du contenu principal */
-}
 
-.sidebar.sidebar-visible {
-  left: 0; /* affiche la sidebar quand elle est visible */
+
+
+
+
+/* Pour les smartphones et les écrans moyens */
+@media (max-width: 766px) {
+
+
+	.sidebar{
+		display: none;
+	}
+
+	.portable{
+		display: block;
+	}
+
+	li {
+		list-style-type: none;
+	}
+	
+	.modal-dialog{
+		padding-right: 75px;
+    	font-size: small;
+	}
+	.modal-content{
+		border-radius: 0;
+		background-color: #fdfdfdf7;
+	}
+	.modal-body{
+		overflow-y: scroll;
+		height: 68vh;
+	}
+	.bg{
+		background-color: #ffe5e973 !important;
+		color: black !important;
+	}
+	li a {
+		color: black;
+		text-decoration: none;
+	}
+	.out{
+		width: 100% !important;
+		background-color: #26394E;
+		border: none !important;
+	}
+	
+
+	#menu__toggle {
+		opacity: 0;
+	  }
+	  #menu__toggle:checked + .menu__btn > span {
+		transform: rotate(45deg);
+	  }
+	  #menu__toggle:checked + .menu__btn > span::before {
+		top: 0;
+		transform: rotate(0deg);
+	  }
+	  #menu__toggle:checked + .menu__btn > span::after {
+		top: 0;
+		transform: rotate(90deg);
+	  }
+	  #menu__toggle:checked ~ .menu__box {
+		left: 0 !important;
+	  }
+	  .menu__btn {
+		position: fixed;
+		top: 20px;
+		left: 20px;
+		width: 26px;
+		height: 26px;
+		cursor: pointer;
+		z-index: 1;
+	  }
+	  .menu__btn > span,
+	  .menu__btn > span::before,
+	  .menu__btn > span::after {
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 2px;
+		background-color: #616161;
+		transition-duration: .25s;
+	  }
+	  .menu__btn > span::before {
+		content: '';
+		top: -8px;
+	  }
+	  .menu__btn > span::after {
+		content: '';
+		top: 8px;
+	  }
+	  .menu__box {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: -100%;
+		width: 300px;
+		height: 100%;
+		margin: 0;
+		padding: 80px 0;
+		list-style: none;
+		background-color: #ECEFF1;
+		box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+		transition-duration: .25s;
+	  }
+	  .menu__item {
+		display: block;
+		padding: 12px 24px;
+		color: #333;
+		font-family: 'Roboto', sans-serif;
+		font-size: 20px;
+		font-weight: 600;
+		text-decoration: none;
+		transition-duration: .25s;
+	  }
+	  .menu__item:hover {
+		background-color: #CFD8DC;
+	  }
+
+	.ouvrir{
+		padding: 16px;
+		border-top-left-radius: 0 !important;
+		border: none;
+		background-color: #F95B90;
+		box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+		/* // position: absolute; */
+	}
+	.nav-link.active{
+		 background-color: unset !important;
+		color: black !important;
+		padding: 2px !important;
+		/* border-radius: 9px; */
+	}
+
+} 
+		  
+/* Pour les ordinateurs et les grands écrans */
+@media (min-width: 767px) {
+
+
+			
 }

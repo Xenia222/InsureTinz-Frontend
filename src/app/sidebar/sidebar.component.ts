@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import { TokenService } from '../_services/token.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
@@ -12,18 +12,31 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SidebarComponent implements OnInit{
 
-  sidebarVisible: boolean = true; // Barre latérale visible par défaut
-
-  constructor() { }
-
-  ngOnInit(): void {
-      // Aucun besoin de changer l'état initial ici si la barre latérale est visible par défaut
-  }
+  sidebarVisible: boolean = false;
 
   toggleSidebar() {
-      this.sidebarVisible = !this.sidebarVisible;
+    this.sidebarVisible = !this.sidebarVisible;
+    this.setBodyClass();
+    console.log('Sidebar visibility:', this.sidebarVisible); // Pour le débogage
   }
-  
+
+  @HostListener('document:click', ['$event'])
+  clickOut(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const sidebar = document.querySelector('.sidebar') as HTMLElement;
+    const toggler = document.querySelector('.sidebar-toggler') as HTMLElement;
+
+    if (this.sidebarVisible && !sidebar.contains(target) && !toggler.contains(target)) {
+      this.sidebarVisible = false;
+      this.setBodyClass();
+    }
+  }
+
+  private setBodyClass() {
+    document.body.classList.toggle('sidebar-open', this.sidebarVisible);
+  }
+
+
   user: any
   img: string = ''
   firstName: string =''

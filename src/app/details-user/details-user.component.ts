@@ -13,7 +13,7 @@ export class DetailsUserComponent {
     this.isShow = !this.isShow;
   }
 
-
+  isInfoVisible2 = false;
   isInfoVisible = false;
   position = { x: 0, y: 0 };
 
@@ -30,6 +30,19 @@ export class DetailsUserComponent {
     }
   }
 
+  toggleInfo2(event: MouseEvent) {
+    this.isInfoVisible2 = !this.isInfoVisible2;
+
+    if (this.isInfoVisible2) {
+      const target = event.target as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      this.position = {
+        x: rect.right,
+        y: rect.top
+      };
+    }
+  }
+  
   hideInfo() {
     this.isInfoVisible = false;
   }

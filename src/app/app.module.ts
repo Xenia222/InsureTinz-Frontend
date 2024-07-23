@@ -37,7 +37,7 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
 import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
 import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 
@@ -85,7 +85,7 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule
-    CarouselModule
+    // CarouselModule
   ],
   providers: [
     provideClientHydration(),
