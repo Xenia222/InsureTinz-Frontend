@@ -33,7 +33,7 @@ overflow-x: hidden;">
                                         <p><strong class="color3 fs-2">{{user_credit}}</strong> <br> <span class="color4">17/06/2023</span></p>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                                <div *ngxPermissionsOnly="['client_buy_credit']" class="col-sm-3 d-flex justify-content-center align-items-center">
                                     <div class="p-3  ">
                                         <button (click)="navigateToCreditsPage()" type="button" class="btn btn-warning col align-item-center" routerLink="/credits"><strong>Purchase
                                                 Credit</strong></button>

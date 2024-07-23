@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckService } from '../_services/check.service';
 import { data } from 'jquery';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-verification-history',
@@ -11,14 +13,27 @@ export class VerificationHistoryComponent implements OnInit{
 
   checks: any = []
   pagedItems: any[] = [];
+  permissions: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 10;
   noCheck = null
 
-  constructor(private checkService:CheckService){}
+  constructor(private checkService:CheckService,private permissionsService: NgxPermissionsService, private userService: UserService){}
 
   ngOnInit(): void {
+
+    this.userService.getCurrentUserRole().subscribe(
+      data => {
+        this.permissions = data.permissions
+        console.log(this.permissions)
+        this.permissionsService.loadPermissions(this.permissions);
+      },
+      err => {
+        console.log(err)
+      }
+    )
+
     this.checkService.getCheckList().subscribe(
       data => {
         this.checks = data

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { error } from 'console';
+import { NgxPermission } from 'ngx-permissions/lib/model/permission.model';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-list-users',
@@ -15,7 +17,8 @@ import { error } from 'console';
 export class ListUsersComponent implements OnInit{
   
   users:any
-  constructor(private router: Router, private userService: UserService) {}
+  permissions: any[] = []
+  constructor(private router: Router, private userService: UserService, private permissionsService: NgxPermissionsService) {}
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
@@ -25,6 +28,18 @@ export class ListUsersComponent implements OnInit{
       },
       error => {
 
+      }
+    )
+
+    this.userService.getCurrentUserRole().subscribe(
+      data => {
+        this.permissions = data.permissions
+        console.log(data.roles)
+        console.log(this.permissions)
+        this.permissionsService.loadPermissions(this.permissions);
+      },
+      err => {
+        console.log(err)
       }
     )
   }

@@ -28,6 +28,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
+import { NoaccessComponent } from './noaccess/noaccess.component';
+import { routeGuard } from './_helper/route.guard';
 
 
 const routes: Routes = [
@@ -52,6 +55,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent , canActivate: [authGuard]},
   { path: 'test', component: TestComponent , canActivate: [authGuard]},
   { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
+  
+  { path: 'no-access', component: NoaccessComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
