@@ -16,7 +16,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 
 export class ListUsersComponent implements OnInit{
   
-  users:any
+  user:any
   permissions: any[] = []
   constructor(private router: Router, private userService: UserService, private permissionsService: NgxPermissionsService) {}
 
@@ -24,7 +24,7 @@ export class ListUsersComponent implements OnInit{
     this.userService.getAllUser().subscribe(
       (data:any) => {
         console.log(data.created_users)
-        this.users = data.created_users
+        this.user = data.created_users
       },
       error => {
 
