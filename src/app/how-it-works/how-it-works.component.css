@@ -1,0 +1,185 @@
+        /* .marg{
+            margin-left: 4rem;
+        } */
+        .marg1{
+            margin-right: 3rem;
+        }
+        .marg2{
+            padding: .6rem 5rem;
+            margin-right: 1rem;
+        }
+        .marg3{
+            width: 25rem;
+        }
+        .bg{
+          background: #2B2B2B;
+        }
+        .a {
+          color: white;
+          text-decoration: none;
+        }
+        .a:hover {
+          text-decoration: underline;
+        }
+        .box1{
+          width: 13rem;
+          margin: 1rem 0;
+          display: flex;
+          justify-content: center;
+        }
+        .check {
+          font-size: 3rem; 
+          font-weight: 500;
+          position: absolute;
+          top: 15%;
+        }
+        .bord{
+            width: 25rem;
+            height: 7.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bord1{
+            border-top: 2px solid #E1E1E1;
+            width: 20%;
+            
+        }
+        .bord3{
+            border-top: 2px solid #E1E1E1;
+            width: 20%;
+        }
+        .bord2{
+            width: 20rem;
+            height: 7.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .color{
+            background: #E1E1E1;
+        }
+
+        .header {
+            background-color: #ffcb05;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+          }
+          
+          .menu {
+            display: flex;
+            gap: 20px;
+            flex-grow: 1;
+            justify-content: center;
+          }
+          
+          .menu a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+          }
+          
+          .menu .first-link {
+            color: #000;
+          }
+          
+          .buttons {
+            display: flex;
+            gap: 10px;
+          }
+          
+          .buttons a {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+          }
+          
+          .login {
+            background-color: transparent;
+            color: black;
+          }
+          
+          .signup {
+            background-color: black;
+            color: #fff;
+          }
+          
+          .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: black;
+          }
+          
+          /* Mobile menu styles */
+          .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+          
+          .mobile-menu-nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin: 15px 0;
+            padding-left: 15px;
+          }
+          
+          .mobile-buttons a {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px 0;
+          }
+          
+          .mobile-buttons .login {
+            background-color: transparent;
+            color: #fff;
+          }
+          
+          .mobile-buttons .signup {
+            background-color: #ffcb05;
+            color: #000;
+          }
+          
+          .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+          }
+          
+          /* Responsive styles */
+          @media (max-width: 768px) {
+            .menu,
+            .buttons {
+              display: none;
+            }
+          
+            .hamburger {
+              display: block;
+            }
+          
+            .mobile-menu {
+              display: flex;
+            }
+          }

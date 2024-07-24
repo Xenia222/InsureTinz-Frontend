@@ -39,7 +39,15 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { NoaccessComponent } from './noaccess/noaccess.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
+import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
+import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 
 
@@ -76,6 +84,11 @@ import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forg
     NoaccessComponent,
     ForgetPasswordComponent,
     ResetForgotPasswordComponent,
+    CreateUserSucessComponent,
+    DetailsUserComponent,
+    WhoWeAreComponent,
+    HowItWorksComponent,
+    WhoCanUseComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +98,9 @@ import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forg
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    SlickCarouselModule
+    // CarouselModule
   ],
   providers: [
     provideClientHydration(),
@@ -94,6 +109,6 @@ import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forg
       withInterceptors([tokenInterceptor])
     ),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
