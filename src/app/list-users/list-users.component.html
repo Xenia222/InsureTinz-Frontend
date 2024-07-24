@@ -51,7 +51,7 @@ overflow-y: scroll;">
                                 
                                 </table>
                             
-                                <button  (click)="navigateToCreateUserAccounts()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Add new user</button>
+                                <button *ngxPermissionsOnly="['client_create_user']" (click)="navigateToCreateUserAccounts()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Add new user</button>
                             
                         </div>
                     </div>
@@ -81,7 +81,7 @@ overflow-y: scroll;">
                                         </a>
                                         <a *ngIf="user.status == 'inactive' " class="dropdown-item " (click)="deactivate(user.id)">
                                             <span *ngxPermissionsOnly="['client_activate_or_deactivate_user']" class="" >Activate</span>
-                                        </a>
+                                        </a>    
                                     </div>
                                 </div>
                             </div>

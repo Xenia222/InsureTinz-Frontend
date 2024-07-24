@@ -78,7 +78,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <div>
+                                        <div *ngIf="totalPages">
                                             <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
                                             <span>Page {{currentPage}} of {{totalPages}}</span>
                                             <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
@@ -142,8 +142,8 @@
                                                 <th class="px-5">Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
+                                        <tbody *ngIf="!noCheck">
+                                            <tr *ngFor="let check2 of pagedItems2">
                                                 <td>04 Sep 2019</td>
                                                 <td>23h 00 min 20 sec</td>
                                                 <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
@@ -178,27 +178,23 @@
                                                 <td>
                                                     <div class="container ">
                                                         <div class="active px-4 py-1">
-                                                            <p>Active</p>
+                                                            <div *ngIf="check2.is_insured == 1" class="status-active ">Active</div>
+                                                            <div *ngIf="check2.is_insured == 0" class="status-expired ">Expired</div>
+                                                            <div *ngIf="check2.is_insured == null" class="status-expired ">Not found</div>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
-
-                                            <tr>
-                                                <td>04 Sep 2019</td>
-                                                <td>23h 00 min 20 sec</td>
-                                                <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
-                                                        class="" (click)="toggleInfo($event)"
-                                                        style="width: 20px; margin-top: -2px;"></td>
-                                                <td>Calavi</td>
-                                                <td>
-                                                    <div class="container ">
-                                                        <div class="noactive px-4 py-1">
-                                                            <p>Not insured</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            <div *ngIf="totalPages2">
+                                                <button (click)="previousPage()" [disabled]="currentPage2 === 1">Previous</button>
+                                                <span>Page {{currentPage2}} of {{totalPages2}}</span>
+                                                <button (click)="nextPage()" [disabled]="currentPage2 === totalPages2">Next</button>
+                                              </div>
+                                        </tbody>
+                                        <tbody *ngIf="noCheck">
+                                            <div class="text-center">
+                                                <strong>{{noCheck}}</strong>
+                                            </div>
                                         </tbody>
                                     </table>
                                 </div>

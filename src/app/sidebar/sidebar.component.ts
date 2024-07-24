@@ -26,8 +26,9 @@ export class SidebarComponent {
     this.userService.getCurrentUserRole().subscribe(
       data => {
         this.roles = data.roles
+        this.roles.push(...data.permissions)
         console.log(data.roles)
-        console.log(this.roles)
+        console.log("Role et right",this.roles)
         this.permissionsService.loadPermissions(this.roles);
         this.getUser()
         this.loadProfilePhoto();

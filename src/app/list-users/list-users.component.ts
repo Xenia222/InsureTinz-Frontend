@@ -31,17 +31,17 @@ export class ListUsersComponent implements OnInit{
       }
     )
 
-    this.userService.getCurrentUserRole().subscribe(
-      data => {
-        this.permissions = data.permissions
-        console.log(data.roles)
-        console.log(this.permissions)
-        this.permissionsService.loadPermissions(this.permissions);
-      },
-      err => {
-        console.log(err)
-      }
-    )
+    // this.userService.getCurrentUserRole().subscribe(
+    //   data => {
+    //     this.permissions = data.permissions
+    //     console.log(data.roles)
+    //     console.log(this.permissions)
+    //     this.permissionsService.loadPermissions(this.permissions);
+    //   },
+    //   err => {
+    //     console.log(err)
+    //   }
+    // )
   }
 
   deactivate(id: string){

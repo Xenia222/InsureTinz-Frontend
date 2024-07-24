@@ -18,6 +18,11 @@ export class UserService {
     return this.http.get(`${this.url}/roles`);
   }
 
+
+  getDashboard(): Observable<any>{
+    return this.http.get(`${this.url}/dashboard`);
+  }
+
   getCurrentUser(){
       return this.http.get(`${this.url}/user`);
   }

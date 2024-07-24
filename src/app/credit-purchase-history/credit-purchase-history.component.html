@@ -14,23 +14,15 @@ overflow-x: hidden;">
                         <section class=" bg-white rounded">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <div class="p-3 bigtext ">
-                                        <h3>Credit <br> Purchased</h3>
-                                        <p><strong class="color1 fs-2">{{user_credit}}</strong> <br> <span class="color4">17/06/2023</span></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h3>Credit <br> Used</h3>
-                                        <p><strong class="color2 fs-2">0</strong> <br> <span class="color4 last bigtext2">
-                                                13/07/2023</span>
-                                        </p>
+                                        <p><strong class="color2 fs-2">{{user_credit_balance}}</strong></p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h3>Credit <br> Balance</h3>
-                                        <p><strong class="color3 fs-2">{{user_credit}}</strong> <br> <span class="color4">17/06/2023</span></p>
+                                        <p><strong class="color3 fs-2">{{user_credit}}</strong></p>
                                     </div>
                                 </div>
                                 <div *ngxPermissionsOnly="['client_buy_credit']" class="col-sm-3 d-flex justify-content-center align-items-center">

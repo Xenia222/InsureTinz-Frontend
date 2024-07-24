@@ -12,6 +12,9 @@ export class QuickCheckComponent {
   constructor(private checkService:CheckService){}
 
   results: any[] = []
+  searchType: string = "licensePlate"
+  vin: any
+  type: string = ''
   inputs: { value: string }[] = [{ value: '' }];
 
     addInput() {
@@ -33,10 +36,21 @@ export class QuickCheckComponent {
   }
 
     onSubmit(){
+      console.log("this.type", this.vin)
+      if(this.searchType == "licensePlate"){
+        this.type = "license_plate" 
+      }else if (this.searchType == "registrationNumber"){
+        this.type  ="vin"
+      }
       let searchValues = this.getInputValues();
       console.log('Search values:', searchValues);
       this.checkService.quickCheck({
-        'license_plate_numbers': searchValues
+        vehicles: searchValues.map(numb => {
+          return {
+            identifier: numb,
+            type: this.type
+          };
+        })
       }).subscribe(
         data => {
           this.results = data.results

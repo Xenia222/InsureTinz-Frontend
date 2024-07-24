@@ -12,27 +12,35 @@ import { UserService } from '../_services/user.service';
 export class VerificationHistoryComponent implements OnInit{
 
   checks: any = []
+  subchecks: any = []
   pagedItems: any[] = [];
   permissions: any[] = [];
+  pagedItems2: any[] = [];
+  permissions2: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 4;
+  currentPage2: number = 1;
+  itemsPerPage2: number = 4;
   totalPages: number = 10;
+  totalPages2: number = 10;
   noCheck = null
+  noCheck2 = null
 
   constructor(private checkService:CheckService,private permissionsService: NgxPermissionsService, private userService: UserService){}
 
   ngOnInit(): void {
 
-    this.userService.getCurrentUserRole().subscribe(
-      data => {
-        this.permissions = data.permissions
-        console.log(this.permissions)
-        this.permissionsService.loadPermissions(this.permissions);
-      },
-      err => {
-        console.log(err)
-      }
-    )
+    // this.userService.getCurrentUserRole().subscribe(
+    //   data => {
+    //     this.permissions = data.permissions
+    //     console.log(this.permissions)
+    //     this.permissionsService.loadPermissions(this.permissions);
+    //   },
+    //   err => {
+    //     console.log(err)
+    //   }
+    // )
+
 
     this.checkService.getCheckList().subscribe(
       data => {
@@ -42,7 +50,22 @@ export class VerificationHistoryComponent implements OnInit{
         if(data.error){
         this.noCheck = data.error
         }
-        console.log(data)
+        console.log("check 1",data)
+      },
+      err => {
+        console.log(err)
+      }
+    )
+
+    this.checkService.getSubCheckList().subscribe(
+      data => {
+        this.subchecks = data
+        this.totalPages2 = Math.ceil(this.subchecks.length / this.itemsPerPage2);
+        this.updatePagedSubItems();
+        if(data.error){
+        this.noCheck2 = data.error
+        }
+        console.log("check 2",data)
       },
       err => {
         console.log(err)
@@ -81,6 +104,12 @@ export class VerificationHistoryComponent implements OnInit{
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.pagedItems = this.checks.slice(start, end);
+  }
+
+  updatePagedSubItems(): void {
+    const start = (this.currentPage2 - 1) * this.itemsPerPage2;
+    const end = start + this.itemsPerPage2;
+    this.pagedItems2 = this.checks.slice(start, end);
   }
 
   previousPage(): void {
