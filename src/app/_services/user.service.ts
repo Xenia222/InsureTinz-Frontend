@@ -53,7 +53,7 @@ export class UserService {
     return this.http.post<any>(this.url+'/store_client_user', user)
   }
 
-  getAllUser(){
+  getAllUser(): Observable<any>{
     return this.http.get<IDataUser>(this.url+'/client_users')
   }
 

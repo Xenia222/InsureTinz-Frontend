@@ -47,6 +47,8 @@ import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.component';
 
 
 
@@ -89,6 +91,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     WhoWeAreComponent,
     HowItWorksComponent,
     WhoCanUseComponent,
+    SearchBarComponent,
+    SearchBarSecondComponent,
   ],
   imports: [
     BrowserModule,

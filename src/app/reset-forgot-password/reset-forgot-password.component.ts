@@ -29,15 +29,15 @@ export class ResetForgotPasswordComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.token = this.route.snapshot.paramMap.get('token');
     this.route.queryParamMap.subscribe(params => {
       this.email = params.get('email');
+      this.token = params.get('token');
     });
     
   }
 
   onSubmit(){
-    this.authService.getResetLink(this.loginForm.value.email).subscribe(
+    this.authService.resetPassword(this.token,this.email,this.loginForm.value.password, this.loginForm.value.confirmpassword).subscribe(
       data => {
         if(data.status == 200){
           this.successMessage = data.message

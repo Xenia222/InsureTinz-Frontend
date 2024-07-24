@@ -95,7 +95,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   { path: 'forget-password', component: ForgetPasswordComponent},
-  { path: 'reset-forgot-password/:token', component: ResetForgotPasswordComponent},
+  { path: 'reset-forgot-password', component: ResetForgotPasswordComponent},
   { path: 'no-access', component: NoaccessComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
@@ -104,10 +104,6 @@ const routes: Routes = [
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'who-can-use', component: WhoCanUseComponent },
   { path: 'details-user', component: DetailsUserComponent },
-  
-
-
-
 
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'reset-password-otp', component: ResetPasswordOtpComponent },

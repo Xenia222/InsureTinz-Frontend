@@ -25,6 +25,8 @@ export class VerificationHistoryComponent implements OnInit{
   totalPages2: number = 10;
   noCheck = null
   noCheck2 = null
+  filteredItems: any[] = []
+  filteredItemsS: any[] = []
 
   constructor(private checkService:CheckService,private permissionsService: NgxPermissionsService, private userService: UserService){}
 
@@ -45,6 +47,7 @@ export class VerificationHistoryComponent implements OnInit{
     this.checkService.getCheckList().subscribe(
       data => {
         this.checks = data
+        this.filteredItems = this.checks;
         this.totalPages = Math.ceil(this.checks.length / this.itemsPerPage);
         this.updatePagedItems();
         if(data.error){
@@ -60,6 +63,7 @@ export class VerificationHistoryComponent implements OnInit{
     this.checkService.getSubCheckList().subscribe(
       data => {
         this.subchecks = data
+        this.filteredItemsS = this.checks;
         this.totalPages2 = Math.ceil(this.subchecks.length / this.itemsPerPage2);
         this.updatePagedSubItems();
         if(data.error){
@@ -73,13 +77,28 @@ export class VerificationHistoryComponent implements OnInit{
     )
   }
 
+  
+
+  onSearch(searchValue: { searchTerm: string, filter: string }) {
+    this.filteredItems = this.checks.filter((item: { [x: string]: any; }) => {
+      const value = item[searchValue.filter as keyof typeof item];
+      return value.toLowerCase().includes(searchValue.searchTerm.toLowerCase());
+    });
+  }
+
+  onSearchS(searchValue: { searchTerm: string, filter: string }) {
+    this.filteredItemsS = this.subchecks.filter((item: { [x: string]: any; }) => {
+      const value = item[searchValue.filter as keyof typeof item];
+      return value.toLowerCase().includes(searchValue.searchTerm.toLowerCase());
+    });
+  }
+
   isShow = false;
 
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
 
-  isInfoVisible2 = false;
   isInfoVisible = false;
   position = { x: 0, y: 0 };
 
@@ -87,18 +106,6 @@ export class VerificationHistoryComponent implements OnInit{
     this.isInfoVisible = !this.isInfoVisible;
 
     if (this.isInfoVisible) {
-      const target = event.target as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      this.position = {
-        x: rect.right,
-        y: rect.top
-      };
-    }
-  }
-  toggleInfo2(event: MouseEvent) {
-    this.isInfoVisible2 = !this.isInfoVisible2;
-
-    if (this.isInfoVisible2) {
       const target = event.target as HTMLElement;
       const rect = target.getBoundingClientRect();
       this.position = {
@@ -121,7 +128,7 @@ export class VerificationHistoryComponent implements OnInit{
   updatePagedSubItems(): void {
     const start = (this.currentPage2 - 1) * this.itemsPerPage2;
     const end = start + this.itemsPerPage2;
-    this.pagedItems2 = this.checks.slice(start, end);
+    this.pagedItems2 = this.subchecks.slice(start, end);
   }
 
   previousPage(): void {

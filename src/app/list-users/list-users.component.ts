@@ -16,32 +16,20 @@ import { NgxPermissionsService } from 'ngx-permissions';
 
 export class ListUsersComponent implements OnInit{
   
-  user:any
+  users: any[] = []
   permissions: any[] = []
   constructor(private router: Router, private userService: UserService, private permissionsService: NgxPermissionsService) {}
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
-      (data:any) => {
-        console.log(data.created_users)
-        this.user = data.created_users
+      data => {
+        console.log("Created user",data.created_users)
+        this.users = data.created_users
       },
       error => {
 
       }
     )
-
-    // this.userService.getCurrentUserRole().subscribe(
-    //   data => {
-    //     this.permissions = data.permissions
-    //     console.log(data.roles)
-    //     console.log(this.permissions)
-    //     this.permissionsService.loadPermissions(this.permissions);
-    //   },
-    //   err => {
-    //     console.log(err)
-    //   }
-    // )
   }
 
   deactivate(id: string){

@@ -1,0 +1,33 @@
+<form class="d-flex justify-content-between" [formGroup]="searchForm">
+    <div class="sear" style="width: 30%;">
+        <input type="text" class="form-control recherche" id="formGroupExampleInput" placeholder="search">
+      </div>
+    
+    <div class=" mt-1 sear2" style="padding: 0px;">
+        <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+    
+            <div class="sous-group24">
+                <img src="../../assets/filter.png" alt="">
+            </div>
+            <div class="sous-group24">
+                <span>filter by</span>
+            </div>
+            <div class="col-auto btn-light sous-group24">
+                <select formControlName="filter" class="form-select bg-light">
+                    <option *ngFor="let filter of filters" [value]="filter.value" [selected]="filter.value === defaultFilter">
+                        {{filter.label}}
+                    </option>
+                </select>
+            </div>
+            <div  style="text-align: center;">
+                <span><a href="#" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+            </div>
+    
+        </div>
+    
+    </div>
+    
+</form>
+
+
+ 

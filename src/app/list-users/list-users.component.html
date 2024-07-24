@@ -54,7 +54,7 @@ overflow-x: hidden;">
                     
                     <!-- La liste des users -->
                     <div class="row g-4 mt-3 ml-1">
-                        <div  class="col-sm-6 col-xl-3 col-custom">
+                        <div *ngFor="let user of users" class="col-sm-6 col-xl-3 col-custom">
                             <div class="bg-white justify-content-between p-4 case-user-detail " style="cursor: pointer;">
                                 <div  class="nav-item dropdown" style="font-size: 15px; color: rgba(64, 64, 64, 1);">
                                     <div  class="nav-link " data-bs-toggle="dropdown">
