@@ -43,7 +43,7 @@ overflow-x: hidden;">
     
                             </div>
     
-                            <button (click)="navigateToCreateUserAccounts()" type="button" class=" btn-warning btn  px-5 py-2 ">Add new user</button>
+                            <button *ngxPermissionsOnly="['client_create_user']" (click)="navigateToCreateUserAccounts()" type="button" class=" btn-warning btn  px-5 py-2 ">Add new user</button>
     
                         </div>
 
@@ -60,9 +60,9 @@ overflow-x: hidden;">
                                     <div  class="nav-link " data-bs-toggle="dropdown">
                                         <img class="rounded-circle me-lg-2" src="../../assets/user.jpg" alt="" style="height: 150px;">
                                         <div class="utilisateur">
-                                            <h5 class="" style="color: black; font-size: medium;"> user.primary_contact_name  user.secondary_contact_name </h5>
-                                            <span class="text-dark" style="font-size: initial;">user.primary_contact_title </span>
-                                            <span class="text-dark mt-2" style="font-style: italic;"> user.primary_business_phone_number </span>
+                                            <h5 class="" style="color: black; font-size: medium;"> {{ user.primary_contact_name }} {{ user.secondary_contact_name }} </h5>
+                                            <span class="text-dark" style="font-size: initial;">{{ user.primary_contact_title }}</span>
+                                            <span class="text-dark mt-2" style="font-style: italic;"> {{ user.primary_business_phone_number }} </span>
                                         </div>
                                     </div>
                                     <div class="menu-detail dropdown-menu p-2">
@@ -70,8 +70,11 @@ overflow-x: hidden;">
                                             <span class="">Details</span>
                                         </a>
                                         <hr>
-                                        <a class="dropdown-item" href="#">
+                                        <a *ngIf="user.status == 'active' " (click)="deactivate(user.id)" class="dropdown-item" >
                                             <span class="" >Desactivate</span>
+                                        </a>
+                                        <a *ngIf="user.status == 'inactive' " class="dropdown-item " (click)="deactivate(user.id)">
+                                            <span *ngxPermissionsOnly="['client_activate_or_deactivate_user']" class="" >Activate</span>
                                         </a>
                                     </div>
                                 </div>

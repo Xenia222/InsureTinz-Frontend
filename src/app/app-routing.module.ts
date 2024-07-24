@@ -42,51 +42,51 @@ const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent},
   { path: 'login-otp', component: LoginOtpComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'signup', component: SignupComponent },
   { path: 'signup-otp', component: SignupOtpComponent },
   { path: 'signup-sucess', component: SignupSuccessComponent },
   { path: 'dashboard-locked', component: DashboardLockedComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'dashboard', component: DashboardComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'credits', component: CreditsComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
 
   },
   { path: 'purchase-credits', component: PurchaseCreditsComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'payment-methods', component: PaymentMethodsComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
 
   },
   { path: 'payment-credits-success', component: PaymentCreditsSuccessComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard]
 
   },
   { path: 'quick-check', component: QuickCheckComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'verification-history', component: VerificationHistoryComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'create-user-accounts', component: CreateUserAccountsComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'profile', component: ProfileComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'test', component: TestComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'list-users', component: ListUsersComponent , 
-    // canActivate: [authGuard]
+    canActivate: [authGuard]
   },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },

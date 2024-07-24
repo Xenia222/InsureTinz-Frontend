@@ -17,17 +17,17 @@ overflow-x: hidden;">
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h4>Credit <br> Used</h4>
-                                        <p><strong class="color2 fs-2">23463</strong> 
+                                        <p><strong class="color2 fs-2">{{user_credit_balance}}</strong> 
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h4>Credit <br> Balance</h4>
-                                        <p><strong class="color3 fs-2">34534</strong> </p>
+                                        <p><strong class="color3 fs-2">{{user_credit}}</strong> </p>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                                <div *ngxPermissionsOnly="['client_buy_credit']"  class="col-sm-3 d-flex justify-content-center align-items-center">
                                     <div class="p-3  ">
                                         <button (click)="navigateToCreditsPage()" type="button" class="btn btn-warning col align-item-center" routerLink="/credits"><strong>Purchase
                                                 Credit</strong></button>

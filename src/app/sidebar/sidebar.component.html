@@ -46,7 +46,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         <div class="element">Dashboard</div>
                     </a>
 
-                    <a routerLink="/credit-purchase-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_credit_management']" routerLink="/credit-purchase-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -54,7 +54,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         </svg>
                         <div class="element">Credits</div>
                     </a>
-                    <a routerLink="/quick-check" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master', 'client_check_management']" routerLink="/quick-check" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -70,7 +70,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         </svg>
                         <div class="element">Status history and logs history</div>
                     </a>
-                    <a routerLink="/list-users" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_rights_and_roles']" routerLink="/list-users" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path

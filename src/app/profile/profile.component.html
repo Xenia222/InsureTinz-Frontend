@@ -16,11 +16,11 @@ overflow-x: hidden;">
 
             <div class="contient">
               <div class="d-flex custom-gradient p-2 text-end">
-                <div class="box">
+                <div *ngIf="photoUrl" class="box">
                   <img [src]="photoUrl" class="img-thumbnail box">
                 </div>
                 <div class="cont h-100">
-                  <p class="fs-4 text-white h-100 align-items-end" style="">form.firstName form.lastName  <br> </p>
+                  <p class="fs-4 text-white h-100 align-items-end" style="">{{firstname}} {{lastname}}  <br> </p>
                   <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning"
                   style="cursor: pointer;">Edit your photo</a>
                 </div>
