@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-// import 'bootstrap';
-// import 'jquery';
-import { Router } from '@angular/router';
+import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
 
 
 @Component({
@@ -10,35 +6,40 @@ import { Router } from '@angular/router';
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
-export class TestComponent {
+export class TestComponent implements AfterViewInit {
 
+  @ViewChild('carouselContainer') containerRef!: ElementRef<HTMLElement>;
+  
+  private container!: HTMLElement;
+  private items: HTMLElement[] = [];
+  private currentIndex = 0;
 
-  sidebarToggle: boolean = true;
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    this.container = this.containerRef.nativeElement;
+    this.items = Array.from(this.container.querySelectorAll('.carousel-item'));
+    this.setupCarousel();
   }
 
-  toggleDropdown(id: string) {
-    const dropdown = document.getElementById(id);
+  private setupCarousel() {
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
 
-    if (dropdown) {
-      dropdown.classList.toggle('hidden');
+    if (prevButton && nextButton) {
+      prevButton.addEventListener('click', () => this.moveCarousel(-1));
+      nextButton.addEventListener('click', () => this.moveCarousel(1));
+    } else {
+      console.error('Carousel navigation buttons not found');
     }
   }
 
+  private moveCarousel(direction: number) {
+    this.currentIndex = (this.currentIndex + direction + this.items.length) % this.items.length;
+    this.updateCarousel();
+  }
 
-
-  slideConfig = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    dots: true,
-    infinite: true,
-  };
-
-  slides = [
-    { img: "path-to-ambulance-image.jpg" },
-    // Ajoutez d'autres images si nécessaire
-  ];
+  private updateCarousel() {
+    const offset = -this.currentIndex * (100 / 3); // Assuming 3 items visible at a time
+    this.container.style.transform = `translateX(${offset}%)`;
+  }
+  
 }

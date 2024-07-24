@@ -1,8 +1,71 @@
-<section class="carousel">
-  <ngx-slick-carousel class="carousel" [config]="slideConfig">
-    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-      <img [src]="slide.img" alt="slide image" />
-      <button class="carousel-button">Who can use</button>
+<!-- app.component.html -->
+<header>
+  <nav>
+    <img src="path-to-logo.png" alt="InsureTinz Logo">
+    <ul>
+      <li><a href="#">How It Works</a></li>
+      <li><a href="#">Benefits</a></li>
+      <li><a href="#">Who Can Use</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button class="login">Login</button>
+      <button class="signup">Signup</button>
     </div>
-  </ngx-slick-carousel>
-</section>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Who can use</h1>
+    <img src="path-to-ambulance-image.png" alt="Ambulance">
+  </section>
+
+  <section class="carousel">
+    <div #carouselContainer class="carousel-container">
+      <div class="carousel-item">
+        <img src="path-to-police-icon.png" alt="Police Icon">
+        <h3>Inland Police Authority</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+      <div class="carousel-item">
+        <img src="path-to-border-crossing-icon.png" alt="Border Crossing Icon">
+        <h3>Border Crossing Authority</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+      <!-- Add more carousel items as needed -->
+    </div>
+    <button class="carousel-prev">Previous</button>
+    <button class="carousel-next">Next</button>
+  </section>
+</main>
+
+<footer>
+  <div class="subscribe">
+    <h3>Subscribe Email</h3>
+    <p>Join our email address to get daily updates</p>
+    <input type="email" placeholder="Email Address">
+    <button>Subscribe</button>
+  </div>
+  <div class="footer-links">
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Who we are</a></li>
+        <li><a href="#">Benefits</a></li>
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Signup</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="logo">
+    <img src="path-to-logo.png" alt="InsureTinz Logo">
+  </div>
+</footer>

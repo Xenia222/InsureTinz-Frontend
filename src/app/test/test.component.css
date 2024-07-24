@@ -1,120 +1,88 @@
 /* styles.css */
-.container {
+body {
 	font-family: Arial, sans-serif;
-	color: #333;
+	margin: 0;
+	padding: 0;
   }
   
   header {
-	background-color: #ffcc00;
+	background-color: #FFC107;
 	padding: 1rem;
   }
   
-  .navbar {
+  nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
   }
   
-  .logo {
+  nav ul {
 	display: flex;
-	align-items: center;
+	list-style-type: none;
   }
   
-  .logo img {
-	height: 40px;
-	margin-right: 0.5rem;
-  }
-  
-  .nav-links {
-	list-style: none;
-	display: flex;
-	gap: 1rem;
-  }
-  
-  .nav-links li {
-	display: inline;
+  nav ul li {
+	margin-right: 1rem;
   }
   
   .auth-buttons button {
-	background-color: transparent;
-	border: 1px solid #333;
 	margin-left: 0.5rem;
-	padding: 0.5rem 1rem;
+  }
+  
+  .hero {
+	background-color: #f0f0f0;
+	padding: 2rem;
+	text-align: center;
   }
   
   .carousel {
-	text-align: center;
-	margin: 2rem 0;
+	position: relative;
+	overflow: hidden;
   }
   
-  .carousel img {
-	max-width: 100%;
-	height: auto;
-  }
-  
-  .carousel-button {
-	background-color: #ffcc00;
-	border: none;
-	padding: 0.5rem 1rem;
-	margin-top: 1rem;
-  }
-  
-  .cards {
+  .carousel-container {
 	display: flex;
-	justify-content: space-around;
-	margin: 2rem 0;
+	transition: transform 0.3s ease;
   }
   
-  .card {
-	text-align: center;
+  .carousel-item {
+	flex: 0 0 33.333%;
 	padding: 1rem;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 10px;
+	text-align: center;
   }
+  
+  .carousel-prev,
+  .carousel-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+  }
+  
+  .carousel-prev { left: 1rem; }
+  .carousel-next { right: 1rem; }
   
   footer {
 	background-color: #333;
-	color: #fff;
+	color: white;
 	padding: 2rem;
 	display: flex;
 	justify-content: space-between;
   }
   
-  .subscribe {
-	max-width: 300px;
-  }
-  
-  .subscribe input {
-	width: 100%;
-	padding: 0.5rem;
+  .subscribe input,
+  .subscribe button {
 	margin-top: 0.5rem;
   }
   
   .footer-links {
 	display: flex;
-	gap: 2rem;
   }
   
-  .footer-links h4 {
-	margin-bottom: 1rem;
+  .footer-links div {
+	margin-right: 2rem;
   }
   
   .footer-links ul {
-	list-style: none;
+	list-style-type: none;
 	padding: 0;
   }
-  
-  .footer-links li {
-	margin-bottom: 0.5rem;
-  }
-  
-  .footer-logo {
-	display: flex;
-	align-items: center;
-  }
-  
-  .footer-logo img {
-	height: 40px;
-	margin-right: 0.5rem;
-  }
-  
