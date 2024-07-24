@@ -96,7 +96,6 @@ const routes: Routes = [
   },
   { path: 'forget-password', component: ForgetPasswordComponent},
   { path: 'reset-forgot-password/:token', component: ResetForgotPasswordComponent},
-  
   { path: 'no-access', component: NoaccessComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
