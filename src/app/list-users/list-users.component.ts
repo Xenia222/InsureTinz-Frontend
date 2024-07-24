@@ -57,4 +57,7 @@ export class ListUsersComponent implements OnInit{
     this.router.navigate(['/create-user-accounts']);
   }
 
+  navigateToUserDetails() {
+    this.router.navigate(['/details-user']);
+  }
 }

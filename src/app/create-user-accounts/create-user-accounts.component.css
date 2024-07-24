@@ -67,14 +67,17 @@
   .boutoon{
     width: 50%;
     /* height: 57px; */
-    margin: 0 auto;
+    margin: 10px auto;
     background: rgba(255, 203, 5, 0.85);
     box-shadow: 4px 4px 6px rgba(139, 136, 136, 0.25);
     border-radius: 10px;
-    font-weight: 700;
+    /* font-weight: 700; */
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .boutoon:hover{
+    box-shadow: unset;
   }
   /*** Layout ***/
   .sidebar {
@@ -780,3 +783,171 @@ font-family: 'Nunito Sans', sans-serif;
   box-shadow: 0 0 2px 0.25rem #ffcb0563 !important;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+}
+
+.custom-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+}
+
+.custom-option {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.custom-option:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-select.open .custom-options {
+  display: block;
+}
+
+.arrow {
+  margin-left: auto;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.photo-upload-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.photo-upload-input {
+  display: none;
+}
+
+.photo-upload-label {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  background-image: url('https://via.placeholder.com/150');
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+}
+
+.photo-upload-label:hover {
+  opacity: 0.8;
+}
+
+
+
+/* Fin du Css du tableau en bas du home page */
+@media (min-width: 1200px) {
+  .sidebar {
+    margin-left: 0;
+  }
+
+  .sidebar.open {
+    margin-left: -250px;
+  }
+
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+
+  .sidebar.open {
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0;
+    /* margin-left: 40px; */
+  }
+}
+@media (max-width: 1200px) {
+  .px-md-4 {
+      padding-right: 1.5rem !important;
+      padding-left: 1.5rem !important;
+      width: 100%;
+  }
+}
+.btn {
+  background-color: #ffcb05;
+  box-shadow: 4px 4px 6px rgba(139, 136, 136, 0.25) !important;
+  border-radius: 7px !important;
+  color: #000000;
+  gap: 12px;
+  font-weight: 500;
+  padding: 11px 39px !important;
+  display: flex;
+  font-size: 15px !important;
+  border: none !important;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  box-shadow: unset !important;
+}

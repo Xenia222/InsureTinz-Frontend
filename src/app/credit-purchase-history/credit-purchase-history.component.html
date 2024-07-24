@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="" style="padding: 0 0px !important;
 overflow-x: hidden;">
     <div class="row">
@@ -12,20 +13,21 @@ overflow-x: hidden;">
 
                     <div class="bann">
                         <section class=" bg-white rounded">
-                            <div class="row">
+                            <div class="row" class="recap" >
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
-                                        <h3>Credit <br> Used</h3>
-                                        <p><strong class="color2 fs-2">{{user_credit_balance}}</strong></p>
+                                        <h4>Credit <br> Used</h4>
+                                        <p><strong class="color2 fs-2">{{user_credit_balance}}</strong> 
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
-                                        <h3>Credit <br> Balance</h3>
-                                        <p><strong class="color3 fs-2">{{user_credit}}</strong></p>
+                                        <h4>Credit <br> Balance</h4>
+                                        <p><strong class="color3 fs-2">{{user_credit}}</strong> </p>
                                     </div>
                                 </div>
-                                <div *ngxPermissionsOnly="['client_buy_credit']" class="col-sm-3 d-flex justify-content-center align-items-center">
+                                <div *ngxPermissionsOnly="['client_buy_credit']"  class="col-sm-3 d-flex justify-content-center align-items-center">
                                     <div class="p-3  ">
                                         <button (click)="navigateToCreditsPage()" type="button" class="btn btn-warning col align-item-center" routerLink="/credits"><strong>Purchase
                                                 Credit</strong></button>
@@ -55,7 +57,7 @@ overflow-x: hidden;">
                                         <option value="2">Is</option>
                                     </select>
                                 </div>
-                                <div class="sous-group">
+                                <div class="">
                                     <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
                                 </div>
                 

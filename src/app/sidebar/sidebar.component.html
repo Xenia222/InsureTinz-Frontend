@@ -17,21 +17,27 @@
     }
 </style>
 
+<a href="javascript:void(0);" (click)="toggleSidebar()" class="sidebar-toggler flex-shrink-0 navbar-brand d-flex me-4"
+style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
+    <h3 class="text-dark mb-0" style="font-size: 20px;"><i class="fa fa-bars"></i></h3>
+  </a>
 <body>
-    <div class=" position-relative d-flex p-0" style="    padding: 0 0px !important;
+    <div class=" position-relative d-flex p-0" style="padding: 0 0px !important;
     overflow-x: hidden;
     overflow-y: scroll;">
 
 
+
+
         <!-- Sidebar Start -->
-        <div class="sidebar pe-3 pb-3">
+        <div class="sidebar pe-3 pb-3" [ngClass]="{ 'sidebar-visible': sidebarVisible }">
             <nav class="navbar bg-white navbar-dark h-100">
-                <a href="#" class="navbar-brand mx-4 mb-2">
+                <a href="" class="navbar-brand mx-4 mb-2">
                     <h3 class="text-main">Main Admin</h3>
                 </a>
 
                 <div class="navbar-bas w-100">
-                    <a routerLink="/dashboard" class="nav-item nav-link active ">
+                    <a routerLink="/dashboard" class="nav-item nav-link" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -40,7 +46,7 @@
                         <div class="element">Dashboard</div>
                     </a>
 
-                    <a *ngxPermissionsOnly="['client_master','client_credit_management']" routerLink="/credit-purchase-history" class="nav-item nav-link mt-2">
+                    <a *ngxPermissionsOnly="['client_master','client_credit_management']" routerLink="/credit-purchase-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -48,7 +54,7 @@
                         </svg>
                         <div class="element">Credits</div>
                     </a>
-                    <a *ngxPermissionsOnly="['client_master', 'client_check_management']" routerLink="/quick-check" class="nav-item nav-link mt-2">
+                    <a *ngxPermissionsOnly="['client_master', 'client_check_management']" routerLink="/quick-check" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -56,7 +62,7 @@
                         </svg>
                         <div class="element">Insurance status</div>
                     </a>
-                    <a routerLink="/verification-history" class="nav-item nav-link mt-2">
+                    <a routerLink="/verification-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -64,7 +70,7 @@
                         </svg>
                         <div class="element">Status history and logs history</div>
                     </a>
-                    <a *ngxPermissionsOnly="['client_master','client_rights_and_roles']" routerLink="/list-users" class="nav-item nav-link mt-2">
+                    <a *ngxPermissionsOnly="['client_master','client_rights_and_roles']" routerLink="/list-users" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -72,7 +78,7 @@
                         </svg>
                         <div class="element">Users accounts</div>
                     </a>
-                    <a routerLink="/profile" class="nav-item nav-link mt-2">
+                    <a routerLink="/profile" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -108,82 +114,10 @@
         <!-- Sidebar End -->
 
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-white navbar-white sticky-top px-4 py-0">
 
-                <a routerLink="/profile" class="sidebar-toggler flex-shrink-0 navbar-brand d-flex d-lg-none me-4">
-                    <h3 class="text-dark mb-0"><i class="fa fa-bars"></i></h3>
-                </a>
-
-                <div class="navbar-nav align-items-center ms-auto">
-
-                    <div class="nav-item dropdown" style="position:absolute">
-                        <a href="#" class="nav-link ">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path
-                                    d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z" />
-                            </svg>
-                            <span class="notification-badge d-none d-lg-inline-flex">0</span>
-                        </a>
-
-                    </div>
-
-                    <div class="nav-item dropdown"
-                        style="font-size: 15px; color: rgba(64, 64, 64, 1);     text-align: end;">
-
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="../../assets/francais.png" width="40" height="27" alt="English"
-                                style="  border-radius: 5px;margin-right: 10px;  width: 20%;  height: 11%;">
-                            <span class="d-none d-lg-inline-flex">English</span>
-                        </a>
-                        <div class="menu-langue dropdown-menu"
-                            style="border: unset; padding: 6px; border-radius: 10px;  box-shadow: 0px 0px 7px 1px #ebebeb;">
-                            <li><a class="dropdown-item" href="#">Select language</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <a href="#" class="dropdown-item" href="#">
-                                <img src="../../assets/anglais.png" width="40" height="27" alt="English"
-                                    style=" margin-right: 10px;">
-                                <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">English</span>
-                            </a>
-                            <a class="dropdown-item mt-2" href="#">
-                                <img src="../../assets/anglais.png" width="40" height="27" alt="English"
-                                    style=" margin-right: 10px;">
-                                <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">Français</span>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link " style="display: flex;">
-                            <img class="rounded-circle me-lg-2" [src]="img" alt=""
-                                style="width: 40px; height: 40px;">
-                            <div>
-                                <span class="" style="font-size: medium;">{{ firstName }} {{ lastName }}</span><br>
-                                <span class=" " style="font-size: small; ">Admin</span>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-            </nav>
-            <!-- Navbar End -->
-
-
-
-        </div>
-        <!-- Content End -->
 
 
     </div>
-
 
 
     <script>
@@ -210,15 +144,7 @@
     </script>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
 
 
 </body>
