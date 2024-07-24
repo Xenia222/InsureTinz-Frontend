@@ -31,6 +31,8 @@ import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-o
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { NoaccessComponent } from './noaccess/noaccess.component';
 import { routeGuard } from './_helper/route.guard';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
 
 
 const routes: Routes = [
@@ -55,6 +57,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent , canActivate: [authGuard]},
   { path: 'test', component: TestComponent , canActivate: [authGuard]},
   { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
+  { path: 'forget-password', component: ForgetPasswordComponent},
+  { path: 'reset-forgot-password/:token', component: ResetForgotPasswordComponent},
   
   { path: 'no-access', component: NoaccessComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },

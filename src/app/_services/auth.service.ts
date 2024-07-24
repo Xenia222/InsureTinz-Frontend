@@ -30,6 +30,12 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/client_login`, formData);
   }
 
+  getResetLink(email: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+    return this.http.post(`${this.apiUrl}/forgot-password`, formData);
+  }
+
   otp_send(email: any): Observable<any> {
     const formData = new FormData();
     formData.append('email', email);

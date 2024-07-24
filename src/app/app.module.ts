@@ -37,6 +37,8 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
 import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { NoaccessComponent } from './noaccess/noaccess.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
@@ -72,6 +74,8 @@ import { NoaccessComponent } from './noaccess/noaccess.component';
     LogoutModalComponent,
     ResetPasswordOtpComponent,
     NoaccessComponent,
+    ForgetPasswordComponent,
+    ResetForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
