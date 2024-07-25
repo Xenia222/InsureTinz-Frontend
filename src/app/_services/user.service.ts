@@ -14,8 +14,21 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
 
+  getCurrentUserRole(): Observable<any>{
+    return this.http.get(`${this.url}/roles`);
+  }
+
+
+  getDashboard(): Observable<any>{
+    return this.http.get(`${this.url}/dashboard`);
+  }
+
   getCurrentUser(){
       return this.http.get(`${this.url}/user`);
+  }
+
+  deactivateUser(cid: any): Observable<any>{
+    return this.http.get(`${this.url}/deactivate_client_user/`+cid);
   }
 
   resetPassword(user: {}){
@@ -40,7 +53,7 @@ export class UserService {
     return this.http.post<any>(this.url+'/store_client_user', user)
   }
 
-  getAllUser(){
+  getAllUser(): Observable<any>{
     return this.http.get<IDataUser>(this.url+'/client_users')
   }
 

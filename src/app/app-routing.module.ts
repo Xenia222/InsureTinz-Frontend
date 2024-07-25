@@ -26,7 +26,20 @@ import { authGuard } from './_helper/auth.guard';
 import { ErrorComponent } from './_utils/error/error.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
+import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
+import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
+import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
+
+
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
+import { NoaccessComponent } from './noaccess/noaccess.component';
+import { routeGuard } from './_helper/route.guard';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
 
 
 const routes: Routes = [
@@ -34,26 +47,66 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'login-otp', component: LoginOtpComponent , canActivate: [authGuard]},
+  { path: 'login-otp', component: LoginOtpComponent , 
+    canActivate: [authGuard]
+  },
   { path: 'signup', component: SignupComponent },
   { path: 'signup-otp', component: SignupOtpComponent },
   { path: 'signup-sucess', component: SignupSuccessComponent },
-  { path: 'dashboard-locked', component: DashboardLockedComponent , canActivate: [authGuard]},
-  { path: 'dashboard', component: DashboardComponent , canActivate: [authGuard]},
-  { path: 'credits', component: CreditsComponent , canActivate: [authGuard]},
-  { path: 'purchase-credits', component: PurchaseCreditsComponent , canActivate: [authGuard]},
-  { path: 'payment-methods', component: PaymentMethodsComponent , canActivate: [authGuard]},
-  { path: 'payment-credits-success', component: PaymentCreditsSuccessComponent , canActivate: [authGuard]},
-  { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard]},
-  { path: 'quick-check', component: QuickCheckComponent , canActivate: [authGuard]},
-  { path: 'verification-history', component: VerificationHistoryComponent , canActivate: [authGuard]},
-  { path: 'create-user-accounts', component: CreateUserAccountsComponent , canActivate: [authGuard]},
-  { path: 'profile', component: ProfileComponent , canActivate: [authGuard]},
-  { path: 'test', component: TestComponent , canActivate: [authGuard]},
-  { path: 'list-users', component: ListUsersComponent , canActivate: [authGuard]},
+  { path: 'dashboard-locked', component: DashboardLockedComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'dashboard', component: DashboardComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'credits', component: CreditsComponent , 
+    canActivate: [authGuard]
+
+  },
+  { path: 'purchase-credits', component: PurchaseCreditsComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'payment-methods', component: PaymentMethodsComponent , 
+    canActivate: [authGuard]
+
+  },
+  { path: 'payment-credits-success', component: PaymentCreditsSuccessComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard]
+
+  },
+  { path: 'quick-check', component: QuickCheckComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'verification-history', component: VerificationHistoryComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'create-user-accounts', component: CreateUserAccountsComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'profile', component: ProfileComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'test', component: TestComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'list-users', component: ListUsersComponent , 
+    canActivate: [authGuard]
+  },
+  { path: 'forget-password', component: ForgetPasswordComponent},
+  { path: 'reset-forgot-password', component: ResetForgotPasswordComponent},
+  { path: 'no-access', component: NoaccessComponent },
   { path: 'structures-informations', component: StructuresInformationsComponent },
   { path: 'credit-purchase-history', component: CreditPurchaseHistoryComponent },
+  { path: 'create-user-sucess', component: CreateUserSucessComponent },
+  { path: 'who-we-are', component: WhoWeAreComponent },
+  { path: 'how-it-works', component: HowItWorksComponent },
+  { path: 'who-can-use', component: WhoCanUseComponent },
+  { path: 'details-user', component: DetailsUserComponent },
+
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password-otp', component: ResetPasswordOtpComponent },
   { path: 'logout', component: LogoutComponent , canActivate: [authGuard]},
   { path:'**', component: ErrorComponent  },
 

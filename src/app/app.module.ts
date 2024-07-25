@@ -34,7 +34,22 @@ import { tokenInterceptor } from './_helper/token.interceptor';
 import { MtnMomoModalComponent } from './mtn-momo-modal/mtn-momo-modal.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LogoutModalComponent } from './logout-modal/logout-modal.component';
+import { ResetPasswordOtpComponent } from './reset-password-otp/reset-password-otp.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { NoaccessComponent } from './noaccess/noaccess.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
+import { CreateUserSucessComponent } from './create-user-sucess/create-user-sucess.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
 // import { NgxSliderModule } from '@angular-slider/ngx-slider';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
+import { WhoWeAreComponent } from './who-we-are/who-we-are.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.component';
+
 
 
 
@@ -67,6 +82,17 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
     MtnMomoModalComponent,
     ResetPasswordComponent,
     LogoutModalComponent,
+    ResetPasswordOtpComponent,
+    NoaccessComponent,
+    ForgetPasswordComponent,
+    ResetForgotPasswordComponent,
+    CreateUserSucessComponent,
+    DetailsUserComponent,
+    WhoWeAreComponent,
+    HowItWorksComponent,
+    WhoCanUseComponent,
+    SearchBarComponent,
+    SearchBarSecondComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +101,10 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxPermissionsModule.forRoot(),
+    SlickCarouselModule
+    // CarouselModule
   ],
   providers: [
     provideClientHydration(),
@@ -84,6 +113,6 @@ import { LogoutModalComponent } from './logout-modal/logout-modal.component';
       withInterceptors([tokenInterceptor])
     ),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

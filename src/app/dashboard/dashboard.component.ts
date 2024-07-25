@@ -1,13 +1,38 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { LegendItem } from 'chart.js';
+import { UserService } from '../_services/user.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit{
+
+  credit_balance: any = {
+    balance: '',
+    since: '',
+  }
+
+  license_status: any = {
+    active: '',
+    expired: '',
+  }
+
+  users: any = {
+    total: '',
+    active: '',
+  }
+
+  verification_history: any[] = [] 
+
+  months:any[] = [];
+  dataOui:any[] = [];
+  dataNon:any[] = [];
+  
+constructor(private userService: UserService){}
 
   isShow = false;
 
@@ -49,13 +74,26 @@ export class DashboardComponent implements AfterViewInit {
     this.isInfoVisible = false;
   }
 
-  months = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'];
-  dataOui = [70, 75, 80, 85, 90, 75, 70, 65, 80, 85, 90, 95];
-  dataNon = [30, 25, 20, 15, 10, 25, 30, 35, 20, 15, 10, 5];
-
   myChart: Chart | undefined;
 
   ngAfterViewInit() {
+    this.userService.getDashboard().subscribe(
+      data => {
+        this.credit_balance.balance = data.credit_balance.balance
+        this.credit_balance.since = data.credit_balance.since
+        this.license_status.active = data.license_status.active
+        this.license_status.expired = data.license_status.expired
+        this.users.total = data.users.total
+        this.users.active = data.users.active
+        this.verification_history = data.verification_history
+        console.log(this.verification_history)
+        this.verification_history.forEach(verify => {
+          this.months.push(verify.location)
+          this.dataOui.push(verify.ensured)
+          this.dataNon.push(verify.not_insured)
+        });
+      }
+    )
     this.initChart();
     const monthSelect = document.getElementById('monthSelect') as HTMLSelectElement | null;
     if (monthSelect) {

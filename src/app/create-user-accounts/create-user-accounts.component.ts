@@ -21,14 +21,14 @@ export class CreateUserAccountsComponent implements OnInit{
   roles: any[] = [];
   availablePermissions: any[] = [];
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
       this.userForm = this.fb.group({
         // photo: [''],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]],
-        phone: ['', Validators.required],
+        phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
         department: ['', Validators.required],
         // loginID: [{value: '', disabled: true}],
@@ -91,6 +91,9 @@ export class CreateUserAccountsComponent implements OnInit{
 
   onSubmit() {
 
+    if (this.userForm.invalid) {
+      this.errorMessage = 'Please fill out the form correctly.';
+    }else{
     this.userService.addClientUser({
       'email': this.userForm.value.email,
       'primary_contact_name': this.userForm.value.firstName,
@@ -104,20 +107,25 @@ export class CreateUserAccountsComponent implements OnInit{
       'password': this.userForm.value.password,
     }).subscribe(
       data => {
+        if (data.user){
         console.log(data)
         this.ngOnInit()
+        this.router.navigate(['/list-users'])
+        }else{
+          for (const key in data.errorsList) {
+              this.errorMessage = data.errorsList[key]
+          }
+          this.ngOnInit()
+        }
       },
       error => {
         console.log(error)
       }
     )
-    // this.submitted = true;
-    // if (this.userForm.invalid) {
-    //   this.errorMessage = 'Please fill out the form correctly.';
-    //   return;
-    // }
     this.errorMessage = null;
     // Handle form submission
     console.log(this.userForm.value);
+  }
+    
   }
 }

@@ -70,6 +70,7 @@
 .text-main {
   color: #f3d66d;
   margin-left: 10px;
+  font-weight: 500;
 }
 
 .case {
@@ -87,11 +88,13 @@
   height: 390px;
   font-weight: 500;
 }
+
 .conteneur {
   box-shadow: 4px 4px 11px rgba(139, 136, 136, 0.25);
   padding: 50px;
   border-radius: 20px;
 }
+
 .menu-langue {
   width: 254px;
   height: 168px;
@@ -103,15 +106,18 @@
   border-color: #ffffff;
   padding: 10px;
 }
+
 .fll {
   display: flex !important;
   align-items: center;
   justify-content: space-around;
 }
+
 .flll {
   align-items: center;
   justify-content: space-between;
 }
+
 .zone3,
 .zone {
   gap: 0px;
@@ -123,6 +129,7 @@
   padding: 12px;
   height: 161px;
 }
+
 @media (max-width: 991.98px) {
   .zone3 {
     /* width: 88vw; */
@@ -135,6 +142,7 @@
   display: flex;
   gap: 20px;
 }
+
 .select {
   background-color: #fcfdfd;
   border-color: #d5d5d5;
@@ -144,6 +152,7 @@
   color: #231f20;
   text-align: center;
 }
+
 /* Css du tableau en bas du home page */
 .select-table {
   background-color: #fcfdfd;
@@ -170,6 +179,7 @@
   font-size: 18px;
   text-align: center;
 }
+
 .bouton-table {
   background-color: rgba(0, 182, 155, 0.1);
   color: rgba(0, 182, 155, 1);
@@ -191,6 +201,7 @@
   .corps-tableau {
     font-size: small;
   }
+
   .titre-tableau {
     font-size: 18px;
   }
@@ -203,7 +214,8 @@
 .conteneur-haut {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px; /* Espace de 20px entre les éléments */
+  gap: 20px;
+  /* Espace de 20px entre les éléments */
 }
 
 .table-search {
@@ -229,10 +241,12 @@
   text-decoration: none;
   margin-left: auto;
 }
+
 .case-sign:hover {
   text-decoration: none;
   color: #000;
 }
+
 @media (min-width: 991.98px) and (max-width: 1550px) {
   .table-search {
     background-color: #f5f6fa;
@@ -251,6 +265,7 @@
     font-size: 16px;
     text-align: center;
   }
+
   .case-sign {
     width: 196px;
     height: 51px;
@@ -290,6 +305,7 @@
     margin-left: 0%;
   }
 }
+
 .modale-info {
   position: absolute;
   width: 414px;
@@ -329,9 +345,9 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 996px) {
   .sidebar {
-    margin-left: -250px;
+    /* margin-left: -250px; */
   }
 
   .sidebar.open {
@@ -342,9 +358,10 @@
     width: 100%;
     margin-left: 0;
   }
+
   .col-sm-6 {
     width: 100%;
-}
+  }
 }
 
 /*** Navbar ***/
@@ -371,6 +388,7 @@
   font-family: "Nunito Sans", sans-serif !important;
   /* font-family: 'Nunito Sans' ; */
 }
+
 .sidebar .navbar .navbar-bas .nav-link i {
   margin-top: 10px;
   font-size: medium;
@@ -380,6 +398,7 @@
   font-size: 15px;
   margin-left: 5px;
 }
+
 .navbar-bas svg {
   margin-right: 10px;
   width: 19px;
@@ -394,11 +413,13 @@
   background: #ffcb05;
   border-color: #ffcb05;
 }
+
 .nav-link.active svg {
   path {
     fill: white;
   }
 }
+
 .nav-link:hover svg {
   path {
     fill: white;
@@ -487,7 +508,8 @@
 }
 
 .modale {
-  display: none; /* Masque la fenêtre modale par défaut */
+  display: none;
+  /* Masque la fenêtre modale par défaut */
   position: fixed;
   left: 0;
   top: 0;
@@ -530,7 +552,8 @@
   line-height: 19.1px;
   text-align: left;
   background-clip: padding-box;
-  appearance: none; /*Fix appearance for date inputs in Safari*/
+  appearance: none;
+  /*Fix appearance for date inputs in Safari*/
   height: 56px;
   border-radius: 5px;
 }
@@ -567,6 +590,7 @@
   border: none;
   border-radius: 10px;
 }
+
 .bouton-add:hover {
   color: #000;
 }
@@ -577,9 +601,52 @@
   /* color: #444444; */
   /* font-weight: bold; */
 }
+
 .navbar-bas svg {
   margin-right: 10px;
   width: 17px;
   height: 30px;
   margin-left: 3px;
+}
+
+
+.sidebar {
+  width: 250px;
+  /* Largeur de la barre latérale */
+  transition: transform 0.3s ease;
+  /* transform: translateX(-100%);  */
+  /* Masquer la barre latérale par défaut */
+  z-index: 2000;
+}
+
+.sidebar-visible {
+  transform: translateX(0);
+  /* Afficher la barre latérale */
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    transform: translateX(-100%);
+    /* Masquer la barre latérale sur les écrans plus petits */
+  }
+
+  .sidebar-visible {
+    transform: translateX(0);
+    /* Afficher la barre latérale sur les écrans plus petits */
+  }
+}
+
+.active-link {
+  background: #ffcb05;
+  /* Couleur de fond pour l'état actif */
+  color: white !important;
+  /* Couleur du texte pour l'état actif */
+  font-weight: bold;
+  /* Gras pour le texte actif */
+}
+
+.active-link svg {
+  path {
+    fill: white !important;
+  }
 }

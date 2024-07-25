@@ -1,0 +1,27 @@
+<form [formGroup]="searchForm">
+    <div class=" mt-3 sear2" style="padding: 0px;">
+        <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+    
+            <div class="sous-group">
+                <img src="../../assets/filter.png" alt="">
+            </div>
+            <div class="sous-group">
+                <span>filter by</span>
+            </div>
+            <div class="col-auto btn-light sous-group">
+                <select formControlName="filter" class="form-select bg-light">
+                    <option [value]="filters.value" >
+                        {{filters.label}}
+                    </option>
+                </select>
+            </div>
+            <div  style="text-align: center;">
+                <span><a href="#" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+            </div>
+    
+        </div>
+    
+    </div>
+</form>
+
+ 

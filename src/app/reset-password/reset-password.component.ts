@@ -24,6 +24,50 @@ export class ResetPasswordComponent implements OnInit{
     this.password.npassword = ''
     this.password.cpassword = ''
   }
+
+  toggleOPasswordVisibility() {
+    const passwordField: any = document.getElementById('opassword');
+    const toggleIcon: any = document.getElementById('toggleIcon');
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      toggleIcon.classList.remove('fa-eye');
+      toggleIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      toggleIcon.classList.remove('fa-eye-slash');
+      toggleIcon.classList.add('fa-eye');
+    }
+  }
+  toggleNPasswordVisibility() {
+    const passwordField: any = document.getElementById('npassword');
+    const toggleIcon: any = document.getElementById('toggleIcon1');
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      toggleIcon.classList.remove('fa-eye');
+      toggleIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      toggleIcon.classList.remove('fa-eye-slash');
+      toggleIcon.classList.add('fa-eye');
+    }
+  }
+  toggleCPasswordVisibility() {
+    const passwordField: any = document.getElementById('cpassword');
+    const toggleIcon: any = document.getElementById('toggleIcon2');
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      toggleIcon.classList.remove('fa-eye');
+      toggleIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      toggleIcon.classList.remove('fa-eye-slash');
+      toggleIcon.classList.add('fa-eye');
+    }
+  }
+
   onSubmit(){
     this.userService.resetPassword({
       "current_password": this.password.opassword,

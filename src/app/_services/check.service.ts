@@ -15,10 +15,17 @@ export class CheckService {
       return this.http.get(`${this.url}/insurance-check-list`);
   }
 
+  getSubCheckList(): Observable<any>{
+    return this.http.get(`${this.url}/client-users-check-list`);
+  }
+
   quickCheck(check: {}): Observable<any>{
     return this.http.post<any>(this.url+'/insurance-check', check)
   }
 
+  getCredits(): Observable<any>{
+    return this.http.get(`${this.url}/credits`);
+  }
   getTransaction(): Observable<any>{
     return this.http.get(`${this.url}/transactions`);
   }

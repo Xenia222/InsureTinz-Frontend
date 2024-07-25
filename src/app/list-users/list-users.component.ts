@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { error } from 'console';
+import { NgxPermission } from 'ngx-permissions/lib/model/permission.model';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-list-users',
@@ -14,13 +16,14 @@ import { error } from 'console';
 
 export class ListUsersComponent implements OnInit{
   
-  users:any
-  constructor(private router: Router, private userService: UserService) {}
+  users: any[] = []
+  permissions: any[] = []
+  constructor(private router: Router, private userService: UserService, private permissionsService: NgxPermissionsService) {}
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
-      (data:any) => {
-        console.log(data.created_users)
+      data => {
+        console.log("Created user",data.created_users)
         this.users = data.created_users
       },
       error => {
@@ -29,8 +32,20 @@ export class ListUsersComponent implements OnInit{
     )
   }
 
+  deactivate(id: string){
+    this.userService.deactivateUser(id).subscribe(
+      data => {
+        console.log(data)
+        this.router.navigate(['/list-users']);
+        this.ngOnInit()
+      }
+    )
+  }
   navigateToCreateUserAccounts() {
     this.router.navigate(['/create-user-accounts']);
   }
 
+  navigateToUserDetails() {
+    this.router.navigate(['/details-user']);
+  }
 }

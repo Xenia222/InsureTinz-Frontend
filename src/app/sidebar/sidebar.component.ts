@@ -1,28 +1,69 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import { TokenService } from '../_services/token.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
+
+  sidebarVisible: boolean = false;
+
+  toggleSidebar() {
+    this.sidebarVisible = !this.sidebarVisible;
+    this.setBodyClass();
+    console.log('Sidebar visibility:', this.sidebarVisible); // Pour le débogage
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOut(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const sidebar = document.querySelector('.sidebar') as HTMLElement;
+    const toggler = document.querySelector('.sidebar-toggler') as HTMLElement;
+
+    if (this.sidebarVisible && !sidebar.contains(target) && !toggler.contains(target)) {
+      this.sidebarVisible = false;
+      this.setBodyClass();
+    }
+  }
+
+  private setBodyClass() {
+    document.body.classList.toggle('sidebar-open', this.sidebarVisible);
+  }
+
 
   user: any
   img: string = ''
   firstName: string =''
   lastName: string = ''
+  roles: any[] = []
 
-  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog){}
+  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService){}
 
   ngOnInit(): void {
-    this.getUser()
-    this.loadProfilePhoto();
-    console.log(this.user)
+    this.userService.getCurrentUserRole().subscribe(
+      data => {
+        this.roles = data.roles
+        this.roles.push(...data.permissions)
+        console.log(data.roles)
+        console.log("Role et right",this.roles)
+        this.permissionsService.loadPermissions(this.roles);
+        this.getUser()
+        this.loadProfilePhoto();
+        console.log(this.user)
+      },
+      err => {
+        console.log(err)
+      }
+    )
+    
   }
   logout(){
     this.tokenService.clearToken()

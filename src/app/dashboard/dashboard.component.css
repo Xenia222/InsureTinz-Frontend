@@ -15,21 +15,7 @@ main {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  #sidebar {
-    position: relative;
-    margin-left: -100%;
-    transition: margin 0.25s ease-in-out;
-  }
 
-  #sidebar.show {
-    margin-left: 0;
-  }
-
-  main {
-    margin-left: 0;
-  }
-}
 
 .dep h6{
   margin-bottom: 5px;
@@ -343,7 +329,7 @@ Button .btn {
 }
 
 /* Fin du Css du tableau en bas du home page */
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .sidebar {
     margin-left: 0;
   }
@@ -358,7 +344,7 @@ Button .btn {
   }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 1200px) {
   .sidebar {
     margin-left: -250px;
   }

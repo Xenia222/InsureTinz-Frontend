@@ -30,11 +30,38 @@ export class ProfileComponent implements OnInit{
   success_msg: string ='';
 
   constructor(private userService: UserService
-    ,private router: Router,private tokenService: TokenService,private storageService: StorageService
+    ,private router: Router,private authService: AuthService,private storageService: StorageService
     ){}
 
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
+    }
+
+    togglePasswordVisibility() {
+      const passwordField: any = document.getElementById('password');
+      const toggleIcon: any = document.getElementById('toggleIcon');
+  
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      }
+    }
+
+    sendOtp(){
+      this.authService.otp_send(this.form.email).subscribe(
+        otpResponse => {
+          console.log('OTP envoyé:', otpResponse);
+        },
+        otpError => {
+          console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+        }
+      );
+      this.router.navigate(['reset-password-otp'])
     }
   
   ngOnInit() {

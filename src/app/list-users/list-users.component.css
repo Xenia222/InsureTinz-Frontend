@@ -100,9 +100,13 @@
     text-align: center;
     padding: 30px;
     border-radius: 20px;
-  
-    height: 390px;
-    font-weight: 500;
+  }
+  .utilisateur{
+    margin-top: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 10px;
   }
   .conteneur {
     box-shadow: 4px 4px 11px rgba(139, 136, 136, 0.25);
@@ -607,7 +611,7 @@ font-family: 'Nunito Sans', sans-serif;
     padding: 30px; 
     border-radius: 20px; 
     width: 100%;
-    height: 390px;
+    /* height: 390px; */
     font-weight: 500;
 }
 @media (min-width: 1251px) and (max-width: 1500px) {
@@ -635,3 +639,213 @@ font-family: 'Nunito Sans', sans-serif;
   .boutoon:hover{
     box-shadow:unset;
   }
+
+  /* Fin du Css du tableau en bas du home page */
+@media (min-width: 1200px) {
+  .sidebar {
+    margin-left: 0;
+  }
+
+  .sidebar.open {
+    margin-left: -250px;
+  }
+
+  .content.open {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+
+  .sidebar.open {
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0;
+    /* margin-left: 40px; */
+  }
+}
+@media (max-width: 1200px) {
+  .px-md-4 {
+      padding-right: 1.5rem !important;
+      padding-left: 1.5rem !important;
+      width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+}
+.flex {
+  align-items: end;
+  gap: 26px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 928.98px) {
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sear{
+    width: 100% !important;
+  }
+}  
+
+.sous-group24{
+  padding: 5px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
+.group3 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 26px;
+}
+
+.grouppp {
+  background-color: #f9f9fb;
+  border: 0.5px solid #d1cdcd59;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* width: 560px; */
+  box-shadow: 6px 6px 54px rgba(0, 0, 0, 0.0288188);
+  padding: 0 10px;
+}
+.grouppp img {
+  width: 20px;
+  /* height: 10px; */
+}
+.sous-group {
+  padding: 10px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
+.sous-group24{
+  padding: 5px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
+.res{
+  display: flex;
+  align-items: center;
+  color: black;
+  gap: 2px;
+  text-underline-position: under;
+}
+.form-select {
+  border: unset !important;
+}
+.form-select:focus {
+  border-color: unset !important;
+  outline: 0;
+  box-shadow: unset !important;
+}
+@media (max-width: 767.98px) {
+  /* .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  } */
+  .sear {
+    width: 100% !important;
+  }
+  .sear2 {
+    margin-top: 0px !important;
+  }
+  .sear3 {
+    width: unset;
+  }
+  .sear22 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+  }
+  .sous-group {
+    padding: 8px;
+    border-right: 0.5px solid #d1cdcd6e;
+  }
+  .sous-group24{
+    padding: 5px;
+    border-right: 0.5px solid #d1cdcd6e;
+    margin: 0 3px;
+    text-align: center;
+}
+  .btn {
+    justify-content: center;
+  }
+  .active p {
+    width: unset !important;
+  }
+  .active .noactive {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .sear33 {
+    margin-left: 0;
+  }
+  
+  .flexy{
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+  }
+  .sous-group span {
+      font-size: 13px;
+  }
+  select{
+      font-size: 13px;
+  }
+  .noactive p{
+      width: unset !important;
+  }
+}
+
+.btn {
+  background-color: #ffcb05;
+  box-shadow: 4px 4px 6px rgba(139, 136, 136, 0.25) !important;
+  border-radius: 7px !important;
+  color: #000000;
+  gap: 12px;
+  font-weight: 500;
+  padding: 11px 39px !important;
+  display: flex;
+  font-size: 15px !important;
+  border: none !important;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  box-shadow: unset !important;
+}
+
+@media (max-width: 485px) {
+.grouppp{
+  background-color: #f9f9fb;
+  border: 0.5px solid #d1cdcd59;
+  display: flex;
+  box-shadow: 6px 6px 54px rgba(0, 0, 0, 0.0288188);
+  padding: 0 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+}
