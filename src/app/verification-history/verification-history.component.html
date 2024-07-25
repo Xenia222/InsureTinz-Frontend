@@ -9,7 +9,7 @@
 
                 <!-- Sale & Revenue Start -->
                 <div class="container-fluid p-6" style="padding: 32px;">
-                    <div class="flex">
+                    <div *ngxPermissionsOnly="['client_view_check_history']" class="flex">
                         <div class="sear" style="width: 45%;">
                             <h3 class="">Your search history</h3>
                         </div>
@@ -19,7 +19,7 @@
 
                     </div>
 
-                    <div class="p-2 mt-4">
+                    <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
                         <div class="row">
                             <div class="col card table-responsive">
                                 <table class="table" style=" margin-bottom: 220px;">
@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                    <div class="">
+                    <div *ngxPermissionsOnly="['client_view_client_check_history']" class="">
                         <div class="sear" style="width: 30%; margin-top: 30px;">
                             <h3 >Verification log history</h3>
                         </div>

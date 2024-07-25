@@ -15,7 +15,7 @@ overflow-x: hidden;">
                     </div>
                     <div class="row g-4">
 
-                        <div class="col-sm-6 col-xl-3">
+                        <div *ngxPermissionsOnly="['client_view_balance']" class="col-sm-6 col-xl-3">
                             <div
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
@@ -43,7 +43,7 @@ overflow-x: hidden;">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xl-3">
+                        <div *ngxPermissionsOnly="['client_view_users']" class="col-sm-6 col-xl-3">
                             <div
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
@@ -79,7 +79,7 @@ overflow-x: hidden;">
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xl-6 ">
+                        <div *ngxPermissionsOnly="['client_status_estimation']" class="col-sm-6 col-xl-6 ">
                             <div class="zone3   align-items-center justify-content-between ">
                                 <div class="d-flex fll ">
                                     <div class="ml-2" style="font-size: 14px; color: #202224;">Licence Status
@@ -162,7 +162,7 @@ overflow-x: hidden;">
                     <!--  Tableau Start -->
 
 
-                    <div class="container-fluid pt-2 px-2 mt-3">
+                    <div *ngxPermissionsOnly="['client_recent_verifications']" class="container-fluid pt-2 px-2 mt-3">
                         <div class="bg-white text-center p-4 case">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="titre-tableau mb-0">Recent Verification</h6>

@@ -11,7 +11,7 @@ overflow-x: hidden;">
                 <section class="container-fluid pt-4 px-4">
                     <div class="col-lg-12 col-md-12 col-12"><div>
 
-                        <div class="flex" style="margin-top: 20px;">
+                        <div *ngxPermissionsOnly="['client_view_client_users']" class="flex" style="margin-top: 20px;">
                             <div class="sear" style="width: 30%;">
                                 <h3 >Your users</h3>
                             </div>
@@ -53,7 +53,7 @@ overflow-x: hidden;">
         
                     
                     <!-- La liste des users -->
-                    <div class="row g-4 mt-3 ml-1">
+                    <div *ngxPermissionsOnly="['client_view_client_users']" class="row g-4 mt-3 ml-1">
                         <div *ngFor="let user of users" class="col-sm-6 col-xl-3 col-custom">
                             <div class="bg-white justify-content-between p-4 case-user-detail " style="cursor: pointer;">
                                 <div  class="nav-item dropdown" style="font-size: 15px; color: rgba(64, 64, 64, 1);">
@@ -66,15 +66,15 @@ overflow-x: hidden;">
                                         </div>
                                     </div>
                                     <div class="menu-detail dropdown-menu p-2">
-                                        <a (click)="navigateToUserDetails()"  class="dropdown-item ">
+                                        <a *ngxPermissionsOnly="['client_view_client_user_details']" (click)="navigateToUserDetails()"  class="dropdown-item ">
                                             <span class="">Details</span>
                                         </a>
                                         <hr>
-                                        <a *ngIf="user.status == 'active' " (click)="deactivate(user.id)" class="dropdown-item" >
-                                            <span class="" >Desactivate</span>
+                                        <a *ngIf="user.status == 'active' "  class="dropdown-item" >
+                                            <span class="" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']" (click)="deactivate(user.id)">Desactivate</span>
                                         </a>
-                                        <a *ngIf="user.status == 'inactive' " class="dropdown-item " (click)="deactivate(user.id)">
-                                            <span *ngxPermissionsOnly="['client_activate_or_deactivate_user']" class="" >Activate</span>
+                                        <a *ngIf="user.status == 'inactive' " class="dropdown-item " >
+                                            <span  class="" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']" (click)="deactivate(user.id)" >Activate</span>
                                         </a>
                                     </div>
                                 </div>

@@ -37,7 +37,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                 </a>
 
                 <div class="navbar-bas w-100">
-                    <a routerLink="/dashboard" class="nav-item nav-link" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_dashboard']" routerLink="/dashboard" class="nav-item nav-link" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -62,7 +62,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         </svg>
                         <div class="element">Insurance status</div>
                     </a>
-                    <a routerLink="/verification-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_check_history_management']" routerLink="/verification-history" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -70,7 +70,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         </svg>
                         <div class="element">Status history and logs history</div>
                     </a>
-                    <a *ngxPermissionsOnly="['client_master','client_rights_and_roles']" routerLink="/list-users" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_users']" routerLink="/list-users" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
@@ -78,7 +78,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                         </svg>
                         <div class="element">Users accounts</div>
                     </a>
-                    <a routerLink="/profile" class="nav-item nav-link mt-2" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master','client_profile']" routerLink="/profile" class="nav-item nav-link mt-2" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path

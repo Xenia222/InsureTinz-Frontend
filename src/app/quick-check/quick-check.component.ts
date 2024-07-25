@@ -16,17 +16,29 @@ export class QuickCheckComponent {
   vin: any
   type: string = ''
   inputs: { value: string }[] = [{ value: '' }];
+  isValidArray: boolean[] = [true];
+
+  validateInput(index: number): void {
+    const regex = /^[A-Za-z]{2}\d{4}RB$/;
+    this.isValidArray[index] = regex.test(this.inputs[index].value);
+  }
 
     addInput() {
         this.inputs.push({ value: '' });
+        this.isValidArray.push(true);
     }
 
     removeInput() {
         if (this.inputs.length > 1) {
             this.inputs.pop();
+            this.isValidArray.pop(); 
         }
     }
   
+    allInputsValid(): boolean {
+      return this.isValidArray.every(isValid => isValid);
+    }
+
     calculateWidth(index: number): number {
       return 100 / Math.ceil((index + 1) / 2);
     }

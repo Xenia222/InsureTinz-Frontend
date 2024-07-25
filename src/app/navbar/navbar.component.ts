@@ -45,11 +45,11 @@ export class NavbarComponent {
   loadProfilePhoto(): void {
     this.userService.getProfilePhoto().subscribe(
       response => {
-        console.log(response.photo_url)
+        console.log("url de nav photo",response.photo_url)
         this.img = response.photo_url;
       },
       error => {
-        console.error( error);
+        console.error("Error ", error);
         this.img = '';
       }
     );
