@@ -2,8 +2,8 @@
 <div class="" style="padding: 0 0px !important;
 overflow-x: hidden;">
     <div class="row">
-        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
 
+        <app-locked-sidebar style="padding-right: 0 !important;"></app-locked-sidebar>
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
             <div class="content">
@@ -15,14 +15,15 @@ overflow-x: hidden;">
                     </div>
                     <div class="row g-4">
 
-                        <div *ngxPermissionsOnly="['client_view_balance']" class="col-sm-6 col-xl-3">
+                        <div class="col-sm-6 col-xl-3">
                             <div
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
                                 <div class=" ml-1 mt-1">
                                     <p class="mb-3" style="font-size: 14px; color: #202224;">Credits balance</p>
-                                    <h3 class="mb-0" style="color: black; font-size: 2em;">{{ credit_balance.balance }}</h3>
-                                    <p class="mb-2 mt-4" style="font-size: 14px;">Since <span style="color: green;">{{ credit_balance.since }}</span></p>
+                                    <h3 class="mb-0" style="color: black; font-size: 2em; font-weight: 500;">40,680</h3>
+                                    <p class="mb-2 mt-4" style="font-size: 14px;">Since <span style="color: green;">2
+                                            hours</span></p>
                                 </div>
                                 <div class="ms-3 mb-auto">
                                     <p class="mb-2">
@@ -43,13 +44,13 @@ overflow-x: hidden;">
                                 </div>
                             </div>
                         </div>
-                        <div *ngxPermissionsOnly="['client_view_users']" class="col-sm-6 col-xl-3">
+                        <div class="col-sm-6 col-xl-3">
                             <div
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
                                 <div class=" ml-1 mt-1">
                                     <p class="mb-3" style="font-size: 14px; color: #202224;">Your users</p>
-                                    <h3 class="mb-0" style="color: black; font-size: 2em;">{{users.total}}</h3>
+                                    <h3 class="mb-0" style="color: black; font-size: 2em;font-weight: 500;">123</h3>
                                     <p class="mb-2 mt-4" style="font-size: 14px">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +58,7 @@ overflow-x: hidden;">
                                                 d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z"
                                                 fill="#00B69B" />
                                         </svg>
-                                        <span style="color: #00B69B;margin-right: 5px;">{{users.active}}</span> Active users
+                                        <span style="color: #00B69B;margin-right: 5px;">50</span> Active users
                                     </p>
                                 </div>
                                 <div class="ms-3 mb-auto">
@@ -79,7 +80,7 @@ overflow-x: hidden;">
                             </div>
                         </div>
 
-                        <div *ngxPermissionsOnly="['client_status_estimation']" class="col-sm-6 col-xl-6 ">
+                        <div class="col-sm-6 col-xl-6 ">
                             <div class="zone3   align-items-center justify-content-between ">
                                 <div class="d-flex fll ">
                                     <div class="ml-2" style="font-size: 14px; color: #202224;">Licence Status
@@ -104,17 +105,26 @@ overflow-x: hidden;">
 
                                 <div class="d-flex fll pl-4 pb-2 mt-3">
                                     <div class="">
-                                        <h6 class="mb-2" style="color: #202224; ">Active</h6>
-                                        <h5 class="mt-3" style="color: #00B69B; text-align: center; ">{{license_status.active}}</h5>
+                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">
+                                            Active</h6>
+                                        <h5 class="mt-3"
+                                            style="color: #00B69B; text-align: center;font-weight: 700 !important; ">100
+                                        </h5>
                                     </div>
-                                    <div class="" >
-                                        <h6 class="mb-2" style="color: #202224;">Expired</h6>
-                                        <h5 class="mt-3" style="color: #F1963A; text-align: center;">{{license_status.expired}}</h5>
+                                    <div class="" style="">
+                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">
+                                            Expired</h6>
+                                        <h5 class="mt-3"
+                                            style="color: #F1963A; text-align: center; font-weight: 700 !important;">223
+                                        </h5>
 
                                     </div>
-                                    <div class="" >
-                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">DNE</h6>
-                                        <h5 class="mt-3" style="color: #FD5454; text-align: center; font-weight: 700 !important;">198</h5>
+                                    <div class="" style="">
+                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">DNE
+                                        </h6>
+                                        <h5 class="mt-3"
+                                            style="color: #FD5454; text-align: center; font-weight: 700 !important;">198
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +154,7 @@ overflow-x: hidden;">
                                             </div>
                                         </div>
 
-                                        <canvas id="myChart"></canvas>
+                                        <!-- <canvas id="myChart"></canvas> -->
 
                                     </div>
 
@@ -162,7 +172,7 @@ overflow-x: hidden;">
                     <!--  Tableau Start -->
 
 
-                    <div *ngxPermissionsOnly="['client_recent_verifications']" class="container-fluid pt-2 px-2 mt-3">
+                    <div class="container-fluid pt-2 px-2 mt-3">
                         <div class="bg-white text-center p-4 case">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="titre-tableau mb-0">Recent Verification</h6>
@@ -208,51 +218,7 @@ overflow-x: hidden;">
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let check of checks">
-                                                    <td>{{check.check.updated_at | date: "dd/MM/yyyy"}}</td>
-                                                    <td>{{check.check.updated_at | date: "hh:mm:ss"}}</td>
-                                                    <td>
-                                                        BELLO Ramsat
-                                                        <img src="../../assets/Box Important.png"
-                                                            (click)="toggleInfo($event)"
-                                                            style="width: 20px; margin-top: -2px;">
 
-                                                        <div class="modale-info" *ngIf="isInfoVisible">
-                                                            <div
-                                                                style="color: rgba(145, 142, 244, 1); text-align: center;">
-                                                                More information
-                                                            </div>
-                                                            <div class="d-flex mt-2 dep">
-                                                                <div class="pl-4 results-left"
-                                                                    style="font-weight: 200;">
-                                                                    <span *ngIf="check.automobile.make">Automobile Make: </span> <br>
-                                                                    <span class="mt-1" *ngIf="check.automobile.model">Model</span> <br>
-                                                                    <span class="mt-1" *ngIf="check.automobile.owername">Owner’s name  </span><br>
-                                                                    <span class="mt-1" *ngIf="check.automobile.policyname">Policy number  </span><br>
-                                                                    <span class="mt-2" *ngIf="check.automobile.vin_number">VIN number </span><br>
-                                                                    <span class="pt-5">Expiration date </span>
-                                                                </div>
-                                                                <div class="divider"></div>
-                                                                <div>
-                                                                    <h6 class="text-dark">{{check.automobile.make}} </h6>
-                                                                    <h6 class="text-dark">{{check.automobile.model}} </h6>
-                                                                    <h6 class="text-dark">{{check.automobile.owername}}</h6>
-                                                                    <h6 class="text-dark">{{check.automobile.policyname}}</h6>
-                                                                    <h6 class="text-dark"> {{check.automobile.vin_number}} </h6>
-                                                                    <h6 class="text-dark">12/08/2023 </h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Calavi</td>
-                                                    <td style="padding-top: 3px !important;">
-                                                        <div class="container ">
-                                                            <div class="active px-2 py-2">
-                                                                <h6>Active</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -277,8 +243,30 @@ overflow-x: hidden;">
             </div>
 
 
+            <div class="overlay">
+                <div class="over">
+                    <h3><b>Thank you for registering with us.</b></h3>
+        
+                    <br>
+                    <p> We're currently processing your registration and waiting for final validation. Once this is
+                        complete, your services will be unlocked.
+                        We appreciate your patience during this process.
+        
+                        If you have any urgent questions or concerns, please feel free to contact our support team.</p>
+                </div>
+                <svg width="137" height="107" viewBox="0 0 137 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M53.1387 77.6584C47.5972 83.6463 38.13 83.6463 32.5886 77.6584L15.2575 58.9312C11.9992 55.4104 6.43265 55.4105 3.17435 58.9312C0.254106 62.0867 0.254105 66.9581 3.17435 70.1136L32.5885 101.897C38.13 107.885 47.5972 107.885 53.1387 101.897L133.826 14.7106C136.746 11.5551 136.746 6.68372 133.826 3.52824C130.567 0.00746989 125.001 0.00746799 121.743 3.52824L53.1387 77.6584Z" fill="#FFCB05"/>
+                    </svg>
+                    
+            </div>
         </main>
+
+
+
+
     </div>
+
+
 </div>
 
 <script>

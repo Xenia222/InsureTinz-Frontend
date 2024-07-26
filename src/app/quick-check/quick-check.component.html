@@ -30,7 +30,7 @@
                     <input type="text" class="text-center form-control mb-2" [(ngModel)]="input.value" (input)="validateInput(i)"
                       [name]="'input_' + i" placeholder="Enter..." oninput="this.value = this.value.toUpperCase()" [class.invalid]="!isValidArray[i]">
                       <p *ngIf="!isValidArray[i]" class="text-danger fs-8">
-                        The format must be 2 letters followed by 4 numbers and end with RB.
+                        {{regexErr}}
                       </p>
                   </div>
                   <div class="mt-2 ajout2 buttt">

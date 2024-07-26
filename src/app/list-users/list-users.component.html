@@ -58,7 +58,7 @@ overflow-x: hidden;">
                             <div class="bg-white justify-content-between p-4 case-user-detail " style="cursor: pointer;">
                                 <div  class="nav-item dropdown" style="font-size: 15px; color: rgba(64, 64, 64, 1);">
                                     <div  class="nav-link " data-bs-toggle="dropdown">
-                                        <img class="rounded-circle me-lg-2" src="../../assets/user.jpg" alt="" style="height: 150px;">
+                                        <img class="rounded-circle me-lg-2" [src]="'https://insuretinz.s3.amazonaws.com/' + user.photo" alt="" style="height: 150px;">
                                         <div class="utilisateur">
                                             <h5 class="" style="color: black; font-size: medium;"> {{ user.primary_contact_name }} {{ user.secondary_contact_name }} </h5>
                                             <span class="text-dark" style="font-size: initial;">{{ user.primary_contact_title }}</span>
@@ -66,7 +66,7 @@ overflow-x: hidden;">
                                         </div>
                                     </div>
                                     <div class="menu-detail dropdown-menu p-2">
-                                        <a *ngxPermissionsOnly="['client_view_client_user_details']" (click)="navigateToUserDetails()"  class="dropdown-item ">
+                                        <a *ngxPermissionsOnly="['client_view_client_user_details']" [routerLink]="'/details-user/'+ user.id"  class="dropdown-item ">
                                             <span class="">Details</span>
                                         </a>
                                         <hr>

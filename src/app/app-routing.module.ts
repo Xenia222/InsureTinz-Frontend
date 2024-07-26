@@ -23,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TestComponent } from './test/test.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { authGuard } from './_helper/auth.guard';
+import { permissionGuard } from './_helper/permission.guard';
 import { ErrorComponent } from './_utils/error/error.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreditPurchaseHistoryComponent } from './credit-purchase-history/credit-purchase-history.component';
@@ -40,6 +41,9 @@ import { NoaccessComponent } from './noaccess/noaccess.component';
 import { routeGuard } from './_helper/route.guard';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forgot-password.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { statusGuard } from './_helper/status.guard';
+import { LockedPageComponent } from './locked-page/locked-page.component';
 
 
 const routes: Routes = [
@@ -47,52 +51,63 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'login-otp', component: LoginOtpComponent , 
-    canActivate: [authGuard]
+  { path: 'login-otp', component: LoginOtpComponent 
   },
   { path: 'signup', component: SignupComponent },
   { path: 'signup-otp', component: SignupOtpComponent },
   { path: 'signup-sucess', component: SignupSuccessComponent },
-  { path: 'dashboard-locked', component: DashboardLockedComponent , 
+  { path: 'dashboard-locked', component: LockedPageComponent , 
     canActivate: [authGuard]
   },
   { path: 'dashboard', component: DashboardComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_dashboard'] }
   },
   { path: 'credits', component: CreditsComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_credit_management'] }
 
   },
   { path: 'purchase-credits', component: PurchaseCreditsComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_credit_management'] }
   },
   { path: 'payment-methods', component: PaymentMethodsComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_credit_management'] }
 
   },
   { path: 'payment-credits-success', component: PaymentCreditsSuccessComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_credit_management'] }
   },
-  { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard]
+  { path: 'payment-completion', component: PaymentCompletionComponent , canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_credit_management'] }
 
   },
   { path: 'quick-check', component: QuickCheckComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_check_management'] }
   },
   { path: 'verification-history', component: VerificationHistoryComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_check_history_management'] }
   },
   { path: 'create-user-accounts', component: CreateUserAccountsComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_users'] }
   },
   { path: 'profile', component: ProfileComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard],
+    data: { requiredPermission: ['client_master', 'client_profile'] }
   },
   { path: 'test', component: TestComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard],
+    data: { requiredPermission: ['client_master', 'client_dashboard'] }
   },
   { path: 'list-users', component: ListUsersComponent , 
-    canActivate: [authGuard]
+    canActivate: [authGuard,permissionGuard],
+    data: { requiredPermission: ['client_master', 'client_dashboard'] }
   },
   { path: 'forget-password', component: ForgetPasswordComponent},
   { path: 'reset-forgot-password', component: ResetForgotPasswordComponent},
@@ -103,7 +118,8 @@ const routes: Routes = [
   { path: 'who-we-are', component: WhoWeAreComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'who-can-use', component: WhoCanUseComponent },
-  { path: 'details-user', component: DetailsUserComponent },
+  { path: 'details-user/:id', component: DetailsUserComponent },
+  { path: 'access-denied', component: AccessDeniedComponent },
 
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'reset-password-otp', component: ResetPasswordOtpComponent },

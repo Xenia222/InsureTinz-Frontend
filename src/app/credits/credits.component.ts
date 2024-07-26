@@ -18,6 +18,7 @@ export class CreditsComponent {
   phoneNumber: string = '';
   paymentStatus: string = '';
   isChecking: boolean = false;
+  result: any
 
   constructor(private paymentService: PaymentService,public dialog: MatDialog) {}
   
@@ -53,14 +54,14 @@ export class CreditsComponent {
   proceedToPayment() {
     
     if (this.paymentMethod === 'mtnmomo') {
-      const dialogRef = this.dialog.open(MtnMomoModalComponent, {
-        width: '400px',
-        // data: { response: response }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          console.log('Phone number received from modal:', result);
-          this.phoneNumber = result
+      // const dialogRef = this.dialog.open(MtnMomoModalComponent, {
+      //   width: '400px',
+      //   // data: { response: response }
+      // });
+      // dialogRef.afterClosed().subscribe(result => {
+        if (this.result) {
+          console.log('Phone number received from modal:', this.result);
+          this.phoneNumber = this.result
           this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
             response => {
             if (response.status === 'pending' && response.referenceId) {
@@ -76,7 +77,7 @@ export class CreditsComponent {
             console.error('Error initiating payment:', error)}
         );
         }
-      });
+      // });
     }
     
     else if (this.paymentMethod === 'paypal') {

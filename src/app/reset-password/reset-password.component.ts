@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,7 +18,14 @@ export class ResetPasswordComponent implements OnInit{
 }
   errorMessage: string | null = null;
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private router: Router){}
+
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 
   ngOnInit(): void {
     this.password.opassword = ''
@@ -78,10 +86,8 @@ export class ResetPasswordComponent implements OnInit{
         console.log(data)
         if(data.error){
         this.errorMessage = data.error
-        this.ngOnInit()
         }else{
           this.msg = data.message
-          this.ngOnInit()
         }
       },
       err => {
@@ -90,6 +96,6 @@ export class ResetPasswordComponent implements OnInit{
       }
 
     )
-    this.ngOnInit()
+    this.refreshPage()
   }
 }

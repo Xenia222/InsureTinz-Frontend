@@ -14,6 +14,20 @@ export class StorageService {
     localStorage.setItem('password', password)
   }
 
+  saveStatus(status:string){
+    localStorage.setItem('status', status)
+  }
+
+  active(): boolean{
+    let statusEtat:boolean = false
+    if(localStorage.getItem('status') == 'active'){
+      statusEtat = true
+    }else if(localStorage.getItem('status') =='inactive' ){
+      statusEtat = false
+    }
+    return statusEtat
+  }
+
   clearCredentials(){
     localStorage.removeItem('id')
     localStorage.removeItem('email')
@@ -31,5 +45,9 @@ export class StorageService {
 
   getId(){
     return localStorage.getItem('id')
+  }
+
+  getStatus(){
+    return localStorage.getItem('status')
   }
 }

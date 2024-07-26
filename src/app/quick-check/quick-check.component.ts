@@ -15,13 +15,23 @@ export class QuickCheckComponent {
   searchType: string = "licensePlate"
   vin: any
   type: string = ''
+  regexErr: string =''
   inputs: { value: string }[] = [{ value: '' }];
   isValidArray: boolean[] = [true];
 
   validateInput(index: number): void {
-    const regex = /^[A-Za-z]{2}\d{4}RB$/;
+    if(this.searchType == "licensePlate"){
+    const regex = /^[A-Za-z]{2}\d{4}$/;
     this.isValidArray[index] = regex.test(this.inputs[index].value);
+    this.regexErr = "The format must be 2 letters followed by 4 numbers."
+    }
+    else if (this.searchType == "registrationNumber"){
+      const regex = /^[A-Za-z0-9]{17}$/;
+      this.regexErr = "The format must be 17 letters and numbers."
+      this.isValidArray[index] = regex.test(this.inputs[index].value);
+    }
   }
+  
 
     addInput() {
         this.inputs.push({ value: '' });

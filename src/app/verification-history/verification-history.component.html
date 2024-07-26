@@ -32,13 +32,13 @@
                                     </thead>
                                     <tbody *ngIf="!noCheck">
                                         <tr *ngFor="let check of filteredItems">
-                                            <td class="text-center py-4 ">{{check.id}}</td>
+                                            <td class="text-center py-4 ">{{check.automobile.license_plate_number}}</td>
                                             <td>
                                                 <div class="container mt-3">
                                                     <div class="active px-4 py-1">
-                                                        <div *ngIf="check.is_insured == 1" class="status-active ">Active</div>
-                                                        <div *ngIf="check.is_insured == 0" class="status-expired ">Expired</div>
-                                                        <div *ngIf="check.is_insured == null" class="status-expired ">Not found</div>
+                                                        <div *ngIf="check.check.is_insured == 1" class="status-active ">Active</div>
+                                                        <div *ngIf="check.check.is_insured == 0" class="status-expired ">Expired</div>
+                                                        <div *ngIf="check.check.is_insured == null" class="status-expired ">Not found</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -51,8 +51,8 @@
                                                     </div>
 
                                                     <div>
-                                                        <span>lorem... <br> 67899GH467690 <br> 90087777 <br>
-                                                            12/08/2023</span>
+                                                        <span> <br> {{check.insurance_policy.policy_number}}<br>  <br>
+                                                            {{check.automobile.expiredate | date: "dd/MM/yyyy"}}</span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -140,7 +140,7 @@
                                                 <th class="px-5">Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody *ngIf="!noCheck">
+                                        <tbody *ngIf="!noCheck2">
                                             <tr *ngFor="let check2 of pagedItems2">
                                                 <td>{{check2.updated_at | date : "dd/MM/yyyy"}}</td>
                                                 <td>{{check2.updated_at | date : "hh:mm:ss"}}</td>
@@ -197,10 +197,12 @@
                                                 </button>
                                               </div>
                                         </tbody>
-                                        <tbody *ngIf="noCheck">
+                                        <tbody *ngIf="noCheck2">
+                                            <tr class="text-center w-100">
                                             <div class="text-center">
-                                                <strong>{{noCheck}}</strong>
+                                                <strong>{{noCheck2}}</strong>
                                             </div>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

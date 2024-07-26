@@ -27,7 +27,9 @@ overflow-y: scroll;">
                     <br>
                     <!-- <div id="demo_3"></div> -->
                     <div class="slider-container">
-                      <input class="slider" id="credits" type="range" [(ngModel)]="credits" (ngModelChange)="updatePrice()" min="0" max="1000" [value]="value" (input)="updateSlider($event)">
+                      <input class="slider" id="credits" type="range" [(ngModel)]="credits"
+                        (ngModelChange)="updatePrice()" min="0" max="1000" [value]="value"
+                        (input)="updateSlider($event)">
                       <p id="rangeValue">{{ value }} credits</p>
                     </div>
 
@@ -97,12 +99,13 @@ overflow-y: scroll;">
             <div class="col-sm-12 col-xl-12 mb-4">
               <div class="bg-white casex">
                 <div class="boxx1">
-                  <button (click)="previousSection()" class="bac" style="height: 20px; border: none; background: unset;">
+                  <button (click)="previousSection()" class="bac"
+                    style="height: 20px; border: none; background: unset;">
                     <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
                   </button>
                   <!-- <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;"> -->
                   <h4 class="marg text-center">Paiement methods</h4>
-                  
+
                   <div class="btn-checkbox-group mt-2">
                     <div class="checkbox-group">
                       <div class="checkbox-group-btn">
@@ -111,7 +114,8 @@ overflow-y: scroll;">
                             class="img " alt=""></button>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="mtnmomo" name="paymentMethod" value="mtnmomo" [(ngModel)]="paymentMethod">
+                        <input class="form-check-input" type="radio" id="mtnmomo" name="paymentMethod" value="mtnmomo"
+                          [(ngModel)]="paymentMethod">
                       </div>
                     </div>
                     <div class="checkbox-group">
@@ -128,12 +132,13 @@ overflow-y: scroll;">
                     <div class="checkbox-group">
                       <div class="checkbox-group-btn">
                         <button type="button" class="bouton-image btn btn-light"
-                          onclick="toggleCheckbox('checkbox3')"><img src="../../assets/téléchargement (1) 1.png"
-                            class="img" alt=""></button>
+                          onclick="toggleCheckbox('checkbox3')"><img src="../../assets/icon-assistance-moovci_Plan-de-travail-1-1.png"
+                           height="100px" width="100px" class="img" alt=""></button>
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="paypal" name="paymentMethod" value="paypal" [(ngModel)]="paymentMethod">
+                        <input class="form-check-input" type="radio" id="paypal" name="paymentMethod" value="paypal"
+                          [(ngModel)]="paymentMethod">
                       </div>
                     </div>
 
@@ -141,14 +146,45 @@ overflow-y: scroll;">
 
                   <div class="mt-5 row justify-content-center">
                     <div class="credit-div col-auto px-4">
-                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits: <strong>{{credits}}</strong><span class="px-4">Price :
+                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits:
+                        <strong>{{credits}}</strong><span class="px-4">Price :
                           <strong>{{price}} Fcfa</strong></span>
                       </p>
                     </div>
                   </div>
                   <div class="mt-5 row justify-content-center">
-                    <div class="col-auto">
+                    <!-- <div class="col-auto">
                       <button (click)="proceedToPayment()" type="button" class="boutoon btn-warning btn  px-5 py-2 ">Pay</button>
+                    </div> -->
+                    <!-- Button trigger modal -->
+                    <button type="button" class="boutoon btn-warning btn  px-5 py-2 "
+                      data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      pay
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog  modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Mtn Momo Payment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="mb-3">
+                              <label for="exampleFormControlInput1" class="form-label">Phone Numer</label>
+                              <input type="text" class="form-control" id="exampleFormControlInput1" name="result" value="mtnmomo"
+                              [(ngModel)]="result"
+                                placeholder="Enter you phone number">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" (click)="proceedToPayment()" class="btn boutoon2 btn-primary" data-bs-dismiss="modal">Submit</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -173,25 +209,30 @@ overflow-y: scroll;">
                     <button (click)="reloadPage()" class="bac" style="height: 20px; border: none; background: unset;">
                       <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
                     </button>
-                      <div class="flex">
-                          <div class="w-100">
-                            <div class="d-flex">
-                              <img src="img/Arrow 2.png" alt="" style="height: 20px; margin-top: 10px;">
-                              <h3 class="text-warning text-center pb-4 w-100" style="font-size: 55px;"> Success </h3>
-                            </div>  
-                            </div>
-                          <div><img src="../../assets/Group 75859.png" alt=""></div>
+                    <div class="flex">
+                      <div class="w-100">
+                        <div class="d-flex">
+                          <img src="img/Arrow 2.png" alt="" style="height: 20px; margin-top: 10px;">
+                          <h3 class="text-warning text-center pb-4 w-100" style="font-size: 55px;"> Success </h3>
+                        </div>
                       </div>
-                      
-                      <p class="fs-4 mx-5 pt-4 text-center">Your payment has been successfully processed. Thank you for your transaction.</p>
-                      <br>
-                      <div class="d-flex justify-content-around">
-                          <div><p><strong>Total credit purchased: {{ credits }}</strong></p></div>
-                          <div><p class="colors">Date: {{currentDate | date: "yyyy/dd/MM"}}</p></div>
+                      <div><img src="../../assets/Group 75859.png" alt=""></div>
+                    </div>
+
+                    <p class="fs-4 mx-5 pt-4 text-center">Your payment has been successfully processed. Thank you for
+                      your transaction.</p>
+                    <br>
+                    <div class="d-flex justify-content-around">
+                      <div>
+                        <p><strong>Total credit purchased: {{ credits }}</strong></p>
                       </div>
-                      <br>
+                      <div>
+                        <p class="colors">Date: {{currentDate | date: "yyyy/dd/MM"}}</p>
+                      </div>
+                    </div>
+                    <br>
                   </div>
-              </section>
+                </section>
 
 
 
@@ -200,7 +241,7 @@ overflow-y: scroll;">
           </div>
         </div>
 
-       
+
       </div>
 
 

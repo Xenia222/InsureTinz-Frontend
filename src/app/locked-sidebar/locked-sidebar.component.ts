@@ -4,16 +4,13 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxPermissionsService } from 'ngx-permissions';
-import { data } from 'jquery';
-import { PermissionService } from '../_services/permission.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  selector: 'app-locked-sidebar',
+  templateUrl: './locked-sidebar.component.html',
+  styleUrl: './locked-sidebar.component.css'
 })
-export class SidebarComponent implements OnInit{
+export class LockedSidebarComponent implements OnInit{
 
   sidebarVisible: boolean = false;
 
@@ -44,28 +41,13 @@ export class SidebarComponent implements OnInit{
   img: string = ''
   firstName: string =''
   lastName: string = ''
-  roles: any[] = []
 
-  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
+  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog){}
 
   ngOnInit(): void {
-    this.userService.getCurrentUserRole().subscribe(
-      data => {
-        this.roles = data.roles
-        this.roles.push(...data.permissions)
-        console.log(data.roles)
-        console.log("Role et right",this.roles)
-        this.permissionService.setPermissions(this.roles);
-        this.permissionsService.loadPermissions(this.roles);
-        this.getUser()
-        this.loadProfilePhoto();
-        console.log(this.user)
-      },
-      err => {
-        console.log(err)
-      }
-    )
-    
+    this.getUser()
+    this.loadProfilePhoto();
+    console.log(this.user)
   }
   logout(){
     this.tokenService.clearToken()
@@ -109,4 +91,5 @@ export class SidebarComponent implements OnInit{
       }
     );
   }
+
 }

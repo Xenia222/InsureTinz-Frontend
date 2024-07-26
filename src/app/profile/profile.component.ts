@@ -33,6 +33,13 @@ export class ProfileComponent implements OnInit{
     ,private router: Router,private authService: AuthService,private storageService: StorageService
     ){}
 
+    refreshPage() {
+      const currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+      });
+    }
+
     onFileSelected(event: any): void {
       this.selectedFile = event.target.files[0];
     }
@@ -97,6 +104,8 @@ export class ProfileComponent implements OnInit{
     } else {
       console.error('Aucun fichier sélectionné');
     }
+    this.ngOnInit()
+    this.refreshPage()
   }
 
 
@@ -127,6 +136,7 @@ export class ProfileComponent implements OnInit{
         this.form.password = ''
       }
     )
+    this.refreshPage()
   }
 
   loadProfilePhoto(): void {

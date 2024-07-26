@@ -47,6 +47,9 @@ overflow-x: hidden;">
 
                               <div class="bg-white mt-5 wadi">
                                 <div class="">
+                                  <div *ngIf="success_msg" class="text-success">
+                                    {{ success_msg }}
+                                  </div>
                                   <form name="form" #LoginForm="ngForm" (ngSubmit)="LoginForm.valid && onSubmit()" class="row g-3">
                                     <div class="col-md-6">
                                       <label for="firstName" class="form-label">First Name</label>
@@ -102,9 +105,6 @@ overflow-x: hidden;">
                                         <i class="bi bi-arrow-clockwise text-primary"></i>
                                          <p style="color: #9b9a9a;"> <u>Reset Password</u></p>
                                       </a>
-                                    </div>
-                                    <div *ngIf="success_msg" class="text-success">
-                                      {{ success_msg }}
                                     </div>
                                     <div *ngxPermissionsOnly="['client_edit_profile']" class="w-100 d-flex justify-content-center mt-2 ">
                                       <button type="submit" class="w-50 btn btn-warning pading"> Update </button>

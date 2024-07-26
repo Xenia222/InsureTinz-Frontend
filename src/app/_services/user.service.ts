@@ -10,7 +10,7 @@ import { TokenService } from './token.service';
 })
 export class UserService {
 
-  url = 'http://52.86.29.221:8000/api'
+  url = 'http://127.0.0.1:8000/api'
   constructor(private http: HttpClient) { }
 
 
@@ -47,6 +47,10 @@ export class UserService {
   
   getRoleAndPermission(): Observable<any> {
     return this.http.get(`${this.url}/create_client_user`)
+  }
+
+  getClientUser(id: any): Observable<any> {
+    return this.http.get(`${this.url}/show_details_client_user/`+ id)
   }
 
   addClientUser(user: {}): Observable<any>{

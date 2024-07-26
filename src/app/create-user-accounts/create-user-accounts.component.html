@@ -95,6 +95,15 @@ overflow-x: hidden;">
                                     </div>
                                 </div>
 
+                                <div class="row g-4">
+                                    <div class="form-group col-md-6 ">
+                                        <label for="type">User Type</label>
+                                        <select id="type" class="form-control champ-select" formControlName="type">
+                                            <option *ngFor="let pos of type" [value]="pos">{{pos}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
 
 
                                 <!-- Section II: Account Information -->
@@ -107,7 +116,7 @@ overflow-x: hidden;">
                                             readonly>
                                     </div>
     
-                                    <div class="form-group col-md-6">
+                                    <div *ngIf="clientMasterStatus == 1" class="form-group col-md-6">
                                         <label for="roles">Roles:</label>
                                         <select id="roles" class="form-control champ" multiple formControlName="roles">
                                           <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
@@ -117,7 +126,7 @@ overflow-x: hidden;">
                                 
 
                                 <div class="row g-4 ">
-                                    <div class="form-group col-md-6" >
+                                    <div *ngIf="clientMasterStatus == 1" class="form-group col-md-6" >
                                         <label for="permissions">Permissions:</label>
                                         <select *ngIf="availablePermissions.length > 0" class="form-control champ" id="permissions" multiple formControlName="permissions">
                                           <option *ngFor="let permission of availablePermissions" [value]="permission.id">
@@ -125,14 +134,15 @@ overflow-x: hidden;">
                                           </option>
                                         </select>
                                       </div>
-                                      <div class="form-group col-md-6">
+                                      <div class="col-md-6">
                                         <label for="password">Set password:</label>
-                                        <input type="password" id="password" class="form-control champ" formControlName="password">
-                                      </div>
+                                        <div aria-disabled="true" class="d-flex form-control champ justify-content-between">
+                                            <input type="password" id="password" class="w-75 border-0 h-100" formControlName="password">
+                                            <i class="fas fa-lock mt-2"></i>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                                
-
                                 <div *ngIf="errorMessage" class="alert alert-danger">
                                     {{ errorMessage }}
                                 </div>

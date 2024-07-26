@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../_services/storage.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { PermissionService } from '../_services/permission.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ export class LoginComponent implements OnInit{
 
   loginForm: FormGroup;
   errorMessage: string | null = null;
+  roles: any;
   
   
   constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
-    private tokenService: TokenService,private storageService: StorageService, private userService: UserService){
+    private tokenService: TokenService,private storageService: StorageService, private permissionService: PermissionService,private userService:UserService){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -41,6 +43,18 @@ export class LoginComponent implements OnInit{
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
             this.tokenService.saveToken(data.token)
+            this.storageService.saveStatus(data.user.status)
+            this.userService.getCurrentUserRole().subscribe(
+              data => {
+                this.roles = data.roles
+                this.roles.push(...data.permissions)
+                console.log("role and right",data.roles)
+                this.permissionService.setPermissions(this.roles);
+              },
+              err => {
+                console.log(err)
+              }
+            )
             this.authService.otp_send(this.storageService.getEmail()).subscribe(
               otpResponse => {
                 console.log('OTP envoyé:', otpResponse);

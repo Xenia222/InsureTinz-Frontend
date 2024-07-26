@@ -49,6 +49,9 @@ import { WhoCanUseComponent } from './who-can-use/who-can-use.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { LockedPageComponent } from './locked-page/locked-page.component';
+import { LockedSidebarComponent } from './locked-sidebar/locked-sidebar.component';
 
 
 
@@ -93,6 +96,9 @@ import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.
     WhoCanUseComponent,
     SearchBarComponent,
     SearchBarSecondComponent,
+    AccessDeniedComponent,
+    LockedPageComponent,
+    LockedSidebarComponent
   ],
   imports: [
     BrowserModule,

@@ -17,9 +17,11 @@ export class CreateUserAccountsComponent implements OnInit{
   errorMessage: string | null = null;
 
   positions = ['Manager', 'Developer', 'Designer', 'Analyst'];
+  type = ['client master', 'client user'];
   departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
   roles: any[] = [];
   availablePermissions: any[] = [];
+  clientMasterStatus: number = 1;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
       this.userForm = this.fb.group({
@@ -27,9 +29,10 @@ export class CreateUserAccountsComponent implements OnInit{
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
+        password: [this.generatePassword()],
         phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
+        type: ['', Validators.required],
         department: ['', Validators.required],
         // loginID: [{value: '', disabled: true}],
         // role: ['', Validators.required],
@@ -40,6 +43,7 @@ export class CreateUserAccountsComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.onChanges()
     this.userService.getRoleAndPermission().subscribe(
       data => {
         console.log(data.roles)
@@ -88,6 +92,26 @@ export class CreateUserAccountsComponent implements OnInit{
   //   }
   // }
 
+  
+  onChanges(): void {
+    this.userForm.get('type')?.valueChanges.subscribe(selectedValue => {
+      if (selectedValue === 'client master') {
+        this.clientMasterStatus = 0;
+      } else {
+        this.clientMasterStatus = 1;
+      }
+    });
+  }
+
+  generatePassword(): string {
+    const length = 12;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let password = '';
+    for (let i = 0, n = charset.length; i < length; ++i) {
+      password += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return password;
+  }
 
   onSubmit() {
 
@@ -101,7 +125,7 @@ export class CreateUserAccountsComponent implements OnInit{
       'primary_business_phone_number': this.userForm.value.phone,
       'primary_contact_title' :this.userForm.get('position')?.value,
       "country": this.userForm.get('department')?.value,
-      "user_type":"client user",
+      "user_type":this.userForm.get('user_type')?.value,
       "roles": this.userForm.get('roles')?.value,
       "permissions": this.userForm.get('permissions')?.value,
       'password': this.userForm.value.password,
