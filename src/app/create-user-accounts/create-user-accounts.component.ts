@@ -22,6 +22,7 @@ export class CreateUserAccountsComponent implements OnInit{
   roles: any[] = [];
   availablePermissions: any[] = [];
   clientMasterStatus: number = 1;
+  pwdStatus: boolean = true
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
       this.userForm = this.fb.group({
@@ -33,6 +34,7 @@ export class CreateUserAccountsComponent implements OnInit{
         phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
         type: ['', Validators.required],
+        policyId: ['', Validators.required],
         department: ['', Validators.required],
         // loginID: [{value: '', disabled: true}],
         // role: ['', Validators.required],
@@ -120,19 +122,20 @@ export class CreateUserAccountsComponent implements OnInit{
     }else{
     this.userService.addClientUser({
       'email': this.userForm.value.email,
+      'police_id': this.userForm.value.policyId,
       'primary_contact_name': this.userForm.value.firstName,
       'secondary_contact_name': this.userForm.value.lastName,
       'primary_business_phone_number': this.userForm.value.phone,
       'primary_contact_title' :this.userForm.get('position')?.value,
       "country": this.userForm.get('department')?.value,
-      "user_type":this.userForm.get('user_type')?.value,
+      "user_type":this.userForm.get('type')?.value,
       "roles": this.userForm.get('roles')?.value,
       "permissions": this.userForm.get('permissions')?.value,
       'password': this.userForm.value.password,
     }).subscribe(
       data => {
+        console.log("Data receives",this.userForm.value.type)
         if (data.user){
-        console.log(data)
         this.ngOnInit()
         this.router.navigate(['/list-users'])
         }else{

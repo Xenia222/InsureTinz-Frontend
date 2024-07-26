@@ -23,7 +23,7 @@ export class UserService {
     return this.http.get(`${this.url}/dashboard`);
   }
 
-  getCurrentUser(){
+  getCurrentUser(): Observable<any>{
       return this.http.get(`${this.url}/user`);
   }
 

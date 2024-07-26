@@ -46,14 +46,14 @@ export class VerificationHistoryComponent implements OnInit{
 
     this.checkService.getCheckList().subscribe(
       data => {
-        this.checks = data.checks
+        this.checks = data.check
         this.filteredItems = this.checks;
         this.totalPages = Math.ceil(this.checks.length / this.itemsPerPage);
         this.updatePagedItems();
         if(data.error){
         this.noCheck = data.error
         }
-        console.log("check 1",data)
+        console.log("check 1",data.check)
       },
       err => {
         console.log(err)
