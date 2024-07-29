@@ -1,0 +1,30 @@
+<!-- item-list.component.html -->
+<div>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search items"
+    />
+    <select [(ngModel)]="selectedCategory">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+    <label for="price-range">Price up to: {{ priceRange }}</label>
+    <input
+      type="range"
+      id="price-range"
+      [(ngModel)]="priceRange"
+      [min]="0"
+      [max]="100"
+      step="5"
+    />
+  </div>
+  <div>
+    <button (click)="exportToPDF()">Export to PDF</button>
+    <!-- <button (click)="exportToCSV()">Export to CSV</button> -->
+  </div>
+  <ul>
+    <li *ngFor="let item of filteredItems">
+      {{ item.name }} - {{ item.category }} - {{ item.price | currency }}
+    </li>
+  </ul>
+  

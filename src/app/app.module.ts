@@ -52,6 +52,7 @@ import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LockedPageComponent } from './locked-page/locked-page.component';
 import { LockedSidebarComponent } from './locked-sidebar/locked-sidebar.component';
+import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 
 
 
@@ -98,7 +99,8 @@ import { LockedSidebarComponent } from './locked-sidebar/locked-sidebar.componen
     SearchBarSecondComponent,
     AccessDeniedComponent,
     LockedPageComponent,
-    LockedSidebarComponent
+    LockedSidebarComponent,
+    DashboardFilterComponent
   ],
   imports: [
     BrowserModule,

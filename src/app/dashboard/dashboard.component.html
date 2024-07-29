@@ -166,12 +166,11 @@ overflow-x: hidden;">
                         <div class="bg-white text-center p-4 case">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h6 class="titre-tableau mb-0">Recent Verification</h6>
+                                <!-- <app-dashboard-filter></app-dashboard-filter> -->
                                 <div class="conteneur-select ml-auto">
-                                    <select class="form-select" aria-label="Default select example"
+                                    <select [(ngModel)]="selectedStatus" class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
-                                        <option selected>All status</option>
-                                        <option value="1">Insured</option>
-                                        <option value="2">Not insured</option>
+                                        <option *ngFor="let category of status" [value]="category">{{ category }}</option>
                                     </select>
                                     <select class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
@@ -202,26 +201,26 @@ overflow-x: hidden;">
                                                 <tr class="">
                                                     <th style="background-color: aliceblue;">Date</th>
                                                     <th style="background-color: aliceblue;">Time</th>
-                                                    <!-- <th style="background-color: aliceblue;">User</th> -->
+                                                    <th style="background-color: aliceblue;">User</th>
                                                     <th class="px-5" style="background-color: aliceblue;">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let check of checks">
+                                                <tr *ngFor="let check of filteredItems">
                                                     <td>{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
                                                     <td>{{check.check.check_date | date: "hh:mm:ss"}}</td>
-                                                    <td *ngIf="check.check == null">
-                                                        BELLO Ramsat
-                                                        <img src="../../assets/Box Important.png"
-                                                            (click)="toggleInfo($event)"
+                                                    <td >
+                                                        {{ findUser(check.check.user_id) | async }}
+                                                        <img *ngIf="check.automobile !== null" src="../../assets/Box Important.png"
+                                                        (click)="toggleInfo($event, check.check.id)"
                                                             style="width: 20px; margin-top: -2px;">
 
-                                                        <div class="modale-info" *ngIf="isInfoVisible">
+                                                        <div class="modale-info" *ngIf="isInfoVisible(check.check.id)">
                                                             <div
                                                                 style="color: rgba(145, 142, 244, 1); text-align: center;">
                                                                 More information
                                                             </div>
-                                                            <div class="d-flex mt-2 dep">
+                                                            <div *ngIf="check.automobile !== null" class="d-flex mt-2 dep">
                                                                 <div class="pl-4 results-left"
                                                                     style="font-weight: 200;">
                                                                     <span *ngIf="check.automobile.make">Automobile Make: </span> <br>
@@ -240,6 +239,9 @@ overflow-x: hidden;">
                                                                     <h6 class="text-dark"> {{check.automobile.vin_number}} </h6>
                                                                     <h6 class="text-dark">12/08/2023 </h6>
                                                                 </div>
+                                                            </div>
+                                                            <div *ngIf="check.automobile == null" class="d-flex mt-2 dep">
+                                                                No data
                                                             </div>
                                                         </div>
                                                     </td>
