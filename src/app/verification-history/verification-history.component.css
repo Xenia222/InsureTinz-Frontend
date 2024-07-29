@@ -6,6 +6,20 @@
     /* min-height: 100vh; */
     padding-bottom: 400px;
   }
+
+  ::ng-deep .pagination {
+    margin-top: 20px;
+}
+
+::ng-deep .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+::ng-deep .page-link {
+    color: #007bff;
+}
+
   .ban {
     /* display: flex;
       justify-content: space-around; */
