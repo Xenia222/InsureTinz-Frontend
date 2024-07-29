@@ -19,66 +19,65 @@
 
                     <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
                         <div class="row">
-                            <div class="col card table-responsive">
-                                <table class="table" style="margin-bottom: 220px;">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">No</th>
-                                            <th class="px-3">STATUS</th>
-                                            <th class="text-center">DETAILS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody *ngIf="!noCheck">
-                                        <tr *ngFor="let check of pagedItems">
-                                            <td *ngIf="check.check.status ==  'not_found'" class="text-center py-4">XXXXXX</td>
-                                            <td *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="text-center py-4">{{check.automobile.license_plate_number}}</td>
-                                            <td *ngIf="check.check">
-                                                <div class="container mt-3">
-                                                    <div class="active px-4 py-1">
-                                                        <div *ngIf="check.check.status == 'insured'" class="status-active">Active</div>
-                                                        <div *ngIf="check.check.status == 'expired'" class="status-expired">Expired</div>
-                                                        <div *ngIf="check.check.status == 'not_found'" class="status-expired">Not found</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td *ngIf="check.check" style="min-width: 300px !important;">
-                                                <div class="d-flex justify-content-around">
-                                                    <div>
-                                                        <span *ngIf="check.check.status ==  'not_found'" class="back1">No data</span>
-
-                                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="back1">Insurance company: <br> Policy number: <br> coverage details: <br> Expiration date:</span>
-                                                    </div>
-                                                    <div>
-                                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'"> <br> {{check.insurance_policy.policy_number}}<br>  <br> {{check.automobile.expiredate | date: "dd/MM/yyyy"}}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody *ngIf="noCheck">
-                                        <tr class="text-center w-100">
-                                            <div class="text-center">
-                                                <strong>{{noCheck}}</strong>
-                                            </div>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- <div class="pagination" *ngIf="totalPages > 1">
-                                    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-no">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z"/>
-                                        </svg>
-                                    </button>
-                                    <span class="pagination-no">Page {{currentPage}} of {{totalPages}}</span>
-                                    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-no">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l5 5a.5.5 0 0 1 0 .708l-5 5a.5.5 0 1 1-.708-.708L9.293 8 4.646 3.354a.5.5 0 0 1 0-.708z"/>
-                                        </svg>
-                                    </button>
-                                </div> -->
-                            </div>
+                          <div class="col card table-responsive">
+                            <table class="table" style="margin-bottom: 220px;">
+                              <thead>
+                                <tr>
+                                  <th class="text-center">No</th>
+                                  <th class="px-3">STATUS</th>
+                                  <th class="text-center">DETAILS</th>
+                                </tr>
+                              </thead>
+                              <tbody *ngIf="!noCheck">
+                                <tr *ngFor="let check of paginatedChecks; let i = index">
+                                  <td *ngIf="check.check.status == 'not_found'" class="text-center py-4">XXXXXX</td>
+                                  <td *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="text-center py-4">{{check.automobile.license_plate_number}}</td>
+                                  <td *ngIf="check.check">
+                                    <div class="container mt-3">
+                                      <div class="active px-4 py-1">
+                                        <div *ngIf="check.check.status == 'insured'" class="status-active">Active</div>
+                                        <div *ngIf="check.check.status == 'expired'" class="status-expired">Expired</div>
+                                        <div *ngIf="check.check.status == 'not_found'" class="status-expired">Not found</div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td *ngIf="check.check" style="min-width: 300px !important;">
+                                    <div class="d-flex justify-content-around">
+                                      <div>
+                                        <span *ngIf="check.check.status == 'not_found'" class="back1">No data</span>
+                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="back1">Insurance company: <br> Policy number: <br> coverage details: <br> Expiration date:</span>
+                                      </div>
+                                      <div>
+                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'"> <br> {{check.insurance_policy.policy_number}}<br>  <br> {{check.automobile.expiredate | date: "dd/MM/yyyy"}}</span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tbody *ngIf="noCheck">
+                                <tr class="text-center w-100">
+                                  <div class="text-center">
+                                    <strong>{{noCheck}}</strong>
+                                  </div>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example text-warning">
+                              <ul class="pagination justify-content-center">
+                                <li class="page-item text-warning" [class.disabled]="currentPage === 1">
+                                  <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                                </li>
+                                <li class="page-item text-warning" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                                  <a class="page-link" (click)="setPage(i + 1)">{{ i + 1 }}</a>
+                                </li>
+                                <li class="page-item text-warning" [class.disabled]="currentPage === totalPages">
+                                  <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                                </li>
+                              </ul>
+                            </nav>
+                          </div>
                         </div>
-                    </div>
+                      </div>                      
                 </div>
 
                 <div *ngxPermissionsOnly="['client_view_check_history']" class="container-fluid p-6" style="padding: 32px;">
@@ -170,7 +169,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let check of subchecks">
+                                            <tr *ngFor="let check of paginatedSubChecks; let i = index">
                                                 <td *ngIf="check.check">{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
                                                 <td *ngIf="check.check">{{check.check.check_date | date: "hh:mm:ss"}}</td>
                                                 <td *ngIf="check.check">
@@ -221,7 +220,27 @@
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <tbody *ngIf="noCheck2">
+                                            <tr class="text-center w-100">
+                                                <div class="text-center">
+                                                    <strong>{{noCheck2}}</strong>
+                                                </div>
+                                            </tr>
+                                        </tbody>
                                     </table>
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                          <li class="page-item" [class.disabled]="currentPageSub === 1">
+                                            <a class="page-link" (click)="setPageSub(currentPageSub - 1)">Previous</a>
+                                          </li>
+                                          <li class="page-item" *ngFor="let page of [].constructor(totalPagesSub); let i = index" [class.active]="currentPageSub === i + 1">
+                                            <a class="page-link" (click)="setPageSub(i + 1)">{{ i + 1 }}</a>
+                                          </li>
+                                          <li class="page-item" [class.disabled]="currentPageSub === totalPagesSub">
+                                            <a class="page-link" (click)="setPageSub(currentPageSub + 1)">Next</a>
+                                          </li>
+                                        </ul>
+                                      </nav>
                                 </div>
                             </div>
                         </div>
