@@ -13,8 +13,8 @@
                         <div class="sear" style="width: 45%;">
                             <h3 class="">Your search history</h3>
                         </div>
-                        <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
-                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button>
+                        <!-- <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button> -->
                     </div>
 
                     <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
@@ -30,8 +30,9 @@
                                     </thead>
                                     <tbody *ngIf="!noCheck">
                                         <tr *ngFor="let check of pagedItems">
+                                            <td *ngIf="check.check.status ==  'not_found'" class="text-center py-4">XXXXXX</td>
                                             <td *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="text-center py-4">{{check.automobile.license_plate_number}}</td>
-                                            <td>
+                                            <td *ngIf="check.check">
                                                 <div class="container mt-3">
                                                     <div class="active px-4 py-1">
                                                         <div *ngIf="check.check.status == 'insured'" class="status-active">Active</div>
@@ -40,9 +41,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td style="min-width: 300px !important;">
+                                            <td *ngIf="check.check" style="min-width: 300px !important;">
                                                 <div class="d-flex justify-content-around">
                                                     <div>
+                                                        <span *ngIf="check.check.status ==  'not_found'" class="back1">No data</span>
+
                                                         <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="back1">Insurance company: <br> Policy number: <br> coverage details: <br> Expiration date:</span>
                                                     </div>
                                                     <div>
@@ -60,7 +63,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="pagination" *ngIf="totalPages > 1">
+                                <!-- <div class="pagination" *ngIf="totalPages > 1">
                                     <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-no">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z"/>
@@ -72,81 +75,167 @@
                                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l5 5a.5.5 0 0 1 0 .708l-5 5a.5.5 0 1 1-.708-.708L9.293 8 4.646 3.354a.5.5 0 0 1 0-.708z"/>
                                         </svg>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div *ngxPermissionsOnly="['client_view_check_history']" class="container-fluid p-6" style="padding: 32px;">
-                    <div class="flex">
-                        <div class="sear" style="width: 45%;">
-                            <h3 class="">Verification History</h3>
+                    <div class="">
+                        <div class="sear" style="width: 30%; margin-top: 30px;">
+                            <h3 >Verification log history</h3>
                         </div>
-                        <app-search-bar (searchEvent)="onSearchS($event)"></app-search-bar>
-                    </div>
+                        <!-- <div class="flex" style="">
 
-                    <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
-                        <div class="row">
-                            <div class="col card table-responsive">
-                                <table class="table" style="margin-bottom: 220px;">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Date</th>
-                                            <th class="px-3">STATUS</th>
-                                            <th class="text-center">DETAILS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody *ngIf="!noCheck2">
-                                        <tr *ngFor="let subcheck of pagedItems2">
-                                            <td class="text-center py-4">{{subcheck.created_at | date: "dd/MM/yyyy"}}</td>
-                                            <td>
-                                                <div class="container mt-3">
-                                                    <div class="active px-4 py-1">
-                                                        <div *ngIf="subcheck.status == 'completed'" class="status-active">Completed</div>
-                                                        <div *ngIf="subcheck.status == 'pending'" class="status-expired">Pending</div>
-                                                        <div *ngIf="subcheck.status == 'failed'" class="status-expired">Failed</div>
+                            <div class="sear" style="width: 30%;">
+                                <input type="text" class="form-control recherche" id="formGroupExampleInput" placeholder="search">
+                              </div>
+    
+                            <div class=" mt-1 sear2" style="padding: 0px;">
+                                <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+    
+                                    <div class="sous-group24">
+                                        <img src="../../assets/filter.png" alt="">
+                                    </div>
+                                    <div class="sous-group24">
+                                        <span>filter by</span>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Department</option>
+                                        </select>
+                                    </div>
+                                    <div  style="text-align: center;">
+                                        <span><a class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                            <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
+                                    src="../../assets/ic-local-printshop-24px.png" alt=""></button>
+    
+                        </div> -->
+                        <!-- <div class="container mt-4 sear33">
+                            <h3 class="sear">Verification log history</h3>
+                        </div>
+
+                        <div class="container mt-3 group3 sear2 sear22" style="padding: 0px;">
+                            <div class="btn-group grouppp  sear3" role="group" aria-label="Basic example">
+
+                                <div class="sous-group">
+                                    <img src="../../assets/filter.png" alt="">
+                                </div>
+                                <div class="sous-group">
+                                    <span>filter by</span>
+                                </div>
+                                <div class="col-auto btn-light sous-group">
+                                    <select class="form-select bg-light">
+                                        <option selected>Month</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto btn-light sous-group">
+                                    <select class="form-select bg-light">
+                                        <option selected>Department</option>
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <span><a href="" style="text-decoration: none !important;"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                </div>
+
+                            </div>
+
+                            <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
+                                    src="../../assets/ic-local-printshop-24px.png" alt=""></button>
+
+                        </div> -->
+
+                        <div class=" mt-4">
+                            <div class="row" style="padding-left: 13px;">
+                                <div class="col card table-responsive">
+                                    <table class="table " style="margin-bottom: 200px;">
+                                        <thead>
+                                            <tr class="">
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>User</th>
+                                                <th class="px-5">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let check of subchecks">
+                                                <td *ngIf="check.check">{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
+                                                <td *ngIf="check.check">{{check.check.check_date | date: "hh:mm:ss"}}</td>
+                                                <td *ngIf="check.check">
+                                                    {{check.check.user_id}}
+                                                    <!-- <img src="../../assets/Box Important.png"
+                                                        (click)="toggleInfo($event)"
+                                                        style="width: 20px; margin-top: -2px;">
+
+                                                    <div class="modale-info" *ngIf="isInfoVisible">
+                                                        <div
+                                                            style="color: rgba(145, 142, 244, 1); text-align: center;">
+                                                            More information
+                                                        </div>
+                                                        <div class="d-flex mt-2 dep">
+                                                            <div class="pl-4 results-left"
+                                                                style="font-weight: 200;">
+                                                                <span *ngIf="check.automobile.make">Automobile Make: </span> <br>
+                                                                <span class="mt-1" *ngIf="check.automobile.model">Model</span> <br>
+                                                                <span class="mt-1" *ngIf="check.automobile.owername">Owner’s name  </span><br>
+                                                                <span class="mt-1" *ngIf="check.automobile.policyname">Policy number  </span><br>
+                                                                <span class="mt-2" *ngIf="check.automobile.vin_number">VIN number </span><br>
+                                                                <span class="pt-5">Expiration date </span>
+                                                            </div>
+                                                            <div class="divider"></div>
+                                                            <div>
+                                                                <h6 class="text-dark">{{check.automobile.make}} </h6>
+                                                                <h6 class="text-dark">{{check.automobile.model}} </h6>
+                                                                <h6 class="text-dark">{{check.automobile.owername}}</h6>
+                                                                <h6 class="text-dark">{{check.automobile.policyname}}</h6>
+                                                                <h6 class="text-dark"> {{check.automobile.vin_number}} </h6>
+                                                                <h6 class="text-dark">12/08/2023 </h6>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </td>
+                                                <td *ngIf="check.check" style="padding-top: 3px !important;">
+                                                    <div class="container ">
+                                                        <div *ngIf="check.check.status == 'insured'" class="status-active px-2 py-2">
+                                                            <h6>Active</h6>
+                                                        </div>
+                                                        <div *ngIf="check.check.status == 'expired'" class="status-expired px-2 py-2">
+                                                            <h6>Expired</h6>
+                                                        </div>
+                                                        <div *ngIf="check.check == null" class="status-expired px-2 py-2">
+                                                            <h6>Not found</h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td style="min-width: 300px !important;">
-                                                <div class="d-flex justify-content-around">
-                                                    <div>
-                                                        <span class="back1">Details:</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>{{subcheck.details}}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody *ngIf="noCheck2">
-                                        <tr class="text-center w-100">
-                                            <div class="text-center">
-                                                <strong>{{noCheck2}}</strong>
-                                            </div>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="pagination" *ngIf="totalPages2 > 1">
-                                    <button (click)="previousPage2()" [disabled]="currentPage2 === 1" class="pagination-no">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z"/>
-                                        </svg>
-                                    </button>
-                                    <span class="pagination-no">Pages{{currentPage2}} of {{totalPages2}}</span>
-                                    <button (click)="nextPage2()" [disabled]="currentPage2 === totalPages2" class="pagination-no">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l5 5a.5.5 0 0 1 0 .708l-5 5a.5.5 0 1 1-.708-.708L9.293 8 4.646 3.354a.5.5 0 0 1 0-.708z"/>
-                                        </svg>
-                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
                 </div>
+
+
+
             </div>
+
+
         </main>
     </div>
 </div>

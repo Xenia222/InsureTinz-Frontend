@@ -126,8 +126,6 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent , canActivate: [authGuard]},
   { path:'**', component: ErrorComponent  },
 
-
-
 ];
 
 @NgModule({

@@ -55,14 +55,6 @@ export class LoginComponent implements OnInit{
                 console.log(err)
               }
             )
-            this.authService.otp_send(this.storageService.getEmail()).subscribe(
-              otpResponse => {
-                console.log('OTP envoyé:', otpResponse);
-              },
-              otpError => {
-                console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
-              }
-            );
             this.router.navigate(['login-otp'])
           }else{
             this.errorMessage = data.status_message

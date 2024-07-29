@@ -20,6 +20,7 @@ export class DashboardComponent implements AfterViewInit{
   license_status: any = {
     active: '',
     expired: '',
+    dne:''
   }
 
   users: any = {
@@ -85,8 +86,9 @@ constructor(private userService: UserService, private checkService: CheckService
         this.credit_balance.since = data.credit_balance.since
         this.license_status.active = data.license_status.active
         this.license_status.expired = data.license_status.expired
-        this.users.total = data.users.total
-        this.users.active = data.users.active
+        this.license_status.dne = data.license_status.dne
+        this.users.total = data.users.total_users
+        this.users.active = data.users.active_users
         this.verification_history = data.verification_history
         console.log(this.verification_history)
         this.verification_history.forEach(verify => {
@@ -100,7 +102,10 @@ constructor(private userService: UserService, private checkService: CheckService
     this.checkService.getCheckList().subscribe(
       data => {
         console.log("CHECK",data);
-        this.checks = data
+        this.checks.push(data.check[0])
+        this.checks.push(data.check[1])
+        this.checks.push(data.check[2])
+        this.checks.push(data.check[3])
         
       }
     )

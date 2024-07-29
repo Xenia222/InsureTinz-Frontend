@@ -48,7 +48,7 @@ export class VerificationHistoryComponent implements OnInit {
   
     this.checkService.getSubCheckList().subscribe(
       data => {
-        this.subchecks = data.checks;
+        this.subchecks = data.clients_checks;
         this.filteredItemsS = this.subchecks;
         this.updateTotalPages();
         this.updatePagedSubItems();

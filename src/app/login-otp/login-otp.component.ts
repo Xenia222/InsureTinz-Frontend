@@ -32,6 +32,14 @@ export class LoginOtpComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.otp_send(this.storageService.getEmail()).subscribe(
+      otpResponse => {
+        console.log('OTP envoyé:', otpResponse);
+      },
+      otpError => {
+        console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
+      }
+    );
     this.startCountdown();
 } 
 

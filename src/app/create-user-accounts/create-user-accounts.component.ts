@@ -30,7 +30,7 @@ export class CreateUserAccountsComponent implements OnInit{
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: [this.generatePassword()],
+        password: ['00000000'],
         phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
         type: ['', Validators.required],
