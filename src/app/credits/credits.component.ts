@@ -14,7 +14,7 @@ export class CreditsComponent {
   price: number = 0;
   currentDate: Date = new Date();
   paymentMethod: string = 'paypal'; // Default payment method
-  currency: string = 'USD';
+  currency: string = 'XOF';
   phoneNumber: string = '';
   paymentStatus: string = '';
   isChecking: boolean = false;
