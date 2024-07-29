@@ -13,8 +13,28 @@
                         <div class="sear" style="width: 45%;">
                             <h3 class="">Your search history</h3>
                         </div>
-                        <!-- <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
-                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button> -->
+                        <div class=" mt-3 sear2" style="padding: 0px;">
+                            <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+                        
+                                <div class="sous-group">
+                                    <img src="../../assets/filter.png" alt="">
+                                </div>
+                                <div class="sous-group">
+                                    <span>filter by</span>
+                                </div>
+                                <div class="col-auto btn-light sous-group">
+                                    <select [(ngModel)]="selectedStatus" class="form-select bg-light" aria-label="Default select example">
+                                        <option *ngFor="let category of status" [value]="category">{{ category }}</option>
+                                    </select>
+                                </div>
+                                <div  style="text-align: center;">
+                                    <span><a type="button" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                </div>
+                        
+                            </div>
+                        
+                        </div>
+                        <button type="button" (click)="exportToPDF()" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button>
                     </div>
 
                     <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
@@ -124,7 +144,7 @@
                         </div> -->
                         <!-- <div class="container mt-4 sear33">
                             <h3 class="sear">Verification log history</h3>
-                        </div>
+                        </div> -->
 
                         <div class="container mt-3 group3 sear2 sear22" style="padding: 0px;">
                             <div class="btn-group grouppp  sear3" role="group" aria-label="Basic example">
@@ -154,7 +174,7 @@
                             <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
                                     src="../../assets/ic-local-printshop-24px.png" alt=""></button>
 
-                        </div> -->
+                        </div>
 
                         <div class=" mt-4">
                             <div class="row" style="padding-left: 13px;">
