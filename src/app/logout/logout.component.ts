@@ -11,6 +11,7 @@ export class LogoutComponent {
   constructor(private tokenService: TokenService){}
   ngOnInit(): void {
     this.tokenService.clearToken()
+    this.tokenService.clearStatus()
   }
   logout(){
     

@@ -4,6 +4,7 @@ import { LegendItem } from 'chart.js';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { CheckService } from '../_services/check.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,9 @@ import { CheckService } from '../_services/check.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements AfterViewInit{
+
+  selectedStatus: string = 'All';
+  infoVisibility: { [key: string]: boolean } = {};
 
   credit_balance: any = {
     balance: '',
@@ -20,6 +24,7 @@ export class DashboardComponent implements AfterViewInit{
   license_status: any = {
     active: '',
     expired: '',
+    dne:''
   }
 
   users: any = {
@@ -27,7 +32,7 @@ export class DashboardComponent implements AfterViewInit{
     active: '',
   }
 
-  verification_history: any[] = [] 
+  verification_history: any[] = []
 
   months:any[] = [];
   checks:any[] = [];
@@ -36,27 +41,29 @@ export class DashboardComponent implements AfterViewInit{
   
 constructor(private userService: UserService, private checkService: CheckService){}
 
+status: string[] = ['All', 'insured', 'expired','not_found'];
+
   isShow = false;
 
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
 
+  findUser(id: string): Observable<string> {
+    return this.userService.getAnyUser(id);
+  }
+
   isInfoVisible2 = false;
-  isInfoVisible = false;
+  // isInfoVisible = false;
   position = { x: 0, y: 0 };
 
-  toggleInfo(event: MouseEvent) {
-    this.isInfoVisible = !this.isInfoVisible;
+  toggleInfo(event: Event, checkId: string) {
+    event.stopPropagation();
+    this.infoVisibility[checkId] = !this.infoVisibility[checkId];
+  }
 
-    if (this.isInfoVisible) {
-      const target = event.target as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      this.position = {
-        x: rect.right,
-        y: rect.top
-      };
-    }
+  isInfoVisible(checkId: string): boolean {
+    return !!this.infoVisibility[checkId];
   }
 
   toggleInfo2(event: MouseEvent) {
@@ -73,7 +80,16 @@ constructor(private userService: UserService, private checkService: CheckService
   }
 
   hideInfo() {
-    this.isInfoVisible = false;
+    // this.isInfoVisible = false;
+  }
+
+  get filteredItems(): any[] {
+    return this.checks.filter(item => {
+      const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
+      // const matchesSearch = item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      // const matchesPrice = item.price <= this.priceRange;
+      return matchesCategory;
+    });
   }
 
   myChart: Chart | undefined;
@@ -85,8 +101,9 @@ constructor(private userService: UserService, private checkService: CheckService
         this.credit_balance.since = data.credit_balance.since
         this.license_status.active = data.license_status.active
         this.license_status.expired = data.license_status.expired
-        this.users.total = data.users.total
-        this.users.active = data.users.active
+        this.license_status.dne = data.license_status.dne
+        this.users.total = data.users.total_users
+        this.users.active = data.users.active_users
         this.verification_history = data.verification_history
         console.log(this.verification_history)
         this.verification_history.forEach(verify => {
@@ -100,7 +117,10 @@ constructor(private userService: UserService, private checkService: CheckService
     this.checkService.getCheckList().subscribe(
       data => {
         console.log("CHECK",data);
-        this.checks = data
+        this.checks.push(data.check[0])
+        this.checks.push(data.check[1])
+        this.checks.push(data.check[2])
+        this.checks.push(data.check[3])
         
       }
     )

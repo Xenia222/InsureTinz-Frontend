@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDataUser, ISingleUser, IUser } from '../_interfaces/user';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Iapi } from '../_interfaces/iapi';
 import { TokenService } from './token.service';
 
@@ -11,6 +11,7 @@ import { TokenService } from './token.service';
 export class UserService {
 
   url = 'http://127.0.0.1:8000/api'
+  private userCache: { [id: string]: BehaviorSubject<string> } = {};
   constructor(private http: HttpClient) { }
 
 
@@ -23,7 +24,7 @@ export class UserService {
     return this.http.get(`${this.url}/dashboard`);
   }
 
-  getCurrentUser(){
+  getCurrentUser(): Observable<any>{
       return this.http.get(`${this.url}/user`);
   }
 
@@ -64,6 +65,22 @@ export class UserService {
   getUser(): Observable <any>{
     return this.http.get(this.url+'/client_users')
   }
+
+  getAnyUser(id: any): Observable<string> {
+    if (!this.userCache[id]) {
+      this.userCache[id] = new BehaviorSubject<string>('Loading...');
+      this.fetchUser(id);
+    }
+    return this.userCache[id].asObservable();
+  }
+
+  private fetchUser(id: string) {
+    this.http.get<any>(`${this.url}/show_user_details/${id}`).subscribe(
+      data => this.userCache[id].next(data.user.primary_contact_name),
+      error => this.userCache[id].next('Error')
+    );
+  }
+
   trashUser(cid: number): Observable<Iapi>{
     return this.http.delete<Iapi>(this.url+'/trash/'+cid)
   }

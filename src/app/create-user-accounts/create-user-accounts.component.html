@@ -112,8 +112,8 @@ overflow-x: hidden;">
                                 <div class="row g-4 " style="    margin-bottom: 20px;">
                                     <div class="form-group col-md-6">
                                         <label for="loginID">LoginID</label>
-                                        <input type="text" id="loginID" class="form-control champ" formControlName="loginID"
-                                            readonly>
+                                        <input type="text" id="loginID" class="form-control champ" formControlName="policyId"
+                                            >
                                     </div>
     
                                     <div *ngIf="clientMasterStatus == 1" class="form-group col-md-6">
@@ -136,8 +136,8 @@ overflow-x: hidden;">
                                       </div>
                                       <div class="col-md-6">
                                         <label for="password">Set password:</label>
-                                        <div aria-disabled="true" class="d-flex form-control champ justify-content-between">
-                                            <input type="password" id="password" class="w-75 border-0 h-100" formControlName="password">
+                                        <div class="d-flex form-control champ justify-content-between">
+                                            <input type="password" id="password" class="w-75 border-0 h-100" formControlName="password" readonly>
                                             <i class="fas fa-lock mt-2"></i>
                                         </div>
                                     </div>

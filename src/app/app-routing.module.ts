@@ -48,7 +48,7 @@ import { LockedPageComponent } from './locked-page/locked-page.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent},
   { path: 'login-otp', component: LoginOtpComponent 
@@ -125,8 +125,6 @@ const routes: Routes = [
   { path: 'reset-password-otp', component: ResetPasswordOtpComponent },
   { path: 'logout', component: LogoutComponent , canActivate: [authGuard]},
   { path:'**', component: ErrorComponent  },
-
-
 
 ];
 

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit{
       console.log(this.loginForm.value);
       this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
         data => {
-          console.log(data.token)
+          console.log(data)
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
             this.tokenService.saveToken(data.token)
@@ -55,14 +55,6 @@ export class LoginComponent implements OnInit{
                 console.log(err)
               }
             )
-            this.authService.otp_send(this.storageService.getEmail()).subscribe(
-              otpResponse => {
-                console.log('OTP envoyé:', otpResponse);
-              },
-              otpError => {
-                console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
-              }
-            );
             this.router.navigate(['login-otp'])
           }else{
             this.errorMessage = data.status_message

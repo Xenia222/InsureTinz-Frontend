@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="" style="padding: 0 0px !important; overflow-x: hidden">
     <div class="row">
-        <app-sidebar style="padding-right: 0 !important; ;"></app-sidebar>
+        <app-sidebar style="padding-right: 0 !important;"></app-sidebar>
 
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
@@ -13,16 +13,14 @@
                         <div class="sear" style="width: 45%;">
                             <h3 class="">Your search history</h3>
                         </div>
-                        <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
-                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
-                                src="../../assets/ic-local-printshop-24px.png" alt=""></button>
-
+                        <!-- <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button> -->
                     </div>
 
                     <div *ngxPermissionsOnly="['client_view_check_history']" class="p-2 mt-4">
                         <div class="row">
                             <div class="col card table-responsive">
-                                <table class="table" style=" margin-bottom: 220px;">
+                                <table class="table" style="margin-bottom: 220px;">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No</th>
@@ -31,68 +29,100 @@
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="!noCheck">
-                                        <tr *ngFor="let check of filteredItems">
-                                            <td class="text-center py-4 ">{{check.automobile.license_plate_number}}</td>
-                                            <td>
+                                        <tr *ngFor="let check of pagedItems">
+                                            <td *ngIf="check.check.status ==  'not_found'" class="text-center py-4">XXXXXX</td>
+                                            <td *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="text-center py-4">{{check.automobile.license_plate_number}}</td>
+                                            <td *ngIf="check.check">
                                                 <div class="container mt-3">
                                                     <div class="active px-4 py-1">
-                                                        <div *ngIf="check.check.is_insured == 1" class="status-active ">Active</div>
-                                                        <div *ngIf="check.check.is_insured == 0" class="status-expired ">Expired</div>
-                                                        <div *ngIf="check.check.is_insured == null" class="status-expired ">Not found</div>
+                                                        <div *ngIf="check.check.status == 'insured'" class="status-active">Active</div>
+                                                        <div *ngIf="check.check.status == 'expired'" class="status-expired">Expired</div>
+                                                        <div *ngIf="check.check.status == 'not_found'" class="status-expired">Not found</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td style="min-width: 300px !important;">
+                                            <td *ngIf="check.check" style="min-width: 300px !important;">
                                                 <div class="d-flex justify-content-around">
                                                     <div>
-                                                        <span class="back1">Insurance company : <br> Policy number : <br>
-                                                            coverage details : <br>Expiration
-                                                            date :</span>
-                                                    </div>
+                                                        <span *ngIf="check.check.status ==  'not_found'" class="back1">No data</span>
 
+                                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'" class="back1">Insurance company: <br> Policy number: <br> coverage details: <br> Expiration date:</span>
+                                                    </div>
                                                     <div>
-                                                        <span> <br> {{check.insurance_policy.policy_number}}<br>  <br>
-                                                            {{check.automobile.expiredate | date: "dd/MM/yyyy"}}</span>
+                                                        <span *ngIf="check.check.status == 'insured' || check.check.status == 'expired'"> <br> {{check.insurance_policy.policy_number}}<br>  <br> {{check.automobile.expiredate | date: "dd/MM/yyyy"}}</span>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <div class="pagination" *ngIf="totalPages">
-                                            <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-no">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                                              </svg>
-                                            </button>
-                                            <span style="    padding-top: 10px;">Page {{currentPage}} of {{totalPages}}</span>
-                                            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-no">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                              </svg>
-                                            </button>
-                                          </div>
                                     </tbody>
                                     <tbody *ngIf="noCheck">
-                                        <div class="text-center">
-                                            <strong>{{noCheck}}</strong>
-                                        </div>
+                                        <tr class="text-center w-100">
+                                            <div class="text-center">
+                                                <strong>{{noCheck}}</strong>
+                                            </div>
+                                        </tr>
                                     </tbody>
                                 </table>
+                                <!-- <div class="pagination" *ngIf="totalPages > 1">
+                                    <button (click)="previousPage()" [disabled]="currentPage === 1" class="pagination-no">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z"/>
+                                        </svg>
+                                    </button>
+                                    <span class="pagination-no">Page {{currentPage}} of {{totalPages}}</span>
+                                    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-no">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l5 5a.5.5 0 0 1 0 .708l-5 5a.5.5 0 1 1-.708-.708L9.293 8 4.646 3.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div> -->
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div *ngxPermissionsOnly="['client_view_client_check_history']" class="">
+                <div *ngxPermissionsOnly="['client_view_check_history']" class="container-fluid p-6" style="padding: 32px;">
+                    <div class="">
                         <div class="sear" style="width: 30%; margin-top: 30px;">
                             <h3 >Verification log history</h3>
                         </div>
-                        <div class="flex" style="">
+                        <!-- <div class="flex" style="">
 
-                            <app-search-bar-second (searchEvent)="onSearchS($event)"></app-search-bar-second>
+                            <div class="sear" style="width: 30%;">
+                                <input type="text" class="form-control recherche" id="formGroupExampleInput" placeholder="search">
+                              </div>
+    
+                            <div class=" mt-1 sear2" style="padding: 0px;">
+                                <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+    
+                                    <div class="sous-group24">
+                                        <img src="../../assets/filter.png" alt="">
+                                    </div>
+                                    <div class="sous-group24">
+                                        <span>filter by</span>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select class="form-select bg-light">
+                                            <option selected>Department</option>
+                                        </select>
+                                    </div>
+                                    <div  style="text-align: center;">
+                                        <span><a class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
     
                             <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
                                     src="../../assets/ic-local-printshop-24px.png" alt=""></button>
     
-                        </div>
+                        </div> -->
                         <!-- <div class="container mt-4 sear33">
                             <h3 class="sear">Verification log history</h3>
                         </div>
@@ -136,73 +166,60 @@
                                                 <th>Date</th>
                                                 <th>Time</th>
                                                 <th>User</th>
-                                                <th>Ville</th>
                                                 <th class="px-5">Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody *ngIf="!noCheck2">
-                                            <tr *ngFor="let check2 of pagedItems2">
-                                                <td>{{check2.updated_at | date : "dd/MM/yyyy"}}</td>
-                                                <td>{{check2.updated_at | date : "hh:mm:ss"}}</td>
-                                                <td>BELLO Ramsat <img src="../../assets/Box Important.png" alt=""
-                                                        class="" (click)="toggleInfo($event)"
+                                        <tbody>
+                                            <tr *ngFor="let check of subchecks">
+                                                <td *ngIf="check.check">{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
+                                                <td *ngIf="check.check">{{check.check.check_date | date: "hh:mm:ss"}}</td>
+                                                <td *ngIf="check.check">
+                                                    {{check.check.user_id}}
+                                                    <!-- <img src="../../assets/Box Important.png"
+                                                        (click)="toggleInfo($event)"
                                                         style="width: 20px; margin-top: -2px;">
+
                                                     <div class="modale-info" *ngIf="isInfoVisible">
-                                                        <div style="color: rgba(145, 142, 244, 1); text-align: center;">
-                                                            More information</div>
+                                                        <div
+                                                            style="color: rgba(145, 142, 244, 1); text-align: center;">
+                                                            More information
+                                                        </div>
                                                         <div class="d-flex mt-2 dep">
-                                                            <div class="pl-4 results-right" 
+                                                            <div class="pl-4 results-left"
                                                                 style="font-weight: 200;">
-                                                                <span>Automobile Make: </span> <br>
-                                                                <span class="mt-1">Model </span> <br>
-                                                                <span class="mt-1">Owner’s name </span><br>
-                                                                <span class="mt-1">Policy number </span><br>
-                                                                <span class="mt-2">VIN number </span><br>
+                                                                <span *ngIf="check.automobile.make">Automobile Make: </span> <br>
+                                                                <span class="mt-1" *ngIf="check.automobile.model">Model</span> <br>
+                                                                <span class="mt-1" *ngIf="check.automobile.owername">Owner’s name  </span><br>
+                                                                <span class="mt-1" *ngIf="check.automobile.policyname">Policy number  </span><br>
+                                                                <span class="mt-2" *ngIf="check.automobile.vin_number">VIN number </span><br>
                                                                 <span class="pt-5">Expiration date </span>
                                                             </div>
                                                             <div class="divider"></div>
-                                                            <div class="resuh6">
-                                                                <h6 class="text-dark">lorem... </h6>
-                                                                <h6 class="text-dark">34465 </h6>
-                                                                <h6 class="text-dark">Bill Gate </h6>
-                                                                <h6 class="text-dark">67899GH467690 </h6>
-                                                                <h6 class="text-dark">90087777 </h6>
+                                                            <div>
+                                                                <h6 class="text-dark">{{check.automobile.make}} </h6>
+                                                                <h6 class="text-dark">{{check.automobile.model}} </h6>
+                                                                <h6 class="text-dark">{{check.automobile.owername}}</h6>
+                                                                <h6 class="text-dark">{{check.automobile.policyname}}</h6>
+                                                                <h6 class="text-dark"> {{check.automobile.vin_number}} </h6>
                                                                 <h6 class="text-dark">12/08/2023 </h6>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </td>
-                                                <td></td>
-                                                <td>
+                                                <td *ngIf="check.check" style="padding-top: 3px !important;">
                                                     <div class="container ">
-                                                        <div class="active px-4 py-1">
-                                                            <div *ngIf="check2.is_insured == 1" class="status-active ">Active</div>
-                                                            <div *ngIf="check2.is_insured == 0" class="status-expired ">Expired</div>
-                                                            <div *ngIf="check2.is_insured == null" class="status-expired ">Not found</div>
+                                                        <div *ngIf="check.check.status == 'insured'" class="status-active px-2 py-2">
+                                                            <h6>Active</h6>
+                                                        </div>
+                                                        <div *ngIf="check.check.status == 'expired'" class="status-expired px-2 py-2">
+                                                            <h6>Expired</h6>
+                                                        </div>
+                                                        <div *ngIf="check.check == null" class="status-expired px-2 py-2">
+                                                            <h6>Not found</h6>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <div class="pagination" *ngIf="totalPages2">
-                                                <button (click)="previousPage()" [disabled]="currentPage2 === 1" class="pagination-no">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                                                  </svg>
-                                                </button>
-                                                <span style="padding-top: 10px;">Page {{currentPage2}} of {{totalPages2}}</span>
-                                                <button (click)="nextPage()" [disabled]="currentPage2 === totalPages2" class="pagination-no">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                                  </svg>
-                                                </button>
-                                              </div>
-                                        </tbody>
-                                        <tbody *ngIf="noCheck2">
-                                            <tr class="text-center w-100">
-                                            <div class="text-center">
-                                                <strong>{{noCheck2}}</strong>
-                                            </div>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

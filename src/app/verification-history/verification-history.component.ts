@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckService } from '../_services/check.service';
-import { data } from 'jquery';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-verification-history',
   templateUrl: './verification-history.component.html',
-  styleUrl: './verification-history.component.css'
+  styleUrls: ['./verification-history.component.css']
 })
-export class VerificationHistoryComponent implements OnInit{
+export class VerificationHistoryComponent implements OnInit {
 
-  checks: any = []
-  subchecks: any = []
+  checks: any = [];
+  subchecks: any = [];
   pagedItems: any[] = [];
   permissions: any[] = [];
   pagedItems2: any[] = [];
@@ -21,80 +20,72 @@ export class VerificationHistoryComponent implements OnInit{
   itemsPerPage: number = 4;
   currentPage2: number = 1;
   itemsPerPage2: number = 4;
-  totalPages: number = 10;
-  totalPages2: number = 10;
-  noCheck = null
-  noCheck2 = null
-  filteredItems: any[] = []
-  filteredItemsS: any[] = []
+  totalPages: number = 0;
+  totalPages2: number = 0;
+  noCheck = null;
+  noCheck2 = null;
+  filteredItems: any[] = [];
+  filteredItemsS: any[] = [];
 
-  constructor(private checkService:CheckService,private permissionsService: NgxPermissionsService, private userService: UserService){}
+  constructor(private checkService: CheckService, private permissionsService: NgxPermissionsService, private userService: UserService) {}
 
   ngOnInit(): void {
-
-    // this.userService.getCurrentUserRole().subscribe(
-    //   data => {
-    //     this.permissions = data.permissions
-    //     console.log(this.permissions)
-    //     this.permissionsService.loadPermissions(this.permissions);
-    //   },
-    //   err => {
-    //     console.log(err)
-    //   }
-    // )
-
-
     this.checkService.getCheckList().subscribe(
       data => {
-        this.checks = data.checks
+        this.checks = data.check;
         this.filteredItems = this.checks;
-        this.totalPages = Math.ceil(this.checks.length / this.itemsPerPage);
+        this.updateTotalPages();
         this.updatePagedItems();
-        if(data.error){
-        this.noCheck = data.error
+        if (data.error) {
+          console.log("THE ERROR",data.error)
+          this.noCheck = data.error;
         }
-        console.log("check 1",data)
       },
       err => {
-        console.log(err)
+        this.noCheck = err.error.error;
       }
-    )
-
+    );
+  
     this.checkService.getSubCheckList().subscribe(
       data => {
-        this.subchecks = data.checks
-        this.filteredItemsS = this.checks;
-        this.totalPages2 = Math.ceil(this.subchecks.length / this.itemsPerPage2);
+        this.subchecks = data.clients_checks;
+        this.filteredItemsS = this.subchecks;
+        this.updateTotalPages();
         this.updatePagedSubItems();
-        console.log("check 2",data)
+        if (data.error) {
+          this.noCheck2 = data.error;
+        }
       },
       err => {
-        this.noCheck2 = err.error.error
-        console.log("ERREUR",err.error.error)
+        this.noCheck2 = err.error.error;
+        console.log("ERREUR", err.error.error);
       }
-    )
+    );
   }
-
-  
 
   onSearch(searchValue: { searchTerm: string, filter: string }) {
     this.filteredItems = this.checks.filter((item: { [x: string]: any; }) => {
       const value = item[searchValue.filter as keyof typeof item];
       return value.toLowerCase().includes(searchValue.searchTerm.toLowerCase());
     });
+    this.currentPage = 1;
+    this.updateTotalPages();
+    this.updatePagedItems();
   }
-
+  
   onSearchS(searchValue: { searchTerm: string, filter: string }) {
     this.filteredItemsS = this.subchecks.filter((item: { [x: string]: any; }) => {
       const value = item[searchValue.filter as keyof typeof item];
       return value.toLowerCase().includes(searchValue.searchTerm.toLowerCase());
     });
+    this.currentPage2 = 1;
+    this.updateTotalPages();
+    this.updatePagedSubItems();
   }
 
-  isShow = false;
-
-  toggleDisplay() {
-    this.isShow = !this.isShow;
+  updateTotalPages(): void {
+    this.totalPages = Math.ceil(this.filteredItems.length / this.itemsPerPage);
+    this.totalPages2 = Math.ceil(this.filteredItemsS.length / this.itemsPerPage2);
   }
 
   isInfoVisible = false;
@@ -119,14 +110,12 @@ export class VerificationHistoryComponent implements OnInit{
 
   updatePagedItems(): void {
     const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.pagedItems = this.checks.slice(start, end);
+    this.pagedItems = this.filteredItems.slice(start, start + this.itemsPerPage);
   }
-
+  
   updatePagedSubItems(): void {
     const start = (this.currentPage2 - 1) * this.itemsPerPage2;
-    const end = start + this.itemsPerPage2;
-    this.pagedItems2 = this.subchecks.slice(start, end);
+    this.pagedItems2 = this.filteredItemsS.slice(start, start + this.itemsPerPage2);
   }
 
   previousPage(): void {
@@ -143,4 +132,17 @@ export class VerificationHistoryComponent implements OnInit{
     }
   }
 
+  previousPage2(): void {
+    if (this.currentPage2 > 1) {
+      this.currentPage2--;
+      this.updatePagedSubItems();
+    }
+  }
+
+  nextPage2(): void {
+    if (this.currentPage2 < this.totalPages2) {
+      this.currentPage2++;
+      this.updatePagedSubItems();
+    }
+  }
 }

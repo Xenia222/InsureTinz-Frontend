@@ -1,0 +1,20 @@
+/* item-list.component.css */
+div {
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"], select, input[type="range"] {
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  

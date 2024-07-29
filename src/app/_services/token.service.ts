@@ -17,6 +17,11 @@ export class TokenService {
     this.router.navigate([''])
   }
 
+  clearStatus(){
+    localStorage.removeItem('status')
+    this.router.navigate([''])
+  }
+
   isLogged(): boolean{
     const token = localStorage.getItem('token')
     return !!token
