@@ -77,18 +77,18 @@ overflow-x: hidden;">
                                                     <tr>
                                                         <th>Date</th>
                                                         <th>Time</th>
-                                                        <th>Status</th>
                                                         <th>Credits Amount</th>
                                                         <th>Payement method</th>
+                                                        <th>Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr *ngFor="let transact of transaction">
                                                         <td>{{transact.updated_at | date : "dd/MM/yyyy"}}</td>
                                                         <td>{{transact.updated_at | date: "hh:mm:ss"}}</td>
-                                                        <td>{{transact.status}}</td>
                                                         <td>{{transact.amount}}</td>
                                                         <td>{{transact.payment_method}}</td>
+                                                        <td>{{transact.status}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
