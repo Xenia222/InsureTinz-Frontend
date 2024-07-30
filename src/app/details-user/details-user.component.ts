@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-details-user',
@@ -18,6 +19,7 @@ export class DetailsUserComponent implements OnInit{
   itemsPerPage: number = 4;
   totalPages: number = 10;
   filteredItems: any[] = []
+  infoVisibility: { [key: string]: boolean } = {};
 
   constructor(private route: ActivatedRoute, private userService: UserService){}
 
@@ -52,27 +54,27 @@ export class DetailsUserComponent implements OnInit{
     this.pagedItems = this.checks.slice(start, end);
   }
 
+  isInfoVisible2 = false;
+  // isInfoVisible = false;
+  position = { x: 0, y: 0 };
+
+
   toggleDisplay() {
     this.isShow = !this.isShow;
   }
 
-  isInfoVisible2 = false;
-  isInfoVisible = false;
-  position = { x: 0, y: 0 };
-
-  toggleInfo(event: MouseEvent) {
-    this.isInfoVisible = !this.isInfoVisible;
-
-    if (this.isInfoVisible) {
-      const target = event.target as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      this.position = {
-        x: rect.right,
-        y: rect.top
-      };
-    }
+  findUser(id: string): Observable<string> {
+    return this.userService.getAnyUser(id);
   }
 
+  toggleInfo(event: Event, checkId: string) {
+    event.stopPropagation();
+    this.infoVisibility[checkId] = !this.infoVisibility[checkId];
+  }
+
+  isInfoVisible(checkId: string): boolean {
+    return !!this.infoVisibility[checkId];
+  }
   toggleInfo2(event: MouseEvent) {
     this.isInfoVisible2 = !this.isInfoVisible2;
 
@@ -87,6 +89,6 @@ export class DetailsUserComponent implements OnInit{
   }
   
   hideInfo() {
-    this.isInfoVisible = false;
+    // this.isInfoVisible = false;
   }
 }
