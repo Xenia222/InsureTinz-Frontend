@@ -13,7 +13,7 @@ export class CreditsComponent {
   credits: number = 0;
   price: number = 0;
   currentDate: Date = new Date();
-  paymentMethod: string = 'paypal'; // Default payment method
+  paymentMethod: string = 'mtnmomo'; // Default payment method
   currency: string = 'XOF';
   phoneNumber: string = '';
   paymentStatus: string = '';

@@ -27,16 +27,7 @@ export class CreditPurchaseHistoryComponent implements OnInit{
         this.user_credit_balance = data.credit_balance.used_credits
       }
     )
-    // this.userService.getCurrentUserRole().subscribe(
-    //   data => {
-    //     this.permissions = data.permissions
-    //     console.log("Permissions",this.permissions)
-    //     this.permissionsService.loadPermissions(this.permissions);
-    //   },
-    //   err => {
-    //     console.log(err)
-    //   }
-    // )
+
     this.creditService.getTransaction().subscribe(
       data => {
         console.log(data.transactions)
