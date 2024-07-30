@@ -34,18 +34,22 @@ overflow-x: hidden;">
                                         <label for="firstName">First Name</label>
                                         <input type="text" id="firstName" class="form-control champ"
                                             formControlName="firstName">
-                                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
-                                        </div>
+                                            <div *ngIf="isInvalidAndTouched('firstName')">
+                                                <small class="text-danger" *ngIf="userForm.get('firstName')?.errors?.['required']">
+                                                  firstname is required.
+                                                </small>
+                                            </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="lastName">Last Name</label>
                                         <input type="text" id="lastName" class="form-control champ"
                                             formControlName="lastName">
-                                        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
-                                        </div>
+                                            <div *ngIf="isInvalidAndTouched('lastName')">
+                                                <small class="text-danger" *ngIf="userForm.get('lastName')?.errors?.['required']">
+                                                  lastname is required.
+                                                </small>
+                                            </div>
                                     </div>
                                 </div>
 
@@ -55,19 +59,27 @@ overflow-x: hidden;">
                                     <div class="form-group col-md-6">
                                         <label for="email">Email</label>
                                         <input type="email" id="email" class="form-control champ" formControlName="email">
-                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['email'].errors['required']">Email is required</div>
-                                            <div *ngIf="f['email'].errors['email']">Email must be a valid email address
-                                            </div>
-                                        </div>
+                                        <div *ngIf="isInvalidAndTouched('email')">
+                                            <small class="text-danger" *ngIf="userForm.get('email')?.errors?.['required']">
+                                            Email is required.
+                                            </small>
+                                            <small class="text-danger" *ngIf="userForm.get('email')?.errors?.['email']">
+                                              Enter a valid email address.
+                                            </small>
+                                          </div>
                                     </div>
 
                                     <div class="form-group col-md-6 ">
                                         <label for="phone">Phone Number</label>
                                         <input type="tel" id="phone" class="form-control champ" formControlName="phone">
-                                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['phone'].errors['required']">Phone Number is required</div>
-                                        </div>
+                                        <div *ngIf="isInvalidAndTouched('phone')">
+                                            <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.['required']">
+                                              Phone Number is required.
+                                            </small>
+                                            <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.['pattern']">
+                                              Phone Number must contain exactly 8 digits.
+                                            </small>
+                                          </div>
                                     </div>
 
 
@@ -79,9 +91,11 @@ overflow-x: hidden;">
                                         <select id="position" class="form-control champ-select" formControlName="position">
                                             <option *ngFor="let pos of positions" [value]="pos">{{pos}}</option>
                                         </select>
-                                        <!-- <div *ngIf="submitted && f['position'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['position'].errors['required']">Position is required</div>
-                                        </div> -->
+                                        <div *ngIf="isInvalidAndTouched('position')">
+                                            <small class="text-danger" *ngIf="userForm.get('position')?.errors?.['required']">
+                                              Position is required.
+                                            </small>
+                                          </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -89,9 +103,11 @@ overflow-x: hidden;">
                                         <select id="department" class="form-control champ-select" formControlName="department">
                                             <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
                                         </select>
-                                        <!-- <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['department'].errors['required']">Department is required</div>
-                                        </div> -->
+                                        <div *ngIf="isInvalidAndTouched('department')">
+                                            <small class="text-danger" *ngIf="userForm.get('department')?.errors?.['required']">
+                                              Department is required.
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -147,7 +163,7 @@ overflow-x: hidden;">
                                     {{ errorMessage }}
                                 </div>
 
-                                <button type="submit" class="boutoon btn-warning btn  px-5 py-2 mt-4">Add</button>
+                                <button type="submit" [disabled]="userForm.invalid" class="boutoon btn-warning btn  px-5 py-2 mt-4">Add</button>
                             </form>
                               
 

@@ -48,7 +48,7 @@ export class StructuresInformationsComponent implements OnInit{
         primaryContactTitle: ['', Validators.required],
         primaryContactEmail: ['', [Validators.required, Validators.email]],
         secondaryContactEmail: ['', [Validators.email]],
-        primaryPhoneNumber: ['', Validators.required,Validators.pattern(/^\d{8}$/)],
+        primaryPhoneNumber: ['', Validators.pattern(/^\d{8}$/)],
         secondaryPhoneNumber: ['', Validators.pattern(/^\d{8}$/)],
       }),
       terms: this.fb.array([

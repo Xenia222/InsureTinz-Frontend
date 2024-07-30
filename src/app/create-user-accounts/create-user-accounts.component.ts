@@ -30,7 +30,7 @@ export class CreateUserAccountsComponent implements OnInit{
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['00000000'],
+        password: ['', Validators.required],
         phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
         type: ['', Validators.required],
@@ -42,6 +42,11 @@ export class CreateUserAccountsComponent implements OnInit{
         roles: [[]],
         permissions: [[]]
     });
+  }
+
+  isInvalidAndTouched(controlName: string): boolean {
+    const control =this.userForm.get(controlName);
+    return control ? control.invalid && (control.dirty || control.touched) : false;
   }
 
   ngOnInit() {
