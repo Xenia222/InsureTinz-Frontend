@@ -100,7 +100,7 @@
                       </div>
                       <div><strong>{{result.valid_to | date:'dd/MM/yyyy'}}</strong></div>
                     </div>
-                    <button class="w-75 btn btn-warning" *ngIf="result.check.status == 'expired' || result.check.status =='not_found' " type="button" (click)="imprimeTicket(result)">Print ticket</button>
+                    <button class="w-75 btn btn-warning" *ngIf="result.check.status == 'expired' || result.check.status =='not_found' " type="button" (click)="generateTicket(result)">Print ticket</button>
                   </td>
                 </tr>
               </tbody>
@@ -108,78 +108,6 @@
           </div>
         </div>
       </div>
-      @if (ticketData) {
-        <div hidden id="printableTicket" class="ticket">
-          <div class="header">
-            <h2>Insurance Violation</h2>
-          </div>
-          
-          <div class="violation-info">
-            <div class="info-row">
-              <span class="label">Violation location :</span>
-              <span class="value">{{ticketData.location}}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Date time :</span>
-              <span class="value">{{ticketData.date}}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">VIN No :</span>
-              <span class="value">{{ticketData.vin}}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Policy number :</span>
-              <span class="value">{{ticketData.policyNumber}}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Owner :</span>
-              <span class="value">{{ticketData.owner}}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Model :</span>
-              <span class="value">{{ticketData.model}}</span>
-            </div>
-          </div>
-
-          <div class="violation-details">
-            <h3>Violation details</h3>
-            <p>Check automobile insurance status with these Check automobile insurance status with these Check automobile insurance status with these with these insurance status with these with these</p>
-          </div>
-
-          <div class="penalties">
-            <h3>Penalties</h3>
-            <div class="penalty-row">
-              <span>Locality fee (fcfa)</span>
-              <span>Administrative fee (fcfa)</span>
-              <span>Others (fcfa)</span>
-            </div>
-            <div class="penalty-row">
-              <span>{{ticketData.penalties.localityFee}}</span>
-              <span>{{ticketData.penalties.administrativeFee}}</span>
-              <span>{{ticketData.penalties.others}}</span>
-            </div>
-            <div class="total">
-              <span>Total :</span>
-              <span>{{getTotalPenalty()}} fcfa</span>
-            </div>
-          </div>
-
-          <div class="payment-methods">
-            <p>Payment methods</p>
-            <!-- Add payment method logos here -->
-          </div>
-
-          <div class="qr-code">
-            <!-- Add QR code here -->
-          </div>
-
-          <div class="violation-codes">
-            <p>Violation codes</p>
-            <!-- Add violation codes here -->
-          </div>
-        </div>
-        <!-- <button type="button" (click)="printTicket()">Imprimer le ticket</button> -->
-      }
     </main>
   </div>
 </div>

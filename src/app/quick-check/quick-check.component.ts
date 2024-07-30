@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CheckService } from '../_services/check.service';
 import { data } from 'jquery';
 import { TicketService } from '../_services/ticket.service';
-import { FLOAT } from 'html2canvas/dist/types/css/property-descriptors/float';
 
 interface TicketData {
   location: string;
@@ -12,9 +11,10 @@ interface TicketData {
   owner: string;
   model: string;
   penalties: {
-    localityFee: FLOAT;
-    administrativeFee: FLOAT;
-    others: FLOAT;
+    localityFee: number;
+    administrativeFee: number;
+    others: number;
+    total: number;
   };
 }
 @Component({
@@ -103,35 +103,244 @@ export class QuickCheckComponent {
 
     generateTicket(ticketData: any) {
       this.ticketData = {
-        location: ticketData.ticket.violation_location,
-        date: ticketData.ticket.violation_date_time,
-        vin: ticketData.check.vin_number,
-        policyNumber: ticketData.policy_number,
-        owner: ticketData.ownername,
-        model: ticketData.model,
+        location: ticketData.ticket.original.ticket.violation_location,
+        date: ticketData.ticket.original.ticket.violation_date_time,
+        vin: ticketData.ticket.original.ticket.vin_number,
+        policyNumber: ticketData.ticket.original.ticket.policy_number,
+        owner: ticketData.ticket.original.ticket.ownerner,
+        model: ticketData.ticket.original.ticket.model,
         penalties: {
           localityFee: ticketData.ticket.original.ticket.violation_codes[0].locality_fee,
           administrativeFee: ticketData.ticket.original.ticket.violation_codes[0].administrative_fee,
-          others: ticketData.ticket.original.ticket.violation_codes[0].other_fees
+          others: ticketData.ticket.original.ticket.violation_codes[0].other_fees,
+          total: ticketData.ticket.original.ticket.violation_codes[0].total
         }
       };
+      const ticketHtml = `
+    <div class="ticket1">
+        <div class="grand-container" style="height: 28vh;">
+            <div class="side-text">${ticketData.ticket.original.ticket.violation_codes[0].code} - ${ticketData.ticket.original.ticket.violation_codes[0].description}</div>
+
+            <div class="container1" style="height: 100%;">
+                <div style="height: 45%;">
+                    <div class="side-text-gauche">${ticketData.ticket.original.ticket.violation_codes[0].code} - ${ticketData.ticket.original.ticket.violation_codes[0].description}</div>
+                    <div class="header" >Insurance Violation</div>
+                    <div class="info-grid">
+                        <div>Violation location:</div>
+                        <div style="text-align: end; padding-right: 20px; font-weight: bold;">${this.ticketData.location}</div>
+                        <div>Date time:</div>
+                        <div style="text-align: end; padding-right: 20px; font-weight: bold;">${this.ticketData.date}</div>
+                    </div>
+                    <div style="height: 2px; background-color: #ffd700; margin-top: 25px;" ></div>
+                </div>
+                <div class="container2">
+                <div class="info-grid" style="padding-left: 70px;">
+                    <div>VIN No:</div>
+                    <div style="text-align: end; padding-right: 20px;">${this.ticketData.vin}</div>
+                    <div>Policy number:</div>
+                    <div style="text-align: end; padding-right: 20px;">${this.ticketData.policyNumber}</div>
+                    <div>Owner:</div>
+                    <div style="text-align: end; padding-right: 20px;">${this.ticketData.owner}</div>
+                    <div>Model:</div>
+                    <div style="text-align: end; padding-right: 20px;">${this.ticketData.model}</div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="ticket">
+        
+            <div class="violation-details">Violation details</div>
+            <p style=" padding: 5px 40px; line-height: 1.4; font-size: 12px;">Check automobile insurance status with these :Check automobile insurance status with these Check automobile insurance status with these with these Check automobile insurance status with these with these</p>
+
+        </div>
+      <div class="ticket">
+        <div class="penalties">Penalties</div>
+            <table class="penalties-table" style="font-size: 15px;">
+                <tr>
+                    <th>Locality fee (fcfa)</th>
+                    <th>Administrative fee (fcfa)</th>
+                    <th>Others (fcfa)</th>
+                </tr>
+                <tr>
+                    <td>${ticketData.ticket.original.ticket.violation_codes[0].locality_fee}</td>
+                    <td>${ticketData.ticket.original.ticket.violation_codes[0].administrative_fee}</td>
+                    <td>${ticketData.ticket.original.ticket.violation_codes[0].other_fees}</td>
+                </tr>
+            </table>
+            <p class="total" style="font-size: 15px;">Total: ${ticketData.ticket.original.ticket.violation_codes[0].total} fcfa</p>
+            <div class="ligne-tirets"></div>
+        <div class="payment-methods">
+            <div id="qrcode"></div>
+            <div>
+                <p style="font-size: 14px;">Payment methods</p>
+                <img src="../../assets/payement_methode.png" alt="">
+            </div>
+        </div>
+        <center><p style="font-weight: bold; font-size: 12px;">Scan the code qr to get access to a space to pay</p></center>
+        <div class="ligne-tirets"></div>
+        <div class="violation-codes">
+            <div class="violation-code">${ticketData.ticket.original.ticket.violation_codes[0].code} - ${ticketData.ticket.original.ticket.violation_codes[0].description}</div>
+        </div>
+    </div>
+    
+  </div>
+  `;
+
+  const printWindow = window.open('', '_blank');
+  if (printWindow) {
+    printWindow.document.write(`
+      <html>
+        <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Insurance Violation Ticket</title>
+          <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+          <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #qrcode {
+            width: 100px;
+            height: 100px;
+        }
+        #qrcode img {
+            width: 100%;
+            height: 100%;
+        }
+        .ticket1 {
+            border: 1px solid #ccc;
+        }
+        .ticket {
+            border-top: 1px solid #ffd700;
+        }
+        .header, .violation-details, .penalties {
+            background-color: #ffd700;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-left: 30px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            padding-left: 20px;
+            font-size: 12px;
+        }
+        .penalties-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-left: 40px;
+        }
+        .penalties-table td, .penalties-table th {
+            padding: 5px;
+            text-align: center;
+        }
+        .total {
+            font-weight: bold;
+            text-align: right;
+            background-color: #ffd700;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-left: 78px;
+            width: 300px;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0px 50px;
+        }
+        .qr-code {
+            width: 70px;
+            height: 70px;
+            background-color: #ccc;
+        }
+        .violation-codes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 7px;
+        }
+        .violation-code {
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .violation{
+            background-color: #ffd700;
+            padding: 8px;
+            text-align: center;
+        }
+        .side-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            float: right;
+            font-size: 10px;
+            height: 100%;
+            width: 30px;
+            padding-right: 15px;
+            background-color: #d9d9d9;
+        }
+        .side-text-gauche{
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            float: left;
+            font-size: 10px;
+            background-color: #d9d9d9;
+            height: 100%;
+            width: 30px;
+            padding-right: 15px;
+            padding-top: 10px;
+        }
+        .ligne-tirets {
+            width: 100%;
+            height: 2px;
+            background-image: linear-gradient(to right, #ffd700 70%, transparent 30%);
+            background-size: 50px 100%;
+            margin: 10px 0;
+        }
+    </style>
+        </head>
+        <body>
+          ${ticketHtml}
+          <script>
+    // Fonction pour générer le code QR
+    function generateQRCode(text) {
+        var qr = qrcode(0, 'M');
+        qr.addData(text);
+        qr.make();
+        document.getElementById('qrcode').innerHTML = qr.createImgTag();
     }
 
-    imprimeTicket(ticketData: any){
-      this.generateTicket(ticketData);
-      this.printTicket();
+    // Appel de la fonction avec le texte souhaité
+    generateQRCode('https://www.example.com');
+            window.onload = function() { window.print(); window.close(); }
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+
     }
-  
-    getTotalPenalty(): number {
-      if (!this.ticketData) return 0;
-      const { localityFee, administrativeFee, others } = this.ticketData.penalties;
-      return localityFee + administrativeFee + others;
     }
+
+    // imprimeTicket(ticketData: any){
+    //   this.generateTicket(ticketData);
+    //   this.printTicket();
+    //   // this.ticketData = null
+    // }
 
     printTicket() {
       const printContent = document.getElementById('printableTicket');
       if (!printContent) {
-        console.error('Le contenu à imprimer est introuvable.');
+        console.error('content not found.');
         return;
       }
       
