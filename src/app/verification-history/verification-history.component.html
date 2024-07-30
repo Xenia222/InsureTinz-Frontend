@@ -201,13 +201,13 @@
                                                 </td>
                                                 <td style="padding-top: 3px !important;">
                                                     <div class="container ">
-                                                        <div *ngIf="check.check.status == 'insured'" class="active px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'insured'" class="status-active px-2 py-2">
                                                             <h6>Active</h6>
                                                         </div>
-                                                        <div *ngIf="check.check.status == 'expired'" class="noactive px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'expired'" class="status-expiredpx-2 py-2">
                                                             <h6>Expired</h6>
                                                         </div>
-                                                        <div *ngIf="check.check.status == 'not_found'" class="noactive px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'not_found'" class="status-expired px-2 py-2">
                                                             <h6>Not found</h6>
                                                         </div>
                                                     </div>
