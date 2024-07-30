@@ -135,8 +135,8 @@ export class QuickCheckComponent {
                 </div>
                 <div class="container2">
                 <div class="info-grid" style="padding-left: 70px;">
-                    <div>VIN No:</div>
-                    <div style="text-align: end; padding-right: 20px;">${this.ticketData.vin}</div>
+                    <div>Identifier No:</div>
+                    <div style="text-align: end; padding-right: 20px;">${ticketData.identifier}</div>
                     <div>Policy number:</div>
                     <div style="text-align: end; padding-right: 20px;">${this.ticketData.policyNumber}</div>
                     <div>Owner:</div>

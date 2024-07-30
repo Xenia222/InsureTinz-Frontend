@@ -4,6 +4,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { UserService } from '../_services/user.service';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-verification-history',
@@ -14,6 +15,7 @@ export class VerificationHistoryComponent implements OnInit {
   
   private _selectedStatus: string = 'All';
   checks: any[] = [];
+  infoVisibility: { [key: string]: boolean } = {};
   filteredChecks: any[] = [];
   paginatedChecks: any[] = [];
   totalRecords: number = 0;
@@ -32,6 +34,7 @@ export class VerificationHistoryComponent implements OnInit {
   constructor(private checkService: CheckService, private permissionsService: NgxPermissionsService, private userService: UserService) {}
 
   status: string[] = ['All', 'insured', 'expired','not_found'];
+  isShow = false;
 
   ngOnInit(): void {
     this.checkService.getCheckList().subscribe(
@@ -46,7 +49,7 @@ export class VerificationHistoryComponent implements OnInit {
         this.noCheck = err.error.error;
       }
     );
-
+    
     this.checkService.getSubCheckList().subscribe(
       data => {
         this.subchecks = data.clients_checks;
@@ -60,6 +63,14 @@ export class VerificationHistoryComponent implements OnInit {
         this.noCheck2 = err.error.error;
       }
     );
+  }
+
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
+  findUser(id: string): Observable<string> {
+    return this.userService.getAnyUser(id);
   }
 
   get selectedStatus(): string {
@@ -102,24 +113,18 @@ export class VerificationHistoryComponent implements OnInit {
     return Math.ceil(this.totalRecordsSub / this.pageSizeSub);
   }
 
-  isInfoVisible = false;
-  position = { x: 0, y: 0 };
 
-  toggleInfo(event: MouseEvent) {
-    this.isInfoVisible = !this.isInfoVisible;
+  toggleInfo(event: Event, checkId: string) {
+    event.stopPropagation();
+    this.infoVisibility[checkId] = !this.infoVisibility[checkId];
+  }
 
-    if (this.isInfoVisible) {
-      const target = event.target as HTMLElement;
-      const rect = target.getBoundingClientRect();
-      this.position = {
-        x: rect.right,
-        y: rect.top
-      };
-    }
+  isInfoVisible(checkId: string): boolean {
+    return !!this.infoVisibility[checkId];
   }
 
   hideInfo() {
-    this.isInfoVisible = false;
+    // this.isInfoVisible = false;
   }
 
   exportToPDF(): void {

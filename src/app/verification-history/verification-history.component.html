@@ -146,35 +146,6 @@
                             <h3 class="sear">Verification log history</h3>
                         </div> -->
 
-                        <div class="container mt-3 group3 sear2 sear22" style="padding: 0px;">
-                            <div class="btn-group grouppp  sear3" role="group" aria-label="Basic example">
-
-                                <div class="sous-group">
-                                    <img src="../../assets/filter.png" alt="">
-                                </div>
-                                <div class="sous-group">
-                                    <span>filter by</span>
-                                </div>
-                                <div class="col-auto btn-light sous-group">
-                                    <select class="form-select bg-light">
-                                        <option selected>Month</option>
-                                    </select>
-                                </div>
-                                <div class="col-auto btn-light sous-group">
-                                    <select class="form-select bg-light">
-                                        <option selected>Department</option>
-                                    </select>
-                                </div>
-                                <div class="">
-                                    <span><a href="" style="text-decoration: none !important;"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
-                                </div>
-
-                            </div>
-
-                            <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
-                                    src="../../assets/ic-local-printshop-24px.png" alt=""></button>
-
-                        </div>
 
                         <div class=" mt-4">
                             <div class="row" style="padding-left: 13px;">
@@ -189,28 +160,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let check of paginatedSubChecks; let i = index">
-                                                <td *ngIf="check.check">{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
-                                                <td *ngIf="check.check">{{check.check.check_date | date: "hh:mm:ss"}}</td>
-                                                <td *ngIf="check.check">
-                                                    {{check.check.user_id}}
-                                                    <!-- <img src="../../assets/Box Important.png"
-                                                        (click)="toggleInfo($event)"
+                                            <tr *ngFor="let check of subchecks">
+                                                <td>{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
+                                                <td>{{check.check.check_date | date: "hh:mm:ss"}}</td>
+                                                <td>
+                                                    {{ findUser(check.check.user_id) | async }}
+                                                    <img *ngIf="check.automobile !== null" src="../../assets/Box Important.png"
+                                                    (click)="toggleInfo($event, check.check.id)"
                                                         style="width: 20px; margin-top: -2px;">
 
-                                                    <div class="modale-info" *ngIf="isInfoVisible">
+                                                    <div class="modale-info" *ngIf="isInfoVisible(check.check.id)">
                                                         <div
                                                             style="color: rgba(145, 142, 244, 1); text-align: center;">
                                                             More information
                                                         </div>
-                                                        <div class="d-flex mt-2 dep">
+                                                        <div *ngIf="check.automobile !== null" class="d-flex mt-2 dep">
                                                             <div class="pl-4 results-left"
                                                                 style="font-weight: 200;">
                                                                 <span *ngIf="check.automobile.make">Automobile Make: </span> <br>
-                                                                <span class="mt-1" *ngIf="check.automobile.model">Model</span> <br>
-                                                                <span class="mt-1" *ngIf="check.automobile.owername">Owner’s name  </span><br>
-                                                                <span class="mt-1" *ngIf="check.automobile.policyname">Policy number  </span><br>
-                                                                <span class="mt-2" *ngIf="check.automobile.vin_number">VIN number </span><br>
+                                                                <span class="mt-1">Model</span> <br>
+                                                                <span class="mt-1">Owner’s name  </span><br>
+                                                                <span class="mt-1">Policy number  </span><br>
+                                                                <span class="mt-2">VIN number </span><br>
                                                                 <span class="pt-5">Expiration date </span>
                                                             </div>
                                                             <div class="divider"></div>
@@ -218,22 +189,25 @@
                                                                 <h6 class="text-dark">{{check.automobile.make}} </h6>
                                                                 <h6 class="text-dark">{{check.automobile.model}} </h6>
                                                                 <h6 class="text-dark">{{check.automobile.owername}}</h6>
-                                                                <h6 class="text-dark">{{check.automobile.policyname}}</h6>
-                                                                <h6 class="text-dark"> {{check.automobile.vin_number}} </h6>
-                                                                <h6 class="text-dark">12/08/2023 </h6>
+                                                                <h6 class="text-dark">{{check.automobile.policy_number}}</h6>
+                                                                <h6 class="text-dark"> {{check.automobile.vin}} </h6>
+                                                                <h6 class="text-dark">{{check.automobile.expiredate | date: "dd/MM/yyyy"}} </h6>
                                                             </div>
                                                         </div>
-                                                    </div> -->
+                                                        <div *ngIf="check.automobile == null" class="d-flex mt-2 dep">
+                                                            No data
+                                                        </div>
+                                                    </div>
                                                 </td>
-                                                <td *ngIf="check.check" style="padding-top: 3px !important;">
+                                                <td style="padding-top: 3px !important;">
                                                     <div class="container ">
-                                                        <div *ngIf="check.check.status == 'insured'" class="status-active px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'insured'" class="active px-2 py-2">
                                                             <h6>Active</h6>
                                                         </div>
-                                                        <div *ngIf="check.check.status == 'expired'" class="status-expired px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'expired'" class="noactive px-2 py-2">
                                                             <h6>Expired</h6>
                                                         </div>
-                                                        <div *ngIf="check.check == null" class="status-expired px-2 py-2">
+                                                        <div *ngIf="check.check.status == 'not_found'" class="noactive px-2 py-2">
                                                             <h6>Not found</h6>
                                                         </div>
                                                     </div>
