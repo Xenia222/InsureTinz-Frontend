@@ -988,3 +988,61 @@ input {
   flex-direction: column;
   gap: 10px; */
 }
+
+.ticket {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.header {
+  background-color: #FFFF00;
+  padding: 10px;
+  text-align: center;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.violation-info, .violation-details, .penalties {
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+h3 {
+  background-color: #FFFF00;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.penalty-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.payment-methods, .qr-code, .violation-codes {
+  margin-top: 20px;
+  text-align: center;
+}
