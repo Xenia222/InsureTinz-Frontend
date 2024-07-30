@@ -10,7 +10,7 @@
         <div class="bann">
 
           <div *ngxPermissionsOnly="['client_quick_check']" class=" search-container">
-            <h3>Quick Check :</h3>
+            <h4>Quick Check :</h4>
             <form name="form" #CheckForm="ngForm" (ngSubmit)="onSubmit()" class="mt-3">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="searchType" id="licensePlate"
@@ -59,9 +59,9 @@
                 <tr *ngFor="let result of results">
                   <td class="text-center two" style="font-size: 20px;">{{result.license_plate_number}}</td>
                   <td class="text-center three justify-content-center align-items-center d-flex">
-                    <div *ngIf="result.is_policy_valid == true" class="status-active ">Active</div>
-                    <div *ngIf="result.is_policy_valid == false" class="status-expired ">Expired</div>
-                    <div *ngIf="result.is_policy_valid == null" class="status-expired ">Not found</div>
+                    <div *ngIf="result.check.status == 'insured'" class="status-active ">Active</div>
+                    <div *ngIf="result.check.status == 'expired'" class="status-expired ">Expired</div>
+                    <div *ngIf="result.check.status== 'not_found'" class="status-expired ">Not found</div>
                   </td>
                   <td style="font-size: 15px;padding: 0 40px;">
                     <div class="results">
@@ -80,7 +80,7 @@
                       <div class="d-flex justify-content-between">
                         <p class="me-3">Owner's name:</p>
                       </div>
-                      <div><strong></strong></div>
+                      <div><strong>{{result.ownername}}</strong></div>
                     </div>
                     <div class="results">
                       <div class="d-flex justify-content-between">
@@ -92,7 +92,7 @@
                       <div class="d-flex justify-content-between">
                         <p class="me-3">VIN number:</p>
                       </div>
-                      <div><strong></strong></div>
+                      <div><strong>{{result.check.vin_number}}</strong></div>
                     </div>
                     <div class="results">
                       <div class="d-flex justify-content-between">
@@ -100,6 +100,7 @@
                       </div>
                       <div><strong>{{result.valid_to | date:'dd/MM/yyyy'}}</strong></div>
                     </div>
+                    <button class="w-75 btn btn-warning" *ngIf="result.check.status == 'expired' || result.check.status =='not_found' " type="button" (click)="imprimeTicket(result)">Print ticket</button>
                   </td>
                 </tr>
               </tbody>
@@ -107,6 +108,78 @@
           </div>
         </div>
       </div>
+      @if (ticketData) {
+        <div hidden id="printableTicket" class="ticket">
+          <div class="header">
+            <h2>Insurance Violation</h2>
+          </div>
+          
+          <div class="violation-info">
+            <div class="info-row">
+              <span class="label">Violation location :</span>
+              <span class="value">{{ticketData.location}}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Date time :</span>
+              <span class="value">{{ticketData.date}}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">VIN No :</span>
+              <span class="value">{{ticketData.vin}}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Policy number :</span>
+              <span class="value">{{ticketData.policyNumber}}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Owner :</span>
+              <span class="value">{{ticketData.owner}}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Model :</span>
+              <span class="value">{{ticketData.model}}</span>
+            </div>
+          </div>
+
+          <div class="violation-details">
+            <h3>Violation details</h3>
+            <p>Check automobile insurance status with these Check automobile insurance status with these Check automobile insurance status with these with these insurance status with these with these</p>
+          </div>
+
+          <div class="penalties">
+            <h3>Penalties</h3>
+            <div class="penalty-row">
+              <span>Locality fee (fcfa)</span>
+              <span>Administrative fee (fcfa)</span>
+              <span>Others (fcfa)</span>
+            </div>
+            <div class="penalty-row">
+              <span>{{ticketData.penalties.localityFee}}</span>
+              <span>{{ticketData.penalties.administrativeFee}}</span>
+              <span>{{ticketData.penalties.others}}</span>
+            </div>
+            <div class="total">
+              <span>Total :</span>
+              <span>{{getTotalPenalty()}} fcfa</span>
+            </div>
+          </div>
+
+          <div class="payment-methods">
+            <p>Payment methods</p>
+            <!-- Add payment method logos here -->
+          </div>
+
+          <div class="qr-code">
+            <!-- Add QR code here -->
+          </div>
+
+          <div class="violation-codes">
+            <p>Violation codes</p>
+            <!-- Add violation codes here -->
+          </div>
+        </div>
+        <!-- <button type="button" (click)="printTicket()">Imprimer le ticket</button> -->
+      }
     </main>
   </div>
 </div>

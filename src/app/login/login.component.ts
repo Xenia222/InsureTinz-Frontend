@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit{
             )
             this.router.navigate(['login-otp'])
           }else{
-            this.errorMessage = data.status_message
+            this.errorMessage = data.message
           }
         })
     }

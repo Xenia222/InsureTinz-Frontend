@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
@@ -6,29 +6,41 @@ import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
 import { TokenService } from '../_services/token.service';
 import { saveAs } from 'file-saver';
+import { FlagService } from '../_services/flag.service';
 
 @Component({
   selector: 'app-structures-informations',
   templateUrl: './structures-informations.component.html',
   styleUrl: './structures-informations.component.css'
 })
-export class StructuresInformationsComponent {
+export class StructuresInformationsComponent implements OnInit{
+
+  ngOnInit(): void {
+    this.flagService.getCountries().subscribe(data => {
+      this.countries = data;
+    });
+  }
+
+  getFlagUrl(code: string): string {
+    return `https://flagcdn.com/w20/${code}.png`;
+  }
+  countries: any[] = [];
 
   SignupForm: FormGroup;
   errorMessage: string = ''; // Initialisation de errorMessage à une chaîne vide
   activeSection: number = 1;
   fileName: string = 'No file(s) selected';
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UserService,
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private flagService: FlagService,
      private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
     this.SignupForm = this.fb.group({
       structureInfo: this.fb.group({
         agencyName: ['', Validators.required],
         agencyType: ['', Validators.required],
-        country: ['', Validators.required],
-        state: ['', Validators.required],
-        city: ['', Validators.required],
-        locgov: ['', Validators.required],
+        country: ['Country 1', Validators.required],
+        state: ['State 1', Validators.required],
+        city: ['City 1', Validators.required],
+        locgov: ['Local governement 1', Validators.required],
       }),
       contactInfo: this.fb.group({
         primaryContactName: ['', Validators.required],
@@ -36,8 +48,8 @@ export class StructuresInformationsComponent {
         primaryContactTitle: ['', Validators.required],
         primaryContactEmail: ['', [Validators.required, Validators.email]],
         secondaryContactEmail: ['', [Validators.email]],
-        primaryPhoneNumber: ['', Validators.required],
-        secondaryPhoneNumber: [''],
+        primaryPhoneNumber: ['', Validators.required,Validators.pattern(/^\d{8}$/)],
+        secondaryPhoneNumber: ['', Validators.pattern(/^\d{8}$/)],
       }),
       terms: this.fb.array([
         this.fb.control(false, Validators.requiredTrue),
@@ -51,6 +63,26 @@ export class StructuresInformationsComponent {
 
   get termsArray() {
     return this.SignupForm.get('terms') as FormArray;
+  }
+
+  get structureInfo() {
+    return this.SignupForm.get('structureInfo') as FormGroup;
+  }
+
+  get contactInfo() {
+    return this.SignupForm.get('contactInfo') as FormGroup;
+  }
+
+  get document() {
+    return this.SignupForm.get('document');
+  }
+
+  // Helper method to check if a control is invalid and touched
+  isInvalidAndTouched(controlName: string, formGroupName?: string): boolean {
+    const control = formGroupName
+      ? this.SignupForm.get(`${formGroupName}.${controlName}`)
+      : this.SignupForm.get(controlName);
+    return control ? control.invalid && (control.dirty || control.touched) : false;
   }
 
   onSubmit() {

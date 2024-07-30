@@ -84,6 +84,9 @@ display: none;
     background-color: var(--bs-body-bg);
     border-color: #FFCB05 !important;
     outline: 0;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
     box-shadow: 0 0 2px .25rem #ffcb0563 !important;
 }
 
