@@ -319,6 +319,32 @@ font-weight: 400;
       margin-left: 0%;
     }
   }
+  .sous-group span {
+    font-size: 13px;
+}
+.sous-group {
+  padding: 10px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
+.sous-group24{
+  padding: 5px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
+
+.sous-group {
+  padding: 8px;
+  border-right: 0.5px solid #d1cdcd6e;
+}
+.sous-group24{
+  padding: 5px;
+  border-right: 0.5px solid #d1cdcd6e;
+  margin: 0 3px;
+  text-align: center;
+}
   .modale-info {
     position: absolute;
     /* width: 414px; */

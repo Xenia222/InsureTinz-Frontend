@@ -44,6 +44,7 @@ export class SidebarComponent implements OnInit{
   img: string = ''
   firstName: string =''
   lastName: string = ''
+  user_type: string = ''
   roles: any[] = []
 
   constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
@@ -77,6 +78,7 @@ export class SidebarComponent implements OnInit{
         (data: any) => {
           this.firstName = data.primary_contact_name;
           this.lastName = data.secondary_contact_name;
+          this.user_type = data.user_type
           console.log('User data:', data);
         },
         error => {

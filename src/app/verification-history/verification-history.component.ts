@@ -14,9 +14,11 @@ import { Observable } from 'rxjs';
 export class VerificationHistoryComponent implements OnInit {
   
   private _selectedStatus: string = 'All';
+  private _selectedStatuss: string = 'All';
   checks: any[] = [];
   infoVisibility: { [key: string]: boolean } = {};
   filteredChecks: any[] = [];
+  filteredCheckss: any[] = [];
   paginatedChecks: any[] = [];
   totalRecords: number = 0;
   pageSize: number = 4;
@@ -34,6 +36,7 @@ export class VerificationHistoryComponent implements OnInit {
   constructor(private checkService: CheckService, private permissionsService: NgxPermissionsService, private userService: UserService) {}
 
   status: string[] = ['All', 'insured', 'expired','not_found'];
+  // statuss: string[] = ['All', 'insured', 'expired','not_found'];
   isShow = false;
 
   ngOnInit(): void {
@@ -81,6 +84,7 @@ export class VerificationHistoryComponent implements OnInit {
     this._selectedStatus = value;
     this.applyFilters();
   }
+  
 
   applyFilters(): void {
     this.filteredChecks = this.checks.filter(item => {
@@ -89,6 +93,25 @@ export class VerificationHistoryComponent implements OnInit {
     });
     this.totalRecords = this.filteredChecks.length;
     this.setPage(1);
+  }
+
+  get selectedStatuss(): string {
+    return this._selectedStatuss;
+  }
+
+  set selectedStatuss(value: string) {
+    this._selectedStatuss = value;
+    this.applyFilterss();
+  }
+  
+
+  applyFilterss(): void {
+    this.filteredCheckss = this.subchecks.filter(item => {
+      const matchesCategory = this.selectedStatuss === 'All' || item.check.status === this.selectedStatuss;
+      return matchesCategory;
+    });
+    this.totalRecordsSub = this.filteredCheckss.length;
+    this.setPageSub(1);
   }
 
   setPage(page: number) {
@@ -106,7 +129,7 @@ export class VerificationHistoryComponent implements OnInit {
     this.currentPageSub = page;
     const startIndex = (page - 1) * this.pageSizeSub;
     const endIndex = startIndex + this.pageSizeSub;
-    this.paginatedSubChecks = this.subchecks.slice(startIndex, endIndex);
+    this.paginatedSubChecks = this.filteredCheckss.slice(startIndex, endIndex);
   }
 
   get totalPagesSub(): number {
@@ -145,6 +168,51 @@ export class VerificationHistoryComponent implements OnInit {
       const expireDate = item.automobile?.expiredate ? `Expiration date: ${new Date(item.automobile.expiredate).toLocaleDateString()}` : 'Expiration date: N/A';
       const details = `Insurance company: \n${policyNumber}\nCoverage details: \n${expireDate}`;
       return [licensePlate, status, details];
+    });
+
+    // Use autoTable to generate table
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 30,
+      theme: 'striped',
+      headStyles: { fillColor: [22, 160, 133] },
+      margin: { top: 10, bottom: 10 }
+    });
+
+    // Footer
+    const pageCount = doc.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(10);
+      doc.text(`Page ${i} of ${pageCount}`, doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() - 10, {
+        align: 'center'
+      });
+    }
+
+    // Save PDF
+    doc.save('check-list.pdf');
+  }
+
+  exportToPDF2(): void {
+    const doc = new jsPDF();
+
+    // Title
+    doc.setFontSize(18);
+    doc.text('Check List', 14, 22);
+
+    // Headers
+    const headers = [['Date','Time', 'User', 'Status', 'Details']];
+
+    // Data
+    const data = this.filteredCheckss.map(item => {
+      const Date = item.check.check_date || 'N/A';
+      const Time = item.check.check_date || 'N/A'
+      const status = item.check.status || 'N/A';
+      const policyNumber = item.insurance_policy?.policy_number ? `Policy number: ${item.insurance_policy.policy_number}` : 'Policy number: N/A';
+      const expireDate = item.automobile?.expiredate ? `Expiration date: ${new Date(item.automobile.expiredate).toLocaleDateString()}` : 'Expiration date: N/A';
+      const details = `Insurance company: \n${policyNumber}\nCoverage details: \n${expireDate}`;
+      return [Date, status, details];
     });
 
     // Use autoTable to generate table

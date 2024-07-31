@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit{
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
             this.tokenService.saveToken(data.token)
-            this.storageService.saveStatus(data.user.status)
             this.userService.getCurrentUserRole().subscribe(
               data => {
                 this.roles = data.roles

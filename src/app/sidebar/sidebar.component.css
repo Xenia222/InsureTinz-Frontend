@@ -650,3 +650,39 @@
     fill: white !important;
   }
 }
+.popover {
+  max-width: 200px;
+  z-index: 2000 !important;
+display: block;
+}
+.custom-popover {
+  max-width: 200px;
+  box-shadow: -7px 5px 10px #d3cec1;
+  z-index: 2000 !important;
+  transform: translate(126px, 1532px) !important;
+
+}
+
+.custom-popover .popover-header {
+  text-align: center;
+}
+
+.custom-popover .popover-body {
+  text-align: center;
+}
+.popover-body {
+  text-align: center;
+}
+
+.footer22{
+  display: flex;
+  justify-content: space-around;
+}
+.btn22{
+  background-color: #ffcb05;
+  border: unset;
+  padding: 5px 30px;
+}
+.btn21{
+  padding: 5px 30px;
+}

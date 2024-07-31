@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  constructor(private router: Router) { }
+  userStatus: string = ''
+  statusEtat: any
+  constructor(private router: Router,private userService: UserService) { }
 
   saveCredentials(id:string, email: string,password: string){
     localStorage.setItem('id', id)
@@ -18,14 +22,13 @@ export class StorageService {
     localStorage.setItem('status', status)
   }
 
-  active(): boolean{
-    let statusEtat:boolean = false
-    if(localStorage.getItem('status') == 'active'){
-      statusEtat = true
-    }else if(localStorage.getItem('status') =='inactive' ){
-      statusEtat = false
-    }
-    return statusEtat
+  active(): Observable<boolean> {
+    return this.userService.getUser().pipe(
+      map((data:any) => {
+        console.log("Status user", data.user.status);
+        return data.user.status === 'active';
+      })
+    );
   }
 
   clearCredentials(){

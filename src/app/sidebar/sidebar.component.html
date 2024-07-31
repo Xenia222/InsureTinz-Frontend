@@ -33,7 +33,9 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
         <div class="sidebar pe-3 pb-3" [ngClass]="{ 'sidebar-visible': sidebarVisible }">
             <nav class="navbar bg-white navbar-dark h-100">
                 <a href="" class="navbar-brand mx-4 mb-2">
-                    <h3 class="text-main">Main Admin</h3>
+                    <h3 *ngIf="user_type == 'client master'" class="text-main">Main Admin</h3>
+                    <h3 *ngIf="user_type == 'client user'" class="text-main">User Admin</h3>
+                    <h3 *ngIf="user_type == 'police user'" class="text-main">Police</h3>
                 </a>
 
                 <div class="navbar-bas w-100">
@@ -89,10 +91,28 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
 
                     <div class="mt-auto">
                         <hr>
-                        <a (click)="modal()" class="open-modal nav-item nav-link mt-2 " data-bs-toggle="dropdown"
-                            style="cursor: pointer;" id="logoutBtn"><i class="fa fa-chart-bar me-2"></i>
-                            <div class="element">Logout</div>
-                        </a>
+                        <button type="button" class="nav-item nav-link mt-2 " style="    padding: 5px 20px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa fa-chart-bar me-2"></i> Logout
+                        </button>
+
+                        <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered dialog22">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to logout ?
+                            </div>
+                            <div class="modal-footer footer22">
+                            <button type="button" class="btn btn-secondary  btn21" data-bs-dismiss="modal">No</button>
+                            <button type="button" (click)="logout()" class="btn btn-primary btn22" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                         <!-- Fenêtre modale de confirmation -->
                         <div id="myModal" class="modale">
                             <div class="modal-contenu shadow-lg">

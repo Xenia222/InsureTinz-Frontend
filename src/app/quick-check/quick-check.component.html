@@ -50,14 +50,14 @@
             <table class="table table-bordered">
               <thead>
                 <tr class="text-center">
-                  <th>No</th>
+                  <th>Vin/license plate</th>
                   <th>STATUS</th>
                   <th>DETAILS</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let result of results">
-                  <td class="text-center two" style="font-size: 20px;">{{result.license_plate_number}}</td>
+                  <td class="text-center two" style="font-size: 20px;">{{result.identifier}}</td>
                   <td class="text-center three justify-content-center align-items-center d-flex">
                     <div *ngIf="result.check.status == 'insured'" class="status-active ">Active</div>
                     <div *ngIf="result.check.status == 'expired'" class="status-expired ">Expired</div>

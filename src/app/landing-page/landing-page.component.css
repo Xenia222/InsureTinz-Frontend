@@ -31,7 +31,8 @@
 
 .banner-text h1 {
   margin-top: 20px;
-  font-size: 38px;
+  /* font-size: 38px; */
+  font-size: 55px;
 }
 
 .banner-text p {
@@ -226,6 +227,7 @@
   }
   .banner-right {
     padding: 0 30px;
+    padding-top: 50px;
   }
   .banner-text {
     /* align-items: center; */
@@ -253,7 +255,8 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.partnerss{
+
+.partnerss {
   padding: 10px 0;
   border-right: 1px solid black;
   padding-right: 20px;
@@ -267,6 +270,7 @@
 .slider {
   overflow: hidden;
   width: 80%;
+  position: relative; /* Ajoutez cette ligne */
 }
 
 .slider::before, .slider::after {
@@ -290,18 +294,13 @@
 }
 
 .slide-track {
-  animation: _ngcontent-ng-c15716289_scroll 40s linear infinite;
+  animation: scroll 40s linear infinite;
   display: flex;
-  width: calc(244px* 11);
+  width: calc(250px * 8); /* Assurez-vous que cette largeur est suffisante pour couvrir le contenu */
   align-items: center;
   gap: 45px;
-
 }
 
-.slide {
-  /* height: 100px; */
-  /* width: 250px; */
-}
 
 
 /* how it work */
@@ -713,7 +712,7 @@ padding-bottom: 0px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 40vh;
+  height: 25vh;
 }
 @media (max-width:768px) {
   .centered-section{
@@ -1088,7 +1087,7 @@ width: 100%;
 @media (max-width: 634px) {
 
   .banner-text h1{
-    font-size: 50px;
+    font-size: 30px !important;
     text-align: center;
 }
 .banner {
@@ -1098,7 +1097,7 @@ width: 100%;
 .banner {
     background-color: #ffcb05;
     background-image: unset;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
     padding: 0px 30px;
     padding-bottom: 80px !important;
@@ -1128,4 +1127,17 @@ width: 100%;
 padding: 0 30px;
 }
 
+}
+
+
+@media (max-width: 634px) {
+.banner-text h1 {
+  margin-top: 20px;
+  font-size: 55px;
+  text-align: left;
+}
+.banner-text ul li {
+  font-size: 16px;
+  text-align: left;
+}
 }

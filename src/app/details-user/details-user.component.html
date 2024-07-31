@@ -16,10 +16,10 @@ overflow-x: hidden;">
                                     <h3 class="mt-2 mb-lg-0 text-dark" style=" margin-left: 40px;">User's details</h3>
                                     <div class="p-3  ">
                                         <button type="button" class="btn btn-warning py-1 px-4 fs-5 "
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                             GiveCredit
                                         </button>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                             <div class="modal-dialog  modal-dialog-centered">
                                                 <div class="modal-content">
@@ -60,7 +60,13 @@ overflow-x: hidden;">
                                             <p>Phone number :</p> <p>+229 {{user.primary_business_phone_number}}</p>
                                         </div>
                                         <div class="details22">
-                                            <p>Department :</p> <p>{{user.state}}</p>
+                                            <p>Status :</p> <p>{{user.status}}</p>
+                                        </div>
+                                        <div class="details22">
+                                            <p>User type :</p> <p>{{user.user_type}}</p>
+                                        </div>
+                                        <div class="details22">
+                                            <p>Credits :</p> <p>{{user.credits}}</p>
                                         </div>
                                     </div>
 
@@ -68,17 +74,33 @@ overflow-x: hidden;">
                                 </div>
                                 
                                 <div class="m-5">
-                                    <div class="sear" style="width: 30%; margin-top: 30px;">
-                                        <h3 >Verification log history</h3>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-            
-                                        <app-search-bar-second class="d-flex"></app-search-bar-second>
-                
-                                        <button type="reset" class="btn btn-warning py-1 px-4 fs-5 ">Export <img
-                                                src="../../assets/ic-local-printshop-24px.png" alt=""></button>
-                
-                                    </div> 
+                                    <div class="d-flex justify-content-between">  
+                                        <div class="sear" style="width: 45%;">
+                                            <h3 class="">Verification history</h3>
+                                        </div>
+                                        <div class=" mt-3 sear2 d-flex justify-content-between">
+                                            <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
+                                        
+                                                <div class="sous-group">
+                                                    <img src="../../assets/filter.png" alt="">
+                                                </div>
+                                                <div class="sous-group">
+                                                    <span>filter by</span>
+                                                </div>
+                                                <div class="col-auto btn-light sous-group">
+                                                    <select [(ngModel)]="selectedStatuss" class="form-select bg-light" aria-label="Default select example">
+                                                        <option *ngFor="let categorys of statuss" [value]="categorys">{{ categorys }}</option>
+                                                    </select>
+                                                </div>
+                                                <!-- <div  style="text-align: center;">
+                                                    <span><a type="button" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                                </div> -->
+                                        
+                                            </div>
+                                            <!-- <button type="button" (click)="exportToPDF()" class="btn btn-warning py-1 px-4 fs-5">Export <img src="../../assets/ic-local-printshop-24px.png" alt=""></button> -->
+                                        
+                                        </div>
+                                      </div> 
                                        
                                     <div class=" mt-4">
                                         <div class="row" style="padding-left: 13px;">
@@ -89,12 +111,11 @@ overflow-x: hidden;">
                                                             <th>Date</th>
                                                             <th>Time</th>
                                                             <th>User</th>
-                                                            <th>Ville</th>
                                                             <th class="px-5">Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let check of filteredItems">
+                                                        <tr *ngFor="let check of paginatedChecks; let i = index">
                                                             <td>{{check.check.check_date | date: "dd/MM/yyyy"}}</td>
                                                             <td>{{check.check.check_date | date: "hh:mm:ss"}}</td>
                                                             <td>
@@ -138,7 +159,7 @@ overflow-x: hidden;">
                                                                     <div *ngIf="check.check.status == 'insured'" class="status-active px-2 py-2">
                                                                         <h6>Active</h6>
                                                                     </div>
-                                                                    <div *ngIf="check.check.status == 'expired'" class="status-expiredpx-2 py-2">
+                                                                    <div *ngIf="check.check.status == 'expired'" class="status-expired px-2 py-2">
                                                                         <h6>Expired</h6>
                                                                     </div>
                                                                     <div *ngIf="check.check.status == 'not_found'" class="status-expired px-2 py-2">
@@ -156,6 +177,19 @@ overflow-x: hidden;">
                                                         </div>
                                                     </div>
                                                 </table>
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center">
+                                                      <li class="page-item" [class.disabled]="currentPage === 1">
+                                                        <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
+                                                      </li>
+                                                      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                                                        <a class="page-link" (click)="setPage(i + 1)">{{ i + 1 }}</a>
+                                                      </li>
+                                                      <li class="page-item" [class.disabled]="currentPage === totalPages">
+                                                        <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+                                                      </li>
+                                                    </ul>
+                                                  </nav>
                                             </div>
                                         </div>
                                     </div>

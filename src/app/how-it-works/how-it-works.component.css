@@ -1,6 +1,9 @@
         /* .marg{
             margin-left: 4rem;
         } */
+        *{
+          /* font-family: "Space Grotesk", sans-serif; */
+         }
         .marg1 {
           margin-right: 3rem;
         }
@@ -306,7 +309,7 @@
         .row2 {
           display: flex;
           flex-direction: column;
-          width: 28rem;
+          width: 32rem;
           gap: 27px;
           align-items: flex-end;
         }
@@ -363,12 +366,14 @@
           left: 60%;
           margin-top: -14%;
           width: 140px;
+          filter: drop-shadow(4px 10px 4px #ffc107);
           transform: rotate(50deg);
         }
 
         .doted2 {
-          margin: 0px 63px 42px 0px;
+          margin: 0px 125px 42px 0px;
           width: 170px;
+          filter: drop-shadow(4px 10px 4px #ffc107);
           transform: rotate(125deg);
 
         }
