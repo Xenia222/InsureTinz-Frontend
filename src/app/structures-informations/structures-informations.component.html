@@ -164,9 +164,8 @@
                     <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label>
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
                       <option disabled selected>Select a country</option>
-                      <option *ngFor="let country of countries" [value]="country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : '')">
-                        <img [src]="getFlagUrl(country.cca2.toLowerCase())" alt="{{ country.name.common }}" style="width: 20px; height: 15px; vertical-align: middle;">
-                        {{ country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : '') }}
+                      <option>
+                        <img src="https://flagcdn.com/w20/bj.png" >
                       </option>
                     </select>
                     
@@ -184,9 +183,8 @@
                     <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label>
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
                       <option disabled selected>Select a country</option>
-                      <option *ngFor="let country of countries" [value]="country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : '')">
-                        <img [src]="getFlagUrl(country.cca2.toLowerCase())" alt="{{ country.name.common }}" style="width: 20px; height: 15px; vertical-align: middle;">
-                        {{ country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : '') }}
+                      <option>
+                        <img src="https://flagcdn.com/w20/bj.png" >
                       </option>
                     </select>
                     
