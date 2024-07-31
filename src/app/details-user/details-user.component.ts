@@ -37,6 +37,7 @@ export class DetailsUserComponent implements OnInit{
         
       }
     )
+    this.ngOnInit()
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
