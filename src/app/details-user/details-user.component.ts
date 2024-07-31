@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { CreditService } from "../_services/credit.service";
+import { response } from 'express';
+import { log } from 'console';
 
 @Component({
   selector: 'app-details-user',
@@ -17,10 +20,24 @@ export class DetailsUserComponent implements OnInit{
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 10;
-  filteredItems: any[] = []
+  filteredItems: any[] = [];
+  result: any;
+  credits: number = 0;
 
-  constructor(private route: ActivatedRoute, private userService: UserService){}
+  constructor(private route: ActivatedRoute, private userService: UserService, private creditService:CreditService){}
 
+  giveCredits(){
+    this.credits = this.result
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    });
+    this.creditService.giveCredits( this.credits ,this.id).subscribe(
+      response =>{
+        console.log(response);
+        
+      }
+    )
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
