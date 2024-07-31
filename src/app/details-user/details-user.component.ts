@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { CreditService } from "../_services/credit.service";
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ export class DetailsUserComponent implements OnInit{
   credits: number = 0;
   infoVisibility: { [key: string]: boolean } = {};
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private creditService:CreditService){}
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private creditService:CreditService){}
 
   statuss: string[] = ['All', 'insured', 'expired','not_found'];
 
@@ -43,7 +43,7 @@ export class DetailsUserComponent implements OnInit{
         
       }
     )
-    this.ngOnInit()
+    this.refreshPage()
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -104,6 +104,13 @@ export class DetailsUserComponent implements OnInit{
 
   toggleDisplay() {
     this.isShow = !this.isShow;
+  }
+
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
   findUser(id: string): Observable<string> {
