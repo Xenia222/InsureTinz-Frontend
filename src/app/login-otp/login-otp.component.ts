@@ -4,6 +4,7 @@ import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
 import { interval, Subscription } from 'rxjs';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-login-otp',
@@ -14,6 +15,7 @@ export class LoginOtpComponent implements OnInit {
 
   otp: string = '';
   email: any;
+  user_type: any;
   generatedOtp: string = '';
   errorMessage: string | null = '';
   timer: number = 60;
@@ -21,7 +23,7 @@ export class LoginOtpComponent implements OnInit {
   private countdownSubscription: Subscription | undefined;
   interval: any;
 
-  constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService,private storageService: StorageService) { }
+  constructor(private router: Router,private userService:UserService, private route: ActivatedRoute,private authService: AuthService,private storageService: StorageService) { }
 
   get minutes(): number {
     return Math.floor(this.timeLeftInSeconds / 60);
@@ -40,6 +42,11 @@ export class LoginOtpComponent implements OnInit {
         console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
       }
     );
+    this.userService.getUser().subscribe(
+      data =>{
+        this.user_type = data.user.user_type
+      }
+    )
     this.startCountdown();
 } 
 
@@ -74,7 +81,10 @@ startCountdown(): void {
       data => {
         if (data.message == "Valid OTP"){
           this.router.navigate(['dashboard'])
-        }else{
+        }else if(this.user_type == "police user"){
+          this.router.navigate(['quick-check'])
+        }
+        else{
           this.errorMessage = data.message
         }
       })

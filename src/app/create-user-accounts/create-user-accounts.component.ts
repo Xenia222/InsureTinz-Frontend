@@ -16,9 +16,9 @@ export class CreateUserAccountsComponent implements OnInit{
   submitted = false;
   errorMessage: string | null = null;
 
-  positions = ['Manager', 'Developer', 'Designer', 'Analyst'];
+  positions = ['Police manager', 'Officier', 'commandant'];
   type = '';
-  departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
+  departments = ['Police', 'Forester', "Bordcoast Police"];
   roles: any[] = [];
   availablePermissions: any[] = [];
   clientMasterStatus: number = 1;
