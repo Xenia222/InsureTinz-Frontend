@@ -54,11 +54,7 @@ export class CreditsComponent {
   proceedToPayment() {
     
     if (this.paymentMethod === 'mtnmomo') {
-      // const dialogRef = this.dialog.open(MtnMomoModalComponent, {
-      //   width: '400px',
-      //   // data: { response: response }
-      // });
-      // dialogRef.afterClosed().subscribe(result => {
+
         if (this.result) {
           console.log('Phone number received from modal:', this.result);
           this.phoneNumber = this.result
@@ -77,7 +73,6 @@ export class CreditsComponent {
             console.error('Error initiating payment:', error)}
         );
         }
-      // });
     }
     
     else if (this.paymentMethod === 'paypal') {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { CreditService } from "../_services/credit.service";
 import { Observable } from 'rxjs';
 import jsPDF from 'jspdf';
 
@@ -21,12 +22,29 @@ export class DetailsUserComponent implements OnInit{
   currentPage: number = 1;
   paginatedChecks: any[] = [];
   filteredChecks: any[] = [];
+  itemsPerPage: number = 4;
+  filteredItems: any[] = [];
+  result: any;
+  credits: number = 0;
   infoVisibility: { [key: string]: boolean } = {};
 
-  constructor(private route: ActivatedRoute, private userService: UserService){}
+  constructor(private route: ActivatedRoute, private userService: UserService, private creditService:CreditService){}
 
   statuss: string[] = ['All', 'insured', 'expired','not_found'];
 
+  giveCredits(){
+    this.credits = this.result
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    });
+    this.creditService.giveCredits( this.credits ,this.id).subscribe(
+      response =>{
+        console.log(response);
+        
+      }
+    )
+    this.ngOnInit()
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
