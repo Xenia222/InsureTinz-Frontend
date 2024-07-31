@@ -17,7 +17,7 @@ export class CreateUserAccountsComponent implements OnInit{
   errorMessage: string | null = null;
 
   positions = ['Manager', 'Developer', 'Designer', 'Analyst'];
-  type = ['client master', 'client user'];
+  type = '';
   departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
   roles: any[] = [];
   availablePermissions: any[] = [];
@@ -33,7 +33,7 @@ export class CreateUserAccountsComponent implements OnInit{
         password: ['', Validators.required],
         phone: ['',Validators.pattern(/^\d{8}$/)],
         position: ['', Validators.required],
-        type: ['', Validators.required],
+        type: [''],
         policyId: ['', Validators.required],
         department: ['', Validators.required],
         // loginID: [{value: '', disabled: true}],
@@ -51,6 +51,15 @@ export class CreateUserAccountsComponent implements OnInit{
 
   ngOnInit() {
     this.onChanges()
+    this.userService.getUser().subscribe(
+      data =>{
+        if (data.user.user_type == "client master"){
+          this.type = "client user"
+        } else if(data.user.user_type == "client user"){
+          this.type = "police user"
+        }
+      }
+    )
     this.userService.getRoleAndPermission().subscribe(
       data => {
         console.log(data.roles)
@@ -70,6 +79,21 @@ export class CreateUserAccountsComponent implements OnInit{
     // this.userForm.valueChanges.subscribe(values => {
     //   this.generateLoginID(values);
     // });
+  }
+
+  toggleOPasswordVisibility() {
+    const passwordField: any = document.getElementById('password');
+    const toggleIcon: any = document.getElementById('toggleIcon');
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      toggleIcon.classList.remove('fa-eye');
+      toggleIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      toggleIcon.classList.remove('fa-eye-slash');
+      toggleIcon.classList.add('fa-eye');
+    }
   }
 
   get f() {
@@ -121,7 +145,8 @@ export class CreateUserAccountsComponent implements OnInit{
   }
 
   onSubmit() {
-
+    console.log("Current user type:", this.type);
+    
     if (this.userForm.invalid) {
       this.errorMessage = 'Please fill out the form correctly.';
     }else{
@@ -133,7 +158,7 @@ export class CreateUserAccountsComponent implements OnInit{
       'primary_business_phone_number': this.userForm.value.phone,
       'primary_contact_title' :this.userForm.get('position')?.value,
       "country": this.userForm.get('department')?.value,
-      "user_type":this.userForm.get('type')?.value,
+      "user_type":this.type,
       "roles": this.userForm.get('roles')?.value,
       "permissions": this.userForm.get('permissions')?.value,
       'password': this.userForm.value.password,

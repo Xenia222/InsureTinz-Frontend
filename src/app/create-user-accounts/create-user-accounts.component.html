@@ -19,7 +19,7 @@ overflow-x: hidden;">
                         <div class="bg-white  justify-content-between  conteneur">
                             <form  [formGroup]="userForm" #LoginForm="ngForm" (ngSubmit)="onSubmit()">
                                 <!-- Section I: Personal Information -->
-                                <h3>Perso Informations</h3>
+                                <h3>Personnal Information</h3>
 
                                 
                                 <!-- <div class="form-group">
@@ -111,17 +111,6 @@ overflow-x: hidden;">
                                     </div>
                                 </div>
 
-                                <div class="row g-4">
-                                    <div class="form-group col-md-6 ">
-                                        <label for="type">User Type</label>
-                                        <select id="type" class="form-control champ-select" formControlName="type">
-                                            <option *ngFor="let pos of type" [value]="pos">{{pos}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-
                                 <!-- Section II: Account Information -->
                                 <h3 class="mt-3">Account Informations</h3>
 
@@ -132,32 +121,24 @@ overflow-x: hidden;">
                                             >
                                     </div>
     
-                                    <div *ngIf="clientMasterStatus == 1" class="form-group col-md-6">
-                                        <label for="roles">Roles:</label>
-                                        <select id="roles" class="form-control champ" multiple formControlName="roles">
-                                          <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
-                                        </select>
-                                      </div>
-                                </div>
-                                
-
-                                <div class="row g-4 ">
-                                    <div *ngIf="clientMasterStatus == 1" class="form-group col-md-6" >
-                                        <label for="permissions">Permissions:</label>
-                                        <select *ngIf="availablePermissions.length > 0" class="form-control champ" id="permissions" multiple formControlName="permissions">
-                                          <option *ngFor="let permission of availablePermissions" [value]="permission.id">
-                                            {{ permission.name }} ({{ permission.roleName }})
-                                          </option>
-                                        </select>
-                                      </div>
-                                      <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        <div class="d-flex input-group justify-content-between">
                                         <label for="password">Set password:</label>
-                                        <div class="d-flex form-control champ justify-content-between">
-                                            <input type="password" id="password" class="w-75 border-0 h-100" formControlName="password">
-                                            <i class="fas fa-lock mt-2"></i>
+                                        <input type="password" id="password" class="champ" style="width: 88%;" formControlName="password">
+                                        <span style="width: 12%;" class="input-group-text" id="togglePassword" (click)="toggleOPasswordVisibility()">
+                                            <i class="fa fa-eye" id="toggleIcon"></i>
+                                          </span>
                                         </div>
                                     </div>
                                 </div>
+                                
+
+                                <!-- <div class="row g-4" hidden>
+                                    <div class="form-group col-md-6 ">
+                                        <label for="type">User Type</label>
+                                        <input type="text" formControlName="type" [value]="type">
+                                    </div>
+                                </div> -->
                                 
                                 <div *ngIf="errorMessage" class="alert alert-danger">
                                     {{ errorMessage }}
