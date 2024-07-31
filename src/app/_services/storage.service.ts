@@ -35,6 +35,7 @@ export class StorageService {
     localStorage.removeItem('id')
     localStorage.removeItem('email')
     localStorage.removeItem('password')
+    localStorage.removeItem('userPermissions')
     this.router.navigate([''])
   }
 

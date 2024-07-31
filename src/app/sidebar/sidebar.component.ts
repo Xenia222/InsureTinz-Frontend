@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { data } from 'jquery';
 import { PermissionService } from '../_services/permission.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -47,7 +48,7 @@ export class SidebarComponent implements OnInit{
   user_type: string = ''
   roles: any[] = []
 
-  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
+  constructor(private tokenService:TokenService,private storageService:StorageService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
 
   ngOnInit(): void {
     this.userService.getCurrentUserRole().subscribe(
@@ -70,6 +71,7 @@ export class SidebarComponent implements OnInit{
   }
   logout(){
     this.tokenService.clearToken()
+    this.storageService.clearCredentials()
   }
 
   getUser() {

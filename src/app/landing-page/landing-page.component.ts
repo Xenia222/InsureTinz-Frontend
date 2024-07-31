@@ -2,6 +2,10 @@ import { Component, OnInit  } from '@angular/core';
 import Swiper from 'swiper';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Router } from '@angular/router';
+import { TokenService } from '../_services/token.service';
+import { UserService } from '../_services/user.service';
+import { daft } from 'bwip-js';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,7 +14,8 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit{
 
-  
+  logged: boolean = false
+  user_type: any
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -53,14 +58,37 @@ export class LandingPageComponent implements OnInit{
     console.log('Carousel initialized', event);
   }
 
+  logout(){
+    this.tokenServices.clearToken()
+    this.storageService.clearCredentials()
+  }
+
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private tokenServices: TokenService,private userService:UserService, private storageService:StorageService) {}
 
   navigatetoWhoWeArePage() {
     this.router.navigate(['/who-we-are']);
   }
 
   ngOnInit(): void {
+    if(this.tokenServices.isLogged()){
+      this.logged = true
+    }else{
+      this.logged = false
+    }
+
+    this.userService.getUser().subscribe(
+      data => {
+        this.user_type = data.user.user_type
+      }
+    )
   }
 
 }
