@@ -328,9 +328,6 @@
     align-items: center;
     padding: 30px;
   }
-  .dep {
-    /* gap: 22px; */
-  }
   /* app.component.scss */
   .user-info-wrapper {
     position: relative;

@@ -59,6 +59,7 @@ export class DetailsUserComponent implements OnInit{
         }
         this.user = data.client_details
         this.checks = data.client_user_checks[0]
+        this.applyFilters();
       }
     )
     
