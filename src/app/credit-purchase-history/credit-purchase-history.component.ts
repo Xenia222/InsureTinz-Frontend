@@ -23,8 +23,12 @@ export class CreditPurchaseHistoryComponent implements OnInit{
     this.creditService.getCredits().subscribe(
       data => {
         console.log("credits",data)
+        if(data.credit_balance.balance){
         this.user_credit = data.credit_balance.balance
-        this.user_credit_balance = data.credit_balance.used_credits
+      }
+      if(data.credit_balance.user_credits){
+      this.user_credit_balance = data.credit_balance.used_credits
+    }
       }
     )
 
