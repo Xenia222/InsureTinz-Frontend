@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CheckService } from '../_services/check.service';
 import { data } from 'jquery';
 import { TicketService } from '../_services/ticket.service';
+import { GeolocationService } from '../_services/geolocation.service';
 
 interface TicketData {
   location: string;
@@ -25,8 +26,9 @@ interface TicketData {
 export class QuickCheckComponent {
 
   ticketData: TicketData | null = null;
+  location: any
 
-  constructor(private checkService:CheckService,private ticketService: TicketService){}
+  constructor(private checkService:CheckService,private geolocationService: GeolocationService,private ticketService: TicketService){}
 
   results: any[] = []
   searchType: string = "licensePlate"
@@ -75,6 +77,16 @@ export class QuickCheckComponent {
   }
 
     onSubmit(){
+      // this.geolocationService.getPosition().subscribe({
+      //   next: (position: GeolocationPosition) => {
+      //     this.location = {
+      //       latitude: position.coords.latitude,
+      //       longitude: position.coords.longitude
+      //     };
+      //     console.log("Localisation de moi",this.location)
+      //   },
+      //   error: (err) => console.error(err)
+      // });
       console.log("this.type", this.vin)
       if(this.searchType == "licensePlate"){
         this.type = "license_plate" 
@@ -89,7 +101,8 @@ export class QuickCheckComponent {
             identifier: numb,
             type: this.type
           };
-        })
+        }),
+        // location: [this.location]
       }).subscribe(
         data => {
           this.results = data.results

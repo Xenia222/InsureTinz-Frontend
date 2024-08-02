@@ -4,6 +4,7 @@ import { UserService } from '../_services/user.service';
 import { CreditService } from "../_services/credit.service";
 import { Observable } from 'rxjs';
 import jsPDF from 'jspdf';
+import { GeolocationService } from '../_services/geolocation.service';
 
 @Component({
   selector: 'app-details-user',
@@ -15,6 +16,7 @@ export class DetailsUserComponent implements OnInit{
   
   id: any
   user: any
+  user_type: any
   checks: any
   noCheck: any
   totalRecords: number = 0;
@@ -51,6 +53,11 @@ export class DetailsUserComponent implements OnInit{
       console.log(this.id);
     });
 
+    this.userService.getUser().subscribe(
+      data => {
+        this.user_type = data.user.user_type
+      }
+    )
     this.userService.getClientUser(this.id).subscribe(
       data =>{
         console.log("User", data.client_user_checks[0].error)
@@ -59,6 +66,7 @@ export class DetailsUserComponent implements OnInit{
         }
         this.user = data.client_details
         this.checks = data.client_user_checks[0]
+        this.applyFilters();
       }
     )
     

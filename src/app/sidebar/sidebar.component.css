@@ -346,9 +346,6 @@
 }
 
 @media (max-width: 996px) {
-  .sidebar {
-    /* margin-left: -250px; */
-  }
 
   .sidebar.open {
     margin-left: 0;

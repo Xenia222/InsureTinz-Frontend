@@ -34,6 +34,12 @@ export class LoginOtpComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getUser().subscribe(
+      data =>{
+        this.user_type = data.user.user_type
+        console.log("User type to redirect", this.user_type);
+      }
+    )
     this.authService.otp_send(this.storageService.getEmail()).subscribe(
       otpResponse => {
         console.log('OTP envoyé:', otpResponse);
@@ -42,13 +48,8 @@ export class LoginOtpComponent implements OnInit {
         console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
       }
     );
-    this.userService.getUser().subscribe(
-      data =>{
-        this.user_type = data.user.user_type
-      }
-    )
     this.startCountdown();
-} 
+}
 
 startCountdown(): void {
   this.countdownSubscription = interval(1000).subscribe(() => {
@@ -80,9 +81,11 @@ startCountdown(): void {
     this.authService.verify_otp(this.storageService.getEmail(), this.otp).subscribe(
       data => {
         if (data.message == "Valid OTP"){
+          if(this.user_type == "police user"){
+            this.router.navigate(['quick-check'])
+          }else{
           this.router.navigate(['dashboard'])
-        }else if(this.user_type == "police user"){
-          this.router.navigate(['quick-check'])
+        }
         }
         else{
           this.errorMessage = data.message
