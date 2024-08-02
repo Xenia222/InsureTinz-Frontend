@@ -84,7 +84,7 @@ overflow-x: hidden;">
                                 <div class="d-flex fll ">
                                     <div class="ml-2" style="font-size: 14px; color: #202224;">Licence Status
                                         Estimations</div>
-                                    <div class=" ml-auto pr-3">
+                                    <!-- <div class=" ml-auto pr-3">
                                         <select name="" class="select form-select ">
                                             <option value="">Alibori</option>
                                             <option value="">Atacora</option>
@@ -99,7 +99,7 @@ overflow-x: hidden;">
                                             <option value="">Plateau</option>
                                             <option value="">Zou</option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="d-flex fll pl-4 pb-2 mt-3">
@@ -137,7 +137,7 @@ overflow-x: hidden;">
                                             <!-- Menu déroulant pour sélectionner le mois -->
                                             <div class="mb-3 ml-auto">
                                                 <select id="monthSelect" class="select form-select ">
-                                                    <option value="all">All</option>
+                                                    <option value="all" selected>All</option>
                                                     <option *ngFor="let month of months; index as i" [value]="i">{{
                                                         month }}</option>
                                                 </select>
@@ -172,7 +172,7 @@ overflow-x: hidden;">
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
                                         <option *ngFor="let category of status" [value]="category">{{ category }}</option>
                                     </select>
-                                    <select class="form-select" aria-label="Default select example"
+                                    <!-- <select class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
                                         <option selected>Month</option>
                                         <option value="">Janvier</option>
@@ -187,7 +187,7 @@ overflow-x: hidden;">
                                         <option value="">Oueme</option>
                                         <option value="">Plateau</option>
                                         <option value="">Zou</option>
-                                    </select>
+                                    </select> -->
 
                                 </div>
 

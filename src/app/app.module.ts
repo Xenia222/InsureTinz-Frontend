@@ -52,7 +52,6 @@ import { SearchBarSecondComponent } from './search-bar-second/search-bar-second.
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LockedPageComponent } from './locked-page/locked-page.component';
 import { LockedSidebarComponent } from './locked-sidebar/locked-sidebar.component';
-import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -101,7 +100,6 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     AccessDeniedComponent,
     LockedPageComponent,
     LockedSidebarComponent,
-    DashboardFilterComponent
   ],
   imports: [
     BrowserModule,

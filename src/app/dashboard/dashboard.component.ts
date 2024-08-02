@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit{
+export class DashboardComponent implements OnInit{
 
   selectedStatus: string = 'All';
   infoVisibility: { [key: string]: boolean } = {};
@@ -38,6 +38,7 @@ export class DashboardComponent implements AfterViewInit{
   checks:any[] = [];
   dataOui:any[] = [];
   dataNon:any[] = [];
+  selectedMonthIndex: number = 0;
   
 constructor(private userService: UserService, private checkService: CheckService){}
 
@@ -94,7 +95,7 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
 
   myChart: Chart | undefined;
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.userService.getDashboard().subscribe(
       data => {
         this.credit_balance.balance = data.credit_balance.balance
@@ -131,6 +132,8 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
         const target = event.target as HTMLSelectElement;
         this.updateChart(target.value);
       });
+    }else{
+      this.updateChart('all')
     }
   }
 

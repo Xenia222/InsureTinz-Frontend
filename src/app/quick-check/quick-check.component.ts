@@ -85,9 +85,7 @@ export class QuickCheckComponent {
           };
           console.log("Localisation de moi",this.location)
         },
-        error: (err) => console.error(err)
       });
-      console.log("this.type", this.vin)
       if(this.searchType == "licensePlate"){
         this.type = "license_plate" 
       }else if (this.searchType == "registrationNumber"){
@@ -95,6 +93,7 @@ export class QuickCheckComponent {
       }
       let searchValues = this.getInputValues();
       console.log('Search values:', searchValues);
+      console.log("Localisation de moi 22",this.location)
       this.checkService.quickCheck({
         vehicles: searchValues.map(numb => {
           return {

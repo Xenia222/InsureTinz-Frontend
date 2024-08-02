@@ -697,7 +697,6 @@ ngx-slider {
 
 
   .boutoon{
-    /* Rectangle 4693 */
 
       width: 238.97px;
       height: 57px;
@@ -706,6 +705,10 @@ ngx-slider {
       border-radius: 10px;
       font-weight: 700;
 
+  }
+  .boutoon2{
+    background-color: rgba(255, 203, 5, 0.85); 
+    border: none !important ;
   }
   .boutoon:hover{
  box-shadow: none;
