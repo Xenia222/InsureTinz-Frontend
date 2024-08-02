@@ -16,9 +16,9 @@ export class CreateUserAccountsComponent implements OnInit{
   submitted = false;
   errorMessage: string | null = null;
 
-  positions = ['Police manager', 'Officier', 'commandant'];
+  positions = ['Police manager', 'Officier', 'Commandant'];
   type = '';
-  departments = ['Police', 'Forester', "Bordcoast Police"];
+  departments = ["Alibori","Atakora", "Atlantique", "Borgou", "Collines", "Donga", "Kouffo", "Littoral", "Mono", "Ouémé", "Plateau","Zou"];
   roles: any[] = [];
   availablePermissions: any[] = [];
   clientMasterStatus: number = 1;
@@ -164,7 +164,7 @@ export class CreateUserAccountsComponent implements OnInit{
       'password': this.userForm.value.password,
     }).subscribe(
       data => {
-        console.log("Data receives",this.userForm.value.type)
+        console.log("Data receives",this.userForm.value.department)
         if (data.user){
         this.ngOnInit()
         this.router.navigate(['/list-users'])

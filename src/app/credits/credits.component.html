@@ -42,7 +42,7 @@ overflow-y: scroll;">
                       <div class="cont3">
                         <div>
 
-                          <button type="button" (click)="nextSection()"
+                          <button [disabled]="credits == 0" type="button" (click)="nextSection()"
                             class="btn btn-warning px-3 mt-4 shadow-lg text-dark bbt "> <strong>Proceed to
                               payment</strong>
                             <svg width="39" height="20" viewBox="0 0 49 27" fill="none"

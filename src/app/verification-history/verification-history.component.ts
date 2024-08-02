@@ -67,6 +67,28 @@ export class VerificationHistoryComponent implements OnInit {
     );
   }
 
+  getPaginationRange(): number[] {
+    const rangeSize = 5; // Nombre de pages à afficher dans la pagination
+    let start = Math.max(this.currentPageSub - Math.floor(rangeSize / 2), 1);
+    let end = Math.min(start + rangeSize - 1, this.totalPagesSub);
+
+    // Ajuste le début si l'ensemble final dépasse le nombre total de pages
+    start = Math.max(end - rangeSize + 1, 1);
+
+    return Array(end - start + 1).fill(0).map((_, idx) => start + idx);
+  }
+
+  getPaginationRange2(): number[] {
+    const rangeSize = 5; // Nombre de pages à afficher dans la pagination
+    let start = Math.max(this.currentPage - Math.floor(rangeSize / 2), 1);
+    let end = Math.min(start + rangeSize - 1, this.totalPages);
+
+    // Ajuste le début si l'ensemble final dépasse le nombre total de pages
+    start = Math.max(end - rangeSize + 1, 1);
+
+    return Array(end - start + 1).fill(0).map((_, idx) => start + idx);
+  }
+
   toggleDisplay() {
     this.isShow = !this.isShow;
   }

@@ -14,8 +14,8 @@ import { NgxPermissionsService } from 'ngx-permissions';
 export class CreditPurchaseHistoryComponent implements OnInit{
 
   transaction: any[] = []
-  user_credit: string = ''
-  user_credit_balance: string = ''
+  user_credit: number = 0
+  user_credit_balance: number = 0
   permissions: any[] = []
   constructor(private router: Router,private creditService: CheckService, private userService: UserService,private permissionsService: NgxPermissionsService) {}
 
@@ -38,6 +38,17 @@ export class CreditPurchaseHistoryComponent implements OnInit{
       }
     )
   }
+
+  formatNumber(value: number): string {
+    if (value >= 1000000) {
+      return (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1) + 'K';
+    } else {
+      return value.toString();
+    }
+  }
+
   navigateToCreditsPage() {
     this.router.navigate(['/credits']);
   }

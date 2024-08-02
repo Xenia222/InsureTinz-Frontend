@@ -1168,3 +1168,21 @@
   height: unset !important;
   width:19px !important;
 }
+
+.pagination .page-link {
+  color: black /* Couleur du texte des liens de page */
+}
+
+.pagination .page-link:hover {
+  background-color: #ffcb05 !important; /* Couleur du texte des liens de page au survol */
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #ffcb05 !important; /* Couleur de fond du lien de la page active */
+  border-color: #ffcb05 !important; /* Couleur de bordure du lien de la page active */
+  color: black ; /* Couleur du texte du lien de la page active */
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d; /* Couleur du texte des liens de page désactivés */
+}

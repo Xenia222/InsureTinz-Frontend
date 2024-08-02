@@ -82,19 +82,19 @@
                                 </tr>
                               </tbody>
                             </table>
-                            <nav aria-label="Page navigation example text-warning">
+                            <nav aria-label="Page navigation example">
                               <ul class="pagination justify-content-center">
-                                <li class="page-item text-warning" [class.disabled]="currentPage === 1">
+                                <li class="page-item" [class.disabled]="currentPage === 1">
                                   <a class="page-link" (click)="setPage(currentPage - 1)">Previous</a>
                                 </li>
-                                <li class="page-item text-warning" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
-                                  <a class="page-link" (click)="setPage(i + 1)">{{ i + 1 }}</a>
+                                <li class="page-item" *ngFor="let page of getPaginationRange2()" [class.active]="currentPage === page">
+                                  <a class="page-link" (click)="setPage(page)">{{ page }}</a>
                                 </li>
-                                <li class="page-item text-warning" [class.disabled]="currentPage === totalPages">
+                                <li class="page-item" [class.disabled]="currentPage === totalPages">
                                   <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
                                 </li>
                               </ul>
-                            </nav>
+                            </nav> 
                           </div>
                         </div>
                       </div>                      
@@ -204,18 +204,18 @@
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-center">
-                                          <li class="page-item" [class.disabled]="currentPageSub === 1">
-                                            <a class="page-link" (click)="setPageSub(currentPageSub - 1)">Previous</a>
-                                          </li>
-                                          <li class="page-item" *ngFor="let page of [].constructor(totalPagesSub); let i = index" [class.active]="currentPageSub === i + 1">
-                                            <a class="page-link" (click)="setPageSub(i + 1)">{{ i + 1 }}</a>
-                                          </li>
-                                          <li class="page-item" [class.disabled]="currentPageSub === totalPagesSub">
-                                            <a class="page-link" (click)="setPageSub(currentPageSub + 1)">Next</a>
-                                          </li>
-                                        </ul>
-                                      </nav>
+                                      <ul class="pagination justify-content-center">
+                                        <li class="page-item" [class.disabled]="currentPageSub === 1">
+                                          <a class="page-link" (click)="setPageSub(currentPageSub - 1)">Previous</a>
+                                        </li>
+                                        <li class="page-item" *ngFor="let page of getPaginationRange()" [class.active]="currentPageSub === page">
+                                          <a class="page-link" (click)="setPageSub(page)">{{ page }}</a>
+                                        </li>
+                                        <li class="page-item" [class.disabled]="currentPageSub === totalPagesSub">
+                                          <a class="page-link" (click)="setPageSub(currentPageSub + 1)">Next</a>
+                                        </li>
+                                      </ul>
+                                    </nav>                                    
                                 </div>
                             </div>
                         </div>
