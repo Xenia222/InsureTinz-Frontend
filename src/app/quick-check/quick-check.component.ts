@@ -26,7 +26,7 @@ interface TicketData {
 export class QuickCheckComponent {
 
   ticketData: TicketData | null = null;
-  location: any
+  location: {} = {}
 
   constructor(private checkService:CheckService,private geolocationService: GeolocationService,private ticketService: TicketService){}
 
@@ -77,16 +77,16 @@ export class QuickCheckComponent {
   }
 
     onSubmit(){
-      // this.geolocationService.getPosition().subscribe({
-      //   next: (position: GeolocationPosition) => {
-      //     this.location = {
-      //       latitude: position.coords.latitude,
-      //       longitude: position.coords.longitude
-      //     };
-      //     console.log("Localisation de moi",this.location)
-      //   },
-      //   error: (err) => console.error(err)
-      // });
+      this.geolocationService.getPosition().subscribe({
+        next: (position: GeolocationPosition) => {
+          this.location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          console.log("Localisation de moi",this.location)
+        },
+        error: (err) => console.error(err)
+      });
       console.log("this.type", this.vin)
       if(this.searchType == "licensePlate"){
         this.type = "license_plate" 
@@ -102,7 +102,7 @@ export class QuickCheckComponent {
             type: this.type
           };
         }),
-        // location: [this.location]
+        location: [this.location]
       }).subscribe(
         data => {
           this.results = data.results

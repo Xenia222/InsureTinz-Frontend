@@ -189,7 +189,7 @@
                     </select>
                     
                     <input type="text" formControlName="secondaryPhoneNumber" class="field form-control w-75" />
-                    <div *ngIf="isInvalidAndTouched('primaryPhoneNumber', 'contactInfo')">
+                    <div *ngIf="isInvalidAndTouched('secondaryPhoneNumber', 'contactInfo')">
                       <small class="text-danger" *ngIf="contactInfo.get('secondaryPhoneNumber')?.errors?.['pattern']">
                         Secondary Phone Number must contain exactly 8 digits.
                       </small>

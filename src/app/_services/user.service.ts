@@ -10,7 +10,7 @@ import { TokenService } from './token.service';
 })
 export class UserService {
 
-  url = 'http://52.86.29.221/api'
+  url = 'http://127.0.0.1:8000/api'
   private userCache: { [id: string]: BehaviorSubject<string> } = {};
   constructor(private http: HttpClient) { }
 
@@ -40,6 +40,12 @@ export class UserService {
     const formData: FormData = new FormData();
     formData.append('photo', photo);
     return this.http.post(`${this.url}/user/profile-photo`, formData);
+  }
+
+  updateDocument(document: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('document', document);
+    return this.http.post(`${this.url}/user/document`, formData);
   }
 
   getProfilePhoto(): Observable<any> {
