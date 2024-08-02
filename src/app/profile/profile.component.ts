@@ -125,7 +125,7 @@ export class ProfileComponent implements OnInit{
         if(data.message){
         this.msg = data.message
         }else{
-        this.success_msg = data.status_message
+        this.success_msg = data.message
         
       }
         },
