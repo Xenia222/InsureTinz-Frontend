@@ -45,17 +45,21 @@ overflow-x: hidden;">
                                 <div class="sous-group">
                                     <span>filter by</span>
                                 </div>
-                                <div class="col-auto btn-light sous-group">
-                                    <select class="form-select bg-light">
-                                        <option selected>Date</option>
-                                    </select>
-                                </div>
                                 <div class="col-auto sous-group">
-                                    <select class="form-select bg-light">
+                                    <select [(ngModel)]="selectedPayement" class="form-select bg-light">
                                         <option *ngFor="let category of payement" [value]="category">{{ category }}</option>
                                     </select>
+                                    
                                 </div>
-                                <div class="">
+                                <div class="col-auto sous-group">
+                                    <label for="startDate">Start-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="startDate">
+                                </div>
+                                <div class="col-auto sous-group">
+                                    <label for="endDate">End-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="endDate" [(ngModel)]="endDate">
+                                </div>
+                                <div class="" (click)="refreshPage()" style="cursor: pointer;">
                                     <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
                                 </div>
                 

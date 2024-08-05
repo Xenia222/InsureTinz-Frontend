@@ -18,7 +18,10 @@ export class CreditPurchaseHistoryComponent implements OnInit{
   user_credit: number = 0
   user_credit_balance: number = 0
   permissions: any[] = []
-  constructor(private router: Router,private creditService: CheckService, private userService: UserService,private permissionsService: NgxPermissionsService) {}
+  startDate: string = '';
+  endDate: string = '';
+
+  constructor(private router: Router,private creditService: CheckService) {}
 
   payement: string[] = ['All','mtnmomo','moovmoney'];
 
@@ -44,6 +47,13 @@ export class CreditPurchaseHistoryComponent implements OnInit{
     )
   }
 
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   formatNumber(value: number): string {
     if (value >= 1000000) {
       return (value / 1000000).toFixed(1) + 'M';
@@ -55,11 +65,19 @@ export class CreditPurchaseHistoryComponent implements OnInit{
   }
 
   get filteredItems(): any[] {
-    return this.transaction = this.transaction.filter(item => {
-      console.log("Pass",item.payment_method)
+    const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
+
+    return this.transaction.filter(item => {
       const matchesCategory = this.selectedPayement === 'All' || item.payment_method === this.selectedPayement;
-      return matchesCategory;
+      const itemDate = this.normalizeDate(new Date(item.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange;
     });
+  }
+
+  private normalizeDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
   navigateToCreditsPage() {

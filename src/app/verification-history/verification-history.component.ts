@@ -4,7 +4,8 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { UserService } from '../_services/user.service';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verification-history',
@@ -14,6 +15,11 @@ import { Observable } from 'rxjs';
 export class VerificationHistoryComponent implements OnInit {
   
   private _selectedStatus: string = 'All';
+  private _startDate: string = '';
+  private _endDate: string = '';
+  private _startDate1: string = '';
+  private _endDate1: string = '';
+  private _searchTerm: string = '';
   private _selectedStatuss: string = 'All';
   checks: any[] = [];
   infoVisibility: { [key: string]: boolean } = {};
@@ -33,10 +39,9 @@ export class VerificationHistoryComponent implements OnInit {
   noCheck: any;
   noCheck2: any;
 
-  constructor(private checkService: CheckService, private permissionsService: NgxPermissionsService, private userService: UserService) {}
+  constructor(private checkService: CheckService,private router: Router, private userService: UserService) {}
 
   status: string[] = ['All', 'insured', 'expired','not_found'];
-  // statuss: string[] = ['All', 'insured', 'expired','not_found'];
   isShow = false;
 
   ngOnInit(): void {
@@ -67,12 +72,18 @@ export class VerificationHistoryComponent implements OnInit {
     );
   }
 
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   getPaginationRange(): number[] {
-    const rangeSize = 5; // Nombre de pages à afficher dans la pagination
+    const rangeSize = 5;
     let start = Math.max(this.currentPageSub - Math.floor(rangeSize / 2), 1);
     let end = Math.min(start + rangeSize - 1, this.totalPagesSub);
 
-    // Ajuste le début si l'ensemble final dépasse le nombre total de pages
     start = Math.max(end - rangeSize + 1, 1);
 
     return Array(end - start + 1).fill(0).map((_, idx) => start + idx);
@@ -105,15 +116,68 @@ export class VerificationHistoryComponent implements OnInit {
     this._selectedStatus = value;
     this.applyFilters();
   }
+
+  get startDate(): string {
+    return this._startDate;
+  }
+
+  set startDate(value: string) {
+    this._startDate = value;
+    this.applyFilters();
+  }
+
+  get endDate(): string {
+    return this._endDate;
+  }
+
+  set endDate(value: string) {
+    this._endDate = value;
+    this.applyFilters();
+  }
+
+  get startDate1(): string {
+    return this._startDate1;
+  }
+
+  set startDate1(value: string) {
+    this._startDate1 = value;
+    this.applyFilterss();
+  }
+
+  get endDate1(): string {
+    return this._endDate1;
+  }
+
+  set endDate1(value: string) {
+    this._endDate1 = value;
+    this.applyFilterss();
+  }
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.applyFilterss();
+  }
   
 
   applyFilters(): void {
+    const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
     this.filteredChecks = this.checks.filter(item => {
       const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
-      return matchesCategory;
+      const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange;
     });
     this.totalRecords = this.filteredChecks.length;
     this.setPage(1);
+  }
+
+  private normalizeDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
   get selectedStatuss(): string {
@@ -127,9 +191,27 @@ export class VerificationHistoryComponent implements OnInit {
   
 
   applyFilterss(): void {
+    const start = this.startDate1 ? this.normalizeDate(new Date(this.startDate1)) : null;
+    const end = this.endDate1 ? this.normalizeDate(new Date(this.endDate1)) : null;
+    
     this.filteredCheckss = this.subchecks.filter(item => {
+      const username$ = this.findUser(item.check.user_id).pipe(
+        map(user => user)
+      );
+      let nameSearch: string = ''
+      username$.subscribe(
+        (name) => {
+          nameSearch = name;
+          console.log("Nom de user", nameSearch)
+        },
+        (error) => {
+        }
+      );
       const matchesCategory = this.selectedStatuss === 'All' || item.check.status === this.selectedStatuss;
-      return matchesCategory;
+      const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange && matchesSearch;
     });
     this.totalRecordsSub = this.filteredCheckss.length;
     this.setPageSub(1);
