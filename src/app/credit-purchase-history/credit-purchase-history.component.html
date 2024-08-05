@@ -52,9 +52,7 @@ overflow-x: hidden;">
                                 </div>
                                 <div class="col-auto sous-group">
                                     <select class="form-select bg-light">
-                                        <option selected>Paiement By</option>
-                                        <option value="1">Deen</option>
-                                        <option value="2">Is</option>
+                                        <option *ngFor="let category of payement" [value]="category">{{ category }}</option>
                                     </select>
                                 </div>
                                 <div class="">
@@ -81,7 +79,7 @@ overflow-x: hidden;">
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let transact of transaction">
+                                                    <tr *ngFor="let transact of filteredItems">
                                                         <td>{{transact.updated_at | date : "dd/MM/yyyy"}}</td>
                                                         <td>{{transact.updated_at | date: "hh:mm:ss"}}</td>
                                                         <td>{{transact.amount}} FCFA</td>

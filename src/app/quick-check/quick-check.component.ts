@@ -101,7 +101,7 @@ export class QuickCheckComponent {
             type: this.type
           };
         }),
-        location: [this.location]
+        location: [{latitude: 6.3698385, longitude: 2.490104}]
       }).subscribe(
         data => {
           this.results = data.results

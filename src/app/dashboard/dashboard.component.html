@@ -168,10 +168,18 @@ overflow-x: hidden;">
                                 <h6 class="titre-tableau mb-0">Recent Verification</h6>
                                 <!-- <app-dashboard-filter></app-dashboard-filter> -->
                                 <div class="conteneur-select ml-auto">
+                                    <input type="search" class="form-control" placeholder="Search user" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="searchTerm">
                                     <select [(ngModel)]="selectedStatus" class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
                                         <option *ngFor="let category of status" [value]="category">{{ category }}</option>
                                     </select>
+                                    <label for="startDate">Start-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="startDate">
+                                    
+                                    <label for="endDate">End-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="endDate" [(ngModel)]="endDate">
+                                      
+                                        <!-- <button (click)="filterData()">Filtrer</button> -->
                                     <!-- <select class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
                                         <option selected>Month</option>

@@ -4,7 +4,7 @@ import { LegendItem } from 'chart.js';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { CheckService } from '../_services/check.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,6 +39,11 @@ export class DashboardComponent implements OnInit{
   dataOui:any[] = [];
   dataNon:any[] = [];
   selectedMonthIndex: number = 0;
+  data: any[] = this.filteredItems;
+  filteredData: any[] = this.filteredItems;
+  startDate: string = '';
+  endDate: string = '';
+  searchTerm: string = '';
   
 constructor(private userService: UserService, private checkService: CheckService){}
 
@@ -85,14 +90,32 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
   }
 
   get filteredItems(): any[] {
+    const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
+
     return this.checks.filter(item => {
+      const username$ = this.findUser(item.check.user_id).pipe(
+        map(user => user)
+      );
+      let nameSearch: string = ''
+      username$.subscribe(
+        (name) => {
+          nameSearch = name;
+        },
+        (error) => {
+        }
+      );
       const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
-      // const matchesSearch = item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      // const matchesPrice = item.price <= this.priceRange;
-      return matchesCategory;
+      const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange && matchesSearch;
     });
   }
 
+  private normalizeDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
   myChart: Chart | undefined;
 
   ngOnInit() {
@@ -118,10 +141,14 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
     this.checkService.getCheckList().subscribe(
       data => {
         console.log("CHECK",data);
-        this.checks.push(data.check[0])
-        this.checks.push(data.check[1])
-        this.checks.push(data.check[2])
-        this.checks.push(data.check[3])
+        if(data.check[0])
+          this.checks.push(data.check[0])
+        if(data.check[1])
+          this.checks.push(data.check[1])
+        if(data.check[2])
+          this.checks.push(data.check[2])
+        if(data.check[3])
+          this.checks.push(data.check[3])
         
       }
     )
