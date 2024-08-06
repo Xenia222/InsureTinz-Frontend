@@ -73,6 +73,16 @@
   Button .btn {
     transition: 0.5s;
   }
+
+  .btn22{
+    background-color: #ffcb05;
+    border: unset;
+    padding: 5px 30px;
+  }
+  .btn21{
+    background-color: #dfdfdf;
+    padding: 5px 30px;
+  }
   
   .btn-square {
     width: 38px;
@@ -729,6 +739,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.btn-dismiss{
+  background-color: rgb(215, 215, 215);
+  box-shadow:0px 4px 6px rgba(139, 136, 136, 0.25) !important;
+  border-radius: 5px !important;
+  color: #000000;
+  font-weight: 500;
+  display: flex;
+  padding: 6px 35px;
+  /* font-size: 17px; */
+  border: none !important;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn-warning:hover{
     box-shadow: unset !important;
 

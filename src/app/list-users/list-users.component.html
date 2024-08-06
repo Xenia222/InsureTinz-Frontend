@@ -37,19 +37,20 @@ overflow-x: hidden;">
                                             <option *ngFor="let category of positions " [value]="category">{{ category }}</option>
                                         </select>
                                     </div>
-                                    <div  style="text-align: center;">
-                                        <span><a href="" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
+                                    <div class="col-auto btn-light sous-group24">
+                                        <select [(ngModel)]="selectedStatus" class="form-select bg-light">
+                                            <option *ngFor="let category of status " [value]="category">{{ category }}</option>
+                                        </select>
+                                    </div>
+                                    <div  style="text-align: center; cursor: pointer;">
+                                        <span><a (click)="refreshPage()" class="res"><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</a></span>
                                     </div>
     
                                 </div>
     
                             </div>
-    
                             <button *ngxPermissionsOnly="['client_create_user']" (click)="navigateToCreateUserAccounts()" type="button" class=" btn-warning btn  px-5 py-2 ">Add new user</button>
-    
                         </div>
-
-
                     </div>
                 </div>
         
@@ -60,7 +61,8 @@ overflow-x: hidden;">
                             <div class="bg-white justify-content-between p-4 case-user-detail " style="cursor: pointer;">
                                 <div  class="nav-item dropdown" style="font-size: 15px; color: rgba(64, 64, 64, 1);">
                                     <div  class="nav-link " data-bs-toggle="dropdown">
-                                        <img class="rounded-circle me-lg-2" [src]="'https://insuretinz.s3.amazonaws.com/' + user.photo" alt="" style="height: 150px;">
+                                        <img *ngIf="user.status == 'inactive'" class="rounded-circle me-lg-2" [src]="'https://insuretinz.s3.amazonaws.com/' + user.photo" alt="" [style]="style">
+                                        <img *ngIf="user.status == 'active'" class="rounded-circle me-lg-2" [src]="'https://insuretinz.s3.amazonaws.com/' + user.photo" alt="" [style]="style1">
                                         <div class="utilisateur">
                                             <h5 class="" style="color: black; font-size: medium;"> {{ user.primary_contact_name }} {{ user.secondary_contact_name }} </h5>
                                             <span class="text-dark" style="font-size: initial;">{{ user.primary_contact_title }}</span>
@@ -73,12 +75,29 @@ overflow-x: hidden;">
                                         </a>
                                         <hr>
                                         <a *ngIf="user.status == 'active' "  class="dropdown-item" >
-                                            <span class="" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']" (click)="deactivate(user.id)">Desactivate</span>
+                                            <span data-bs-toggle="modal" data-bs-target="#exampleModalactive" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']" >Desactivate</span>
                                         </a>
                                         <a *ngIf="user.status == 'inactive' " class="dropdown-item " >
-                                            <span  class="" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']" (click)="deactivate(user.id)" >Activate</span>
+                                            <span  data-bs-toggle="modal" data-bs-target="#exampleModalactive" *ngxPermissionsOnly="['client_activate_or_deactivate_client_user']"  >Activate</span>
                                         </a>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModalactive" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered dialog22">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Activate or deactivate user</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to activate this user ?
+                                    </div>
+                                    <div class="modal-footer footer22">
+                                    <button type="button" class="btn-dismiss btn-danger" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-primary btn22" (click)="deactivate(user.id)" data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

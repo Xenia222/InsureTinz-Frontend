@@ -27,6 +27,7 @@ export class QuickCheckComponent {
 
   ticketData: TicketData | null = null;
   location: {} = {}
+  errorMsg: string = '';
 
   constructor(private checkService:CheckService,private geolocationService: GeolocationService,private ticketService: TicketService){}
 
@@ -39,10 +40,13 @@ export class QuickCheckComponent {
   isValidArray: boolean[] = [true];
 
   validateInput(index: number): void {
-    if(this.searchType == "licensePlate"){
-    const regex = /^[A-Za-z]{2}\d{4}$/;
-    this.isValidArray[index] = regex.test(this.inputs[index].value);
-    this.regexErr = "The format must be 2 letters followed by 4 numbers."
+    if (this.inputs[index].value === '') {
+      this.isValidArray[index] = false;
+      this.regexErr = "This field cannot be empty.";
+    }else if(this.searchType == "licensePlate"){
+      const regex = /^[A-Za-z]{2}\d{4}$/;
+      this.isValidArray[index] = regex.test(this.inputs[index].value);
+      this.regexErr = "The format must be 2 letters followed by 4 numbers."
     }
     else if (this.searchType == "registrationNumber"){
       const regex = /^[A-Za-z0-9]{17}$/;
@@ -108,7 +112,8 @@ export class QuickCheckComponent {
           console.log(data.results);
         },
         err =>{
-          console.log(err);
+          this.errorMsg = err.error.error
+          console.log("Erreur de check",err.error);
         }
       )
     }

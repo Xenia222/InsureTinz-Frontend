@@ -11,6 +11,11 @@
 
           <div *ngxPermissionsOnly="['client_quick_check']" class=" search-container">
             <h4>Quick Check :</h4>
+            <div *ngIf="errorMsg" class="text-danger">
+              <small>
+                {{errorMsg}}
+              </small>
+            </div>
             <form name="form" #CheckForm="ngForm" (ngSubmit)="onSubmit()" class="mt-3">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="searchType" id="licensePlate"
@@ -39,8 +44,25 @@
                 </div>
                 <!-- Bouton de soumission -->
                 <div class="text-center p-3 w-50">
-                    <button type="submit" [disabled]="!allInputsValid()" class="w-75 btn btn-warning">Search</button>
+                    <button type="button" [disabled]="!allInputsValid()" class="w-75 btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModalcheck">Search</button>
                 </div>
+                <div class="modal fade" id="exampleModalcheck" tabindex="-1" aria-labelledby="exampleModalLabelcheck" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered dialog22">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Do check</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          Are you sure you want do this check ?
+                      </div>
+                      <div class="modal-footer footer22">
+                      <button type="button" class="btn-dismiss btn-danger" data-bs-dismiss="modal">No</button>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" type="submit">Yes</button>
+                      </div>
+                  </div>
+                  </div>
+              </div>
                 </div>
               </div>
             </form>

@@ -302,20 +302,36 @@ export class VerificationHistoryComponent implements OnInit {
 
     // Title
     doc.setFontSize(18);
-    doc.text('Check List', 14, 22);
+    doc.text('My client user check list', 14, 22);
 
     // Headers
-    const headers = [['Date','Time', 'User', 'Status', 'Details']];
+    const headers = [['Date and Time', 'User', 'Status', 'More informations']];
 
     // Data
     const data = this.filteredCheckss.map(item => {
-      const Date = item.check.check_date || 'N/A';
-      const Time = item.check.check_date || 'N/A'
+      const Datec = item.check.check_date || 'N/A';
       const status = item.check.status || 'N/A';
-      const policyNumber = item.insurance_policy?.policy_number ? `Policy number: ${item.insurance_policy.policy_number}` : 'Policy number: N/A';
+      const username$ = this.findUser(item.check.user_id).pipe(
+        map(user => user)
+      );
+      let nameSearch: string = ''
+      username$.subscribe(
+        (name) => {
+          nameSearch = name;
+          console.log("Nom de user", nameSearch)
+        },
+        (error) => {
+        }
+      );
+      const user = nameSearch
+      const automobileMake = item.automobile?.make ? `Automobile Make: ${item.automobile.make}` : 'Automobile Make: N/A';
+      const model = item.automobile?.model ? `Model: ${item.automobile.model}` : 'Model: N/A';
+      const owner = item.automobile?.ownername ? `Owner's name: ${item.automobile.ownername}` : 'Owner\'s name: N/A';
+      const policyNumber = item.automobile?.policy_number ? `Policy number: ${item.automobile.policy_number}` : 'Policy number: N/A';
+      const vinNumber = item.automobile?.vin ? `Vin: ${item.automobile.vin}` : 'Vin: N/A';
       const expireDate = item.automobile?.expiredate ? `Expiration date: ${new Date(item.automobile.expiredate).toLocaleDateString()}` : 'Expiration date: N/A';
-      const details = `Insurance company: \n${policyNumber}\nCoverage details: \n${expireDate}`;
-      return [Date, status, details];
+      const details = ` ${automobileMake}\n ${model}\n ${owner}\n ${policyNumber}\n ${vinNumber}\n ${expireDate}`;
+      return [Datec,user, status, details];
     });
 
     // Use autoTable to generate table
@@ -339,6 +355,6 @@ export class VerificationHistoryComponent implements OnInit {
     }
 
     // Save PDF
-    doc.save('check-list.pdf');
+    doc.save('client-user-check-list.pdf');
   }
 }

@@ -31,6 +31,20 @@ export class StructuresInformationsComponent implements OnInit{
   activeSection: number = 1;
   fileName: string = 'No file(s) selected';
   selectedFile: File | null = null;
+  departments = ["Alibori","Atakora", "Atlantique", "Borgou", "Collines", "Donga", "Kouffo", "Littoral", "Mono", "Ouémé", "Plateau","Zou"];
+  state: any[] = []
+  Alibori= ["Banikoara","Gogounou","Kandi","Karimama","Malanville","Ségbana"]
+  Atakora= ["Boukoumbé","Cobly","Kérou","Kouandé","Matéri","Natitingou","Péhunco","Tanguiéta","Toucountouna"]
+  Atlantique= ["Abomey-Calavi","Allada","Kpomassè","Ouidah","Sô-Ava","Toffo","Tori-Bossito","Zè"]
+  Borgou= ["Bembèrèkè","Kalalé","N'Dali","Nikki","Parakou","Pèrèrè","Sinendé","Tchaourou"]
+  Collines= ["Bantè","Dassa-Zoumè","Glazoué","Ouèssè","Savalou","Savè"]
+  Couffo= ["Aplahoué","Djakotomey","Dogbo","Klouékanmè","Lalo","Toviklin"]
+  Donga= ["Bassila","Copargo","Djougou","Ouaké"]
+  Littoral= ["Cotonou"]
+  Mono= ["Athiémè","Bopa","Comè","Grand-Popo","Houéyogbé","Lokossa"]
+  Ouémé= ["Adjarra","Adjohoun","Aguégués","Akpro-Missérété","Avrankou","Bonou","Dangbo","Porto-Novo","Sèmè-Kpodji"]
+  Plateau= ["Adja-Ouèrè","Ifangni","Kétou","Pobè","Sakété"]
+  Zou= ["Abomey","Agbangnizoun","Bohicon","Covè","Djidja","Ouinhi","Zagnanado","Za-Kpota","Zogbodomey"]
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private flagService: FlagService,
      private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
@@ -38,10 +52,10 @@ export class StructuresInformationsComponent implements OnInit{
       structureInfo: this.fb.group({
         agencyName: ['', Validators.required],
         agencyType: ['', Validators.required],
-        country: ['Country 1', Validators.required],
-        state: ['State 1', Validators.required],
-        city: ['City 1', Validators.required],
-        locgov: ['Local governement 1', Validators.required],
+        country: ['no', Validators.required],
+        state: ['no', Validators.required],
+        city: ['no', Validators.required],
+        locgov: ['no', Validators.required],
       }),
       contactInfo: this.fb.group({
         primaryContactName: ['', Validators.required],
@@ -80,6 +94,34 @@ export class StructuresInformationsComponent implements OnInit{
 
   // Helper method to check if a control is invalid and touched
   isInvalidAndTouched(controlName: string, formGroupName?: string): boolean {
+    if(this.SignupForm.get('structureInfo.country')?.value == "Alibori"){
+      this.state = this.Alibori
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Atakora"){
+      this.state = this.Atakora
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Atlantique"){
+      this.state = this.Atlantique
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Borgou"){
+      this.state = this.Borgou
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Collines"){
+      this.state = this.Collines
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Couffo"){
+      this.state = this.Couffo
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Donga"){
+      this.state = this.Donga
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Littoral"){
+      this.state = this.Littoral
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Mono"){
+      this.state = this.Mono
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Ouémé"){
+      this.state = this.Ouémé
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Plateau"){
+      this.state = this.Plateau
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Zou"){
+      this.state = this.Zou
+    }
+    else{
+      this.state = []
+    }
     const control = formGroupName
       ? this.SignupForm.get(`${formGroupName}.${controlName}`)
       : this.SignupForm.get(controlName);

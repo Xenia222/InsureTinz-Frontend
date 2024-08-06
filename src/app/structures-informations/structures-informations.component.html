@@ -55,20 +55,18 @@
                 </div>
                 <div class="mb-4 d-flex justify-content-between">
                   <select formControlName="country" class="form-select field me-4" required>
-                    <option disabled>Country *</option>
-                    <option value="Country 1" selected>Country 1</option>
-                    <option value="Country 2">Country 2</option>
-                  </select>
+                    <option value="no" disabled>Country *</option>
+                    <option *ngFor="let category of departments" [value]="category">{{ category }}</option>
+                  </select> <br>
                   <div *ngIf="isInvalidAndTouched('country', 'structureInfo')">
                     <small class="text-danger" *ngIf="structureInfo.get('country')?.errors?.['required']">
                       Country is required.
                     </small>
                   </div>
                   <select formControlName="state" class="form-select field" required>
-                    <option disabled>State *</option>
-                    <option value="State 1" selected>State 1</option>
-                    <option value="State 2">State 2</option>
-                  </select>
+                    <option value="no" disabled>State *</option>
+                    <option *ngFor="let category of state" [value]="category" selected>{{ category }}</option>
+                  </select> <br>
                   <div *ngIf="isInvalidAndTouched('state', 'structureInfo')">
                     <small class="text-danger" *ngIf="structureInfo.get('state')?.errors?.['required']">
                       State is required.
@@ -77,17 +75,17 @@
                 </div>
                 <div class="mb-4 d-flex justify-content-between">
                   <select formControlName="city" class="form-select field me-4" required>
-                    <option disabled>City *</option>
+                    <option value="no" disabled>City *</option>
                     <option value="City 1" selected>City 1</option>
                     <option value="City 2">City 2</option>
-                  </select>
+                  </select> <br>
                   <div *ngIf="isInvalidAndTouched('city', 'structureInfo')">
                     <small class="text-danger" *ngIf="structureInfo.get('city')?.errors?.['required']">
                       City is required.
                     </small>
                   </div>
                   <select formControlName="locgov" class="form-select field" required>
-                    <option disabled>Local governement *</option>
+                    <option value="no" disabled>Local governement *</option>
                     <option value="Local governement 1" selected>Local governement 1</option>
                     <option value="Local governement 2">Local governement 2</option>
                   </select>
