@@ -77,17 +77,17 @@ export class QuickCheckComponent {
   }
 
     onSubmit(){
-      // this.geolocationService.getPosition().subscribe({
-      //   next: (position: GeolocationPosition) => {
-      //     this.location = {
-      //       latitude: position.coords.latitude,
-      //       longitude: position.coords.longitude
-      //     };
-      //     console.log("Localisation de moi",this.location)
-      //   },
-      //   error: (err) => console.error(err)
-      // });
-      console.log("this.type", this.vin)
+      this.geolocationService.getPosition().subscribe({
+        next: (position: GeolocationPosition) => {
+          this.location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          console.log("My location",this.location)
+        },
+        error: (err) => console.error(err)
+      });
+      // console.log("this.type", this.vin)
       if(this.searchType == "licensePlate"){
         this.type = "license_plate" 
       }else if (this.searchType == "registrationNumber"){
@@ -99,10 +99,11 @@ export class QuickCheckComponent {
         vehicles: searchValues.map(numb => {
           return {
             identifier: numb,
-            type: this.type
+            type: this.type,
+            location: [this.location]
           };
         }),
-        // location: [this.location]
+        // 
       }).subscribe(
         data => {
           this.results = data.results

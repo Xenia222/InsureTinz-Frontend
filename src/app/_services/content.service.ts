@@ -5,12 +5,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CreditService {
+export class ContentService {
   private apiUrl = 'http://127.0.0.1:8000/api'; 
-
   constructor(private http: HttpClient) { }
 
-  giveCredits(credits: number, id:any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/give-credits/${id}`, {  credits });
+  getContent(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/get-contents`);
   }
 }
