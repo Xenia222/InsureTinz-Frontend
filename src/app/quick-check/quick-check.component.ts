@@ -102,7 +102,8 @@ export class QuickCheckComponent {
         vehicles: searchValues.map(numb => {
           return {
             identifier: numb,
-            type: this.type
+            type: this.type,
+            location: [this.location]
           };
         }),
         location: [{latitude: 6.3698385, longitude: 2.490104}]

@@ -6,6 +6,7 @@ import { TokenService } from '../_services/token.service';
 import { UserService } from '../_services/user.service';
 import { daft } from 'bwip-js';
 import { StorageService } from '../_services/storage.service';
+import { ContentService } from '../_services/content.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,6 +17,7 @@ export class LandingPageComponent implements OnInit{
 
   logged: boolean = false
   user_type: any
+  contents: any 
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -71,7 +73,9 @@ export class LandingPageComponent implements OnInit{
   }
 
   
-  constructor(private router: Router, private tokenServices: TokenService,private userService:UserService, private storageService:StorageService) {}
+  constructor(private router: Router, private tokenServices: TokenService,
+    private userService:UserService, private storageService:StorageService,
+    private contentService:ContentService) {}
 
   navigatetoWhoWeArePage() {
     this.router.navigate(['/who-we-are']);
@@ -87,6 +91,14 @@ export class LandingPageComponent implements OnInit{
     this.userService.getUser().subscribe(
       data => {
         this.user_type = data.user.user_type
+      }
+    )
+
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        console.log(this.contents);
+        
       }
     )
   }
