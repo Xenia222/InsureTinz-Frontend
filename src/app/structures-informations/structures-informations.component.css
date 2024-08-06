@@ -114,13 +114,14 @@ display: none;
 }
 
 #countrySelect option {
-    padding-left: 30px;
-    background-repeat: no-repeat;
-    background-position: 5px center;
-    background-size: 20px auto;
+    display: flex;
+    align-items: center;
   }
-  #countrySelect option[data-flag="bj"] {
-    background-image: url('https://flagcdn.com/w20/bj.png');
+  #countrySelect option img.emoji {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+    vertical-align: middle;
   }
 
 .form-container {
