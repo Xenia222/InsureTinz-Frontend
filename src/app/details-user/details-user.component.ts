@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { CreditService } from "../_services/credit.service";
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import jsPDF from 'jspdf';
 import { GeolocationService } from '../_services/geolocation.service';
 
@@ -13,6 +13,9 @@ import { GeolocationService } from '../_services/geolocation.service';
 })
 export class DetailsUserComponent implements OnInit{
   private _selectedStatuss: string = 'All';
+  private _startDate: string = '';
+  private _endDate: string = '';
+  private _searchTerm: string = '';
   
   id: any
   user: any
@@ -65,7 +68,7 @@ export class DetailsUserComponent implements OnInit{
            this.noCheck = data.client_user_checks[0].error
         }
         this.user = data.client_details
-        this.checks = data.client_user_checks[0]
+        this.checks = data.client_user_checks
         this.applyFilters();
       }
     )
@@ -81,17 +84,64 @@ export class DetailsUserComponent implements OnInit{
     this.applyFilters();
   }
 
+  get startDate(): string {
+    return this._startDate;
+  }
+
+  set startDate(value: string) {
+    this._startDate = value;
+    this.applyFilters();
+  }
+
+  get endDate(): string {
+    return this._endDate;
+  }
+
+  set endDate(value: string) {
+    this._endDate = value;
+    this.applyFilters();
+  }
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    this.applyFilters();
+  }
+
   get totalPages(): number {
     return Math.ceil(this.totalRecords / this.pageSize);
   }
 
   applyFilters(): void {
-    this.filteredChecks = this.checks.filter((item: { check: { status: string; }; }) => {
+    const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
+    this.filteredChecks = this.checks.filter((item: any) => {
+      const username$ = this.findUser(item.check.user_id).pipe(
+        map(user => user)
+      );
+      let nameSearch: string = ''
+      username$.subscribe(
+        (name) => {
+          nameSearch = name;
+        },
+        (error) => {
+        }
+      );
       const matchesCategory = this.selectedStatuss === 'All' || item.check.status === this.selectedStatuss;
-      return matchesCategory;
+      const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange && matchesSearch;
     });
     this.totalRecords = this.filteredChecks.length;
     this.setPage(1);
+  }
+
+  private normalizeDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
   setPage(page: number) {

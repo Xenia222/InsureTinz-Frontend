@@ -16,9 +16,9 @@ export class CreateUserAccountsComponent implements OnInit{
   submitted = false;
   errorMessage: string | null = null;
 
-  positions = ['Police manager', 'Officier', 'commandant'];
+  positions = ['Police manager', 'Officier', 'Commandant'];
   type = '';
-  departments = ['Police', 'Forester', "Bordcoast Police"];
+  departments = ["Alibori","Atakora", "Atlantique", "Borgou", "Collines", "Donga", "Kouffo", "Littoral", "Mono", "Ouémé", "Plateau","Zou"];
   roles: any[] = [];
   availablePermissions: any[] = [];
   clientMasterStatus: number = 1;
@@ -26,7 +26,6 @@ export class CreateUserAccountsComponent implements OnInit{
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
       this.userForm = this.fb.group({
-        // photo: [''],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
@@ -36,9 +35,6 @@ export class CreateUserAccountsComponent implements OnInit{
         type: [''],
         policyId: ['', Validators.required],
         department: ['', Validators.required],
-        // loginID: [{value: '', disabled: true}],
-        // role: ['', Validators.required],
-        // permissions: ['', Validators.required]
         roles: [[]],
         permissions: [[]]
     });
@@ -73,12 +69,7 @@ export class CreateUserAccountsComponent implements OnInit{
       error => {
         console.log(error);
       }
-      
     )
-    
-    // this.userForm.valueChanges.subscribe(values => {
-    //   this.generateLoginID(values);
-    // });
   }
 
   toggleOPasswordVisibility() {
@@ -108,21 +99,12 @@ export class CreateUserAccountsComponent implements OnInit{
         roleName: role.name
       })));
 
-    // Mettre à jour les permissions sélectionnées
     const currentPermissions = this.userForm.get('permissions')?.value || [];
     const updatedPermissions = currentPermissions.filter((id: number) => 
       this.availablePermissions.some(p => p.id === id)
     );
     this.userForm.patchValue({ permissions: updatedPermissions }, { emitEvent: false });
   }
-  // generateLoginID(values: { firstName: any; lastName: any; email: any; phone: any; }) {
-  //   const { firstName, lastName, email, phone } = values;
-  //   if (firstName && lastName && email && phone) {
-  //     const loginID = `${firstName.charAt(0)}${lastName.charAt(0)}${email.split('@')[0]}${phone.slice(-4)}`.slice(0, 8);
-  //     this.userForm.patchValue({ loginID }, { emitEvent: false });
-  //   }
-  // }
-
   
   onChanges(): void {
     this.userForm.get('type')?.valueChanges.subscribe(selectedValue => {
@@ -164,7 +146,7 @@ export class CreateUserAccountsComponent implements OnInit{
       'password': this.userForm.value.password,
     }).subscribe(
       data => {
-        console.log("Data receives",this.userForm.value.type)
+        console.log("Data receives",this.userForm.value.department)
         if (data.user){
         this.ngOnInit()
         this.router.navigate(['/list-users'])
@@ -180,7 +162,6 @@ export class CreateUserAccountsComponent implements OnInit{
       }
     )
     this.errorMessage = null;
-    // Handle form submission
     console.log(this.userForm.value);
   }
     

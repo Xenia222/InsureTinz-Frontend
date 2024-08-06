@@ -23,7 +23,7 @@
         </div>
 
 
-        <div class="navbut">
+        <div *ngIf="logged == false" class="navbut">
           <li class="nav-item">
             <a class="nav-link active login" aria-current="page" routerLink="/login">{{contents.login.body_en}}</a>
           </li>
@@ -31,6 +31,36 @@
             <a class="nav-link active signup" aria-current="page" routerLink="/signup">{{contents.signup.body_en}}</a>
           </li>
         </div>
+        <div *ngIf="logged == true" class="navbut">
+
+          <li *ngIf="user_type == 'client master' || user_type == 'client user' " class="nav-item">
+            <a class="nav-link active login" aria-current="page" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li *ngIf="user_type == 'police user' " class="nav-item">
+            <a class="nav-link active login" aria-current="page" routerLink="/quick-check">Quick check</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active signup" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
+          </li>
+          
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered dialog22">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Logout</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Are you sure you want to logout ?
+              </div>
+              <div class="modal-footer footer22">
+              <button type="button" class="btn btn-secondary  btn21" data-bs-dismiss="modal">No</button>
+              <button type="button" routerLink="/logout" class="btn btn-primary btn22" data-bs-dismiss="modal">Yes</button>
+              </div>
+          </div>
+          </div>
+      </div>
 
       </ul>
     </div>
@@ -123,10 +153,13 @@
 
       <!-- 3rd Column -->
       <div class="footer-col">
-        <h4>{{contents.help.body_en}}</h4>
-        <ul>
+        <h4>{{contents.help.body_en}}</h4>          
+        <ul *ngIf="logged == false">
           <li><a href="">{{contents.login.body_en}}</a></li>
           <li><a href="">{{contents.signup.body_en}}</a></li>
+        </ul>
+        <ul *ngIf="logged == true">
+          <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
 

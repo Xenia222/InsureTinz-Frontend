@@ -19,7 +19,7 @@ overflow-x: hidden;">
                                 <div *ngIf="photoUrl" class="box">
                                   <img [src]="'https://insuretinz.s3.amazonaws.com/' + photoUrl" class="img-thumbnail box">
                                 </div>
-                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{firstname}} {{lastname}} <br> <a data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
+                                <div class="cont text-center h-100"><p class="fs-4 ms-4 text-white h-100 align-items-end" style="">{{firstname}} {{lastname}} <br> <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profilePhotoModal" class="h-100 fs-6 text-warning ">Edit your photo</a></p></div>
                             </div>
                               <!-- The Modal -->
                               <div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
@@ -35,7 +35,7 @@ overflow-x: hidden;">
                                     <div class="modal-body">
                                       <form (ngSubmit)="onSubmitPhoto()" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                          <label for="photo" class="form-label">Choisir une photo :</label>
+                                          <label for="photo" class="form-label">Upload image :</label>
                                           <input type="file" id="photo" class="form-control" (change)="onFileSelected($event)">
                                         </div>
                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
@@ -50,7 +50,7 @@ overflow-x: hidden;">
                                   <div *ngIf="success_msg" class="text-success">
                                     {{ success_msg }}
                                   </div>
-                                  <form name="form" #LoginForm="ngForm" (ngSubmit)="LoginForm.valid && onSubmit()" class="row g-3">
+                                  <form name="form" #LoginForm="ngForm" (ngSubmit)="onSubmit()" class="row g-3">
                                     <div class="col-md-6">
                                       <label for="firstName" class="form-label">First Name</label>
                                       <input type="text" [value]="form.firstName"  name="firstName" class="form-control champ" [(ngModel)]="form.firstName" #firstName="ngModel" id="firstName" placeholder="First Name" required>
@@ -107,7 +107,7 @@ overflow-x: hidden;">
                                       </a>
                                     </div>
                                     <div *ngxPermissionsOnly="['client_edit_profile']" class="w-100 d-flex justify-content-center mt-2 ">
-                                      <button type="submit" class="w-50 btn btn-warning pading"> Update </button>
+                                      <button type="submit" [disabled]="LoginForm.invalid" class="w-50 btn btn-warning pading"> Update </button>
                                     </div>
                                   </form>
                                 </div>

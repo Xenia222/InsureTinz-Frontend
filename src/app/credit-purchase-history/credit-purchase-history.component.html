@@ -17,16 +17,14 @@ overflow-x: hidden;">
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h4>Credit <br> Used</h4>
-                                        <p *ngIf="user_credit_balance == null"><strong class="color2 fs-2">0</strong> 
-                                        </p>
-                                        <p><strong class="color2 fs-2">{{user_credit_balance}}</strong> 
+                                        <p><strong class="color2 fs-2">{{formatNumber(user_credit_balance)}}</strong> 
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="p-3 bigtext">
                                         <h4>Credit <br> Balance</h4>
-                                        <p><strong class="color3 fs-2">{{user_credit}}</strong> </p>
+                                        <p><strong class="color3 fs-2">{{formatNumber(user_credit)}}</strong> </p>
                                     </div>
                                 </div>
                                 <div *ngxPermissionsOnly="['client_buy_credit']"  class="col-sm-3 d-flex justify-content-center align-items-center">
@@ -47,19 +45,21 @@ overflow-x: hidden;">
                                 <div class="sous-group">
                                     <span>filter by</span>
                                 </div>
-                                <div class="col-auto btn-light sous-group">
-                                    <select class="form-select bg-light">
-                                        <option selected>Date</option>
+                                <div class="col-auto sous-group">
+                                    <select [(ngModel)]="selectedPayement" class="form-select bg-light">
+                                        <option *ngFor="let category of payement" [value]="category">{{ category }}</option>
                                     </select>
+                                    
                                 </div>
                                 <div class="col-auto sous-group">
-                                    <select class="form-select bg-light">
-                                        <option selected>Paiement By</option>
-                                        <option value="1">Deen</option>
-                                        <option value="2">Is</option>
-                                    </select>
+                                    <label for="startDate">Start-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="startDate">
                                 </div>
-                                <div class="">
+                                <div class="col-auto sous-group">
+                                    <label for="endDate">End-date:</label>
+                                    <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="endDate" [(ngModel)]="endDate">
+                                </div>
+                                <div class="" (click)="refreshPage()" style="cursor: pointer;">
                                     <span><img src="../../assets/ic-replay-24px.png" alt=""> Reset filter</span>
                                 </div>
                 
@@ -83,7 +83,7 @@ overflow-x: hidden;">
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let transact of transaction">
+                                                    <tr *ngFor="let transact of filteredItems">
                                                         <td>{{transact.updated_at | date : "dd/MM/yyyy"}}</td>
                                                         <td>{{transact.updated_at | date: "hh:mm:ss"}}</td>
                                                         <td>{{transact.amount}} FCFA</td>

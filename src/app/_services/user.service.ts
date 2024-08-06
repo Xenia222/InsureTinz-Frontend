@@ -42,6 +42,12 @@ export class UserService {
     return this.http.post(`${this.url}/user/profile-photo`, formData);
   }
 
+  updateDocument(document: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('document', document);
+    return this.http.post(`${this.url}/user/document`, formData);
+  }
+
   getProfilePhoto(): Observable<any> {
     return this.http.get(`${this.url}/user/profile-photo`);
   }

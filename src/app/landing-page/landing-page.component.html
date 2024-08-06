@@ -538,10 +538,13 @@
 
       <!-- 3rd Column -->
       <div class="footer-col">
-        <h4>{{contents.help.body_en}}</h4>
-        <ul>
+        <h4>{{contents.help.body_en}}</h4>          
+        <ul *ngIf="logged == false">
           <li><a href="">{{contents.login.body_en}}</a></li>
           <li><a href="">{{contents.signup.body_en}}</a></li>
+        </ul>
+        <ul *ngIf="logged == true">
+          <li><a href="/logout">Logout</a></li>
         </ul>
       </div>
 

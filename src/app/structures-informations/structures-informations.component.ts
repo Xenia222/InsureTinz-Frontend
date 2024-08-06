@@ -30,6 +30,7 @@ export class StructuresInformationsComponent implements OnInit{
   errorMessage: string = ''; // Initialisation de errorMessage à une chaîne vide
   activeSection: number = 1;
   fileName: string = 'No file(s) selected';
+  selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private flagService: FlagService,
      private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
@@ -92,6 +93,13 @@ export class StructuresInformationsComponent implements OnInit{
     } else {
       this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
       console.log(this.SignupForm.value);
+      if(this.selectedFile){
+      this.userService.updateDocument(this.selectedFile).subscribe(
+        data => {
+          
+        }
+      )
+    }
       this.userService.putUser(
          {
           "email": this.storageService.getEmail(),
@@ -108,7 +116,6 @@ export class StructuresInformationsComponent implements OnInit{
           'primary_contact_business_email' :this.SignupForm.get('contactInfo.primaryContactEmail')?.value,
           'primary_business_phone_number' :this.SignupForm.get('contactInfo.primaryPhoneNumber')?.value,
           'secondary_business_phone_number' :this.SignupForm.get('contactInfo.secondaryPhoneNumber')?.value,
-          'document' :this.fileName,
         }).subscribe(
           data => {
             console.log(data.detail);
@@ -164,15 +171,21 @@ export class StructuresInformationsComponent implements OnInit{
     }
   }
 
-  onFileChange(event: Event): void {
-    const file = this.SignupForm.get('document')?.value;
+  onFileChange(event: any): void {
     const input = event.target as HTMLInputElement;
+    const file = this.SignupForm.get('document')?.value;
     const files = input.files;
     if (file) {
       saveAs(file, this.fileName);
     }
     if (files?.length) {
       this.handleFiles(files);
+    }
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.SignupForm.patchValue({
+        document: this.selectedFile.name
+      });
     }
   }
 

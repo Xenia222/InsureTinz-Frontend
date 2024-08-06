@@ -26,7 +26,7 @@ interface TicketData {
 export class QuickCheckComponent {
 
   ticketData: TicketData | null = null;
-  location: any
+  location: {} = {}
 
   constructor(private checkService:CheckService,private geolocationService: GeolocationService,private ticketService: TicketService){}
 
@@ -83,11 +83,9 @@ export class QuickCheckComponent {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           };
-          console.log("My location",this.location)
+          console.log("Localisation de moi",this.location)
         },
-        error: (err) => console.error(err)
       });
-      // console.log("this.type", this.vin)
       if(this.searchType == "licensePlate"){
         this.type = "license_plate" 
       }else if (this.searchType == "registrationNumber"){
@@ -95,6 +93,7 @@ export class QuickCheckComponent {
       }
       let searchValues = this.getInputValues();
       console.log('Search values:', searchValues);
+      console.log("Localisation de moi 22",this.location)
       this.checkService.quickCheck({
         vehicles: searchValues.map(numb => {
           return {
@@ -103,7 +102,7 @@ export class QuickCheckComponent {
             location: [this.location]
           };
         }),
-        // 
+        location: [{latitude: 6.3698385, longitude: 2.490104}]
       }).subscribe(
         data => {
           this.results = data.results

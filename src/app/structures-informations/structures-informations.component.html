@@ -161,15 +161,14 @@
                 </div>
                 <div class="mb-4 d-flex">
                   <div class="input-group me-4">
-                    <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label>
+                    <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label> <br>
+                    <div class="input-group me-4">
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
-                      <option disabled selected>Select a country</option>
-                      <option>
-                        <img src="https://flagcdn.com/w20/bj.png" >
-                      </option>
+                      <option value="bj" selected >🇧🇯 +229</option>
                     </select>
                     
                     <input type="text" formControlName="primaryPhoneNumber" class="w-75 field form-control" required />
+                  </div>
                     <div *ngIf="isInvalidAndTouched('primaryPhoneNumber', 'contactInfo')">
                       <small class="text-danger" *ngIf="contactInfo.get('primaryPhoneNumber')?.errors?.['required']">
                         Primary Phone Number is required.
@@ -180,16 +179,16 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label>
+                    <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label> <br>
+                    <div class="input-group me-4">
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
-                      <option disabled selected>Select a country</option>
-                      <option>
-                        <img src="https://flagcdn.com/w20/bj.png" >
-                      </option>
+                      <!-- <option disabled selected>Select a country</option> -->
+                      <option value="bj" selected >🇧🇯 +229</option>
                     </select>
                     
                     <input type="text" formControlName="secondaryPhoneNumber" class="field form-control w-75" />
-                    <div *ngIf="isInvalidAndTouched('primaryPhoneNumber', 'contactInfo')">
+                  </div>
+                    <div *ngIf="isInvalidAndTouched('secondaryPhoneNumber', 'contactInfo')">
                       <small class="text-danger" *ngIf="contactInfo.get('secondaryPhoneNumber')?.errors?.['pattern']">
                         Secondary Phone Number must contain exactly 8 digits.
                       </small>
@@ -271,6 +270,49 @@
 //     $('.upload input').click();
 // });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser Twemoji
+    twemoji.parse(document.body, {
+      folder: 'svg',
+      ext: '.svg'
+    });
+
+    const select = document.getElementById('countrySelect');
+
+    // Fonction pour créer un élément avec l'emoji
+    function createOptionWithEmoji(option) {
+      const div = document.createElement('div');
+      div.innerHTML = option.innerHTML;
+      twemoji.parse(div);
+      return div;
+    }
+
+    // Remplacer les options par des versions avec emoji
+    Array.from(select.options).forEach(option => {
+      const newOption = createOptionWithEmoji(option);
+      option.innerHTML = newOption.innerHTML;
+    });
+
+    // Gérer l'affichage de l'emoji sélectionné
+    select.addEventListener('change', function() {
+      const selectedOption = this.options[this.selectedIndex];
+      const emojiSpan = document.createElement('span');
+      emojiSpan.innerHTML = selectedOption.innerHTML.split(' ')[0]; // Prendre seulement l'emoji
+      twemoji.parse(emojiSpan);
+      
+      // Créer un wrapper pour l'affichage sélectionné
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.appendChild(emojiSpan);
+      wrapper.appendChild(document.createTextNode(' ' + selectedOption.text));
+      
+      // Remplacer le contenu affiché du select
+      this.parentNode.insertBefore(wrapper, this.nextSibling);
+      this.style.color = 'transparent';
+      this.style.position = 'absolute';
+    });
+  });
 
 document.addEventListener('DOMContentLoaded', function () {
   Array.prototype.forEach.call(

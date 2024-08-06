@@ -4,16 +4,16 @@ import { LegendItem } from 'chart.js';
 import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { CheckService } from '../_services/check.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit{
+export class DashboardComponent implements OnInit{
 
-  selectedStatus: string = 'All';
+  selectedStatus: string = 'Status';
   infoVisibility: { [key: string]: boolean } = {};
 
   credit_balance: any = {
@@ -38,15 +38,31 @@ export class DashboardComponent implements AfterViewInit{
   checks:any[] = [];
   dataOui:any[] = [];
   dataNon:any[] = [];
+  selectedMonthIndex: number = 0;
+  data: any[] = this.filteredItems;
+  filteredData: any[] = this.filteredItems;
+  startDate: string = '';
+  endDate: string = '';
+  searchTerm: string = '';
   
 constructor(private userService: UserService, private checkService: CheckService){}
 
-status: string[] = ['All', 'insured', 'expired','not_found'];
+status: string[] = ['Status', 'insured', 'expired','not_found'];
 
   isShow = false;
 
   toggleDisplay() {
     this.isShow = !this.isShow;
+  }
+
+  formatNumber(value: number): string {
+    if (value >= 1000000) {
+      return (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1) + 'K';
+    } else {
+      return value.toString();
+    }
   }
 
   findUser(id: string): Observable<string> {
@@ -84,17 +100,35 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
   }
 
   get filteredItems(): any[] {
+    const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
+
     return this.checks.filter(item => {
-      const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
-      // const matchesSearch = item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      // const matchesPrice = item.price <= this.priceRange;
-      return matchesCategory;
+      const username$ = this.findUser(item.check.user_id).pipe(
+        map(user => user)
+      );
+      let nameSearch: string = ''
+      username$.subscribe(
+        (name) => {
+          nameSearch = name;
+        },
+        (error) => {
+        }
+      );
+      const matchesCategory = this.selectedStatus === 'Status' || item.check.status === this.selectedStatus;
+      const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && withinDateRange && matchesSearch;
     });
   }
 
+  private normalizeDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
   myChart: Chart | undefined;
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.userService.getDashboard().subscribe(
       data => {
         this.credit_balance.balance = data.credit_balance.balance
@@ -117,10 +151,14 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
     this.checkService.getCheckList().subscribe(
       data => {
         console.log("CHECK",data);
-        this.checks.push(data.check[0])
-        this.checks.push(data.check[1])
-        this.checks.push(data.check[2])
-        this.checks.push(data.check[3])
+        if(data.check[0])
+          this.checks.push(data.check[0])
+        if(data.check[1])
+          this.checks.push(data.check[1])
+        if(data.check[2])
+          this.checks.push(data.check[2])
+        if(data.check[3])
+          this.checks.push(data.check[3])
         
       }
     )
@@ -131,6 +169,8 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
         const target = event.target as HTMLSelectElement;
         this.updateChart(target.value);
       });
+    }else{
+      this.updateChart('all')
     }
   }
 

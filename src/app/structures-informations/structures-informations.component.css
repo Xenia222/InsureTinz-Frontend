@@ -113,6 +113,17 @@ display: none;
 
 }
 
+#countrySelect option {
+    display: flex;
+    align-items: center;
+  }
+  #countrySelect option img.emoji {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+  }
+
 .form-container {
     max-width: 500px;
     margin: auto;

@@ -91,7 +91,7 @@ startCountdown(): void {
           this.errorMessage = data.message
         }
       })
-    
+    this.storageService.clearCredentials()
   }
 
 }
