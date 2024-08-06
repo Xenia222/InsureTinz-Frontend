@@ -14,7 +14,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 export class CreditPurchaseHistoryComponent implements OnInit{
 
   transaction: any[] = []
-  selectedPayement: string = 'All';
+  selectedPayement: string = 'Payment methods';
   user_credit: number = 0
   user_credit_balance: number = 0
   permissions: any[] = []
@@ -23,7 +23,7 @@ export class CreditPurchaseHistoryComponent implements OnInit{
 
   constructor(private router: Router,private creditService: CheckService) {}
 
-  payement: string[] = ['All','mtnmomo','moovmoney'];
+  payement: string[] = ['Payment methods','mtnmomo','moovmoney'];
 
   ngOnInit(): void {
     this.creditService.getCredits().subscribe(
@@ -69,7 +69,7 @@ export class CreditPurchaseHistoryComponent implements OnInit{
     const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
 
     return this.transaction.filter(item => {
-      const matchesCategory = this.selectedPayement === 'All' || item.payment_method === this.selectedPayement;
+      const matchesCategory = this.selectedPayement === 'Payment methods' || item.payment_method === this.selectedPayement;
       const itemDate = this.normalizeDate(new Date(item.created_at));
       const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
       return matchesCategory && withinDateRange;

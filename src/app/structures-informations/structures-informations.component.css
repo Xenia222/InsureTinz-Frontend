@@ -113,6 +113,16 @@ display: none;
 
 }
 
+#countrySelect option {
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    background-size: 20px auto;
+  }
+  #countrySelect option[data-flag="bj"] {
+    background-image: url('https://flagcdn.com/w20/bj.png');
+  }
+
 .form-container {
     max-width: 500px;
     margin: auto;

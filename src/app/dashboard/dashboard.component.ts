@@ -13,7 +13,7 @@ import { map, Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit{
 
-  selectedStatus: string = 'All';
+  selectedStatus: string = 'Status';
   infoVisibility: { [key: string]: boolean } = {};
 
   credit_balance: any = {
@@ -47,12 +47,22 @@ export class DashboardComponent implements OnInit{
   
 constructor(private userService: UserService, private checkService: CheckService){}
 
-status: string[] = ['All', 'insured', 'expired','not_found'];
+status: string[] = ['Status', 'insured', 'expired','not_found'];
 
   isShow = false;
 
   toggleDisplay() {
     this.isShow = !this.isShow;
+  }
+
+  formatNumber(value: number): string {
+    if (value >= 1000000) {
+      return (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1) + 'K';
+    } else {
+      return value.toString();
+    }
   }
 
   findUser(id: string): Observable<string> {
@@ -105,7 +115,7 @@ status: string[] = ['All', 'insured', 'expired','not_found'];
         (error) => {
         }
       );
-      const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
+      const matchesCategory = this.selectedStatus === 'Status' || item.check.status === this.selectedStatus;
       const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
       const itemDate = this.normalizeDate(new Date(item.check.created_at));
       const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);

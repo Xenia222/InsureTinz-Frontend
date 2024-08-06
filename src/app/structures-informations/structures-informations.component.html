@@ -161,7 +161,8 @@
                 </div>
                 <div class="mb-4 d-flex">
                   <div class="input-group me-4">
-                    <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label>
+                    <label for="number1" class="mb-3" style="color:darkgrey; font-size: small;">Primary Business Phone Number *</label> <br>
+                    <div class="input-group me-4">
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
                       <option disabled selected>Select a country</option>
                       <option>
@@ -170,6 +171,7 @@
                     </select>
                     
                     <input type="text" formControlName="primaryPhoneNumber" class="w-75 field form-control" required />
+                  </div>
                     <div *ngIf="isInvalidAndTouched('primaryPhoneNumber', 'contactInfo')">
                       <small class="text-danger" *ngIf="contactInfo.get('primaryPhoneNumber')?.errors?.['required']">
                         Primary Phone Number is required.
@@ -180,15 +182,15 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label>
+                    <label for="number2" class="mb-3" style="color:darkgrey; font-size: small;">Secondary Business Phone Number</label> <br>
+                    <div class="input-group me-4">
                     <select class="form-select field w-25" id="countrySelect" aria-label="Select Country">
                       <option disabled selected>Select a country</option>
-                      <option>
-                        <img src="https://flagcdn.com/w20/bj.png" >
-                      </option>
+                      <option value="bj">🇧🇯 Benin</option>
                     </select>
                     
                     <input type="text" formControlName="secondaryPhoneNumber" class="field form-control w-75" />
+                  </div>
                     <div *ngIf="isInvalidAndTouched('secondaryPhoneNumber', 'contactInfo')">
                       <small class="text-danger" *ngIf="contactInfo.get('secondaryPhoneNumber')?.errors?.['pattern']">
                         Secondary Phone Number must contain exactly 8 digits.

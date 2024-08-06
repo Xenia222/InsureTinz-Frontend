@@ -18,7 +18,13 @@ export class ListUsersComponent implements OnInit{
   
   users: any[] = []
   permissions: any[] = []
-  constructor(private router: Router, private userService: UserService, private permissionsService: NgxPermissionsService) {}
+  departments = ['Departments',"Alibori","Atakora", "Atlantique", "Borgou", "Collines", "Donga", "Kouffo", "Littoral", "Mono", "Ouémé", "Plateau","Zou"];
+  positions = [ 'Positions','Police manager', 'Officier', 'Commandant'];
+  selectedDepartment: string = 'Departments';
+  selectedPosition: string = 'Positions';
+  searchTerm: string = '';
+
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
@@ -41,6 +47,21 @@ export class ListUsersComponent implements OnInit{
       }
     )
   }
+
+  get filteredItems(): any[] {
+    // const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
+    // const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
+
+    return this.users.filter(item => {
+      const matchesCategory = this.selectedDepartment === 'Departments' || item.country === this.selectedDepartment;
+      const matchesPosition = this.selectedPosition === 'Positions' || item.primary_contact_title === this.selectedPosition;
+      const matchesSearch = item.primary_contact_name.toLowerCase().includes(this.searchTerm.toLowerCase()) || item.secondary_contact_name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      // const itemDate = this.normalizeDate(new Date(item.check.created_at));
+      // const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
+      return matchesCategory && matchesSearch && matchesPosition;
+    });
+  }
+
   navigateToCreateUserAccounts() {
     this.router.navigate(['/create-user-accounts']);
   }

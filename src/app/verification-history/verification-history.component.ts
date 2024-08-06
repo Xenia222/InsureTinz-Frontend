@@ -14,13 +14,13 @@ import { Router } from '@angular/router';
 })
 export class VerificationHistoryComponent implements OnInit {
   
-  private _selectedStatus: string = 'All';
+  private _selectedStatus: string = 'Status';
   private _startDate: string = '';
   private _endDate: string = '';
   private _startDate1: string = '';
   private _endDate1: string = '';
   private _searchTerm: string = '';
-  private _selectedStatuss: string = 'All';
+  private _selectedStatuss: string = 'Status';
   checks: any[] = [];
   infoVisibility: { [key: string]: boolean } = {};
   filteredChecks: any[] = [];
@@ -41,7 +41,7 @@ export class VerificationHistoryComponent implements OnInit {
 
   constructor(private checkService: CheckService,private router: Router, private userService: UserService) {}
 
-  status: string[] = ['All', 'insured', 'expired','not_found'];
+  status: string[] = ['Status', 'insured', 'expired','not_found'];
   isShow = false;
 
   ngOnInit(): void {
@@ -167,7 +167,7 @@ export class VerificationHistoryComponent implements OnInit {
     const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
     const end = this.endDate ? this.normalizeDate(new Date(this.endDate)) : null;
     this.filteredChecks = this.checks.filter(item => {
-      const matchesCategory = this.selectedStatus === 'All' || item.check.status === this.selectedStatus;
+      const matchesCategory = this.selectedStatus === 'Status' || item.check.status === this.selectedStatus;
       const itemDate = this.normalizeDate(new Date(item.check.created_at));
       const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);
       return matchesCategory && withinDateRange;
@@ -207,7 +207,7 @@ export class VerificationHistoryComponent implements OnInit {
         (error) => {
         }
       );
-      const matchesCategory = this.selectedStatuss === 'All' || item.check.status === this.selectedStatuss;
+      const matchesCategory = this.selectedStatuss === 'Status' || item.check.status === this.selectedStatuss;
       const matchesSearch = nameSearch.toLowerCase().includes(this.searchTerm.toLowerCase());
       const itemDate = this.normalizeDate(new Date(item.check.created_at));
       const withinDateRange = (!start || itemDate >= start) && (!end || itemDate <= end);

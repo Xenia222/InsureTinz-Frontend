@@ -123,9 +123,10 @@ export class ProfileComponent implements OnInit{
       data => {
         console.log("Update profile",data)
         if(data.message){
-        this.msg = data.message
-        }else{
-        this.success_msg = data.message
+          this.msg = data.message
+        }else if(data.status_code ==200){
+          this.success_msg = data.message
+          this.refreshPage()
         
       }
         },
@@ -136,7 +137,6 @@ export class ProfileComponent implements OnInit{
         this.form.password = ''
       }
     )
-    this.refreshPage()
   }
 
   loadProfilePhoto(): void {

@@ -14,9 +14,11 @@ overflow-x: hidden;">
                         <div *ngxPermissionsOnly="['client_view_client_users']" class="flex" style="margin-top: 20px;">
                             <div class="sear" style="width: 30%;">
                                 <h3 >Your users</h3>
+                                <input type="search" class="form-control" placeholder="Search user" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="searchTerm">
                             </div>
     
                             <div class=" mt-1 sear2" style="padding: 0px;">
+
                                 <div class="btn-group grouppp sear3" role="group" aria-label="Basic example">
     
                                     <div class="sous-group24">
@@ -26,13 +28,13 @@ overflow-x: hidden;">
                                         <span>filter by</span>
                                     </div>
                                     <div class="col-auto btn-light sous-group24">
-                                        <select class="form-select bg-light">
-                                            <option selected>Department</option>
+                                        <select [(ngModel)]="selectedDepartment" class="form-select bg-light">
+                                            <option *ngFor="let category of departments " [value]="category">{{ category }}</option>
                                         </select>
                                     </div>
                                     <div class="col-auto btn-light sous-group24">
-                                        <select class="form-select bg-light">
-                                            <option selected>Position</option>
+                                        <select [(ngModel)]="selectedPosition" class="form-select bg-light">
+                                            <option *ngFor="let category of positions " [value]="category">{{ category }}</option>
                                         </select>
                                     </div>
                                     <div  style="text-align: center;">
@@ -54,7 +56,7 @@ overflow-x: hidden;">
                     
                     <!-- La liste des users -->
                     <div *ngxPermissionsOnly="['client_view_client_users']" class="row g-4 mt-3 ml-1">
-                        <div *ngFor="let user of users" class="col-sm-6 col-xl-3 col-custom">
+                        <div *ngFor="let user of filteredItems" class="col-sm-6 col-xl-3 col-custom">
                             <div class="bg-white justify-content-between p-4 case-user-detail " style="cursor: pointer;">
                                 <div  class="nav-item dropdown" style="font-size: 15px; color: rgba(64, 64, 64, 1);">
                                     <div  class="nav-link " data-bs-toggle="dropdown">
