@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CheckService {
 
-  url ='http://127.0.0.1:8000/api'
+  url ='http://52.86.29.221/api'
   constructor(private http: HttpClient) { }
 
 
