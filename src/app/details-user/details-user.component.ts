@@ -68,7 +68,7 @@ export class DetailsUserComponent implements OnInit{
            this.noCheck = data.client_user_checks[0].error
         }
         this.user = data.client_details
-        this.checks = data.client_user_checks
+        this.checks = data.client_user_checks[0].client_user_checks
         this.applyFilters();
       }
     )

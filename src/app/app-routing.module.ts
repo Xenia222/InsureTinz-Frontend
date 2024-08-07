@@ -44,6 +44,7 @@ import { ResetForgotPasswordComponent } from './reset-forgot-password/reset-forg
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { statusGuard } from './_helper/status.guard';
 import { LockedPageComponent } from './locked-page/locked-page.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,10 @@ const routes: Routes = [
     data: { requiredPermission: ['client_master', 'client_check_history_management'] }
   },
   { path: 'create-user-accounts', component: CreateUserAccountsComponent , 
+    canActivate: [authGuard,permissionGuard,statusGuard],
+    data: { requiredPermission: ['client_master', 'client_users'] }
+  },
+  { path: 'edit-user/:id', component: EditUserComponent , 
     canActivate: [authGuard,permissionGuard,statusGuard],
     data: { requiredPermission: ['client_master', 'client_users'] }
   },

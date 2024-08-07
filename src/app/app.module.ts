@@ -53,6 +53,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { LockedPageComponent } from './locked-page/locked-page.component';
 import { LockedSidebarComponent } from './locked-sidebar/locked-sidebar.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 
@@ -100,6 +101,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     AccessDeniedComponent,
     LockedPageComponent,
     LockedSidebarComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

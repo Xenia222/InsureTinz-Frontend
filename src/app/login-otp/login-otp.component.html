@@ -30,7 +30,7 @@
                 <p style="margin-bottom: 30px;">The code will expire in <strong>{{ minutes }} minutes {{seconds}} seconds</strong></p>
                 <input type="text" class="form-control field" placeholder="CODE" [(ngModel)]="otp" />
                 <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-                <a class="d-block mb-4 text-dark text-decoration-none hover" (click)="resendOtp()">Resend OTP</a>
+                <a class="d-block mb-4 text-dark text-decoration-none hover" style="cursor: pointer;" (click)="resendOtp()">Resend OTP</a>
                 <button class="btn btn-warning text-white w-100" style="height: 52px;"
                     (click)="onSubmit()"><strong>Next</strong></button>
             </div>
