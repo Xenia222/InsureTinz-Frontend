@@ -33,13 +33,13 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
         <div class="sidebar pe-3 pb-3" [ngClass]="{ 'sidebar-visible': sidebarVisible }">
             <nav class="navbar bg-white navbar-dark h-100">
                 <a href="" class="navbar-brand mx-4 mb-2">
-                    <h3 *ngIf="user_type == 'client master'" class="text-main">Main Admin</h3>
-                    <h3 *ngIf="user_type == 'client user'" class="text-main">User Admin</h3>
-                    <h3 *ngIf="user_type == 'police user'" class="text-main">Police</h3>
+                    <h3 *ngIf="user_type == 'client master'" class="text-main">Client Master</h3>
+                    <h3 *ngIf="user_type == 'client user'" class="text-main">Client User</h3>
+                    <h3 *ngIf="user_type == 'police user'" class="text-main">Police USer</h3>
                 </a>
 
                 <div class="navbar-bas w-100">
-                    <a *ngxPermissionsOnly="['client_master','client_dashboard']" routerLink="/dashboard" class="nav-item nav-link" routerLinkActive="active-link">
+                    <a *ngxPermissionsOnly="['client_master']" routerLink="/dashboard" class="nav-item nav-link" routerLinkActive="active-link">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path

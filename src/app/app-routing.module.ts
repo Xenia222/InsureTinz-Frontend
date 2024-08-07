@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent , 
     canActivate: [authGuard,permissionGuard,statusGuard],
-    data: { requiredPermission: ['client_master', 'client_dashboard'] }
+    data: { requiredPermission: ['client_master'] }
   },
   { path: 'credits', component: CreditsComponent , 
     canActivate: [authGuard,permissionGuard,statusGuard],
@@ -108,11 +108,11 @@ const routes: Routes = [
   },
   { path: 'test', component: TestComponent , 
     canActivate: [authGuard,permissionGuard],
-    data: { requiredPermission: ['client_master', 'client_dashboard'] }
+    data: { requiredPermission: ['client_master'] }
   },
   { path: 'list-users', component: ListUsersComponent , 
     canActivate: [authGuard,permissionGuard],
-    data: { requiredPermission: ['client_master', 'client_dashboard'] }
+    data: { requiredPermission: ['client_master'] }
   },
   { path: 'forget-password', component: ForgetPasswordComponent},
   { path: 'reset-forgot-password', component: ResetForgotPasswordComponent},

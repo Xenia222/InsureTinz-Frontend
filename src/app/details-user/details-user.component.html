@@ -15,7 +15,7 @@ overflow-x: hidden;">
                                 <div class="d-flex align-items-center justify-content-between" >
                                     <h3 class="mt-2 mb-lg-0 text-dark" style=" margin-left: 40px;">User's details</h3>
                                     <div class="p-3  ">
-                                        <button type="button" class="btn btn-warning py-1 px-4 fs-5 give"
+                                        <button *ngxPermissionsOnly="['client_give_credits']" type="button" class="btn btn-warning py-1 px-4 fs-5 give"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                             Give credit
                                         </button>
@@ -62,6 +62,12 @@ overflow-x: hidden;">
                                         </div>
                                         <div class="details22">
                                             <p>Status :</p> <p>{{user.status}}</p>
+                                        </div>
+                                        <div class="details22">
+                                            <p>Title :</p> <p>{{user.primary_contact_title}}</p>
+                                        </div>
+                                        <div class="details22">
+                                            <p>Department :</p> <p>{{user.country}}</p>
                                         </div>
                                         <div class="details22">
                                             <p>User type :</p> <p>{{user.user_type}}</p>

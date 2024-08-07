@@ -27,7 +27,7 @@ export class StructuresInformationsComponent implements OnInit{
   countries: any[] = [];
 
   SignupForm: FormGroup;
-  errorMessage: string = ''; // Initialisation de errorMessage à une chaîne vide
+  errorMessage: string = '';
   activeSection: number = 1;
   fileName: string = 'No file(s) selected';
   selectedFile: File | null = null;
@@ -104,7 +104,7 @@ export class StructuresInformationsComponent implements OnInit{
       this.state = this.Borgou
     }else if(this.SignupForm.get('structureInfo.country')?.value == "Collines"){
       this.state = this.Collines
-    }else if(this.SignupForm.get('structureInfo.country')?.value == "Couffo"){
+    }else if(this.SignupForm.get('structureInfo.country')?.value == "Kouffo"){
       this.state = this.Couffo
     }else if(this.SignupForm.get('structureInfo.country')?.value == "Donga"){
       this.state = this.Donga

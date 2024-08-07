@@ -95,6 +95,10 @@ export class UserService {
     return this.http.put<any>(this.url+'/client_profile_update', user)
   }
 
+  putClientUser(user: {}, id:any): Observable<any>{
+    return this.http.put<any>(this.url+'/update_client_user/'+id, user)
+  }
+
   untrashUser(cid: number): Observable<Iapi>{
     return this.http.post<Iapi>(this.url+'/untrash/'+cid, {})
   }
