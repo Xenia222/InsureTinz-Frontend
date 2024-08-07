@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, Renderer2  } from '@angular/core';
 import Swiper from 'swiper';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Router } from '@angular/router';
@@ -55,6 +55,7 @@ export class LandingPageComponent implements OnInit{
     },
     // Ajoutez les autres éléments ici...
   ];
+  url: any;
 
   onInitialized(event: any) {
     console.log('Carousel initialized', event);
@@ -75,7 +76,8 @@ export class LandingPageComponent implements OnInit{
   
   constructor(private router: Router, private tokenServices: TokenService,
     private userService:UserService, private storageService:StorageService,
-    private contentService:ContentService) {}
+    private contentService:ContentService,
+  private renderer :Renderer2) {}
 
   navigatetoWhoWeArePage() {
     this.router.navigate(['/who-we-are']);
@@ -97,10 +99,16 @@ export class LandingPageComponent implements OnInit{
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents
+        // this.url = data.contents.header_img
+        // this.setCSSVariable('--url', this.url);
         console.log(this.contents);
         
       }
     )
   }
+
+  // setCSSVariable(variableName: string, value: string){
+  //   this.renderer.setStyle(document.documentElement, variableName, value);
+  // }
 
 }
