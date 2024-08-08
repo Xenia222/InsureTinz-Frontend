@@ -99,8 +99,8 @@ export class LandingPageComponent implements OnInit{
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents
-        console.log("image banner", data.contents.home_partners_cloud_8020.image);
-        this.renderer.setStyle(document.documentElement, '--background-image-url', `url(${data.contents.header_img.image})`);
+        console.log("image banner", data.contents.header_img.image);
+        this.renderer.setStyle(document.documentElement, '--background-image-url', `url(https://insuretinz.s3.amazonaws.com/${data.contents.header_img.image})`);
         console.log(this.contents);
         
       }

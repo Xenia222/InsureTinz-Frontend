@@ -61,8 +61,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   { path: 'dashboard', component: DashboardComponent , 
-    canActivate: [authGuard,permissionGuard,statusGuard],
-    data: { requiredPermission: ['client_master'] }
+    canActivate: [authGuard,statusGuard],
   },
   { path: 'credits', component: CreditsComponent , 
     canActivate: [authGuard,permissionGuard,statusGuard],
