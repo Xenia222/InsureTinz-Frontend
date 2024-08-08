@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
 import { TokenService } from '../_services/token.service';
 import { interval, Subscription } from 'rxjs';
+import { ContentService } from '../_services/content.service'
+
 
 @Component({
   selector: 'app-signup-otp',
@@ -21,8 +23,13 @@ export class SignupOtpComponent {
   timeLeftInSeconds: number = 10 * 60;
   private countdownSubscription: Subscription | undefined;
   interval: any;
+  contents: any 
 
-  constructor(private router: Router,private tokenService: TokenService,private authService: AuthService, private storageService: StorageService) { }
+
+  constructor(private router: Router,private tokenService: TokenService,
+    private authService: AuthService, private storageService: StorageService,
+    private contentService:ContentService
+  ) { }
 
   get minutes(): number {
     return Math.floor(this.timeLeftInSeconds / 60);
@@ -33,6 +40,13 @@ export class SignupOtpComponent {
   }
 
   ngOnInit() {
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        console.log(this.contents);
+        
+      }
+    )
     this.startCountdown();
 } 
 

@@ -2,15 +2,14 @@
     <div class="row h-100">
 
         <div class="col-md-6 left-section d-flex flex-column justify-content-center align-items-center text-center p-5">
-            <div class="d-flex ">
-                <img src="../../assets/logo.png" alt="Logo" class="me-3" />
-            </div>
-            <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
-            <h2 class="mt-4 mb-4">Check automobile insurance <br> status in 2 seconds</h2>
-            <p class="text-center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor
-                incididunt.
-            </p>
+          <div class="d-flex ">
+            <img src="{{contents.home_logo.body_en}}" alt="Logo" class="me-3" />
+          </div>
+          <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
+          <h2 class="mt-4 mb-4">{{contents.home_under_cta.body_en}}</h2>
+          <p class="text-center">
+              {{contents.home_under_cta.body_en}} <br> {{contents.wwa_text1.body_en}}
+          </p>
           </div>
             
       <div class="col-md-6 right-section">
@@ -24,18 +23,18 @@
                         <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
                       </a>
                     <div>
-                      <span>Already have an account? </span>
-                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a>
+                      <span>{{contents.login_question.body_en}} </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in.body_en}}</a>
                     </div>
                 </div>
 
-              <h1 style="font-size: 39px; margin-top: 30px;">Structure's informations</h1>
+              <h1 style="font-size: 39px; margin-top: 30px;">{{contents.structure_information.body_en}}</h1>
               <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
                 <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
                   3
                 </div>
               </div>
-              <p style="font-size: 17px; margin-top: 50px; margin-bottom: 30px;">Complete informations about your structure</p>
+              <p style="font-size: 17px; margin-top: 50px; margin-bottom: 30px;">{{contents.structure_information_message.body_en}}</p>
               <div formGroupName="structureInfo" class="w-100">
                 <div class="mb-4">
                   <input type="text" formControlName="agencyName" class="field form-control" placeholder="Agency Name *" required />
@@ -106,12 +105,12 @@
                         <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
                       </a>
                     <div>
-                      <span>Already have an account? </span>
-                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">Sign In</a>
+                      <span>{{contents.login_question.body_en}} </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in.body_en}}</a>
                     </div>
                 </div>
 
-              <h1 style="font-size: 39px; margin-top: 30px; margin-bottom: 25px;">Structure's informations</h1>
+              <h1 style="font-size: 39px; margin-top: 30px; margin-bottom: 25px;">{{contents.structure_information.body_en}}</h1>
               <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
                 <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
                   3

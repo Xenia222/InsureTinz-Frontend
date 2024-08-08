@@ -7,6 +7,8 @@ import { AuthService } from '../_services/auth.service';
 import { TokenService } from '../_services/token.service';
 import { saveAs } from 'file-saver';
 import { FlagService } from '../_services/flag.service';
+import { ContentService } from '../_services/content.service'
+
 
 @Component({
   selector: 'app-structures-informations',
@@ -14,11 +16,21 @@ import { FlagService } from '../_services/flag.service';
   styleUrl: './structures-informations.component.css'
 })
 export class StructuresInformationsComponent implements OnInit{
+  contents: any 
 
   ngOnInit(): void {
     this.flagService.getCountries().subscribe(data => {
       this.countries = data;
     });
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        // this.url = data.contents.header_img
+        // this.setCSSVariable('--url', this.url);
+        console.log(this.contents);
+        
+      }
+    )
   }
 
   getFlagUrl(code: string): string {
@@ -46,8 +58,12 @@ export class StructuresInformationsComponent implements OnInit{
   Plateau= ["Adja-Ouèrè","Ifangni","Kétou","Pobè","Sakété"]
   Zou= ["Abomey","Agbangnizoun","Bohicon","Covè","Djidja","Ouinhi","Zagnanado","Za-Kpota","Zogbodomey"]
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private flagService: FlagService,
-     private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
+  constructor(private fb: FormBuilder, private router: Router, 
+    private userService: UserService,private flagService: FlagService,
+     private storageService: StorageService, private authService: AuthService, 
+     private tokenService: TokenService,
+     private contentService:ContentService
+    ) {
     this.SignupForm = this.fb.group({
       structureInfo: this.fb.group({
         agencyName: ['', Validators.required],
@@ -76,6 +92,7 @@ export class StructuresInformationsComponent implements OnInit{
     });
   }
 
+  
   get termsArray() {
     return this.SignupForm.get('terms') as FormArray;
   }

@@ -4,6 +4,8 @@ import { AuthService } from '../_services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { ContentService } from '../_services/content.service'
+
 
 @Component({
   selector: 'app-signup',
@@ -18,13 +20,29 @@ export class SignupComponent {
   uid: string = '';
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  contents: any 
 
-  constructor(private fb: FormBuilder, private router: Router,private storageService: StorageService,private authService: AuthService) {
+
+  constructor(private fb: FormBuilder, private router: Router,private storageService: StorageService,
+    private authService: AuthService, private contentService:ContentService,
+  ) {
     this.SignupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
     }, { validator: this.passwordMatchValidator });
+  }
+
+  ngOnInit(): void { 
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        // this.url = data.contents.header_img
+        // this.setCSSVariable('--url', this.url);
+        console.log(this.contents);
+        
+      }
+    )
   }
 
   passwordMatchValidator(form: FormGroup) {

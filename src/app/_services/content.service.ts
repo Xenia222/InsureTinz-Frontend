@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ContentService {
-  private apiUrl = 'http://52.86.29.221/api'; 
+  private apiUrl = 'http://127.0.0.1:8000/api'; 
   constructor(private http: HttpClient) { }
 
   getContent(): Observable<any> {
