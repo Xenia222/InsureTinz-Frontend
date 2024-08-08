@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { UserService } from '../_services/user.service';
-import { StorageService } from '../_services/storage.service';
-import { TokenService } from '../_services/token.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -18,8 +14,7 @@ export class ForgetPasswordComponent implements OnInit{
   successMessage: string | null = null;
   
   
-  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
-    private tokenService: TokenService,private storageService: StorageService, private userService: UserService){
+  constructor(private fb: FormBuilder, private authService: AuthService){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -34,7 +29,6 @@ export class ForgetPasswordComponent implements OnInit{
       data => {
         if(data.status == 200){
           this.successMessage = data.message
-          console.log(data.message)
         }else if (data.status_code == 404){
           this.errorMessage = data.message
         }

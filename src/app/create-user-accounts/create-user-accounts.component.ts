@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
-import { data } from 'jquery';
-import { error } from 'console';
 import { Router } from '@angular/router';
 
 @Component({
@@ -58,8 +56,6 @@ export class CreateUserAccountsComponent implements OnInit{
     )
     this.userService.getRoleAndPermission().subscribe(
       data => {
-        console.log(data.roles)
-        console.log(data.permissions)
         this.roles = data.roles
         this.userForm.get('roles')?.valueChanges.subscribe((selectedRoleIds: number[]) => {
           this.updateAvailablePermissions(selectedRoleIds);
@@ -67,7 +63,6 @@ export class CreateUserAccountsComponent implements OnInit{
 
       },
       error => {
-        console.log(error);
       }
     )
   }
@@ -127,7 +122,6 @@ export class CreateUserAccountsComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log("Current user type:", this.type);
     
     if (this.userForm.invalid) {
       this.errorMessage = 'Please fill out the form correctly.';
@@ -146,7 +140,6 @@ export class CreateUserAccountsComponent implements OnInit{
       'password': this.userForm.value.password,
     }).subscribe(
       data => {
-        console.log("Data receives",this.userForm.value.department)
         if (data.user){
         this.ngOnInit()
         this.router.navigate(['/list-users'])
@@ -158,11 +151,9 @@ export class CreateUserAccountsComponent implements OnInit{
         }
       },
       error => {
-        console.log(error)
       }
     )
     this.errorMessage = null;
-    console.log(this.userForm.value);
   }
     
   }

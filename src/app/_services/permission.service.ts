@@ -1,6 +1,4 @@
-// permission.service.ts
 import { Injectable, OnInit } from '@angular/core';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +6,7 @@ import { UserService } from './user.service';
 export class PermissionService{
 
 
-  private userPermissions: string[] = []; // Simulez les permissions de l'utilisateur
+  private userPermissions: string[] = [];
   
   constructor() {
     this.loadPermissions();
@@ -31,7 +29,6 @@ export class PermissionService{
     return this.userPermissions.includes(permission);
   }
 
-  // Nouvelle méthode pour vérifier plusieurs permissions
   hasAnyPermission(permissions: string[]): boolean {
     return permissions.some(permission => this.hasPermission(permission));
   }

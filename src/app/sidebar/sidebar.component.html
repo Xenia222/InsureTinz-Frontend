@@ -129,7 +129,6 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
 
     <script>
         $(document).ready(function () {
-            // Ouvrir la fenêtre modale
             $('.modale-info').hide();
             $('.image-info').click(function () {
                 $('.modale-info').css('display', 'block');
@@ -138,12 +137,10 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                 $('#myModal').css('display', 'block');
             });
 
-            // Fermer la fenêtre modale en cliquant sur la croix ou en dehors de la fenêtre
             $('.close, .modale').click(function () {
                 $('#myModal').css('display', 'none');
             });
 
-            // Empêcher la fermeture de la fenêtre modale lors du clic à l'intérieur de la modal-content
             $('.modal-content').click(function (event) {
                 event.stopPropagation();
             });

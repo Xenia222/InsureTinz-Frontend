@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDataUser, ISingleUser, IUser } from '../_interfaces/user';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Iapi } from '../_interfaces/iapi';
-import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'

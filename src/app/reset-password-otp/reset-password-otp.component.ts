@@ -36,7 +36,6 @@ export class ResetPasswordOtpComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser().subscribe(
       data =>{
-        console.log(data)
         this.email = data.user.email
       }
     )
@@ -57,11 +56,9 @@ startCountdown(): void {
   resendOtp() {
     this.authService.otp_send(this.email).subscribe(
       otpResponse => {
-        console.log('OTP envoyé:', otpResponse);
         this.successMessage = otpResponse.message
       },
       otpError => {
-        console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
         this.errorMessage = otpError.error
       }
     );
@@ -70,7 +67,6 @@ startCountdown(): void {
 
 
   onSubmit(){
-    console.log(this.otp)
     this.authService.verify_otp(this.email, this.otp).subscribe(
       data => {
         if (data.message == "Valid OTP"){

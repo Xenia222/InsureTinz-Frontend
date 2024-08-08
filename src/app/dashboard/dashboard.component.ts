@@ -70,7 +70,6 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
   }
 
   isInfoVisible2 = false;
-  // isInfoVisible = false;
   position = { x: 0, y: 0 };
 
   toggleInfo(event: Event, checkId: string) {
@@ -95,9 +94,6 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
     }
   }
 
-  hideInfo() {
-    // this.isInfoVisible = false;
-  }
 
   get filteredItems(): any[] {
     const start = this.startDate ? this.normalizeDate(new Date(this.startDate)) : null;
@@ -139,7 +135,6 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
         this.users.total = data.users.total_users
         this.users.active = data.users.active_users
         this.verification_history = data.verification_history
-        console.log(this.verification_history)
         this.verification_history.forEach(verify => {
           this.months.push(verify.location)
           this.dataOui.push(verify.ensured)
@@ -150,7 +145,6 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
 
     this.checkService.getCheckList().subscribe(
       data => {
-        console.log("CHECK",data);
         if(data.check[0])
           this.checks.push(data.check[0])
         if(data.check[1])

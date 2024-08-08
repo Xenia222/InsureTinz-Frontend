@@ -18,16 +18,7 @@ overflow-x: hidden;">
 
                         <div class="bg-white  justify-content-between  conteneur">
                             <form  [formGroup]="userForm" #LoginForm="ngForm" (ngSubmit)="onSubmit()">
-                                <!-- Section I: Personal Information -->
                                 <h3>Personnal Information</h3>
-
-                                
-                                <!-- <div class="form-group">
-                                    <label for="photo">Upload Photo</label>
-                                    <input type="file" id="photo" class="form-control" (change)="onFileChange($event)">
-                                </div> -->
-                                <!-- <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*">
-        <label for="photo-upload" class="photo-upload-label">Upload Photo</label> -->
 
                                 <div class="row g-4 mt-3">
                                     <div class="form-group col-md-6">
@@ -111,7 +102,6 @@ overflow-x: hidden;">
                                     </div>
                                 </div>
 
-                                <!-- Section II: Account Information -->
                                 <h3 class="mt-3">Account Informations</h3>
 
                                 <div class="row g-4 " style="    margin-bottom: 20px;">
@@ -132,14 +122,6 @@ overflow-x: hidden;">
                                     </div>
                                 </div>
                                 
-
-                                <!-- <div class="row g-4" hidden>
-                                    <div class="form-group col-md-6 ">
-                                        <label for="type">User Type</label>
-                                        <input type="text" formControlName="type" [value]="type">
-                                    </div>
-                                </div> -->
-                                
                                 <div *ngIf="errorMessage" class="alert alert-danger">
                                     {{ errorMessage }}
                                 </div>
@@ -150,8 +132,6 @@ overflow-x: hidden;">
 
                             
                         </div>
-                        <!--End account management-->
-
                     </div>
 
                 </section>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CheckService } from '../_services/check.service';
-import { data } from 'jquery';
 import { TicketService } from '../_services/ticket.service';
 import { GeolocationService } from '../_services/geolocation.service';
 
@@ -87,7 +86,6 @@ export class QuickCheckComponent {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           };
-          console.log("Localisation de moi",this.location)
         },
       });
       if(this.searchType == "licensePlate"){
@@ -96,8 +94,6 @@ export class QuickCheckComponent {
         this.type  ="vin"
       }
       let searchValues = this.getInputValues();
-      console.log('Search values:', searchValues);
-      console.log("Localisation de moi 22",this.location)
       this.checkService.quickCheck({
         vehicles: searchValues.map(numb => {
           return {
@@ -110,11 +106,9 @@ export class QuickCheckComponent {
       }).subscribe(
         data => {
           this.results = data.results
-          console.log(data.results);
         },
         err =>{
           this.errorMsg = err.error.error
-          console.log("Erreur de check",err.error);
         }
       )
     }
@@ -349,16 +343,9 @@ export class QuickCheckComponent {
     }
     }
 
-    // imprimeTicket(ticketData: any){
-    //   this.generateTicket(ticketData);
-    //   this.printTicket();
-    //   // this.ticketData = null
-    // }
-
     printTicket() {
       const printContent = document.getElementById('printableTicket');
       if (!printContent) {
-        console.error('content not found.');
         return;
       }
       
@@ -431,14 +418,12 @@ export class QuickCheckComponent {
         WindowPrt.document.write('</body></html>');
         WindowPrt.document.close();
         
-        // Ajout d'un délai pour s'assurer que le document est complètement chargé avant de lancer l'impression
         setTimeout(() => {
           WindowPrt.focus();
           WindowPrt.print();
           WindowPrt.close();
         }, 500);
       } else {
-        console.error('Impossible d\'ouvrir la fenêtre d\'impression.');
       }
     }
 }

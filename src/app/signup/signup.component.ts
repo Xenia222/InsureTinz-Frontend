@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -36,20 +35,15 @@ export class SignupComponent {
     if (this.SignupForm.invalid) {
       this.errorMessage = 'Please enter valid informations.';
     } else {
-      console.log(this.uid)
       this.errorMessage = null;
-      console.log(this.SignupForm.value.email);
       this.authService.signup(this.SignupForm.value.email, this.SignupForm.value.password, this.user_type, this.uid).subscribe(
         data => {
-          console.log(data.detail);
           if (data.user){
             this.storageService.saveCredentials(data.user.id,this.SignupForm.value.email, this.SignupForm.value.password)
             this.authService.otp_send(this.storageService.getEmail()).subscribe(
               otpResponse => {
-                console.log('OTP envoyé:', otpResponse);
               },
               otpError => {
-                console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
               }
             );
             this.router.navigate(['/signup-otp']);

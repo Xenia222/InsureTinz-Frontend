@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICredential } from '../_interfaces/credential';
 import { AuthService } from '../_services/auth.service';
-import { TokenService } from '../_services/token.service';
 import { UserService } from '../_services/user.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
@@ -30,7 +28,7 @@ export class ProfileComponent implements OnInit{
   success_msg: string ='';
 
   constructor(private userService: UserService
-    ,private router: Router,private authService: AuthService,private storageService: StorageService
+    ,private router: Router,private authService: AuthService
     ){}
 
     refreshPage() {
@@ -62,10 +60,8 @@ export class ProfileComponent implements OnInit{
     sendOtp(){
       this.authService.otp_send(this.form.email).subscribe(
         otpResponse => {
-          console.log('OTP envoyé:', otpResponse);
         },
         otpError => {
-          console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
         }
       );
       this.router.navigate(['reset-password-otp'])
@@ -84,7 +80,6 @@ export class ProfileComponent implements OnInit{
         this.firstname = data.user.primary_contact_name
         this.lastname =data.user.secondary_contact_name
         this.form.phoneNumber = data.user.primary_business_phone_number
-        console.log(data.user)
       }
     )
    }
@@ -93,16 +88,13 @@ export class ProfileComponent implements OnInit{
     if (this.selectedFile) {
       this.userService.updateProfilePhoto(this.selectedFile).subscribe(
         response => {
-          console.log('Photo de profil mise à jour avec succès', response);
           this.msg = response.status_message
           this.ngOnInit();
         },
         error => {
-          console.error('Erreur lors de la mise à jour de la photo de profil', error);
         }
       );
     } else {
-      console.error('Aucun fichier sélectionné');
     }
     this.ngOnInit()
     this.refreshPage()
@@ -110,7 +102,6 @@ export class ProfileComponent implements OnInit{
 
 
   onSubmit(){
-    // console.log(this.form)
     this.userService.putUser(
       {
         "email": this.form.email,
@@ -121,7 +112,6 @@ export class ProfileComponent implements OnInit{
       }
     ).subscribe(
       data => {
-        console.log("Update profile",data)
         if(data.message){
           this.msg = data.message
         }else if(data.status_code ==200){
@@ -131,8 +121,6 @@ export class ProfileComponent implements OnInit{
       }
         },
       err => {
-        console.log("profile")
-        console.log(err.error)
         this.msg = err.error.status_message
         this.form.password = ''
       }
@@ -142,11 +130,9 @@ export class ProfileComponent implements OnInit{
   loadProfilePhoto(): void {
     this.userService.getProfilePhoto().subscribe(
       response => {
-        console.log(response.photo_url)
         this.photoUrl = response.photo_url;
       },
       error => {
-        console.error( error);
         this.photoUrl = null;
       }
     );

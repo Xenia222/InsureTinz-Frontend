@@ -25,7 +25,6 @@ overflow-y: scroll;">
                         and viewing its associated price in real-time. </p>
                     </div>
                     <br>
-                    <!-- <div id="demo_3"></div> -->
                     <div class="slider-container">
                       <input class="slider" id="credits" type="range" [(ngModel)]="credits"
                         (ngModelChange)="updatePrice()" min="0" max="1000" [value]="value"
@@ -91,10 +90,6 @@ overflow-y: scroll;">
 
 
         <div *ngIf="activeSection === 2" class="container-fluid pt-4 px-4">
-
-          <!-- <div class="">
-            <h3 class="marg">Purchase Credits</h3>
-          </div> -->
           <div class="row g-4">
             <div class="col-sm-12 col-xl-12 mb-4">
               <div class="bg-white casex">
@@ -103,7 +98,6 @@ overflow-y: scroll;">
                     style="height: 20px; border: none; background: unset;">
                     <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
                   </button>
-                  <!-- <img src="../../assets/Arrow 2.png" type="button" class="bac" (click)="previousSection()" alt="" style="height: 20px; margin-top: 10px;"> -->
                   <h4 class="marg text-center">Paiement methods</h4>
 
                   <div class="btn-checkbox-group mt-2">
@@ -244,17 +238,3 @@ overflow-y: scroll;">
     </main>
   </div>
 </div>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-
-<!-- <script>
-  function updateSlider(slider) {
-    const value = slider.value;
-    const max = slider.max;
-    const min = slider.min;
-    const percentage = ((value - min) / (max - min)) * 100;
-    slider.style.background = `linear-gradient(to right, #ffcc00 ${percentage}%, #b8a9a9 ${percentage}%)`;
-    document.getElementById('rangeValue').innerText = `${value} credits`;
-  }
-</script> -->

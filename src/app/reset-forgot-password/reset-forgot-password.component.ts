@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
-import { StorageService } from '../_services/storage.service';
 import { TokenService } from '../_services/token.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class ResetForgotPasswordComponent implements OnInit{
   email: string | null = null;
   
   
-  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
-    private tokenService: TokenService,private route: ActivatedRoute, private userService: UserService){
+  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,private route: ActivatedRoute){
     this.loginForm = this.fb.group({
       password: ['', [Validators.required]],
       confirmpassword: ['', [Validators.required]]
@@ -41,7 +39,6 @@ export class ResetForgotPasswordComponent implements OnInit{
       data => {
         if(data.status == 200){
           this.successMessage = data.message
-          console.log(data.message)
         }else if (data.status_code == 404){
           this.errorMessage = data.message
         }

@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit{
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents
-        // this.url = data.contents.header_img
-        // this.setCSSVariable('--url', this.url);
         console.log(this.contents);
         
       }
@@ -54,7 +52,6 @@ export class LoginComponent implements OnInit{
       console.log(this.loginForm.value);
       this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
         data => {
-          console.log(data)
           if (data.token){
             this.storageService.saveCredentials(data.user.id,this.loginForm.value.email,this.loginForm.value.password)
             this.tokenService.saveToken(data.token)
@@ -62,11 +59,9 @@ export class LoginComponent implements OnInit{
               data => {
                 this.roles = data.roles
                 this.roles.push(...data.permissions)
-                console.log("role and right",data.roles)
                 this.permissionService.setPermissions(this.roles);
               },
               err => {
-                console.log(err)
               }
             )
             this.router.navigate(['login-otp'])

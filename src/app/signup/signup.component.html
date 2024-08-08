@@ -33,19 +33,9 @@
             </div>
             <div class="mb-2 input-group">
               <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control field" placeholder="Your Password (minimum 6 characters)" required />
-              <!-- <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary" (click)="toggleShowPassword()">
-                  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-                </button>
-              </div> -->
             </div>
             <div class="mb-4 input-group">
               <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmpassword" class="form-control field" placeholder="Confirm your Password" required />
-              <!-- <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary" (click)="toggleShowConfirmPassword()">
-                  <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-                </button>
-              </div> -->
             </div>
             <button type="submit" class="btn btn-warning text-white w-100 mb-3" style="height: 52px;">
               <strong>Next</strong>

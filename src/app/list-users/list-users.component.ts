@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
-import { data } from 'jquery';
-import { error } from 'console';
-import { NgxPermission } from 'ngx-permissions/lib/model/permission.model';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-list-users',
@@ -33,7 +29,6 @@ export class ListUsersComponent implements OnInit{
   ngOnInit(): void {
     this.userService.getAllUser().subscribe(
       data => {
-        console.log("Created user",data.created_users)
         this.users = data.created_users
       },
       error => {
@@ -52,7 +47,6 @@ export class ListUsersComponent implements OnInit{
   deactivate(id: string){
     this.userService.deactivateUser(id).subscribe(
       data => {
-        console.log(data)
         this.router.navigate(['/list-users']);
         this.ngOnInit()
       }

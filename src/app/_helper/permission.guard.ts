@@ -1,4 +1,3 @@
-// permission.guard.ts
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { PermissionService } from '../_services/permission.service';

@@ -47,7 +47,7 @@ export class StructuresInformationsComponent implements OnInit{
   Zou= ["Abomey","Agbangnizoun","Bohicon","Covè","Djidja","Ouinhi","Zagnanado","Za-Kpota","Zogbodomey"]
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UserService,private flagService: FlagService,
-     private storageService: StorageService, private authService: AuthService, private tokenService: TokenService) {
+     private storageService: StorageService) {
     this.SignupForm = this.fb.group({
       structureInfo: this.fb.group({
         agencyName: ['', Validators.required],
@@ -133,8 +133,7 @@ export class StructuresInformationsComponent implements OnInit{
       this.errorMessage = 'Please enter valid informations.';
 
     } else {
-      this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
-      console.log(this.SignupForm.value);
+      this.errorMessage = '';
       if(this.selectedFile){
       this.userService.updateDocument(this.selectedFile).subscribe(
         data => {
@@ -160,7 +159,6 @@ export class StructuresInformationsComponent implements OnInit{
           'secondary_business_phone_number' :this.SignupForm.get('contactInfo.secondaryPhoneNumber')?.value,
         }).subscribe(
           data => {
-            console.log(data.detail);
             if (data.user){
               this.storageService.clearCredentials()
               this.router.navigate(['/signup-sucess']);
@@ -169,7 +167,6 @@ export class StructuresInformationsComponent implements OnInit{
             }
           }
         );
-      // Redirection après une soumission réussie
     }
   }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { setVfs } from '../../../pdfMakeConfig';
-import bwipjs from 'bwip-js';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,6 @@ export class TicketService {
   }
 
   async generatePDF(ticketData: any) {
-    // const barcodeImage = await this.generateBarcode(ticketData.barcode);
 
     const documentDefinition: any = {
       content: [
@@ -108,7 +106,6 @@ export class TicketService {
         },
         {
           columns: [
-            // { image: barcodeImage, width: 100 },
             {
               stack: [
                 {
@@ -162,16 +159,4 @@ export class TicketService {
 
     pdfMake.createPdf(documentDefinition).open();
   }
-
-  // private async generateBarcode(data: string): Promise<string> {
-  //   const buffer = await bwipjs.toBuffer({
-  //     bcid: 'code128', // Barcode type
-  //     text: data,      // Text to encode
-  //     scale: 3,        // 3x scaling factor
-  //     height: 10,      // Bar height, in millimeters
-  //     includetext: false, // Show human-readable text
-  //     textxalign: 'center', // Always good to set this
-  //   });
-  //   return `data:image/png;base64,${buffer.toString('base64')}`;
-  // }
 }
