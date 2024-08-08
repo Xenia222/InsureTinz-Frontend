@@ -6,6 +6,7 @@ import { StorageService } from '../_services/storage.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { PermissionService } from '../_services/permission.service';
+import { ContentService } from '../_services/content.service'
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,14 @@ export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   errorMessage: string | null = null;
   roles: any;
+  contents: any 
   
   
   constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
-    private tokenService: TokenService,private storageService: StorageService, private permissionService: PermissionService,private userService:UserService){
+    private tokenService: TokenService,private storageService: StorageService, 
+    private permissionService: PermissionService,private userService:UserService,
+    private contentService:ContentService,
+  ){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -29,7 +34,17 @@ export class LoginComponent implements OnInit{
     });
   }
   
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        // this.url = data.contents.header_img
+        // this.setCSSVariable('--url', this.url);
+        console.log(this.contents);
+        
+      }
+    )
+  }
 
   onSubmit(){
     if (this.loginForm.invalid) {
