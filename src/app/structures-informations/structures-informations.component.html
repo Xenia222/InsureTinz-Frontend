@@ -263,9 +263,6 @@
 
 
 <script>
-//   $('#file-select-button').click(function(){
-//     $('.upload input').click();
-// });
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialiser Twemoji
@@ -276,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const select = document.getElementById('countrySelect');
 
-    // Fonction pour créer un élément avec l'emoji
     function createOptionWithEmoji(option) {
       const div = document.createElement('div');
       div.innerHTML = option.innerHTML;
@@ -284,27 +280,23 @@ document.addEventListener('DOMContentLoaded', function() {
       return div;
     }
 
-    // Remplacer les options par des versions avec emoji
     Array.from(select.options).forEach(option => {
       const newOption = createOptionWithEmoji(option);
       option.innerHTML = newOption.innerHTML;
     });
 
-    // Gérer l'affichage de l'emoji sélectionné
     select.addEventListener('change', function() {
       const selectedOption = this.options[this.selectedIndex];
       const emojiSpan = document.createElement('span');
-      emojiSpan.innerHTML = selectedOption.innerHTML.split(' ')[0]; // Prendre seulement l'emoji
+      emojiSpan.innerHTML = selectedOption.innerHTML.split(' ')[0];
       twemoji.parse(emojiSpan);
       
-      // Créer un wrapper pour l'affichage sélectionné
       const wrapper = document.createElement('div');
       wrapper.style.display = 'flex';
       wrapper.style.alignItems = 'center';
       wrapper.appendChild(emojiSpan);
       wrapper.appendChild(document.createTextNode(' ' + selectedOption.text));
       
-      // Remplacer le contenu affiché du select
       this.parentNode.insertBefore(wrapper, this.nextSibling);
       this.style.color = 'transparent';
       this.style.position = 'absolute';
@@ -319,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const label = button.parentElement.querySelector(".file-upload__label");
       const defaultLabelText = "No file(s) selected";
 
-      // Set default text for label
       label.textContent = defaultLabelText;
       label.title = defaultLabelText;
 

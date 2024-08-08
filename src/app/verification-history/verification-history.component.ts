@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckService } from '../_services/check.service';
-import { NgxPermissionsService } from 'ngx-permissions';
 import { UserService } from '../_services/user.service';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
@@ -90,11 +89,10 @@ export class VerificationHistoryComponent implements OnInit {
   }
 
   getPaginationRange2(): number[] {
-    const rangeSize = 5; // Nombre de pages à afficher dans la pagination
+    const rangeSize = 5;
     let start = Math.max(this.currentPage - Math.floor(rangeSize / 2), 1);
     let end = Math.min(start + rangeSize - 1, this.totalPages);
 
-    // Ajuste le début si l'ensemble final dépasse le nombre total de pages
     start = Math.max(end - rangeSize + 1, 1);
 
     return Array(end - start + 1).fill(0).map((_, idx) => start + idx);
@@ -202,7 +200,6 @@ export class VerificationHistoryComponent implements OnInit {
       username$.subscribe(
         (name) => {
           nameSearch = name;
-          console.log("Nom de user", nameSearch)
         },
         (error) => {
         }
@@ -249,10 +246,7 @@ export class VerificationHistoryComponent implements OnInit {
     return !!this.infoVisibility[checkId];
   }
 
-  hideInfo() {
-    // this.isInfoVisible = false;
-  }
-
+ 
   exportToPDF(): void {
     const doc = new jsPDF();
 
@@ -318,7 +312,6 @@ export class VerificationHistoryComponent implements OnInit {
       username$.subscribe(
         (name) => {
           nameSearch = name;
-          console.log("Nom de user", nameSearch)
         },
         (error) => {
         }

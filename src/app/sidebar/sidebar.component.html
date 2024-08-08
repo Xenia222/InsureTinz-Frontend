@@ -35,7 +35,7 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                 <a href="" class="navbar-brand mx-4 mb-2">
                     <h3 *ngIf="user_type == 'client master'" class="text-main">Client Master</h3>
                     <h3 *ngIf="user_type == 'client user'" class="text-main">Client User</h3>
-                    <h3 *ngIf="user_type == 'police user'" class="text-main">Police USer</h3>
+                    <h3 *ngIf="user_type == 'police user'" class="text-main">Police User</h3>
                 </a>
 
                 <div class="navbar-bas w-100">
@@ -129,7 +129,6 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
 
     <script>
         $(document).ready(function () {
-            // Ouvrir la fenêtre modale
             $('.modale-info').hide();
             $('.image-info').click(function () {
                 $('.modale-info').css('display', 'block');
@@ -138,12 +137,10 @@ style="position: absolute;top: 20px; left: 20px; z-index: 2000;">
                 $('#myModal').css('display', 'block');
             });
 
-            // Fermer la fenêtre modale en cliquant sur la croix ou en dehors de la fenêtre
             $('.close, .modale').click(function () {
                 $('#myModal').css('display', 'none');
             });
 
-            // Empêcher la fermeture de la fenêtre modale lors du clic à l'intérieur de la modal-content
             $('.modal-content').click(function (event) {
                 event.stopPropagation();
             });

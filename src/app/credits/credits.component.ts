@@ -1,8 +1,6 @@
-import { error } from 'node:console';
 import { PaymentService } from '../_services/payment.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MtnMomoModalComponent } from '../mtn-momo-modal/mtn-momo-modal.component';
 
 @Component({
   selector: 'app-credits',
@@ -13,7 +11,7 @@ export class CreditsComponent {
   credits: number = 0;
   price: number = 0;
   currentDate: Date = new Date();
-  paymentMethod: string = 'mtnmomo'; // Default payment method
+  paymentMethod: string = 'mtnmomo';
   currency: string = 'XOF';
   phoneNumber: string = '';
   paymentStatus: string = '';
@@ -28,18 +26,12 @@ export class CreditsComponent {
       response => {
         this.paymentStatus = response.status;
         if (response.status === 'success') {
-          // Payment successful, update UI accordingly
 
-          console.log(response);
         } else if (response.status === 'pending') {
-          // Payment still processing, maybe check again after a delay
-          console.log('Payment still processing');
-          setTimeout(() => this.checkMoMoStatus(referenceId, transactionId), 5000); // Check again after 5 seconds
+          setTimeout(() => this.checkMoMoStatus(referenceId, transactionId), 5000);
         }
       },
       error => {
-        console.error('Error checking payment status:', error);
-        // Handle error (show message to user, etc.)
       }
     );
   }
@@ -56,21 +48,16 @@ export class CreditsComponent {
     if (this.paymentMethod === 'mtnmomo') {
 
         if (this.result) {
-          console.log('Phone number received from modal:', this.result);
           this.phoneNumber = this.result
           this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
             response => {
             if (response.status === 'pending' && response.referenceId) {
-              // Start checking status for MoMo payments
               this.checkMoMoStatus(response.referenceId, response.transactionId);
             }
-            console.log('MTN MoMo payment initiated:', response);
             this.nextSection()
           },
           error => {
-            console.log(this.credits, this.paymentMethod, this.currency);
-            
-            console.error('Error initiating payment:', error)}
+          }
         );
         }
     }
@@ -79,9 +66,6 @@ export class CreditsComponent {
     this.paymentService.initiatePayment(this.credits, this.paymentMethod, this.currency, this.phoneNumber).subscribe(
       
       response => {
-        
-          // window.location.href = response.redirectUrl;
-          console.log(response)
           window.open(response.redirectUrl, '_blank');
         },
       error => {

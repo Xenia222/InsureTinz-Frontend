@@ -21,7 +21,6 @@ export class SidebarComponent implements OnInit{
   toggleSidebar() {
     this.sidebarVisible = !this.sidebarVisible;
     this.setBodyClass();
-    console.log('Sidebar visibility:', this.sidebarVisible); // Pour le débogage
   }
 
   @HostListener('document:click', ['$event'])
@@ -55,13 +54,10 @@ export class SidebarComponent implements OnInit{
       data => {
         this.roles = data.roles
         this.roles.push(...data.permissions)
-        console.log(data.roles)
-        console.log("Role et right",this.roles)
         this.permissionService.setPermissions(this.roles);
         this.permissionsService.loadPermissions(this.roles);
         this.getUser()
         this.loadProfilePhoto();
-        console.log(this.user)
       },
       err => {
         console.log(err)
@@ -81,10 +77,8 @@ export class SidebarComponent implements OnInit{
           this.firstName = data.primary_contact_name;
           this.lastName = data.secondary_contact_name;
           this.user_type = data.user_type
-          console.log('User data:', data);
         },
         error => {
-          console.error('Failed to get user data:', error);
         }
       );
     }
@@ -93,7 +87,6 @@ export class SidebarComponent implements OnInit{
   modal(){
     const dialogRef = this.dialog.open(LogoutModalComponent, {
       width: '400px',
-      // data: { response: response }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -104,11 +97,9 @@ export class SidebarComponent implements OnInit{
   loadProfilePhoto(): void {
     this.userService.getProfilePhoto().subscribe(
       response => {
-        console.log(response.photo_url)
         this.img = response.photo_url;
       },
       error => {
-        console.error( error);
         this.img = '';
       }
     );

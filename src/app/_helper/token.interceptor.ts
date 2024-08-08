@@ -7,7 +7,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = inject(TokenService).getToken()
 
-    // SI token à insérer dans le header
     if(token !== null){
       const authReq = req.clone({
         setHeaders: {

@@ -4,7 +4,6 @@ import { UserService } from '../_services/user.service';
 import { CreditService } from "../_services/credit.service";
 import { map, Observable } from 'rxjs';
 import jsPDF from 'jspdf';
-import { GeolocationService } from '../_services/geolocation.service';
 
 @Component({
   selector: 'app-details-user',
@@ -156,7 +155,6 @@ export class DetailsUserComponent implements OnInit{
   isShow = false;
 
   isInfoVisible2 = false;
-  // isInfoVisible = false;
   position = { x: 0, y: 0 };
 
 
@@ -238,9 +236,5 @@ export class DetailsUserComponent implements OnInit{
 
     // Save PDF
     doc.save('check-list.pdf');
-  }
-  
-  hideInfo() {
-    // this.isInfoVisible = false;
   }
 }

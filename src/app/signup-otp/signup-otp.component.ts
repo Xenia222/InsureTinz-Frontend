@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../_services/storage.service';
 import { TokenService } from '../_services/token.service';
 import { interval, Subscription } from 'rxjs';
@@ -63,10 +62,8 @@ startCountdown(): void {
   resendOtp() {
     this.authService.otp_send(this.storageService.getEmail()).subscribe(
       otpResponse => {
-        console.log('OTP envoyé:', otpResponse);
       },
       otpError => {
-        console.log('Erreur lors de l\'envoi de l\'OTP:', otpError.error);
         this.errorMessage = otpError.error
       }
     );
@@ -76,7 +73,6 @@ startCountdown(): void {
 
 
   onSubmit(){
-    console.log(this.otp)
     
     this.authService.verify_otp(this.storageService.getEmail(), this.otp).subscribe(
       data => {
@@ -84,7 +80,6 @@ startCountdown(): void {
         if (data.message == "Valid OTP"){
           this.authService.login(this.storageService.getEmail(),this.storageService.getPassword()).subscribe(
             data => {
-              console.log(data.token)
               if (data.token){
                 this.tokenService.saveToken(data.token)
               }else{
@@ -95,7 +90,6 @@ startCountdown(): void {
         }else{
           this.errorMessage = data.message
         }
-        console.log(data.detail)
       })
     
   }

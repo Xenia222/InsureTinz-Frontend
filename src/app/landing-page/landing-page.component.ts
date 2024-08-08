@@ -1,17 +1,15 @@
-import { Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
-import Swiper from 'swiper';
+import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Router } from '@angular/router';
 import { TokenService } from '../_services/token.service';
 import { UserService } from '../_services/user.service';
-import { daft } from 'bwip-js';
 import { StorageService } from '../_services/storage.service';
 import { ContentService } from '../_services/content.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.css'
+  styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit{
 
@@ -53,7 +51,6 @@ export class LandingPageComponent implements OnInit{
       title: 'Automobile Registration Authority',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elitauris ut'
     },
-    // Ajoutez les autres éléments ici...
   ];
   url: any;
 
@@ -76,8 +73,7 @@ export class LandingPageComponent implements OnInit{
   
   constructor(private router: Router, private tokenServices: TokenService,
     private userService:UserService, private storageService:StorageService,
-    private contentService:ContentService,
-    private renderer: Renderer2) {}
+    private contentService:ContentService) {}
 
   navigatetoWhoWeArePage() {
     this.router.navigate(['/who-we-are']);
@@ -99,10 +95,6 @@ export class LandingPageComponent implements OnInit{
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents
-        console.log("image banner", data.contents.header_img.image);
-        this.renderer.setStyle(document.documentElement, '--background-image-url', `url(https://insuretinz.s3.amazonaws.com/${data.contents.header_img.image})`);
-        console.log(this.contents);
-        
       }
     )
   }

@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICredential } from '../_interfaces/credential';
-import { IToken } from '../_interfaces/token';
 import { Observable } from 'rxjs';
 
 @Injectable({

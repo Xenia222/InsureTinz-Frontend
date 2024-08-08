@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
-import { data } from 'jquery';
 import { Router } from '@angular/router';
 
 @Component({
@@ -83,7 +82,6 @@ export class ResetPasswordComponent implements OnInit{
       "new_password_confirmation": this.password.cpassword
     }).subscribe(
       data => {
-        console.log(data)
         if(data.error){
         this.errorMessage = data.error
         }else{
@@ -92,7 +90,6 @@ export class ResetPasswordComponent implements OnInit{
       },
       err => {
         this.errorMessage = err.error
-        console.log(err)
       }
 
     )

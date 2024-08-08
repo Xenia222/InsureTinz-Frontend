@@ -45,7 +45,6 @@ export class EditUserComponent implements OnInit{
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
-      console.log(this.id);
     });
     this.onChanges()
     this.userService.getClientUser(this.id).subscribe(
@@ -104,7 +103,6 @@ export class EditUserComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log("Current user type:", this.type);
     
     if (this.userForm.invalid) {
       this.errorMessage = 'Please fill out the form correctly.';
@@ -121,17 +119,14 @@ export class EditUserComponent implements OnInit{
       'password': this.userForm.value.password,
     }, this.id).subscribe(
       data => {
-        console.log("Data receives",this.userForm.value.department)
         this.ngOnInit()
         this.router.navigate(['/details-user/'+this.id])
       },
       error => {
         this.errorMessage = error.error.message
-        console.log(error)
       }
     )
     this.errorMessage = null;
-    console.log(this.userForm.value);
   }
     
   }

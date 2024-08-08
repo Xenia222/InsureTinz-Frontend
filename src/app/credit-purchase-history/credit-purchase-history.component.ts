@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CheckService } from '../_services/check.service';
-import { data } from 'jquery';
-import { UserService } from '../_services/user.service';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 
 @Component({
@@ -28,7 +25,6 @@ export class CreditPurchaseHistoryComponent implements OnInit{
   ngOnInit(): void {
     this.creditService.getCredits().subscribe(
       data => {
-        console.log("credits",data)
         if( data.credit_balance.used_credits){
           this.user_credit_balance = data.credit_balance.used_credits
         }
@@ -40,7 +36,6 @@ export class CreditPurchaseHistoryComponent implements OnInit{
 
     this.creditService.getTransaction().subscribe(
       data => {
-        console.log(data.transactions)
         this.transaction = data.transactions
       },
       err => {

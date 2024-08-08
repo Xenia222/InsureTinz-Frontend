@@ -2,9 +2,7 @@ import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxPermissionsService } from 'ngx-permissions';
-import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
-import { data } from 'jquery';
 
 export const routeGuard: CanActivateFn = (route, state) => {
   const authService = inject(UserService);

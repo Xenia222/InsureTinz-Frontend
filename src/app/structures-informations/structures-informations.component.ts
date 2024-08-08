@@ -150,8 +150,7 @@ export class StructuresInformationsComponent implements OnInit{
       this.errorMessage = 'Please enter valid informations.';
 
     } else {
-      this.errorMessage = ''; // Réinitialisation de errorMessage à une chaîne vide
-      console.log(this.SignupForm.value);
+      this.errorMessage = '';
       if(this.selectedFile){
       this.userService.updateDocument(this.selectedFile).subscribe(
         data => {
@@ -177,7 +176,6 @@ export class StructuresInformationsComponent implements OnInit{
           'secondary_business_phone_number' :this.SignupForm.get('contactInfo.secondaryPhoneNumber')?.value,
         }).subscribe(
           data => {
-            console.log(data.detail);
             if (data.user){
               this.storageService.clearCredentials()
               this.router.navigate(['/signup-sucess']);
@@ -186,7 +184,6 @@ export class StructuresInformationsComponent implements OnInit{
             }
           }
         );
-      // Redirection après une soumission réussie
     }
   }
 
