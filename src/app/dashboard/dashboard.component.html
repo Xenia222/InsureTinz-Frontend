@@ -20,9 +20,14 @@ overflow-x: hidden;">
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
                                 <div class=" ml-1 mt-1">
-                                    <p class="mb-3" style="font-size: 14px; color: #202224;">Credits balance</p>
+                                    <p class="mb-3" style="font-size: 14px; color: #202224;">
+                                        {{contents.credit_balance[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                                    </p>
                                     <h3 class="mb-0" style="color: black; font-size: 2em;">{{ formatNumber(credit_balance.balance) }}</h3>
-                                    <p class="mb-2 mt-4" style="font-size: 14px;">Since <span style="color: green;">{{ credit_balance.since }}</span></p>
+                                    <p class="mb-2 mt-4" style="font-size: 14px;">
+                                        {{contents.since[langue === 'fr' ? 'body_fr' : 'body_en']}} 
+                                        <span style="color: green;">{{ credit_balance.since }}</span>
+                                    </p>
                                 </div>
                                 <div class="ms-3 mb-auto">
                                     <p class="mb-2">
@@ -48,7 +53,9 @@ overflow-x: hidden;">
                                 class="bg-white d-flex align-items-center justify-content-between pt-2 pb-2 pl-3 pr-3 zone">
 
                                 <div class=" ml-1 mt-1">
-                                    <p class="mb-3" style="font-size: 14px; color: #202224;">Your users</p>
+                                    <p class="mb-3" style="font-size: 14px; color: #202224;">
+                                        {{contents.your_users[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                                    </p>
                                     <h3 class="mb-0" style="color: black; font-size: 2em;">{{formatNumber(users.total)}}</h3>
                                     <p class="mb-2 mt-4" style="font-size: 14px">
                                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -57,7 +64,7 @@ overflow-x: hidden;">
                                                 d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z"
                                                 fill="#00B69B" />
                                         </svg>
-                                        <span style="color: #00B69B;margin-right: 5px;">{{formatNumber(users.active)}}</span> Active users
+                                        <span style="color: #00B69B;margin-right: 5px;">{{formatNumber(users.active)}}</span> {{contents.active_users[langue === 'fr' ? 'body_fr' : 'body_en']}}
                                     </p>
                                 </div>
                                 <div class="ms-3 mb-auto">
@@ -82,22 +89,23 @@ overflow-x: hidden;">
                         <div *ngxPermissionsOnly="['client_status_estimation']" class="col-sm-6 col-xl-6 ">
                             <div class="zone3   align-items-center justify-content-between ">
                                 <div class="d-flex fll ">
-                                    <div class="ml-2" style="font-size: 14px; color: #202224;">Licence Status
-                                        Estimations</div>
+                                    <div class="ml-2" style="font-size: 14px; color: #202224;">
+                                        {{contents.licence_status_estimations[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                                    </div>
                                 </div>
 
                                 <div class="d-flex fll pl-4 pb-2 mt-3">
                                     <div class="">
-                                        <h6 class="mb-2" style="color: #202224; ">Active</h6>
+                                        <h6 class="mb-2" style="color: #202224; ">{{contents.status_active[langue === 'fr' ? 'body_fr' : 'body_en']}}</h6>
                                         <h5 class="mt-3" style="color: #00B69B; text-align: center; ">{{formatNumber(license_status.active)}}</h5>
                                     </div>
                                     <div class="" >
-                                        <h6 class="mb-2" style="color: #202224;">Expired</h6>
+                                        <h6 class="mb-2" style="color: #202224;">{{contents.status_expired[langue === 'fr' ? 'body_fr' : 'body_en']}}</h6>
                                         <h5 class="mt-3" style="color: #F1963A; text-align: center;">{{formatNumber(license_status.expired) }}</h5>
 
                                     </div>
                                     <div class="" >
-                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">DNE</h6>
+                                        <h6 class="mb-2" style="color: #202224; font-size: 17px; font-weight: 500;">{{contents.status_non_insured[langue === 'fr' ? 'body_fr' : 'body_en']}}</h6>
                                         <h5 class="mt-3" style="color: #FD5454; text-align: center; font-weight: 700 !important;">{{formatNumber(license_status.dne)}}</h5>
                                     </div>
                                 </div>
@@ -116,8 +124,7 @@ overflow-x: hidden;">
                                     <div class=" p-4">
                                         <div class="d-flex flll ">
                                             <h2 class="" style="color: rgba(32, 34, 36, 1); font-size: 24px;">
-                                                Verification history estimations </h2>
-
+                                                {{contents.verification_history_estimations[langue === 'fr' ? 'body_fr' : 'body_en']}}</h2>
                                             <!-- Menu déroulant pour sélectionner le mois -->
                                             <div class="mb-3 ml-auto">
                                                 <select id="monthSelect" class="select form-select ">
@@ -149,17 +156,17 @@ overflow-x: hidden;">
                     <div *ngxPermissionsOnly="['client_recent_verifications']" class="container-fluid pt-2 px-2 mt-3">
                         <div class="bg-white text-center p-4 case">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="titre-tableau mb-0">Recent Verification</h6>
+                                <h6 class="titre-tableau mb-0">{{contents.recent_verification[langue === 'fr' ? 'body_fr' : 'body_en']}}</h6>
                                 <div class="conteneur-select ml-auto">
                                     <input type="search" class="form-control" placeholder="Search user" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="searchTerm">
                                     <select [(ngModel)]="selectedStatus" class="form-select" aria-label="Default select example"
                                         style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;">
                                         <option *ngFor="let category of status" [value]="category">{{ category }}</option>
                                     </select>
-                                    <label for="startDate">Start-date:</label>
+                                    <label for="startDate">{{contents.start_date[langue === 'fr' ? 'body_fr' : 'body_en']}}</label>
                                     <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="startDate" [(ngModel)]="startDate">
                                     
-                                    <label for="endDate">End-date:</label>
+                                    <label for="endDate">{{contents.end_date[langue === 'fr' ? 'body_fr' : 'body_en']}}</label>
                                     <input type="date" class="form-control" style="background-color: #F5F6FA; color: #202224; margin-bottom: 5px;" id="endDate" [(ngModel)]="endDate">
                                 </div>
 
@@ -171,10 +178,10 @@ overflow-x: hidden;">
                                         <table class="table " style="margin-bottom: 220px;">
                                             <thead>
                                                 <tr class="">
-                                                    <th style="background-color: aliceblue;">Date</th>
-                                                    <th style="background-color: aliceblue;">Time</th>
-                                                    <th style="background-color: aliceblue;">User</th>
-                                                    <th class="px-5" style="background-color: aliceblue;">Status</th>
+                                                    <th style="background-color: aliceblue;">{{contents.verification_date[langue === 'fr' ? 'body_fr' : 'body_en']}}</th>
+                                                    <th style="background-color: aliceblue;">{{contents.verification_time[langue === 'fr' ? 'body_fr' : 'body_en']}}</th>
+                                                    <th style="background-color: aliceblue;">{{contents.verification_user[langue === 'fr' ? 'body_fr' : 'body_en']}}</th>
+                                                    <th class="px-5" style="background-color: aliceblue;">{{contents.verification_status[langue === 'fr' ? 'body_fr' : 'body_en']}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -1,6 +1,8 @@
 import { PaymentService } from '../_services/payment.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ContentService } from '../_services/content.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-credits',
@@ -17,8 +19,12 @@ export class CreditsComponent {
   paymentStatus: string = '';
   isChecking: boolean = false;
   result: any
+  contents: any;
+  langue: any = 'en';
 
-  constructor(private paymentService: PaymentService,public dialog: MatDialog) {}
+  constructor(private paymentService: PaymentService,public dialog: MatDialog,
+    private storageService: StorageService, private contentService:ContentService
+  ) {}
   
   checkMoMoStatus(referenceId: string, transactionId: string) {
     this.isChecking = true;
@@ -77,7 +83,14 @@ export class CreditsComponent {
   }
   value: number = 0;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.langue = this.storageService.getLangue()
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+      }
+    )
+  }
 
   ngAfterViewInit(): void {
     this.updateSliderBackground();

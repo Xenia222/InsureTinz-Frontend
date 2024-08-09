@@ -49,7 +49,9 @@ export class DashboardComponent implements OnInit{
   contents: any;
   langue: any = 'en';
   
-constructor(private userService: UserService,private storageService: StorageService, private checkService: CheckService,private contentService:ContentService){}
+constructor(private userService: UserService,private storageService: StorageService,
+   private checkService: CheckService,private contentService:ContentService
+  ){}
 
 status: string[] = ['Status', 'insured', 'expired','not_found'];
 

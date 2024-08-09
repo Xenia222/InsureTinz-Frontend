@@ -16,34 +16,36 @@ overflow-y: scroll;">
               <div class="bg-white  case">
                 <section class=" py-1 mt-3">
                   <div class=" mt-4 ">
-                    <h3>Purchase Credits</h3>
+                    <h3>{{contents.purchase_credit[langue === 'fr' ? 'body_fr' : 'body_en']}}</h3>
                   </div>
                   <div class=" " style="padding: 14px 0;">
 
                     <div class="  fs-5" style="font-size: 17px !important;">
-                      <p>Use the interactive slider to customize your credit purchase by selecting the desired quantity
-                        and viewing its associated price in real-time. </p>
+                      <p>
+                        {{contents.credit_CTA[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                      </p>
                     </div>
                     <br>
                     <div class="slider-container">
                       <input class="slider" id="credits" type="range" [(ngModel)]="credits"
                         (ngModelChange)="updatePrice()" min="0" max="1000" [value]="value"
                         (input)="updateSlider($event)">
-                      <p id="rangeValue">{{ value }} credits</p>
+                      <p id="rangeValue">{{ value }} {{contents.credits[langue === 'fr' ? 'body_fr' : 'body_en']}}</p>
                     </div>
 
                     <br><br><br>
                     <div class="prix-bouton">
 
-                      <div class=" btn-custom shadow-lg py-4 px-5 "><span class="spn pl-3">Price</span> : <strong
+                      <div class=" btn-custom shadow-lg py-4 px-5 "><span class="spn pl-3">{{contents.price[langue === 'fr' ? 'body_fr' : 'body_en']}}</span> : <strong
                           class="" style="font-size: 28px; font-weight: 800;"> {{price}} Fcfa</strong> </div>
 
                       <div class="cont3">
                         <div>
 
                           <button [disabled]="credits == 0" type="button" (click)="nextSection()"
-                            class="btn btn-warning px-3 mt-4 shadow-lg text-dark bbt "> <strong>Proceed to
-                              payment</strong>
+                            class="btn btn-warning px-3 mt-4 shadow-lg text-dark bbt "> <strong>
+                              {{contents.proceed_to_payment[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                            </strong>
                             <svg width="39" height="20" viewBox="0 0 49 27" fill="none"
                               xmlns="http://www.w3.org/2000/svg">
                               <g filter="url(#filter0_d_197_2117)">
@@ -98,7 +100,7 @@ overflow-y: scroll;">
                     style="height: 20px; border: none; background: unset;">
                     <img src="../../assets/Arrow 2.png" alt="" style="height: 100%;">
                   </button>
-                  <h4 class="marg text-center">Paiement methods</h4>
+                  <h4 class="marg text-center">{{contents.payement_method[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
 
                   <div class="btn-checkbox-group mt-2">
                     <div class="checkbox-group">
@@ -140,8 +142,8 @@ overflow-y: scroll;">
 
                   <div class="mt-5 row justify-content-center">
                     <div class="credit-div col-auto px-4">
-                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> Credits:
-                        <strong>{{credits}}</strong><span class="px-4">Price :
+                      <p class="text-center" style="margin-bottom: 0;font-size: larger;"> {{contents.credits[langue === 'fr' ? 'body_fr' : 'body_en']}}:
+                        <strong>{{credits}}</strong><span class="px-4">{{contents.price[langue === 'fr' ? 'body_fr' : 'body_en']}} :
                           <strong>{{price}} Fcfa</strong></span>
                       </p>
                     </div>
@@ -149,7 +151,7 @@ overflow-y: scroll;">
                   <div class="mt-5 row justify-content-center">
                     <button type="button" class="boutoon btn-warning btn  px-5 py-2 "
                       data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                      pay
+                      {{contents.pay[langue === 'fr' ? 'body_fr' : 'body_en']}}
                     </button>
 
                     <!-- Modal -->
@@ -158,12 +160,14 @@ overflow-y: scroll;">
                       <div class="modal-dialog  modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Mtn Momo Payment</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                              {{contents.mtn_momo_payment[langue === 'fr' ? 'body_fr' : 'body_en']}}
+                            </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
                             <div class="mb-3">
-                              <label for="exampleFormControlInput1" class="form-label">Phone Numer</label>
+                              <label for="exampleFormControlInput1" class="form-label">{{contents.phone_number[langue === 'fr' ? 'body_fr' : 'body_en']}}</label>
                               <input type="text" class="form-control" id="exampleFormControlInput1" name="result" value="mtnmomo"
                               [(ngModel)]="result"
                                 placeholder="Enter you phone number">

@@ -4,6 +4,8 @@ import { AuthService } from '../_services/auth.service';
 import { StorageService } from '../_services/storage.service';
 import { interval, Subscription } from 'rxjs';
 import { UserService } from '../_services/user.service';
+import { ContentService } from '../_services/content.service'
+
 
 @Component({
   selector: 'app-login-otp',
@@ -21,8 +23,14 @@ export class LoginOtpComponent implements OnInit {
   timeLeftInSeconds: number = 10 * 60;
   private countdownSubscription: Subscription | undefined;
   interval: any;
+  contents: any 
+  langue: any = ''
 
-  constructor(private router: Router,private userService:UserService,private authService: AuthService,private storageService: StorageService) { }
+
+  constructor(private router: Router,private userService:UserService,
+    private authService: AuthService,private storageService: StorageService,
+    private contentService:ContentService
+  ) { }
 
   get minutes(): number {
     return Math.floor(this.timeLeftInSeconds / 60);
@@ -44,6 +52,14 @@ export class LoginOtpComponent implements OnInit {
       otpError => {
       }
     );
+    this.langue = this.storageService.getLangue()
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+        console.log(this.contents);
+        
+      }
+    )
     this.startCountdown();
 }
 
