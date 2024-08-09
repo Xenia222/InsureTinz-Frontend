@@ -5,6 +5,8 @@ import { UserService } from '../_services/user.service';
 import { data } from 'jquery';
 import { CheckService } from '../_services/check.service';
 import { map, Observable } from 'rxjs';
+import { ContentService } from '../_services/content.service';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,8 +46,10 @@ export class DashboardComponent implements OnInit{
   startDate: string = '';
   endDate: string = '';
   searchTerm: string = '';
+  contents: any;
+  langue: any = 'en';
   
-constructor(private userService: UserService, private checkService: CheckService){}
+constructor(private userService: UserService,private storageService: StorageService, private checkService: CheckService,private contentService:ContentService){}
 
 status: string[] = ['Status', 'insured', 'expired','not_found'];
 
@@ -125,6 +129,7 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
   myChart: Chart | undefined;
 
   ngOnInit() {
+    this.langue = this.storageService.getLangue()
     this.userService.getDashboard().subscribe(
       data => {
         this.credit_balance.balance = data.credit_balance.balance
@@ -140,6 +145,12 @@ status: string[] = ['Status', 'insured', 'expired','not_found'];
           this.dataOui.push(verify.ensured)
           this.dataNon.push(verify.not_insured)
         });
+      }
+    )
+
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
       }
     )
 

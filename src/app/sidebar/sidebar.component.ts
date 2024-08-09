@@ -8,6 +8,8 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { data } from 'jquery';
 import { PermissionService } from '../_services/permission.service';
 import { StorageService } from '../_services/storage.service';
+import { Content } from 'html2canvas/dist/types/css/property-descriptors/content';
+import { ContentService } from '../_services/content.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,6 +19,8 @@ import { StorageService } from '../_services/storage.service';
 export class SidebarComponent implements OnInit{
 
   sidebarVisible: boolean = false;
+  contents: any;
+  langue: any = 'en'
 
   toggleSidebar() {
     this.sidebarVisible = !this.sidebarVisible;
@@ -47,9 +51,10 @@ export class SidebarComponent implements OnInit{
   user_type: string = ''
   roles: any[] = []
 
-  constructor(private tokenService:TokenService,private storageService:StorageService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
+  constructor(private tokenService:TokenService,private contentService: ContentService, private storageService:StorageService, private userService: UserService,public dialog: MatDialog,private permissionsService: NgxPermissionsService,private permissionService: PermissionService){}
 
   ngOnInit(): void {
+    this.langue = this.storageService.getLangue()
     this.userService.getCurrentUserRole().subscribe(
       data => {
         this.roles = data.roles
@@ -61,6 +66,12 @@ export class SidebarComponent implements OnInit{
       },
       err => {
         console.log(err)
+      }
+    )
+
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
       }
     )
     

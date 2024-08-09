@@ -3,12 +3,12 @@
 
         <div class="col-md-6 left-section d-flex flex-column justify-content-center align-items-center text-center p-5">
           <div class="d-flex ">
-            <img src="{{contents.home_logo.body_en}}" alt="Logo" class="me-3" />
+            <img src="{{contents.home_logo[langue === 'fr' ? 'body_fr' : 'body_en']}}" alt="Logo" class="me-3" />
           </div>
           <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
-          <h2 class="mt-4 mb-4">{{contents.home_under_cta.body_en}}</h2>
+          <h2 class="mt-4 mb-4">{{contents.home_under_cta[langue === 'fr' ? 'body_fr' : 'body_en']}}</h2>
           <p class="text-center">
-              {{contents.home_under_cta.body_en}} <br> {{contents.wwa_text1.body_en}}
+              {{contents.home_under_cta[langue === 'fr' ? 'body_fr' : 'body_en']}} <br> {{contents.wwa_text1[langue === 'fr' ? 'body_fr' : 'body_en']}}
           </p>
           </div>
             
@@ -23,18 +23,18 @@
                         <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
                       </a>
                     <div>
-                      <span>{{contents.login_question.body_en}} </span>
-                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in.body_en}}</a>
+                      <span>{{contents.login_question[langue === 'fr' ? 'body_fr' : 'body_en']}} </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
                     </div>
                 </div>
 
-              <h1 style="font-size: 39px; margin-top: 30px;">{{contents.structure_information.body_en}}</h1>
+              <h1 style="font-size: 39px; margin-top: 30px;">{{contents.structure_information[langue === 'fr' ? 'body_fr' : 'body_en']}}</h1>
               <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
                 <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
                   3
                 </div>
               </div>
-              <p style="font-size: 17px; margin-top: 50px; margin-bottom: 30px;">{{contents.structure_information_message.body_en}}</p>
+              <p style="font-size: 17px; margin-top: 50px; margin-bottom: 30px;">{{contents.structure_information_message[langue === 'fr' ? 'body_fr' : 'body_en']}}</p>
               <div formGroupName="structureInfo" class="w-100">
                 <div class="mb-4">
                   <input type="text" formControlName="agencyName" class="field form-control" placeholder="Agency Name *" required />
@@ -105,12 +105,12 @@
                         <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
                       </a>
                     <div>
-                      <span>{{contents.login_question.body_en}} </span>
-                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in.body_en}}</a>
+                      <span>{{contents.login_question[langue === 'fr' ? 'body_fr' : 'body_en']}} </span>
+                      <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
                     </div>
                 </div>
 
-              <h1 style="font-size: 39px; margin-top: 30px; margin-bottom: 25px;">{{contents.structure_information.body_en}}</h1>
+              <h1 style="font-size: 39px; margin-top: 30px; margin-bottom: 25px;">{{contents.structure_information[langue === 'fr' ? 'body_fr' : 'body_en']}}</h1>
               <div class="d-flex justify-content-end align-items-center mb-4 " style="height: 25px;">
                 <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 57px; height: 57px; font-size: 30px;">
                   3

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { LogoutModalComponent } from '../logout-modal/logout-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageService } from '../_services/storage.service';
+import { ContentService } from '../_services/content.service';
 
 
 @Component({
@@ -17,13 +19,33 @@ export class NavbarComponent {
   img: string = ''
   firstName: string =''
   lastName: string = ''
+  langue: any = 'en'
+  contents: any;
 
-  constructor(private tokenService:TokenService, private userService: UserService,public dialog: MatDialog){}
+  constructor(private tokenService:TokenService,private contentService:ContentService, private userService: UserService,public dialog: MatDialog, private storageService : StorageService){}
 
   ngOnInit(): void {
+    this.langue = this.storageService.getLangue()
     this.getUser()
     this.loadProfilePhoto();
     console.log(this.user)
+    this.contentService.getContent().subscribe(
+      data =>{
+        this.contents = data.contents
+      }
+    )
+  }
+
+  setLanguefr(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('fr')
+    this.ngOnInit()
+  }
+
+  setLangueEn(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('en')
+    this.ngOnInit()
   }
 
   getUser() {

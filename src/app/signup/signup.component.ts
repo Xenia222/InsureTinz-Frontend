@@ -21,6 +21,7 @@ export class SignupComponent {
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
   contents: any 
+  langue: any = 'en'
 
 
   constructor(private fb: FormBuilder, private router: Router,private storageService: StorageService,
@@ -34,6 +35,7 @@ export class SignupComponent {
   }
 
   ngOnInit(): void { 
+    this.langue = this.storageService.getLangue()
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents

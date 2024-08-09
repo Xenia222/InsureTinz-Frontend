@@ -17,12 +17,15 @@ export class HowItWorksComponent implements OnInit{
 
   logged: boolean = false
   user_type: any
-  contents: any 
+  contents: any
+  langue: any = 'en'
   constructor(private router: Router, private tokenServices: TokenService,
     private userService:UserService, private storageService:StorageService,
     private contentService:ContentService) {}
 
   ngOnInit(): void {
+
+    this.langue = this.storageService.getLangue()
     if(this.tokenServices.isLogged()){
       this.logged = true
     }else{
@@ -42,5 +45,17 @@ export class HowItWorksComponent implements OnInit{
         
       }
     )
+  }
+
+  setLanguefr(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('fr')
+    this.ngOnInit()
+  }
+
+  setLangueEn(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('en')
+    this.ngOnInit()
   }
 }

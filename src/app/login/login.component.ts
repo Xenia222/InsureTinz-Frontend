@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit{
   errorMessage: string | null = null;
   roles: any;
   contents: any 
+  langue:any = 'en'
   
   
   constructor(private fb: FormBuilder, private router:Router, private authService: AuthService,
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit{
   }
   
   ngOnInit(): void { 
+    this.langue = this.storageService.getLangue()
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents

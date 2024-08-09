@@ -17,8 +17,10 @@ import { ContentService } from '../_services/content.service'
 })
 export class StructuresInformationsComponent implements OnInit{
   contents: any 
+  langue:any = 'en'
 
   ngOnInit(): void {
+    this.langue = this.storageService.getLangue()
     this.flagService.getCountries().subscribe(data => {
       this.countries = data;
     });

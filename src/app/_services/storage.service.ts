@@ -22,6 +22,14 @@ export class StorageService {
     localStorage.setItem('status', status)
   }
 
+  saveLangue(status:string){
+    localStorage.setItem('langue', status)
+  }
+
+  cleanLangue(){
+    localStorage.removeItem('langue')
+  }
+
   active(): Observable<boolean> {
     return this.userService.getUser().pipe(
       map((data:any) => {
@@ -53,5 +61,9 @@ export class StorageService {
 
   getStatus(){
     return localStorage.getItem('status')
+  }
+
+  getLangue(){
+    return localStorage.getItem('langue')
   }
 }

@@ -23,6 +23,7 @@ export class SignupOtpComponent {
   private countdownSubscription: Subscription | undefined;
   interval: any;
   contents: any 
+  langue: any = ''
 
 
   constructor(private router: Router,private tokenService: TokenService,
@@ -39,6 +40,7 @@ export class SignupOtpComponent {
   }
 
   ngOnInit() {
+    this.langue = this.storageService.getLangue()
     this.contentService.getContent().subscribe(
       data =>{
         this.contents = data.contents

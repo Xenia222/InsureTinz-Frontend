@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #ffc107 !important;">
   <div class="container-fluid">
-    <a href="#" class="logo"><img src="{{contents.home_logo.body_en}}" alt="logo"></a>
+    <a href="#" class="logo"><img src="{{contents.home_logo[langue === 'fr' ? 'body_fr' : 'body_en']}}" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,26 +9,52 @@
       <ul class="navbar-nav">
         <div class="navlink">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/landing-page">{{contents.home_menu.body_en}}</a>
+            <a class="nav-link active" aria-current="page" routerLink="/landing-page">{{contents.home_menu[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/how-it-works">{{contents.home_how_it_works.body_en}}</a>
+            <a class="nav-link active" aria-current="page" routerLink="/how-it-works">{{contents.home_how_it_works[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/who-we-are">{{contents.home_who_we_are.body_en}}</a>
+            <a class="nav-link active" aria-current="page" routerLink="/who-we-are">{{contents.home_who_we_are[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/who-can-use">{{contents.home_who_can_use.body_en}}</a>
+            <a class="nav-link active" aria-current="page" routerLink="/who-can-use">{{contents.home_who_can_use[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
         </div>
+
+        <!-- Menu de sélection de la langue -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-light" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Language
+          </a>
+          <ul class="menu-langue dropdown-menu" aria-labelledby="languageDropdown" style="border: unset; padding: 6px; border-radius: 10px; box-shadow: 0px 0px 7px 1px #ebebeb;">
+            <li><a class="dropdown-item">Select language</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a (click)="setLangueEn()" style="cursor: pointer;" class="dropdown-item">
+                <img src="../../assets/anglais.png" width="40" height="27" alt="English" style="margin-right: 10px;">
+                <span class="d-none d-lg-inline-flex" style="margin-left: 10px;">English</span>
+              </a>
+            </li>
+            <li>
+              <a (click)="setLanguefr()" style="cursor: pointer;" class="dropdown-item mt-2">
+                <img src="../../assets/anglais.png" width="40" height="27" alt="Français" style="margin-right: 10px;">
+                <span class="d-none d-lg-inline-flex" style="margin-left: 10px;">Français</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Fin du menu de sélection de la langue -->
 
 
         <div *ngIf="logged == false" class="navbut">
           <li class="nav-item">
-            <a class="nav-link active login" aria-current="page" routerLink="/login">{{contents.login.body_en}}</a>
+            <a class="nav-link active login" aria-current="page" routerLink="/login">{{contents.login[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active signup" aria-current="page" routerLink="/signup">{{contents.signup.body_en}}</a>
+            <a class="nav-link active signup" aria-current="page" routerLink="/signup">{{contents.signup[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </li>
         </div>
         <div *ngIf="logged == true" class="navbut">
@@ -78,9 +104,9 @@
     <div class="row row2">
       <div class="col">
         <span class="nombre">1</span>
-        <h4>{{contents.home_simple_signup.body_en}}</h4>
-        <p style="text-align: end;">{{contents.hiw_signup_text.body_en}}
-          {{contents.hiw_signup_text.body_en}}
+        <h4>{{contents.home_simple_signup[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
+        <p style="text-align: end;">{{contents.hiw_signup_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
+          {{contents.hiw_signup_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
         </p>
         <img src="../../assets/Group 54.png" class="img-fluid" alt="">
       </div>
@@ -98,9 +124,9 @@
     <div class="row row2">
       <div class="col">
         <span class="nombre">2</span>
-        <h4>{{contents.hiw_enter_vehicle_details.body_en}}</h4>
-        <p style="text-align: end;">{{contents.hiw_enter_vehicle_details_text.body_en}}
-          {{contents.hiw_enter_vehicle_details_text.body_en}}
+        <h4>{{contents.hiw_enter_vehicle_details[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
+        <p style="text-align: end;">{{contents.hiw_enter_vehicle_details_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
+          {{contents.hiw_enter_vehicle_details_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
         </p>
         <img src="../../assets/illustrationx.png" class="img-fluid" alt="">
       </div>
@@ -120,9 +146,9 @@
     <div class="row row2">
       <div class="col">
         <span class="nombre">3</span>
-        <h4>{{contents.hiw_get_results.body_en}}</h4>
-        <p style="text-align: end;">{{contents.hiw_get_result_text.body_en}}
-          {{contents.hiw_get_result_text.body_en}}
+        <h4>{{contents.hiw_get_results[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
+        <p style="text-align: end;">{{contents.hiw_get_result_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
+          {{contents.hiw_get_result_text[langue === 'fr' ? 'body_fr' : 'body_en']}}
         </p>
         <img src="../../assets/illustration (1).png" class="img-fluid" alt="">
       </div>
@@ -139,33 +165,33 @@
   <div class="container free">
     <div class="row point">
       <div class="footer-col">
-        <h4>{{contents.footer_suscribe_email.body_en}}</h4>
-        <p>{{contents.footer_cta.body_en}} </p>
+        <h4>{{contents.footer_suscribe_email[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
+        <p>{{contents.footer_cta[langue === 'fr' ? 'body_fr' : 'body_en']}} </p>
         <form action="" class="mt-3">
           <input type="email" placeholder="Email Address" class="inputEmail" style="    background-color: unset;
                   border: 1px solid white;" />
-          <button>{{contents.footer_suscribe_email.body_en}}</button>
+          <button>{{contents.footer_suscribe_email[langue === 'fr' ? 'body_fr' : 'body_en']}}</button>
         </form>
       </div>
 
       <!-- 2nd Column -->
       <div class="footer-col">
-        <h4>{{contents.footer_about.body_en}}</h4>
+        <h4>{{contents.footer_about[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>
         <ul>
-          <li><a href="">{{contents.home_menu.body_en}}</a></li>
-          <li><a href="">{{contents.home_who_we_are.body_en}}</a></li>
-          <li><a href="">{{contents.home_who_can_use.body_en}}</a></li>
-          <li><a href="">{{contents.footer_reviews.body_en}}s</a></li>
-          <li><a href="">{{contents.footer_contact_us.body_en}}</a></li>
+          <li><a href="">{{contents.home_menu[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
+          <li><a href="">{{contents.home_who_we_are[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
+          <li><a href="">{{contents.home_who_can_use[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
+          <li><a href="">{{contents.footer_reviews[langue === 'fr' ? 'body_fr' : 'body_en']}}s</a></li>
+          <li><a href="">{{contents.footer_contact_us[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
         </ul>
       </div>
 
       <!-- 3rd Column -->
       <div class="footer-col">
-        <h4>{{contents.help.body_en}}</h4>          
+        <h4>{{contents.help[langue === 'fr' ? 'body_fr' : 'body_en']}}</h4>          
         <ul *ngIf="logged == false">
-          <li><a href="">{{contents.login.body_en}}</a></li>
-          <li><a href="">{{contents.signup.body_en}}</a></li>
+          <li><a href="">{{contents.login[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
+          <li><a href="">{{contents.signup[langue === 'fr' ? 'body_fr' : 'body_en']}}</a></li>
         </ul>
         <ul *ngIf="logged == true">
           <li><a href="/logout">Logout</a></li>
@@ -175,7 +201,7 @@
       <!-- 3th Column -->
 
       <div class="footer-col">
-        <img src="{{contents.footer_logo.body_en}}" alt="logo">
+        <img src="{{contents.footer_logo[langue === 'fr' ? 'body_fr' : 'body_en']}}" alt="logo">
       </div>
       <!-- </footer> -->
       <!-- footer -->

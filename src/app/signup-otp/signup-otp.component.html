@@ -2,12 +2,12 @@
     <div class="row h-100">
       <div class="col-md-6 left-section d-flex flex-column justify-content-center align-items-center text-center p-5">
         <div class="d-flex ">
-          <img src="{{contents.home_logo.body_en}}" alt="Logo" class="me-3" />
+          <img src="{{contents.home_logo[langue === 'fr' ? 'body_fr' : 'body_en']}}" alt="Logo" class="me-3" />
         </div>
         <img src="../../assets/Illustration.png" alt="Illustration" class="ill" />
-        <h2 class="mt-4 mb-4">{{contents.home_under_cta.body_en}}</h2>
+        <h2 class="mt-4 mb-4">{{contents.home_under_cta[langue === 'fr' ? 'body_fr' : 'body_en']}}</h2>
         <p class="text-center">
-            {{contents.home_under_cta.body_en}} <br> {{contents.wwa_text1.body_en}}
+            {{contents.home_under_cta[langue === 'fr' ? 'body_fr' : 'body_en']}} <br> {{contents.wwa_text1[langue === 'fr' ? 'body_fr' : 'body_en']}}
         </p>
       </div>
 
@@ -17,19 +17,19 @@
               <img src="../../assets/Arrow 2.png" alt="" style="width: 36px;">
             </a>
           <div>
-            <span>{{contents.login_question.body_en}}</span>
-            <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in.body_en}}</a>
+            <span>{{contents.login_question[langue === 'fr' ? 'body_fr' : 'body_en']}}</span>
+            <a routerLink="/login" routerLinkActive="active" class="text-warning text-decoration-none">{{contents.log_in[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
           </div>
         </div>
         <div class="w-100">
-            <h1 style="font-size: 48px; margin-top: 66px; margin-bottom: 45px;">{{contents.otp_validation.body_en}}</h1>
-            <p style="margin-bottom: 30px;">{{contents.otp_message.body_en}}</p>
-            <p style="margin-bottom: 30px;">{{contents.otp_expiration.body_en}}<strong>{{ minutes }} minutes {{seconds}} seconds</strong></p>
+            <h1 style="font-size: 48px; margin-top: 66px; margin-bottom: 45px;">{{contents.otp_validation[langue === 'fr' ? 'body_fr' : 'body_en']}}</h1>
+            <p style="margin-bottom: 30px;">{{contents.otp_message[langue === 'fr' ? 'body_fr' : 'body_en']}}</p>
+            <p style="margin-bottom: 30px;">{{contents.otp_expiration[langue === 'fr' ? 'body_fr' : 'body_en']}}<strong>{{ minutes }} minutes {{seconds}} seconds</strong></p>
             <input type="text" class="form-control field" placeholder="CODE" [(ngModel)]="otp" />
             <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-            <a class="d-block mb-4 text-dark text-decoration-none" (click)="resendOtp()">{{contents.resend_otp.body_en}}</a>
+            <a class="d-block mb-4 text-dark text-decoration-none" (click)="resendOtp()">{{contents.resend_otp[langue === 'fr' ? 'body_fr' : 'body_en']}}</a>
             <button class="btn btn-warning text-white w-100" style="height: 52px;"
-                (click)="onSubmit()"><strong>{{contents.next.body_en}}</strong></button>
+                (click)="onSubmit()"><strong>{{contents.next[langue === 'fr' ? 'body_fr' : 'body_en']}}</strong></button>
         </div>
       </div>
     </div>

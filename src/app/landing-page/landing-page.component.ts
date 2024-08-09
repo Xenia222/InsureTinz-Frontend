@@ -16,6 +16,7 @@ export class LandingPageComponent implements OnInit{
   logged: boolean = false
   user_type: any
   contents: any 
+  langue: any = 'en'
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -70,6 +71,18 @@ export class LandingPageComponent implements OnInit{
     });
   }
 
+  setLanguefr(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('fr')
+    this.ngOnInit()
+  }
+
+  setLangueEn(){
+    this.storageService.cleanLangue()
+    this.storageService.saveLangue('en')
+    this.ngOnInit()
+  }
+
   
   constructor(private router: Router, private tokenServices: TokenService,
     private userService:UserService, private storageService:StorageService,
@@ -80,6 +93,9 @@ export class LandingPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.langue = this.storageService.getLangue()
+
     if(this.tokenServices.isLogged()){
       this.logged = true
     }else{
