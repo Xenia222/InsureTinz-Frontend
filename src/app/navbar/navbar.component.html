@@ -11,8 +11,13 @@
                     <div class="nav-item dropdown"
                         style="font-size: 15px; color: rgba(64, 64, 64, 1); text-align: end;">
 
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="../../assets/francais.png" width="40" height="27" alt="English"
+                        <a *ngIf="langue == 'fr'" style="cursor: pointer;" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="../../assets/francais.png" width="40" height="27" alt="Francais"
+                                style="  border-radius: 5px;margin-right: 10px;  width: 20%;  height: 11%;">
+                            <span class="d-none d-lg-inline-flex">Francais</span>
+                        </a>
+                        <a *ngIf="langue == 'en'" style="cursor: pointer;" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="../../assets/anglais.png" width="40" height="27" alt="English"
                                 style="  border-radius: 5px;margin-right: 10px;  width: 20%;  height: 11%;">
                             <span class="d-none d-lg-inline-flex">English</span>
                         </a>
@@ -22,13 +27,13 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <a (click)="setLangueEn()" class="dropdown-item" >
+                            <a (click)="setLangueEn()" style="cursor: pointer;" class="dropdown-item" >
                                 <img src="../../assets/anglais.png" width="40" height="27" alt="English"
                                     style=" margin-right: 10px;">
                                 <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">English</span>
                             </a>
-                            <a (click)="setLanguefr()" class="dropdown-item mt-2" >
-                                <img src="../../assets/anglais.png" width="40" height="27" alt="English"
+                            <a (click)="setLanguefr()" style="cursor: pointer;" class="dropdown-item mt-2" >
+                                <img src="../../assets/francais.png" width="40" height="27" alt="English"
                                     style=" margin-right: 10px;">
                                 <span class="d-none d-lg-inline-flex" style=" margin-left: 10px;">Français</span>
                             </a>

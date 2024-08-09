@@ -22,7 +22,7 @@ export class NavbarComponent {
   langue: any = 'en'
   contents: any;
 
-  constructor(private tokenService:TokenService,private contentService:ContentService, private userService: UserService,public dialog: MatDialog, private storageService : StorageService){}
+  constructor(private tokenService:TokenService,private router:Router, private contentService:ContentService, private userService: UserService,public dialog: MatDialog, private storageService : StorageService){}
 
   ngOnInit(): void {
     this.langue = this.storageService.getLangue()
@@ -36,16 +36,23 @@ export class NavbarComponent {
     )
   }
 
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   setLanguefr(){
     this.storageService.cleanLangue()
     this.storageService.saveLangue('fr')
-    this.ngOnInit()
+    this.refreshPage()
   }
 
   setLangueEn(){
     this.storageService.cleanLangue()
     this.storageService.saveLangue('en')
-    this.ngOnInit()
+    this.refreshPage()
   }
 
   getUser() {
